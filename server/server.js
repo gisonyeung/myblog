@@ -7,8 +7,6 @@ var config = require('../webpack.config');
 var bodyParser = require('body-parser');
 var port = 6000;
 var compiler = webpack(config);
-var request = require('request');
-var http = require('http');
 
 app.use(webpackDevMiddleware(compiler, { 
 	noInfo: true, 
