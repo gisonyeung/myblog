@@ -5,27 +5,31 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('../webpack.config');
 var bodyParser = require('body-parser');
-var port = 6000;
+var port = 8000;
 var compiler = webpack(config);
 
+app.use(express.static(__dirname + '/app'));
 app.use(webpackDevMiddleware(compiler, { 
 	noInfo: true, 
 	publicPath: config.output.publicPath,
-	// hot: true,
+	hot: true,
+	stats: { colors: true } 
 }));
 app.use(webpackHotMiddleware(compiler));
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
-app.use(express.static(__dirname + '/app'));
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 app.get('/', function(req, res) {
-	res.sendFile('/index.html');
+	res.render('/index.html');
 });
 
 // 定制404页面
 app.use(function(req, res) {
 	res.status(404);
-	res.render('404');
+	res.send('404');
 });
 
 
@@ -34,5 +38,5 @@ app.listen(port, function(err){
 	if( err ){
 		console.log(err);
 	}
-	console.log('The server is running on http://localhost:6000/');
+	console.log('The server is running on http://localhost:8000/');
 });

@@ -1,24 +1,29 @@
 var webpack = require('webpack');
-var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+// var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var path = require('path');
 
 module.exports = {
 	entry: [
-		'webpack-dev-server/client?http://localhost:6000', // WebpackDevServer host and port
+		// 'webpack-hot-middleware/client?http://localhost:8000/', // WebpackDevServer host and port
+		// 'webpack/hot/only-dev-server',
+    	'webpack-hot-middleware/client?reload=true&http://localhost:8000',
 		'webpack/hot/only-dev-server',
 		'./src/app.jsx',
 	],
 	output: {
-		path: path.join(__dirname,"dist"),
+		path: path.join(__dirname,"server/app/static"),
 		filename: 'bundle.js',
 		publicPath: "/static/"
+	},
+	resolve: {
+		extensions: ['', '.js', '.jsx']
 	},
 	module: {
 		loaders: [
 			{
 				test: /\.jsx?$/,
-				loaders: ['jsx-loader', 'babel'],
+				loaders: ['react-hot-loader', 'babel'],
 				exclude: /node_modules/,
 				include: __dirname
 			},
@@ -31,8 +36,8 @@ module.exports = {
 				loader: "style!css"
 			},
 			{
-				test: /\.(jpg|png)$/,
-				loader: "url?limit=40000"
+				test: /\.(jpg|png|jpeg|gif)$/,
+				loader: "url?limit=4096"
 			},
 			{
 				test: /\.(woff|svg|ttf|eot)/,
@@ -41,17 +46,18 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new CommonsChunkPlugin('common.js'),
-		new OpenBrowserPlugin({ url: 'http://localhost:6000' }),
+		// new CommonsChunkPlugin('common.js'),
 		new webpack.optimize.OccurenceOrderPlugin(),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoErrorsPlugin(),
+		new OpenBrowserPlugin({ url: 'http://localhost:8000' }),
 	],
 	devServer: {
 		historyApiFallback: true,
 		hot: true,
 		inline: true,
 		progress: true,
-		port: 6000,
+		port: 8000,
 	},
 
 }
