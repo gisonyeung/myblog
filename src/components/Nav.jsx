@@ -2,16 +2,16 @@ import React from 'react';
 import { IndexLink, Link } from 'react-router';
 import SearchBar from './SearchBar';
 
-require('../sass/nav.scss');
+require('../sass/Nav.scss');
 
 const Nav = React.createClass({
 	
   render() {
     return (
-      <nav className="nav">
+      <header className="nav">
       	<div className="inner-wrapper clearfix">
 	      <a href="#" className="brand" title="二点零的个人站点">TWOPOINTHOLE</a>
-	      <div className="nav-bar">
+	      <nav className="nav-bar">
 	        <div className="nav-list">
 	          <IndexLink to="/" activeClassName="active">首页</IndexLink>
 	          <Link to="/mylife" activeClassName="active">我的生活</Link>
@@ -22,9 +22,9 @@ const Nav = React.createClass({
 	          <span className="triangle" />
 	        </div>
 	        <SearchBar />
-	      </div>
+	      </nav>
         </div>
-      </nav>
+      </header>
     )
   }
 

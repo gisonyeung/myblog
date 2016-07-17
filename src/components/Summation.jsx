@@ -1,12 +1,22 @@
 import React from 'react';
-require('../sass/summation.scss');
 
 const Summation = React.createClass({
 
   render() {
     return (
-      <section className="station">
-
+      <section className="summation clearfix">
+        <div className="data">
+          <h3 className="value">2016</h3>
+          <p className="key">博客</p>
+        </div>
+        <div className="data">
+          <h3 className="value">130</h3>
+          <p className="key">留言</p>
+        </div>
+        <div className="data">
+          <h3 className="value">28</h3>
+          <p className="key">订阅数</p>
+        </div>
       </section>
     )
   }

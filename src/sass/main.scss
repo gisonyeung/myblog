@@ -90,10 +90,58 @@ body {
 	margin: 0 auto;
 }
 
+.shadow-1 {
+	box-shadow: 0px 2px 2px rgba(0,0,0,0.05);
+	border-radius: 2px;
+}
+
+
+
+
+
+
+
+/* icon */
 .icon-github {
 	@include bgsize(17px, 17px);
 	@include bgimg('../img/icon-github.png');	
 }
+
+.icon-mail {
+	@include bgsize(19px, 12px);
+	@include bgimg('../img/icon-mail.png');	
+}
+
+.icon-disc {
+	@include bgsize(4px, 4px);
+	@include bgimg('../img/icon-disc.png');	
+}
+
+.icon-time {
+	@include bgsize(14px, 14px);
+	@include bgimg('../img/icon-time.png');	
+}
+
+.icon-update {
+	@include bgsize(14px, 14px);
+	@include bgimg('../img/icon-update.png');	
+}
+
+.icon-tag {
+	@include bgsize(11px, 11px);
+	@include bgimg('../img/icon-tag.png');	
+
+	&.active {
+		@include bgimg('../img/icon-tag-active.png');
+	}
+}
+
+
+
+
+
+
+
 
 
 

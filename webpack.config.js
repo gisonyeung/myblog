@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 // var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+// var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var path = require('path');
 
 module.exports = {
@@ -54,7 +54,7 @@ module.exports = {
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin(),
-		new OpenBrowserPlugin({ url: 'http://localhost:8000' }),
+		// new OpenBrowserPlugin({ url: 'http://localhost:8000' }),
 	],
 	devServer: {
 		historyApiFallback: true,
