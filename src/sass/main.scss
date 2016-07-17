@@ -137,7 +137,11 @@ body {
 }
 
 
-
+body {
+	&.mylife {
+		background: url('../img/life-bg.png') repeat;
+	}
+}
 
 
 

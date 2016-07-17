@@ -53,7 +53,7 @@ $navHeight: 86px;
 	color: #fff;
 	height: 86px;
 	background-color: #24292c;
-
+	@include transition();
 	.brand {
 		margin-top: 31px;
 		@include bgsize(228px, 30px);
@@ -157,9 +157,6 @@ $navHeight: 86px;
 					left: 516px;
 				}
 			}
-
-
-
 		}
 	}
 	.search-bar {
@@ -185,9 +182,42 @@ $navHeight: 86px;
 			&:focus + .icon-search {
 				@include bgimg('../img/icon-search-active.png');
 			}
+			@include transition();
 
 		}
 	}
 
+	&.mylife {
+		border-bottom: 1px solid #E3E3D7;
+		background: url('../img/life-nav.png') center center repeat #EAEAE0;
+
+		.nav-list {
+			a {
+				color: #a49369;
+				&:hover {
+					color: rgba(#aa3f2b, 0.8);
+				}
+				&.active {
+					color: #aa3f2b;
+				}
+			}
+		}
+
+		.brand {
+			@include bgimg('../img/brand-life.png')
+		}
+
+		.triangle {
+			display: none!important;
+		}
+
+		.search-bar {
+			input {
+				color: #999;
+				background-color: transparent;
+				border: 1px solid #d1cebf;
+			}
+		}
+	}
 
 }
