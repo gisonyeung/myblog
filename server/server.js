@@ -13,7 +13,7 @@ app.use(webpackDevMiddleware(compiler, {
 	noInfo: true, 
 	publicPath: config.output.publicPath,
 	hot: true,
-	stats: { colors: true } 
+	stats: { colors: true } ,
 }));
 app.use(webpackHotMiddleware(compiler));
 app.use(bodyParser.json()); 
@@ -26,10 +26,9 @@ app.get('/', function(req, res) {
 	res.render('/index.html');
 });
 
-// 定制404页面
+// like HistoryFallback
 app.use(function(req, res) {
-	res.status(404);
-	res.send('404');
+	res.render('../server/app/index.html');
 });
 
 

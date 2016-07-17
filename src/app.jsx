@@ -1,18 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
-// import StageController from './components/StageController';
+import { Router, IndexRoute, Route, browserHistory } from 'react-router';
+import App from './components/App';
+import Home from './components/Home';
+import MainController from './components/MainController';
 
-// require('./src/sass/main.scss');
+
 
 if(module.hot) {
     module.hot.accept();
 }
 
+require('./sass/main.scss');
+
 render(
-  <div>
-  	哈w哈w哈哈dd哈的的d 的h d好ddd的dd芳dffdd哈哈ddddfd骨灰s盒ds dd
-  </div>
+  <MainController />
   ,
   document.querySelector('#container')
 );
-

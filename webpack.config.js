@@ -37,12 +37,16 @@ module.exports = {
 			},
 			{
 				test: /\.(jpg|png|jpeg|gif)$/,
-				loader: "url?limit=4096"
+				loader: "url?limit=8192"
 			},
 			{
 				test: /\.(woff|svg|ttf|eot)/,
 				loader: "file"
-			}
+			},
+			{
+				test: /\.json$/,
+				loader: 'json-loader'
+			},
 		]
 	},
 	plugins: [
