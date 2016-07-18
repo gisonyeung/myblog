@@ -12,9 +12,22 @@ const Nav = React.createClass({
       };
   },
 
+  componentDidMount() {
+    // 第一次访问时，不会触发WillReceiveProps，所以需要用到DidMout
+    this.selectStyle();  
+  },
+
+
   componentWillReceiveProps(nextProps) {
-  	console.log(1);
-  	// 判断location 加载不同css文件
+  	
+    this.selectStyle();
+  },
+
+  /*
+  *  @description 判断location 加载不同css文件 
+  */
+  selectStyle() { // 
+    
     var path = location.pathname;
 
 
@@ -25,6 +38,20 @@ const Nav = React.createClass({
     		stateClass: 'mylife'
     	});
 
+    } else if( /^\/book/.test(path) ) {
+
+      document.body.className = 'book';
+      this.setState({
+        stateClass: 'book'
+      });
+
+    } else if( /^\/archives/.test(path) ) {
+
+      document.body.className = 'archives';
+      this.setState({
+        stateClass: 'archives'
+      });
+
     } else {
 
     	document.body.className = '';
@@ -33,7 +60,6 @@ const Nav = React.createClass({
     	});
 
     }
-        
   },
 
 
@@ -46,10 +72,10 @@ const Nav = React.createClass({
 	      <nav className="nav-bar">
 	        <div className="nav-list">
 	          <IndexLink to="/" activeClassName="active">首页</IndexLink>
-	          <Link to="/mylife" activeClassName="active">我的生活</Link>
-	          <Link to="/book" activeClassName="active">推荐书目</Link>
-	          <Link to="/tag" activeClassName="active">分类标签</Link>
-	          <Link to="/archive" activeClassName="active">归档</Link>
+	          <Link to="/mylife" activeClassName="active">手帐</Link>
+	          <Link to="/book" activeClassName="active">我的书单</Link>
+	          <Link to="/archives" activeClassName="active">归档</Link>
+	          <Link to="/board" activeClassName="active">留言板</Link>
 	          <Link to="/about" activeClassName="active">关于</Link>
 	          <span className="triangle" />
 	        </div>

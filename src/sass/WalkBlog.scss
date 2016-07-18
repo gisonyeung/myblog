@@ -1,0 +1,190 @@
+@mixin transition($obj: all, $time: 0.2s, $type: ease-out) {
+	transition: $obj $time $type;
+	-moz-transition: $obj $time $type;	
+	-webkit-transition: $obj $time $type;	
+	-o-transition: $obj $time $type;
+}
+@mixin transitionProperty($obj) {
+	transition-property: $obj;
+	-moz-transition-property: $obj;	
+	-webkit-transition-property: $obj;	
+	-o-transition-property: $obj;
+}
+
+@mixin bgsize($width, $height) {
+	display: inline-block;
+	height: 0;
+	width: $width;
+	padding-top: $height;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+%IEBox {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+@mixin bgimg($url) {
+	background: url($url) transparent no-repeat center top;
+}
+
+@mixin transform($code) {
+	transform: $code;
+    -webkit-transform: $code;
+    -moz-transform: $code;
+    -o-transform: $code;
+    -ms-transform: $code;
+}
+
+@mixin transform-origin($code) {
+	transform-origin: $code;
+	-ms-transform-origin: $code;
+	-o-transform-origin: $code;
+	-webkit-transform-origin: $code;
+	-moz-transform-origin: $code;
+}
+
+.box-wrap {
+	margin-bottom: 30px;
+}
+
+.walk-content {
+	position: relative;
+    border: 1px solid #f0eaca;
+}
+
+.cont-wrap {
+    margin: 0 30px;
+    padding-left: 29px;
+    border-left: 1px solid #f3dac6;
+    overflow: hidden;
+}
+
+$linkColor: #a49369;
+
+.cont-top {
+	background: url('../img/life-bookbg.png') repeat;
+
+	.time {
+		font-size: 14px;
+		font-weight: bold;
+		color: $linkColor;
+		text-align: center;
+		padding-top: 22px;
+		font-family: Arial,sans-serif;
+		
+		&.nophoto {
+			font-weight: normal;
+			text-align: left;
+			& + .picture {
+				display: none;
+			}
+		}
+	}
+
+	.picture {
+		
+		img {
+		    max-width: 100%;
+    		margin: 15px 0 0;
+		}
+	}
+
+}
+
+.cont-mid {
+	color: $linkColor;
+	font-size: 13px;
+	// font-family: Microsoft Yahei;
+	line-height: 26px;
+    background: url('../img/life-line.png') repeat;
+
+    .cont-wrap {
+	    padding: 26px 29px 27px;
+    }
+
+    .text {
+    	color: #555;
+    	ul, ol, p, blockquote {
+		    margin: 0 0 26px;
+    		overflow: hidden;
+    	}
+    }
+
+	a {
+		font-size: 12px;
+	}
+
+	.tags {
+		a {
+			display: inline-block;
+			margin-right: 15px;
+			@include transition();
+			&:hover {
+				color: darken($linkColor, 20%);
+			}
+		}
+	}
+
+	.summation {
+		a {
+			display: inline-block;
+			margin-right: 25px;
+		}
+
+		.full {
+			text-decoration: underline;
+			// @include transition();
+			// &:hover {
+			// 	color: darken($linkColor, 20%);
+			// }
+		}
+
+
+
+		.icon {
+			padding-left: 15px;
+			background-position: 0 8px;
+		}
+	}
+
+}
+
+.cont-bot {
+	padding-left: 9px;
+	background: url('../img/life-left.png') no-repeat left bottom;
+
+	.cont-bot-r {
+		padding-right: 9px;
+		background: url('../img/life-right.png') no-repeat right bottom;
+	}
+
+	.cont-bot-m {
+		position: relative;
+		height: 9px;
+		background: url('../img/life-middle.png') repeat-x;
+	}
+
+	.cont-bot-sl, .cont-bot-sr {
+		position: absolute;
+	    bottom: -5px;
+	    width: 114px;
+	    height: 8px;
+        background: url('../img/life-shadow.png') left bottom no-repeat;
+	}
+
+	.cont-bot-sl {
+		left: 10px;
+	}
+
+	.cont-bot-sr {
+		right: 17px;
+	}
+
+
+}
+
+
+

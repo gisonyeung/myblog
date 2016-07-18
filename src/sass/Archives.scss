@@ -47,18 +47,43 @@
 	-moz-transform-origin: $code;
 }
 
-.nav {
-	background: url('../img/life-nav.png') center center repeat #EAEAE0;
 
-	.nav-list {
-		a {
-			color: #a49369;
-			&:hover {
-				color: rgba(#aa3f2b, 0.8);
+$linkColor: #7594b3;
+
+.archives {
+
+	.main {
+		width: 880px;
+	}
+
+	
+
+	@at-root {
+		.ar-nav {
+			height: 72px;
+			line-height: 72px;
+			border-bottom: 1px solid #ddd;
+
+			.nav-link {
+				float: left;
+				margin-right: 48px;
+				font-size: 16px;
+				color: #aaa;
+				cursor: pointer;
+				@include transition();
+
+				&:hover {
+					color: $linkColor;
+				}
 			}
-			&.active {
-				color: #aa3f2b;
+
+			.nav-down {
+				display: inline-block;
+				padding-right: 30px;
+				background: url('../img/icon-down.png') 48px 34px no-repeat;
 			}
+
 		}
 	}
+
 }

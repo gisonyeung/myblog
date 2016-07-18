@@ -71,7 +71,22 @@ a {
 
 $bgColor: #ededef;
 body {
+
 	background-color: $bgColor;
+
+	&.mylife {
+		background: url('../img/life-bg.png') repeat;
+	}
+
+	&.book {
+		// background: url('../img/book-bg.png') repeat #a1cbe1;
+		background: url('../img/book-bg.png') repeat #ebc783;
+	}
+
+	&.archives {
+		background-color: #fff;
+	}
+
 }
 
 .clearfix {
@@ -96,6 +111,11 @@ body {
 }
 
 
+.life-wrap {
+	width: 620px;
+	margin: 0 auto;
+	padding-top: 20px;
+}
 
 
 
@@ -136,12 +156,15 @@ body {
 	}
 }
 
-
-body {
-	&.mylife {
-		background: url('../img/life-bg.png') repeat;
-	}
+.icon-hot {
+	@include bgimg('../img/icon-hot.png');	
 }
+
+.icon-comment {
+	@include bgimg('../img/icon-comment.png');	
+}
+
+
 
 
 

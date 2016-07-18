@@ -1,0 +1,167 @@
+@mixin transition($obj: all, $time: 0.2s, $type: ease-out) {
+	transition: $obj $time $type;
+	-moz-transition: $obj $time $type;	
+	-webkit-transition: $obj $time $type;	
+	-o-transition: $obj $time $type;
+}
+@mixin transitionProperty($obj) {
+	transition-property: $obj;
+	-moz-transition-property: $obj;	
+	-webkit-transition-property: $obj;	
+	-o-transition-property: $obj;
+}
+
+@mixin bgsize($width, $height) {
+	display: inline-block;
+	height: 0;
+	width: $width;
+	padding-top: $height;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+%IEBox {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+@mixin bgimg($url) {
+	background: url($url) transparent no-repeat center top;
+}
+
+@mixin transform($code) {
+	transform: $code;
+    -webkit-transform: $code;
+    -moz-transform: $code;
+    -o-transform: $code;
+    -ms-transform: $code;
+}
+
+@mixin transform-origin($code) {
+	transform-origin: $code;
+	-ms-transform-origin: $code;
+	-o-transform-origin: $code;
+	-webkit-transform-origin: $code;
+	-moz-transform-origin: $code;
+}
+
+.book-wrap {
+	position: relative;
+	padding-top: 30px;
+	width: 90%;
+}
+
+.book-bar {
+	float: right;
+	width: 450px;
+	.number {
+		margin-top: 10px;
+		font-size: 15px;
+		color: #fff;
+		text-shadow: 0 1px 2px rgba(#000, 0.18);
+	}
+	margin-bottom: 70px;
+}
+
+ul.book-list {
+	width: 100%;
+	padding: 0 6px;
+	min-height: 600px;
+	background-color: #fff;
+	@extend %IEBox;
+	border-radius: 4px;
+
+	li {
+		position: relative;
+		padding: 0 16px;
+		line-height: 60px;
+		height: 60px;
+		font-size: 15px;
+		border-bottom: 1px solid #eee;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+
+		&:hover, &.active {
+			&:before {
+				content: '';
+				width: 0;
+				height: 0;
+				border: 10px solid transparent;
+				border-right-color: #fff;
+				position: absolute;
+				top: 20px;
+				left: -25px;
+			}
+
+			.book-name {
+				color: #d4aa59;
+			}
+		}
+
+	}
+
+	.book-name {
+		float: left;
+		color: #666;
+		@include transition();
+	}
+
+	.price {
+		float: right;
+		color: #999;
+		@include transition();
+	}
+
+
+}
+
+.book-panel {
+	float: right;
+	text-align: right;
+	margin-right: 67px;
+	color: #fff;
+	font-size: 15px;
+	text-shadow: 0 1px 2px rgba(#000, 0.18);
+
+	.book-name {
+		margin: 20px 0;
+		font-size: 22px;
+	}
+
+	.price {
+		margin: 20px 0;
+		span {
+			margin-left: 20px; 
+		}
+
+	}
+
+	.star {
+		margin-top: 30px;
+	}
+
+	.photo {
+		display: inline-block;
+		margin-top: 80px;
+		width: 200px;
+		background-color: #fff;
+
+		img {
+			max-width: 100%;
+		}
+	}
+
+	&.fix {
+		position: absolute;
+		right: 517px;
+		top: 25px;
+		margin-right: 0;
+	}
+
+
+
+}
+
