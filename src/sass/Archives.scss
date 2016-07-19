@@ -72,18 +72,173 @@ $linkColor: #7594b3;
 				cursor: pointer;
 				@include transition();
 
-				&:hover {
-					color: $linkColor;
+				&.all {
+					&:hover {
+						color: $linkColor;
+					}
 				}
+
 			}
 
 			.nav-down {
 				display: inline-block;
 				padding-right: 30px;
 				background: url('../img/icon-down.png') 48px 34px no-repeat;
+				&:hover {
+					color: $linkColor;
+				}
+			}
+
+			.switch {
+				position: relative;
 			}
 
 		}
+
+		.ar-panel {
+
+			display: none;
+			cursor: default;
+			position: absolute;
+			top: 65px;
+			width: 367px;
+			height: 271px;
+			z-index: 10;
+			background-color: #fff;
+			border: 1px solid #bcc1c8;
+			// @extend %IEBox;
+			&:before {
+				content: '';
+				position: absolute;
+				top: -11px;
+				left: 43px;
+				@include bgsize(19px, 11px);
+				@include bgimg('../img/ar-top.png');
+			}
+
+			&.open {
+				display: block;
+			}
+
+			&.date {
+				padding: 0 20px;
+				
+				.year {
+					text-align: center;
+					font-size: 30px;
+					font-family: Microsoft Yahei;
+					font-weight: normal;
+					line-height: 80px;
+					color: #aaa;
+					.icon {
+						margin-top: 31px;
+						cursor: pointer;
+					}
+				}
+
+				.icon-arleft {
+					float: left;
+				}
+
+				.icon-arright {
+					float: right;
+				}
+
+				.date-list {
+					width: 366px;
+					border: 1px solid #d7d8db;
+					border-width: 1px 1px 0 0;
+				}
+
+				.date-item {
+					float: left;
+					width: 61px;
+					height: 75px;
+					background-color: #fff;
+					border: 1px solid #d7d8db;
+					border-width: 0 0 1px 1px;
+					text-align: center;
+					@extend %IEBox;
+
+
+
+					h3 {
+						font-size: 24px;
+						line-height: 49px;
+						color: #555;
+						font-weight: normal;
+						font-family: Microsoft Yahei;
+					}
+
+					.number {
+						font-size: 12px;
+						font-family: Microsoft Yahei;
+						color: #999;
+						line-height: 14px;
+
+					}
+
+					&.disabled {
+						background-color: #f8f8f8;
+						h3 {
+							color: #d9d9d9;
+						}
+						.number {
+							display: none;
+						}
+					}
+
+					&.active {
+						background: #7c7c7c;
+						h3 {
+							color: #fff;
+						}
+						.number {
+							color: #fff;
+						}
+					}
+
+				}
+
+
+			}
+
+			&.tag {
+				height: 273px;
+				width: 450px;
+				padding: 28px 10px 28px 34px;
+				@extend %IEBox;
+
+				.tag-list {
+					height: 214px;
+					overflow-y: auto;
+				}
+
+				.ar-tag {
+					display: inline-block;
+					float: left;
+					margin: 0 3px 3px 0; 
+					height: 35px;
+					padding: 0 14px;
+					line-height: 35px;
+					font-size: 16px;
+					color: #fff;
+					background-color: #888;
+					border-radius: 4px;
+
+					@include transition($time: 0.15s);
+
+					&:hover, &.active {
+						background-color: #444;
+					}
+
+				}
+
+			}
+
+		}
+
+
 	}
 
 }

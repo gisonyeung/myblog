@@ -10,7 +10,7 @@ const ArchiveNav = React.createClass({
   render() {
     return (
       <div className="ar-nav">
-        <Link to="/" className="nav-link">全部文章（128）</Link>
+        <Link to="/" className="all nav-link">全部文章（128）</Link>
         <div className="switch nav-link">
           <a href="javascript:;" className="nav-down">日期</a>
           <DatePanel />

@@ -266,6 +266,10 @@ $navHeight: 86px;
 
 	&.archives {
 		margin-bottom: 0;
+
+		.triangle {
+			border-bottom-color: #fff!important;
+		}
 	}
 
 }

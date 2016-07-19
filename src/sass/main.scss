@@ -72,6 +72,7 @@ a {
 $bgColor: #ededef;
 body {
 
+	@include transition();
 	background-color: $bgColor;
 
 	&.mylife {
@@ -103,6 +104,13 @@ body {
 	width: 100%;
 	max-width: 1200px;
 	margin: 0 auto;
+}
+
+// 防止滚动条显隐导致内容跳动
+@media screen and (min-width: 1210px) {
+   .inner-wrapper {
+       padding-left: calc(100vw - 100%);
+   }
 }
 
 .shadow-1 {
@@ -163,6 +171,17 @@ body {
 .icon-comment {
 	@include bgimg('../img/icon-comment.png');	
 }
+
+.icon-arleft {
+	@include bgsize(10px, 19px);
+	@include bgimg('../img/icon-arleft.png');	
+}
+
+.icon-arright {
+	@include bgsize(10px, 19px);
+	@include bgimg('../img/icon-arright.png');	
+}
+
 
 
 
