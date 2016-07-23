@@ -68,6 +68,31 @@ a {
 	text-decoration: none;
 }
 
+/* 播放器 */
+#music-video {
+	position: fixed;
+	bottom: 30px;
+	left: 10px;
+	opacity: 0.3;
+	@include transition();
+	&:hover {
+		opacity: 1;
+	}
+}
+
+@media screen and (max-width: 1800px) {
+	#music-video {
+		left: auto;
+		right: 60px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	#music-video {
+		display: none;
+	}
+}
+
 
 $bgColor: #ededef;
 body {
@@ -81,7 +106,8 @@ body {
 
 	&.book {
 		// background: url('../img/book-bg.png') repeat #a1cbe1;
-		background: url('../img/book-bg.png') repeat #ebc783;
+		// background: url('../img/book-bg.png') repeat #ebc783;
+		background-color: #fff;
 	}
 
 	&.archives {
@@ -119,11 +145,8 @@ body {
 }
 
 
-.life-wrap {
-	width: 620px;
-	margin: 0 auto;
-	padding-top: 20px;
-}
+
+
 
 
 
@@ -182,12 +205,48 @@ body {
 	@include bgimg('../img/icon-arright.png');	
 }
 
+.icon-pageleft {
+	@include bgsize(6px, 11px);
+	@include bgimg('../img/icon-pageleft.png');	
+}
+
+.icon-pageright {
+	@include bgsize(6px, 11px);
+	@include bgimg('../img/icon-pageright.png');	
+}
+
+.icon-like {
+	@include bgsize(60px, 60px);
+	@include bgimg('../img/icon-like.png');	
+}
+
+.icon-share {
+	@include bgsize(60px, 60px);
+	@include bgimg('../img/icon-share.png');	
+}
 
 
 
 
 
+/* 选中 */
+
+$selectBg: lighten(#24292c, 10%);
+$selectFt: #fff;
 
 
+::selection {
+    background: $selectBg; 
+    color: $selectFt;
+}
+::-moz-selection {
+    background: $selectBg; 
+    color: $selectFt;
+}
+
+::-webkit-selection {
+    background: $selectBg; 
+    color: $selectFt;
+}
 
 

@@ -1,0 +1,384 @@
+
+@mixin transition($obj: all, $time: 0.2s, $type: ease-out) {
+	transition: $obj $time $type;
+	-moz-transition: $obj $time $type;	
+	-webkit-transition: $obj $time $type;	
+	-o-transition: $obj $time $type;
+}
+@mixin transitionProperty($obj) {
+	transition-property: $obj;
+	-moz-transition-property: $obj;	
+	-webkit-transition-property: $obj;	
+	-o-transition-property: $obj;
+}
+
+@mixin bgsize($width, $height) {
+	display: inline-block;
+	height: 0;
+	width: $width;
+	padding-top: $height;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+%IEBox {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+@mixin bgimg($url) {
+	background: url($url) transparent no-repeat center top;
+}
+
+@mixin transform($code) {
+	transform: $code;
+    -webkit-transform: $code;
+    -moz-transform: $code;
+    -o-transform: $code;
+    -ms-transform: $code;
+}
+
+@mixin transform-origin($code) {
+	transform-origin: $code;
+	-ms-transform-origin: $code;
+	-o-transform-origin: $code;
+	-webkit-transform-origin: $code;
+	-moz-transform-origin: $code;
+}
+
+
+.article-main {
+	float: left;
+	width: 853px;
+	// height: 1500px;
+
+	.content {
+		padding: 65px 45px 50px;
+		background-color: #fff;
+	}
+	@at-root {
+		.atc-top {
+			margin-bottom: 57px;
+			.title {
+				font-size: 28px;
+				color: #444;
+				font-weight: 200;
+				margin-bottom: 13px;
+			}
+			.subtitle {
+				font-size: 12px;
+				color: #aaa;
+				.icon {
+					position: relative;
+					top: 2px;
+					margin-right: 6px;
+				}
+
+				span {
+					margin-right: 19px;
+				}
+
+				a {
+					color: #7594b3;
+					@include transition();
+					&:hover {
+						color: darken(#7594b3, 20%);
+					}
+				}
+			}
+		}
+		/* 文本效果 */
+		.atc-content {
+			padding-bottom: 60px;
+			color: #333;
+			h2 {
+				font-size: 20px;
+				line-height: 30px;
+				margin-bottom: 25px;
+			}
+			h3 {
+				font-size: 17px;
+				line-height: 30px;
+				margin-bottom: 25px;
+			}
+			p {
+				line-height: 27px;
+				margin-bottom: 25px;
+			}
+
+
+			ul {
+				list-style-type: circle;
+				margin: 16px 0;
+				padding-left: 40px;
+			}
+
+
+			blockquote {
+				margin: 20px 0;
+				padding: 15px;
+				border-left: 3px solid #ccc;
+				background-color: #f7f7f7;
+			}
+
+
+			code {
+			    background: #eee;
+			    text-shadow: 0 1px #fff;
+			    padding: 0 0.3em;
+			    margin: 0 0.3em;
+			}
+
+
+			.highlight {
+				background: #f7f7f7;
+			    margin: 20px 0;
+			    padding: 15px;
+			    overflow: auto;
+			    font-size: 13px;
+			    color: #4d4d4c;
+			    line-height: 1.6;
+		        font-family: "PT Mono", Consolas, Monaco, Menlo, monospace;
+			    table {
+		    	    margin: 0;
+				    width: auto;
+				    border: none;
+			    }
+			    td {
+			    	border: none;
+		    	    padding: 0;
+		    	    text-align: left;
+				    vertical-align: middle;
+				    font-weight: normal;
+			    }
+			    .gutter {
+					pre {
+					    color: #666;
+					    text-align: right;
+    					padding-right: 20px;
+					}
+			    }
+			    .line {
+		    	    height: 20px;
+			    }
+			}
+
+
+		}
+
+		.atc-bottom {
+
+			.tags {
+				margin-bottom: 37px;
+			}
+			.tag {
+				display: inline-block;
+				background-color: #f5f5f5;
+				margin-right: 13px;
+				padding: 1px 7px;
+				font-size: 13px;
+				color: #555;
+				@include transition();
+				&:hover {
+					background-color: darken(#f5f5f5, 10%);
+				}
+			}
+
+			.page {
+				padding: 34px 0;
+				border-top: 1px solid #eee;
+				a {
+					font-size: 14px;
+					color: #999;
+					@include transition();
+					&:hover {
+						color: #333;
+					}
+					&.left {
+						float: left;
+						.icon {
+							margin-right: 9px;
+						}
+						&:hover {
+							.icon-pageleft {
+								@include bgimg('../img/icon-pageleft-active.png');
+							}
+						}
+					}
+					&.right {
+						float: right;
+						.icon {
+							margin-left: 9px;
+						}
+						&:hover {
+							.icon-pageright {
+								@include bgimg('../img/icon-pageright-active.png');
+							}
+						}
+					}
+
+				}
+				.text {
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+
+		.atc-hot {
+			padding: 58px 0;
+			text-align: center;
+
+			span {
+				cursor: pointer;
+				margin-bottom: 7px;
+			}
+
+			.widget {
+				display: inline-block;
+				margin: 0 40px;
+				color: #555;
+				&.active {
+					.icon-like {
+						@include bgimg('../img/icon-like-active.png');
+					}
+					color: #85b7e2;
+				}
+			}
+		}
+
+
+		.comment-panel {
+			background-color: #fff;
+			padding: 47px 45px 100px;
+			margin-bottom: 200px;
+			.panel-title {
+				margin-bottom: 47px;
+				font-size: 22px;
+				font-weight: 200;
+				color: #333;
+			}
+		}
+
+		.comments-list {
+		}
+
+		.comment {
+			padding: 20px 0 22px 0;
+			border: 1px dashed #eee;
+			border-width: 1px 0 1px;
+			&:hover {
+				.quote {
+					display: inline!important;
+				}
+			}
+			.cm-top {
+				font-size: 13px;
+				color: #999;
+
+				.info {
+					float: left;
+					a {
+						text-decoration: underline;
+					}
+				}
+				.handle {
+					float: right;
+				}
+
+				.name {
+					font-size: 16px;
+					color: #3a3a3a;
+					margin-right: 15px;
+				}
+
+				.quote {
+					display: none;
+					margin-right: 15px;
+					cursor: pointer;
+					text-decoration: underline;
+					@include transition();
+					&:hover {
+						color: #555;
+					}
+				}
+			}
+			.cm-content {
+				padding: 10px 100px 10px 0;
+				p {
+					line-height: 28px;
+				}
+			}
+		}
+
+		.comment-box {
+			padding: 60px 0;
+
+			.important {
+				color: #f44336;
+			}
+
+			.label {
+				margin: 12px 0;
+				font-size: 16px;
+				color: #555;
+			}
+
+			.form-text {
+				border: 1px solid #ccc;
+				font-size: 14px;
+				padding: 7px 9px;
+				width: 250px;
+
+				&.msg {
+					width: 100%;
+					max-width: 500px;
+					min-height: 50px;
+					@include transition();
+					&:focus, &.on {
+						min-height: 150px;
+					}
+				}
+			}
+
+			label {
+				cursor: pointer;
+			}
+
+			.remember {
+				margin: 12px 0 10px;
+				font-size: 14px;
+				color: #888;
+
+				input {
+					cursor: pointer;
+				}
+
+				span {
+					position: relative;
+					top: -2px;
+					margin-left: 4px;
+					
+				}
+			}
+			.submit {
+				font-size: 14px;
+				padding: 5px 60px;
+				color: #fff;
+				background-color: #777;
+				border: 0;
+				font-family: inherit;
+				cursor: pointer;
+				@include transition();
+
+				&:hover {
+					background-color: #373737;
+				}
+			}
+		}
+
+	}
+}
+

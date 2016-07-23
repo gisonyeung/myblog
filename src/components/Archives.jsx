@@ -17,8 +17,12 @@ const Archives = React.createClass({
           <ArchiveContent />
         </div>
         <div className="category-bar">
+          <div className="segment">
+            <div className="line">
+              <a href="javascript:;" className="arrow"></a>
+            </div>
+          </div>
           <Category />
-          <a href="javascript:;" className="fold"><span className="arrow"></span></a>
         </div>
       </div>
     )

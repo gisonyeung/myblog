@@ -5,6 +5,7 @@ import Home from './Home';
 import Mylife from './Mylife';
 import Book from './Book';
 import Archives from './Archives';
+import Article from './Article';
 
 
 
@@ -15,6 +16,7 @@ const MainController = React.createClass({
       <Router history={browserHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={Home} />
+          <Route path="/article/:articleId" component={Article} />
           <Route path="/mylife" component={Mylife} />
           <Route path="/book" component={Book} />
           <Route path="/archives" component={Archives} />

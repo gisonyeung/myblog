@@ -49,10 +49,12 @@ $bgColor: #ededef;
 $navHeight: 86px;
 
 .nav {
+	position: relative;
 	margin-bottom: 32px;
 	color: #fff;
 	height: 86px;
 	background-color: #24292c;
+	z-index: 10;
 	@include transition();
 	.brand {
 		margin-top: 31px;
@@ -199,6 +201,7 @@ $navHeight: 86px;
 	}
 
 	&.mylife {
+		margin-bottom: 52px;
 		border-bottom: 1px solid #E3E3D7;
 		background: url('../img/life-nav.png') center center repeat #EAEAE0;
 
@@ -232,36 +235,41 @@ $navHeight: 86px;
 	}
 
 	&.book {
-		background: none;
-		background-color: transparent;
-		border: none;
+		// background: none;
+		// background-color: transparent;
+		// border: none;
 
-		.nav-list {
-			a {
-				color: rgba(#fff, 0.8);
-				text-shadow: 0 1px 1px rgba(#000, 0.18);
-				&:hover {
-					color: #fff;
-				}
-				&.active {
-					color: #fff;
-				}
-			}
-		}
+		// .nav-list {
+		// 	a {
+		// 		color: rgba(#fff, 0.8);
+		// 		text-shadow: 0 1px 1px rgba(#000, 0.18);
+		// 		&:hover {
+		// 			color: #fff;
+		// 		}
+		// 		&.active {
+		// 			color: #fff;
+		// 		}
+		// 	}
+		// }
 
+
+		// .triangle {
+		// 	display: none!important;
+		// }
+
+		// .search-bar {
+
+		// 	input {
+		// 		color: #999;
+		// 		background-color: rgba(#fff, 0.9);
+		// 		box-shadow: 0 2px 2px rgba(#000, 0.12);
+		// 	}
+		// }
 
 		.triangle {
-			display: none!important;
+			border-bottom-color: #fff!important;
 		}
 
-		.search-bar {
-
-			input {
-				color: #999;
-				background-color: rgba(#fff, 0.9);
-				box-shadow: 0 2px 2px rgba(#000, 0.12);
-			}
-		}
 	}
 
 	&.archives {

@@ -10,6 +10,7 @@ const App = React.createClass({
       <div>
         <Nav />
         {this.props.children}
+        
       </div>
     )
   }

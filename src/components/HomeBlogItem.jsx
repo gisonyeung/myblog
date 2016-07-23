@@ -9,7 +9,7 @@ const HomeBlogItem = React.createClass({
     return (
       <article className="blog-item shadow-1">
         <h1 className="title" title="查看全文">
-          <Link to="/">函数式编程柯里化</Link>
+          <Link to="/article/1">函数式编程柯里化</Link>
           <div className="border" />
         </h1>
         <div className="subtitle">
@@ -36,7 +36,7 @@ const HomeBlogItem = React.createClass({
           <div className="summation">
             <span>阅读(321)</span>
             <span>评论</span>
-            <Link to="/" className="article-link" title="查看全文">全文链接 »</Link>
+            <Link to="/article/1" className="article-link" title="查看全文">全文链接 »</Link>
           </div>
         </footer>
       </article>

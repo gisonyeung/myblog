@@ -161,7 +161,126 @@ ul.book-list {
 		margin-right: 0;
 	}
 
-
-
 }
 
+.b-head {
+
+	padding: 10px 0 40px 0;
+
+	.title {
+		height: 34px;
+		line-height: 34px;
+		font-size: 24px;
+		font-weight: normal;
+		color: #000;
+		span {
+			font-size: 18px;
+			color: #ccc;
+		}
+	}
+	.about {
+		font-size: 13px;
+		line-height: 24px;
+		color: #868686;
+	}
+}
+
+.b-body {
+	overflow: hidden;
+}
+
+$right: 5%;
+
+.b-list {
+	margin-right: -$right;
+
+	.wrap {
+		margin-bottom: 20px;
+		height: 216px;
+		text-align: center;
+		img {
+			max-height: 100%;
+		}
+	}
+}
+
+.book-widget {
+	position: relative;
+	float: left;
+	width: (100 - 3*$right) / 3;
+	padding: 50px 0;
+	margin-right: $right;
+	font-size: 12px;
+	// border: 1px solid transparent;
+	// border-width: 1px 0 1px;
+
+	$borderColor: #ccc;
+	$distance: -60%;
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: $distance;
+		width: 100%;
+		height: 1px;
+		background-color: $borderColor;
+		opacity: 0;
+		@include transition();
+	}
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		right: $distance;
+		width: 100%;
+		height: 1px;
+		background-color: $borderColor;
+		opacity: 0;
+		@include transition();
+	}
+
+
+	&:hover {
+		// border-color: #eee;
+		&:before {
+			opacity: 1;
+			left: 0;
+		}
+		&:after {
+			opacity: 1;
+			right: 0;
+		}
+	}
+	.text {
+		margin-bottom: 10px;
+	}
+	.book-name {
+		line-height: 30px;
+		height: 30px;
+	}
+	.introduction {
+		line-height: 24px;
+	}
+	.foot {
+		font-size: 12px;
+		.time {
+			color: #fff;
+			padding: 0 5px;
+			border-radius: 2px;
+			box-shadow: 0 1px 2px rgba(#000, 0.18);
+			background-color: #94AEC8;
+			cursor: pointer;
+		}
+		.recommend {
+			float: right;
+			margin-left: 20px;
+			font-weight: normal;
+			color: #999;
+			cursor: pointer;
+			@include transition();
+			&:hover {
+				color: #7594b3;
+			}
+		}
+	}
+}
