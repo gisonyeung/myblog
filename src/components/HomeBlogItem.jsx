@@ -5,38 +5,45 @@ require('../sass/HomeBlogItem.scss');
 
 const HomeBlogItem = React.createClass({
 
+  
+
   render() {
+
     return (
       <article className="blog-item shadow-1">
         <h1 className="title" title="查看全文">
-          <Link to="/article/1">函数式编程柯里化</Link>
+          <Link to={`/article/${this.props.id}`}>{this.props.title}</Link>
           <div className="border" />
         </h1>
         <div className="subtitle">
           <span>
             <i className="icon icon-time" title="发表时间"></i>
-            <time>2016-06-23</time>
+            <time>{this.props.createAt}</time>
           </span>
           <span>
             <i className="icon icon-update" title="最后更新时间"></i>
-            <time>2016-06-23</time>
+            <time>{this.props.updateAt}</time>
           </span>
-          <Link to="/" title="分类">JS杂谈</Link>
+          <Link to={`/archives?type=category&category=${this.props.category}`} title="分类">{this.props.category}</Link>
         </div>
-        <p className="summary">JS是一门函数式编程语言，其中具有一个很明显的特点就是: 函数是"第一等公民",也就是说函数跟数值，字符串，对象等数据类型一样，函数也是JS的一种数据类型。 这点在下面的代码体现非常明显：123456Function. ...</p>
+        <p className="summary">{this.props.summary}</p>
         <footer className="details clearfix">
           <div className="tags">
             <span className="icon icon-tag" title="标签"></span>
             <ul className="tags-list">
-              <li><Link to="/">JavaScript</Link></li>
-              <li><Link to="/">算法</Link></li>
-              <li><Link to="/">函数式编程</Link></li>
+              {
+                this.props.tags.split(',').map(function(tag, index) {
+                  return (
+                    <li key={index}><Link to={`/archives?type=tag&tag=${tag}`}>{tag}</Link></li>
+                  )
+                })
+              }
             </ul>
           </div>
           <div className="summation">
-            <span>阅读(321)</span>
-            <span>评论</span>
-            <Link to="/article/1" className="article-link" title="查看全文">全文链接 »</Link>
+            <span>阅读{this.props.numbers.view ? `(${this.props.numbers.view})` : ''}</span>
+            <span>评论{this.props.numbers.comment ? `(${this.props.numbers.comment})` : ''}</span>
+            <Link to={`/article/${this.props.id}`} className="article-link" title="查看全文">全文链接 »</Link>
           </div>
         </footer>
       </article>

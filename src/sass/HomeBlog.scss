@@ -54,3 +54,29 @@
 	// height: 1500px;
 	
 }
+
+.blog-appear {
+	opacity: 0.01;
+	// margin-left: -60px;
+	@include transform(translate3d(-65px,0,0))
+}
+
+.blog-appear.blog-appear-active {
+	opacity: 1;
+	// margin-left: 0px;
+	@include transform(translate3d(0,0,0))
+	transition: all 200ms linear;
+}
+
+.info-appear {
+	position: relative;
+	opacity: 0.01;
+	left: 60px;
+}
+
+.info-appear.info-appear-active {
+	opacity: 1;
+	left: 0px;
+	transition: all 200ms linear;
+}
+

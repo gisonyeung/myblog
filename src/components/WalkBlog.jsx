@@ -13,9 +13,9 @@ const  WalkBlog = React.createClass({
           <div className="cont-top">
             <div className="cont-wrap">
               <h2 className="time nophoto">
-                <Link to="/mylife">2016-07-18</Link>
+                <span>2016-07-18</span>
               </h2>
-              <Link to="/mylife" className="picture" title="查看全文">
+              <Link to="/mylife/1" className="picture" title="查看全文">
                 <img src={photo1} />
               </Link>
             </div>
@@ -32,9 +32,9 @@ const  WalkBlog = React.createClass({
                 <Link to="/tag/橡皮活字印刷术">#橡皮活字印刷术</Link>
               </div>
               <div className="summation">
-                <Link to="/mylife" className="icon icon-hot">热度 42</Link>
-                <Link to="/mylife" className="icon icon-comment">评论 5</Link>
-                <Link to="/mylife" className="full" title="查看全文">全文链接 »</Link>
+                <Link to="/mylife/1" className="icon icon-hot">热度 42</Link>
+                <Link to="/mylife/1" className="icon icon-comment">评论 5</Link>
+                <Link to="/mylife/1" className="full" title="查看全文">全文链接 »</Link>
               </div>
             </div>
           </div>

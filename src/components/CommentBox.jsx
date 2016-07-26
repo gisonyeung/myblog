@@ -16,7 +16,7 @@ const CommentBox = React.createClass({
         <input className="form-text" name="nickname" placeholder="我信任你，不会填写广告链接" />
         <p className="remember">
           <label htmlFor="remember">
-            <input type="checkbox" id="remember" checked="true"/>
+            <input type="checkbox" id="remember" defaultChecked="true"/>
             <span>记住个人信息</span>
           </label>
         </p>

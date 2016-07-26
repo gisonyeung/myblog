@@ -61,7 +61,7 @@
 		margin: 0 10px;
 		background-color: transparent;
 		border-top: 1px solid transparent;
-		@include transition();
+		@include transition($type: border);
 		
 		&:hover {
 			border-color: #373737;
