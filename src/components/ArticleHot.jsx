@@ -8,7 +8,8 @@ const ArticleHot = React.createClass({
       <div className="atc-hot">
         <div className="widget">
           <span className="icon icon-like"></span>
-          <p>点赞(32)</p>
+          <p>点赞{
+            this.props.numbers.like ? '(' + this.props.numbers.like + ')' : ''}</p>
         </div>
         <div className="widget">
           <span className="icon icon-share"></span>

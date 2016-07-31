@@ -225,6 +225,12 @@ body {
 	@include bgimg('../img/icon-share.png');	
 }
 
+.icon-error {
+	@include bgsize(14px, 14px);
+	@include bgimg('../img/icon-error.png');	
+}
+
+
 
 
 

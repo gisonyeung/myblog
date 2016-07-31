@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import dateFormat from '../utils/dateFormat';
 
 const Comment = React.createClass({
 
@@ -8,16 +9,21 @@ const Comment = React.createClass({
       <div className="comment">
         <div className="cm-top clearfix">
           <p className="info">
-            <span className="name">小明他姐</span>
-            <span className="time">2016-06-25 22:43</span>
+            {
+              this.props.website ? 
+              <a href={this.props.website} className="name" target="_blank">{this.props.nickname}</a>
+              :
+              <span className="name">{this.props.nickname}</span>
+            }
+            <span className="time">{dateFormat(this.props.time, "YYYY-MM-DD hh:mm:ss")}</span>
           </p>
           <p className="handle">
             <span className="quote">引用</span>
-            <span className="floor">1楼</span>
+            <span className="floor">{this.props.floor}楼</span>
           </p>
         </div>
         <div className="cm-content">
-          <p>看不懂图表什么情况 为什么两个柱状图上下排列 分别代表什么 为什 分别代表什么 为什 分别代表什么 为什么还有—1%的</p>
+          <p>{this.props.content}</p>
         </div>
       </div>
     )

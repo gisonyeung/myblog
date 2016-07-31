@@ -12,11 +12,17 @@ const Article = React.createClass({
     return (
       <div className="inner-wrapper">
       <ReactCSSTransitionGroup
-          transitionName="blog" 
+          transitionName="blog"
           transitionAppear={true} 
           transitionAppearTimeout={400}
+          transitionEnterTimeout={400}
+          transitionLeaveTimeout={400}
+
         >
-          <ArticlePanel />
+          <ArticlePanel 
+            key={this.props.params.articleId}
+            blogId={this.props.params.articleId} 
+          />
         </ReactCSSTransitionGroup>
         <SelfInfoBar />
       </div>

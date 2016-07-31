@@ -22,14 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-app.get('/', function(req, res) {
-	res.render('/index.html');
-});
-
-// like HistoryFallback
-app.use(function(req, res) {
-	res.render('../server/app/index.html');
-});
+// 路由
+require('./routes.js')(app);
 
 
 app.listen(port, function(err){

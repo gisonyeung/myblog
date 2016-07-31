@@ -4,12 +4,18 @@ import HomeBlogItem from './HomeBlogItem';
 import Pagination from './Pagination';
 import BlogStore from '../stores/BlogStore';
 import BlogAction from '../actions/BlogAction';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 require('../sass/HomeBlog.scss');
 
 const HomeBlog = React.createClass({
 
+  
+
   getInitialState() {
+    // 换成异步的时候，移至getInitial
+    BlogAction.fetchBlogs(this.props.query.page);
+    
       return {
           blogs: [],
       };
@@ -24,8 +30,7 @@ const HomeBlog = React.createClass({
   componentDidMount() {
 
     BlogStore.addChangeListener('BLOG_LIST', this.updateList);
-    // 换成异步的时候，移至getInitial
-    BlogAction.fetchBlogs(this.props.query.page);
+    
 
   },
 
@@ -36,7 +41,6 @@ const HomeBlog = React.createClass({
   },
 
   updateList() {
-
     this.setState({
       blogs: BlogStore.getBlogList()
     });
@@ -47,24 +51,30 @@ const HomeBlog = React.createClass({
     return (
       <div className="home-blogs">
         <section className="blog-list">
-          {
-            this.state.blogs.map(function(blog, index) {
-              return (
-                <HomeBlogItem 
-                  key={index}
-                  id={blog.id}
-                  data={blog}
-                  title={blog.title}
-                  createAt={blog.time.createAt.split(' ')[0]}
-                  updateAt={blog.time.updateAt.split(' ')[0]}
-                  category={blog.category}
-                  summary={blog.summary}
-                  tags={blog.tags}
-                  numbers={blog.numbers}
-                />
-              )
-            })
-          }
+          <ReactCSSTransitionGroup
+            transitionName="blogitem" 
+            transitionEnterTimeout={400}
+            transitionLeaveTimeout={300}
+          >
+            {
+              this.state.blogs.map(function(blog, index) {
+                return (
+                  <HomeBlogItem 
+                    key={blog._id}
+                    id={blog.blogId}
+                    data={blog}
+                    title={blog.title}
+                    createAt={blog.time.createAt}
+                    updateAt={blog.time.updateAt}
+                    category={blog.category}
+                    summary={blog.summary}
+                    tags={blog.tags}
+                    numbers={blog.numbers}
+                  />
+                )
+              })
+            }
+          </ReactCSSTransitionGroup>
         </section>
         <Pagination query={this.props.query} />
       </div>

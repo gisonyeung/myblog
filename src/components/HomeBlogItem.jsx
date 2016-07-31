@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
+import dateFormat from '../utils/dateFormat';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 require('../sass/HomeBlogItem.scss');
 
 const HomeBlogItem = React.createClass({
 
-  
 
   render() {
+
 
     return (
       <article className="blog-item shadow-1">
@@ -18,11 +20,11 @@ const HomeBlogItem = React.createClass({
         <div className="subtitle">
           <span>
             <i className="icon icon-time" title="发表时间"></i>
-            <time>{this.props.createAt}</time>
+            <time>{dateFormat(this.props.createAt, "YYYY-MM-DD")}</time>
           </span>
           <span>
             <i className="icon icon-update" title="最后更新时间"></i>
-            <time>{this.props.updateAt}</time>
+            <time>{dateFormat(this.props.updateAt, "YYYY-MM-DD")}</time>
           </span>
           <Link to={`/archives?type=category&category=${this.props.category}`} title="分类">{this.props.category}</Link>
         </div>

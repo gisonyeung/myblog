@@ -12,6 +12,22 @@ AppDispatcher.register(function(action) {
 		case 'FETCH_PAGES':
 			BlogStore.fetchPages(); 
 			break;
+		case 'FETCH_BLOG_DETAIL':
+			BlogStore.fetchBlogDetail(action.blogId); 
+			break;
+		case 'FETCH_NEAR_BLOG':
+			BlogStore.fetchNearBlog(action.blogId); 
+			break;
+		case 'FETCH_BLOG_COMMENT':
+			BlogStore.fetchComments(action.blogId); 
+			break;
+		case 'SEND_BLOG_COMMENT':
+			BlogStore.sendComment(action.formData); 
+			break;
+
+
+
+
 	}
 
 });

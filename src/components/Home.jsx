@@ -14,6 +14,8 @@ const Home = React.createClass({
           transitionName="blog" 
           transitionAppear={true} 
           transitionAppearTimeout={400}
+          transitionEnterTimeout={400}
+          transitionLeaveTimeout={300}
         >
           <HomeBlog query={this.props.location.query} />
         </ReactCSSTransitionGroup>

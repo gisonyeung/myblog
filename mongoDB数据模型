@@ -15,7 +15,7 @@
 
 博文 blog
 {
-	id: '',
+	blogId: '',
 	time: {
 		createAt: 'YYYY-MM-DD hh:mm:ss',
 		updateAt: 'YYYY-MM-DD hh:mm:ss',
@@ -30,6 +30,7 @@
 		comment: 0,
 		like: 0,
 	},
+	isShow: false,
 }
 
 行博 walkingblog
@@ -54,14 +55,12 @@
 	host: blog.id, // 外键
 	type: 'blog' || 'wb' || 'board',
 	user: {
-		id: '',
 		nickname: '',
 		email: '',
 		website: '',
 	},
 	time: 'YYYY-MM-DD hh:mm:ss',
 	content: '',
-	floor: 0,
 }
 
 游客信息表 tourist

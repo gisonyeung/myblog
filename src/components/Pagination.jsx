@@ -10,25 +10,25 @@ const Pagination = React.createClass({
 
 
   getInitialState() {
-
-      return {
-          allPages: this.props.query.page,
-          pageNow: this.props.query.page,
-      };
+    // 改成异步时，放到getInitialState
+    BlogAction.fetchPages();
+    return {
+      allPages: this.props.query.page,
+      pageNow: this.props.query.page,
+    };
 
   },
 
   componentWillReceiveProps(nextProps) {
-      this.setState({
-        pageNow: nextProps.query.page
-      });  
+    this.setState({
+      pageNow: nextProps.query.page
+    });  
   },
 
   componentDidMount() {
 
     BlogStore.addChangeListener('BLOG_PAGE', this.updatePageNum);
-    // 改成异步时，放到getInitialState
-    BlogAction.fetchPages();
+    
 
   },
 
@@ -79,7 +79,9 @@ const Pagination = React.createClass({
           nextPage >= this.state.allPages - 1 ? '' : <span className="space">…</span>
         }
 
-        <Link to={`?page=${this.state.allPages}`} className="page-number" activeClassName="active">{this.state.allPages}</Link>
+        {
+          this.state.allPages == 1 ? '' : <Link to={`?page=${this.state.allPages}`} className="page-number" activeClassName="active">{this.state.allPages}</Link>
+        }
         
         {
           this.state.pageNow == this.state.allPages ? '' : <Link to={`?page=${nextPage}`} className="next-page">»</Link>

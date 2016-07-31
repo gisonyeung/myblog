@@ -49,8 +49,11 @@
 
 
 .article-main {
-	float: left;
+	// float: left;
 	width: 853px;
+	position: absolute;
+	top: 0;
+	// left: 0;
 	// height: 1500px;
 
 	.content {
@@ -140,28 +143,23 @@
 			    color: #4d4d4c;
 			    line-height: 1.6;
 		        font-family: "PT Mono", Consolas, Monaco, Menlo, monospace;
-			    table {
-		    	    margin: 0;
-				    width: auto;
-				    border: none;
-			    }
-			    td {
-			    	border: none;
-		    	    padding: 0;
-		    	    text-align: left;
-				    vertical-align: middle;
-				    font-weight: normal;
-			    }
-			    .gutter {
-					pre {
-					    color: #666;
-					    text-align: right;
-    					padding-right: 20px;
-					}
-			    }
-			    .line {
-		    	    height: 20px;
-			    }
+				pre {
+				    color: #666;
+				    text-align: right;
+					padding-right: 20px;
+				}
+			}
+
+			pre {
+			    padding: 16px;
+			    overflow: auto;
+			    font-size: 85%;
+			    line-height: 1.45;
+			    background-color: #f7f7f7;
+		        word-wrap: normal;
+			    border-radius: 3px;
+			    color: #333;
+			    font: 13px Consolas, "Liberation Mono", Menlo, Courier, monospace;
 			}
 
 
@@ -255,7 +253,7 @@
 			padding: 47px 45px 100px;
 			margin-bottom: 200px;
 			.panel-title {
-				margin-bottom: 47px;
+				
 				font-size: 22px;
 				font-weight: 200;
 				color: #333;
@@ -263,6 +261,7 @@
 		}
 
 		.comments-list {
+
 		}
 
 		.comment {
@@ -274,6 +273,10 @@
 					display: inline!important;
 				}
 			}
+			&:first-child {
+				margin-top: 47px;
+				border-top: 0;
+			}
 			.cm-top {
 				font-size: 13px;
 				color: #999;
@@ -281,7 +284,13 @@
 				.info {
 					float: left;
 					a {
-						text-decoration: underline;
+						margin-top: -1px;
+						border-bottom: 1px solid #888;
+						cursor: pointer;
+						@include transition();
+						&:hover {
+							border-bottom: 1px solid #333;
+						}
 					}
 				}
 				.handle {
@@ -289,6 +298,7 @@
 				}
 
 				.name {
+					display: inline-block;
 					font-size: 16px;
 					color: #3a3a3a;
 					margin-right: 15px;
@@ -363,6 +373,28 @@
 					
 				}
 			}
+
+			.error-tip {
+				font-size: 12px;
+				color: #fa5b5b;
+			    line-height: 20px;
+			    vertical-align: top;
+			    word-break: break-all;
+			    font-family: Microsoft Yahei;
+			    margin-bottom: 10px;
+
+			    .icon-error {
+			    	margin-right: 5px;
+			    }
+
+			    .text {
+			    	position: relative;
+			    	top: -2px;
+			    }
+
+
+			}
+
 			.submit {
 				font-size: 14px;
 				padding: 5px 60px;
