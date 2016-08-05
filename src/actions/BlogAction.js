@@ -43,6 +43,22 @@ const BlogAction = {
 		});
 	},
 
+	addLike(blogId) {
+		AppDispatcher.dispatch({
+			actionType: 'ADD_BLOG_LIKE',
+			blogId: blogId,
+		});
+	},
+
+	quoteComment(data) {
+		AppDispatcher.dispatch({
+			actionType: 'QUOTE_COMMENT',
+			data: data,
+		});
+	},
+
+
+
 
 
 

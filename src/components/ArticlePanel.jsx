@@ -23,6 +23,12 @@ const ArticlePanel = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+
+    // 相等的时候，不更新
+    if(nextProps.blogId == this.props.blogId) {
+      return false;
+    }
+
     // 与当前页切换博文详情时，发送请求，更新页面
     BlogAction.fetchBlogDetail(nextProps.blogId);  
   },

@@ -17,7 +17,6 @@ const Article = React.createClass({
           transitionAppearTimeout={400}
           transitionEnterTimeout={400}
           transitionLeaveTimeout={400}
-
         >
           <ArticlePanel 
             key={this.props.params.articleId}

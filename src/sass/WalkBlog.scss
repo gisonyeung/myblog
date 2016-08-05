@@ -125,9 +125,10 @@ $linkColor: #a49369;
 	}
 
 	.tags {
-		a {
+		span {
 			display: inline-block;
 			margin-right: 15px;
+			cursor: pointer;
 			@include transition();
 			&:hover {
 				color: darken($linkColor, 20%);
@@ -273,6 +274,10 @@ $linkColor: #a49369;
 			margin: 0 7px;
 		}
 
+		a {
+			text-decoration: underline;
+		}
+
 	}
 
 
@@ -330,6 +335,43 @@ $linkColor: #a49369;
 			span {
 				margin-left: 5px;
 			}
+		}
+	}
+
+	&-info {
+		
+		margin-bottom: 20px;
+		
+
+		.label {
+			font-size: 14px;
+			line-height: 30PX;
+			color: #a49369;
+		}
+
+		.form-text {
+			padding: 5px 9px;
+		}
+
+	}
+
+	.error-tip {
+		float: left;
+		margin: 9px 0 0;
+		font-size: 14px;
+
+		.icon {
+		    margin-right: 5px;
+		}
+
+		.text {
+		    position: relative;
+		    top: -2px;
+		    color: #fa5b5b;
+
+		    &.success {
+		    	color: #4dd25e;
+		    }
 		}
 	}
 

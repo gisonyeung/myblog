@@ -25,6 +25,13 @@ const ArticleContent = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    
+    // 相等的时候，不更新
+    if(nextProps.blogId == this.props.blogId || this.props.blogId != -1) {
+      return false;
+    }
+
+
     // 换成异步的时候，移至WillReceiveProps
     BlogAction.fetchNearBlog(nextProps.blogId);
   },

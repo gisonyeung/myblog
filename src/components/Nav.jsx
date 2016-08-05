@@ -72,7 +72,7 @@ const Nav = React.createClass({
 	      <nav className="nav-bar">
 	        <div className="nav-list">
 	          <IndexLink to="/" activeClassName="active">首页</IndexLink>
-	          <Link to="/mylife" activeClassName="active">手帐</Link>
+	          <Link to="/mylife" activeClassName="active">日常</Link>
 	          <Link to="/book" activeClassName="active">我的书单</Link>
 	          <Link to="/archives" activeClassName="active">归档</Link>
 	          <Link to="/board" activeClassName="active">留言板</Link>

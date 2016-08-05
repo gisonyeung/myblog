@@ -2,43 +2,56 @@ import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import fetch from '../utils/fetch';
 import Api from '../constants/Api';
+import _ from 'lodash';
 
-const BlogStore = assign({}, EventEmitter.prototype, {
-
+const WalkingBlogStore = assign({}, EventEmitter.prototype, {
 
 	blogs: [],
 
-	allpagesNum: 1,
+	beginIndex: 1,
 
-	blog: {},
+	lastIndex: 0,
 
-	nearBlog: {
-		prev: {
-			blogId: -1,
-			title: '',
+	blog: {
+		blogId: -1,
+		time: {
+			createAt: '0000-00-00',
+			updateAt: '0000-00-00',
 		},
-		next: {
-			blogId: -1,
-			title: '',
-		}
+		photo: '',
+		content: '',
+		tags: '',
+		numbers: {
+			view: 0,
+			comment: 0,
+		},
 	},
 
-	quoteData: {
-		email: '',
-		time: '',
-		nickname: '',
-		content: '',
+	nearBlog: {
+		prev: -1,
+		next: -1,
 	},
 
 	comments: [],
+
+	quoteData: {
+		nickname: '',
+		email: '',
+		website: '',
+		content: '',
+		time: '0000-00-00',
+	},
 
 	getBlogList: function() {
 		return this.blogs;
 	},
 
-	fetchBlogs: function(pageNum) {
-		fetch(Api.homeBlog, {
-			page: pageNum
+	fetchBlogList: function() {
+
+		let beginIndex = this.beginIndex;
+
+		fetch(Api.walkingBlog, {
+			beginIndex: beginIndex
 		})
 		.then(data => {
 			if( data.result == 'success' ) {
@@ -51,36 +64,18 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 		});
 	},
 
-	getPageNum: function() {
-		return this.allpagesNum;
-	},
-
-	fetchPages: function() {
-		fetch(Api.homePage)
-		.then(data => {
-			if( data.result == 'success' ) {
-				this.allpagesNum = data.page;
-				this.emitEvent('BLOG_PAGE');
-			}
-		})
-		.catch(err => {
-			console.log(err);
-		});
-		
-	},
-
 	getBlogDetail: function() {
 		return this.blog;
 	},
 
 	fetchBlogDetail: function(blogId) {
-		fetch(Api.blogDetail, {
+		fetch(Api.walkingBlogDetail, {
 			blogId: blogId
 		})
 		.then(data => {
 			if ( data.result == 'success' ) {
 				this.blog = data.blog;
-				this.emitEvent('BLOG_DETAIL');
+				this.emitEvent('WALKINGBLOG_DETAIL');
 			} 
 		})
 		.catch(err => {
@@ -93,12 +88,13 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 	},
 
 	fetchNearBlog: function(blogId) {
-		fetch(Api.nearBlog, {
+		fetch(Api.nearWalkingBlog, {
 			blogId: blogId
 		})
 		.then(data => {
 			if ( data.result == 'success' ) {
 				this.nearBlog = data.nearBlog;
+				console.log(data.nearBlog);
 				this.emitEvent('BLOG_NEAR');
 			} 
 		})
@@ -112,7 +108,7 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 	},
 
 	fetchComments: function(blogId) {
-		fetch(Api.blogComment, {
+		fetch(Api.walkingBlogComment, {
 			blogId: blogId
 		})
 		.then(data => {
@@ -130,13 +126,14 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 		const that = this;
 
-		fetch(Api.addblogComment, {
+
+		fetch(Api.addWalkingBlogComment, {
 			blogId: formData.blogId,
 			nickname: formData.nickname,
 			email: formData.email,
 			website: formData.website,
 			content: formData.content,
-			quoteData: that.quoteData
+			quoteData: that.quoteData,
 		})
 		.then(data => {
 			if ( data.result == 'success' ) {
@@ -150,30 +147,21 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 		});
 	},
 
-	addLike: function(blogId) {
-		fetch(Api.addBlogLike, {
-			blogId: blogId,
-		})
-		.then(data => {
-			if ( data.result == 'success' ) {
-				this.emitEvent('REFRESH_LIKE');
-			} else {
-				this.emitEvent('REFRESH_LIKE', data.reason);
-			}
-		})
-		.catch(err => {
-			console.log(err);
-		});
-	},
-
-	quoteComment: function(data) {
+	replyComment: function(data) {
 		this.quoteData = data;
-		this.emitEvent('QUOTE_COMMENT', data);
+		this.emitEvent('REPLY_COMMENT', data);
 	},
 
-
-
-
+	cancelReply: function() {
+		this.quoteData = {
+			nickname: '',
+			email: '',
+			website: '',
+			content: '',
+			time: '0000-00-00',
+		};
+		this.emitEvent('REPLY_COMMENT', this.quoteData);
+	},
 
 	emitEvent: function(event, data) {
 		this.emit(event, data);
@@ -189,4 +177,4 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 });
 
-export default BlogStore;
+export default WalkingBlogStore;

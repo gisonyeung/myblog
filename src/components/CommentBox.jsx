@@ -28,8 +28,9 @@ const CommentBox = React.createClass({
     return {
       isChecked: isChecked,
       isOpen: false,  
-      isError: {
+      isTip: {
         status: false,
+        type: 'error', // 'error' or 'success'
         text: '',
       },
       cookieForm: cookieForm,
@@ -39,12 +40,14 @@ const CommentBox = React.createClass({
   componentDidMount() {
 
     BlogStore.addChangeListener('SEND_COMMENT', this.sendCall);
+    BlogStore.addChangeListener('QUOTE_COMMENT', this.quoteComment);
     
   },
 
   componentWillUnmount() {
 
     BlogStore.removeChangeListener('SEND_COMMENT', this.sendCall)  
+    BlogStore.removeChangeListener('QUOTE_COMMENT', this.quoteComment)  
 
   },
 
@@ -72,23 +75,39 @@ const CommentBox = React.createClass({
     /*
       表单验证
     */
-    if ( !/\S/.test(formData.content) ) {
-      this.handleError('评论内容不能为空');
+    if ( !/\S/.test(formData.content.replace(/<blockquote>[\s\S]*<\/blockquote>/g, '')) ) {
+      this.handleTip('error', '评论内容不能为空');
       this.refs.content.focus();
       return false;
     } else if ( !/\S/.test(formData.nickname) ) {
-      this.handleError('昵称不能为空');
+      this.handleTip('error', '昵称不能为空');
       this.refs.nickname.focus();
       return false;
     } else if ( !/\S/.test(formData.email) ) {
-      this.handleError('电子邮箱不能为空');
+      this.handleTip('error', '电子邮箱不能为空');
       this.refs.email.focus();
       return false;
     } else if ( !/^\w+@\w+\.\w+(\.\w+)?$/.test(formData.email) ) {
-      this.handleError('电子邮箱格式错误');
+      this.handleTip('error', '电子邮箱格式错误');
       this.refs.email.focus();
       return false;
-    }
+    } else if ( formData.content.length > 1500 ) {
+      this.handleTip('error', '评论内容过长');
+      this.refs.content.focus();
+      return false;
+    } else if ( formData.nickname.length > 15 ) {
+      this.handleTip('error', '昵称过长');
+      this.refs.nickname.focus();
+      return false;
+    } else if ( formData.email.length > 50 ) {
+      this.handleTip('error', '电子邮箱过长');
+      this.refs.email.focus();
+      return false;
+    }  else if ( formData.website.length > 100 ) {
+      this.handleTip('error', '个人网站过长');
+      this.refs.website.focus();
+      return false;
+    } 
     /*
       个人网站不为空时，检测有无https?://前缀，无则添加http://
     */
@@ -106,9 +125,9 @@ const CommentBox = React.createClass({
 
     // 记住个人信息，存储进cookie => nickname, email, website
     if ( this.refs.remember.checked ) {
-      cookie.save('nickname', formData.nickname, { path: '/' });
-      cookie.save('email', formData.email, { path: '/' });
-      cookie.save('website', formData.website, { path: '/' });
+      cookie.save('nickname', formData.nickname, { path: '/', maxAge: 2592000 });
+      cookie.save('email', formData.email, { path: '/', maxAge: 2592000 });
+      cookie.save('website', formData.website, { path: '/', maxAge: 2592000 });
     } else {
       // 删除对应cookie
       cookie.remove('nickname', { path: '/' });
@@ -116,25 +135,27 @@ const CommentBox = React.createClass({
       cookie.remove('website', { path: '/' });
     }
     
-    this.clearError();
+    this.clearTip();
 
     BlogAction.sendComment(formData);
 
   },
 
-  handleError(text) {
+  handleTip(type, text) {
     this.setState({
-      isError: {
+      isTip: {
         status: true,
+        type: type,
         text: text,
       },
     });
   },
 
-  clearError() {
+  clearTip() {
     this.setState({
-      isError: {
+      isTip: {
         status: false,
+        type: 'error',
         text: '',
       },
     });
@@ -142,10 +163,23 @@ const CommentBox = React.createClass({
 
   sendCall(reason) {
     if( reason ) {
-      handleError(reason);
+      this.handleTip('error', reason);
     } else {
-      location.reload();
+      this.refs.content.value = '';
+      this.handleTip('success', '发表评论成功');
+      location.href = '#comment';
+      BlogAction.fetchBlogComment(this.props.blogId);
     }
+  },
+
+  quoteComment(data) {
+
+    data.content = data.content.replace(/<blockquote>[\s\S]*<\/blockquote>/, '').replace(/<\/?script>/g, '');
+    data.nickname = data.nickname.replace(/<\/?script>/g, '');
+
+    let commentValue = `<blockquote>\n<pre>引用 ${data.nickname} 的发言：</pre>\n\n${data.content}\n\n</blockquote>\n`;
+    this.refs.content.value = commentValue + this.refs.content.value;
+    this.refs.content.focus();
   },
 
 
@@ -195,10 +229,10 @@ const CommentBox = React.createClass({
           </label>
         </p>
         {
-          this.state.isError.status ? 
+          this.state.isTip.status ? 
           <p className="error-tip">
-            <span className="icon icon-error"></span>
-            <span className="text">{this.state.isError.text}</span>
+            <span className={`icon ${this.state.isTip.type == 'error' ? 'icon-error' : 'icon-ok'}`}></span>
+            <span className={`text ${this.state.isTip.type == 'error' ? '' : 'success'}`}>{this.state.isTip.text}</span>
           </p>
           : 
           ''

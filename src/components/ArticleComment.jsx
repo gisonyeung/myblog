@@ -14,6 +14,9 @@ const ArticleComment = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    if( nextProps.blogId == this.props.blogId || this.props.blogId != -1) {
+      return false;
+    }
     // 换成异步的时候，移至WillReceiveProps
     BlogAction.fetchBlogComment(nextProps.blogId);
   },
@@ -31,16 +34,17 @@ const ArticleComment = React.createClass({
   },
 
   updateComments() {
+
     this.setState({
       comments: BlogStore.getComments()
     });
-
+    
   },
 
   render() {
     const comments_length = this.state.comments.length;
     return (
-      <div className="comment-panel shadow-1">
+      <div className="comment-panel shadow-1" id="comment">
         <h1 className="panel-title">留言{ this.state.comments.length ? '(' + this.state.comments.length + ')' : ''}</h1>
         <div className="comments-list">
           {
@@ -50,6 +54,7 @@ const ArticleComment = React.createClass({
                   key={comment._id}
                   nickname={comment.user.nickname}
                   website={comment.user.website}
+                  email={comment.user.email}
                   time={comment.time}
                   content={comment.content}
                   floor={comments_length - index}

@@ -240,6 +240,7 @@
 				color: #555;
 				&.active {
 					.icon-like {
+						cursor: default;
 						@include bgimg('../img/icon-like-active.png');
 					}
 					color: #85b7e2;
@@ -320,6 +321,30 @@
 				p {
 					line-height: 28px;
 				}
+				a {
+					text-decoration: underline;
+				}
+				blockquote {
+					display: block;
+					margin-bottom: 5px;
+					padding: 10px 0;
+					font-size: 12px;
+					border-left: 3px solid #eee;
+					padding-left: 14px;
+					background-color: #f8f8f8;
+					blockquote {
+						margin-bottom: 0;
+					}
+					pre {
+						font-weight: bold;
+						padding-bottom: 7px;
+						word-wrap: normal;
+
+					}
+					p {
+						line-height: 20px;
+					}
+				}
 			}
 		}
 
@@ -376,20 +401,24 @@
 
 			.error-tip {
 				font-size: 12px;
-				color: #fa5b5b;
+				
 			    line-height: 20px;
 			    vertical-align: top;
 			    word-break: break-all;
 			    font-family: Microsoft Yahei;
 			    margin-bottom: 10px;
 
-			    .icon-error {
+			    .icon {
 			    	margin-right: 5px;
 			    }
 
 			    .text {
 			    	position: relative;
 			    	top: -2px;
+			    	color: #fa5b5b;
+			    	&.success {
+			    		color: #4dd25e;
+			    	}
 			    }
 
 

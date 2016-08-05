@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var CommentSchema = new mongoose.Schema({
 	host: Number,
-	type: String,
+	type: String, //'blog' || 'wb' || 'board'
 	user: {
 		nickname: String,
 		email: String,
@@ -13,6 +13,11 @@ var CommentSchema = new mongoose.Schema({
 		default: Date.now(),
 	},
 	content: String,
+	replyTo: {
+		nickname: String,
+		email: String,
+		website: String,
+	}
 });
 
 CommentSchema.statics = {
@@ -28,6 +33,20 @@ CommentSchema.statics = {
 			})
 			.exec(callback);
 	},
+
+	fetchWalkingBlogComment: function(blogId, callback) {
+		return this
+			.find({
+				host: blogId,
+				type: 'wb',
+			})
+			.sort({
+				'time': -1,
+			})
+			.exec(callback);
+	},
+
+
 
 
 

@@ -25,6 +25,11 @@ const addPage_change = (prevStage, nextStage, replace) => {
 }
 
 
+
+
+
+
+
 const MainController = React.createClass({
 
   render() {
@@ -32,7 +37,7 @@ const MainController = React.createClass({
       <Router history={browserHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={Home} onEnter={addPage} onChange={addPage_change}/>
-          <Route path="/article/:articleId" component={Article} />
+          <Route path="/article/:articleId" component={Article}  />
           <Route path="/mylife" component={Mylife} />
           <Route path="/mylife/:postId" component={WalkBlogDetail} />
           <Route path="/book" component={Book} />
