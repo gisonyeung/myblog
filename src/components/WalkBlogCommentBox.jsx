@@ -214,7 +214,7 @@ const  WalkBlogCommentBox = React.createClass({
       <article className="box-wrap">
         <div className="walk-content">
           <div className="cont-top">
-            <div className="cont-wrap wbcm">
+            <div className="cont-wrap wbcm line">
               <h3 className="wb-title">评论{this.state.comments.length ? '(' + this.state.comments.length + ')' : ''}</h3>
               <div className="clearfix">
                 <textarea

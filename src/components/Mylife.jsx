@@ -6,7 +6,7 @@ import WalkingBlogStore from '../stores/WalkingBlogStore';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
-// require('../sass/Mylife.scss');
+require('../sass/Mylife.scss');
 
 const  Mylife = React.createClass({
 
@@ -41,10 +41,14 @@ const  Mylife = React.createClass({
   render() {
     return (
       <div className="inner-wrapper">
-        <div className="life-wrap">
+        <div className="life-wrap shadow-1">
+          <div className="banner">
+            <h1>惜有</h1>
+            <p>找个风口，俯瞰灯火阑珊。</p>
+          </div>
           <ReactCSSTransitionGroup
             transitionName="blogitem"
-            transitionAppear={true} 
+            transitionAppear={true}
             transitionAppearTimeout={400}
             transitionEnterTimeout={400}
             transitionLeaveTimeout={300}

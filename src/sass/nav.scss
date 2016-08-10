@@ -201,37 +201,49 @@ $navHeight: 86px;
 	}
 
 	&.mylife {
-		margin-bottom: 52px;
-		border-bottom: 1px solid #E3E3D7;
-		background: url('../img/life-nav.png') center center repeat #EAEAE0;
+		// margin-bottom: 52px;
+		// border-bottom: 1px solid #E3E3D7;
+		// background: url('../img/life-nav.png') center center repeat #EAEAE0;
+		
 
-		.nav-list {
-			a {
-				color: #a49369;
-				&:hover {
-					color: rgba(#aa3f2b, 0.8);
-				}
-				&.active {
-					color: #aa3f2b;
-				}
-			}
-		}
+		// .nav-list {
+		// 	a {
+		// 		color: #a49369;
+		// 		&:hover {
+		// 			color: rgba(#aa3f2b, 0.8);
+		// 		}
+		// 		&.active {
+		// 			color: #aa3f2b;
+		// 		}
+		// 	}
+		// }
 
-		.brand {
-			@include bgimg('../img/brand-life3.png')
-		}
+		// .brand {
+		// 	@include bgimg('../img/brand-life3.png')
+		// }
 
-		.triangle {
-			display: none!important;
-		}
+		// .triangle {
+		// 	display: none!important;
+		// }
+
+		// .search-bar {
+		// 	input {
+		// 		color: #999;
+		// 		background-color: transparent;
+		// 		border: 1px solid #d1cebf;
+		// 	}
+		// }
+
+		background-color: #132332;
 
 		.search-bar {
 			input {
-				color: #999;
-				background-color: transparent;
-				border: 1px solid #d1cebf;
+				color: #666;
+				background-color: #fff;
 			}
 		}
+
+		margin-bottom: 70px;
 	}
 
 	&.book {

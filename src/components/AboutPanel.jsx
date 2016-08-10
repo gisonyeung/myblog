@@ -97,7 +97,7 @@ const AboutPanel = React.createClass({
                   <p className="time">2016年7月</p>
                   <div className="item-cont">
                     <h3>应聘学院16级新生助班</h3>
-                    <p>通过年级辅导员的面试，成为16级软件四班助班</p>
+                    <p>通过年级辅导员的面试，任职16级软件4班助班</p>
                   </div>
                 </div>
                 <div className="item clearfix">

@@ -78,6 +78,7 @@ a {
 	bottom: 30px;
 	left: 10px;
 	opacity: 0.3;
+    z-index: 2;
 	@include transition();
 	&:hover {
 		opacity: 1;
@@ -600,13 +601,13 @@ $topMove: 40px;
 	}
 }
 
-.icon-hot {
-	@include bgimg('../img/icon-hot.png');	
-}
+// .icon-hot {
+// 	@include bgimg('../img/icon-hot.png');	
+// }
 
-.icon-comment {
-	@include bgimg('../img/icon-comment.png');	
-}
+// .icon-comment {
+// 	@include bgimg('../img/icon-comment.png');	
+// }
 
 .icon-arleft {
 	@include bgsize(10px, 19px);

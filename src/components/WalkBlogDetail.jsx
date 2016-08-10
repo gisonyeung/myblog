@@ -69,7 +69,7 @@ const  WalkBlogDetail = React.createClass({
             transitionAppearTimeout={400}
             transitionEnterTimeout={400}
           >
-          <div className="life-wrap" key={this.state.blog.blogId}>
+          <div className="life-wrap detail" key={this.state.blog.blogId}>
             <WalkBlog 
               blogId={this.state.blog.blogId || -1}
               time={this.state.blog.time.createAt || '0000-00-00'}

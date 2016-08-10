@@ -33,7 +33,7 @@ const Nav = React.createClass({
 
     if( /^\/mylife/.test(path) ) { // mylife
 
-    	document.body.className = 'mylife';
+    	document.body.className = '';
     	this.setState({
     		stateClass: 'mylife'
     	});
