@@ -62,7 +62,7 @@ const ArticlePanel = React.createClass({
           updateAt={this.state.blog.time.updateAt || '0000:00:00'}
           category={this.state.blog.category || ''}
           content={this.state.blog.content || ''}
-          tags={this.state.tags || ''}
+          tags={this.state.blog.tags || ''}
         />
         {
           this.state.blog.blogId != -1 ? 

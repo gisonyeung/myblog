@@ -7,6 +7,8 @@ import Book from './Book';
 import Archives from './Archives';
 import Article from './Article';
 import WalkBlogDetail from './WalkBlogDetail';
+import Board from './Board';
+import About from './About';
 
 
 
@@ -42,8 +44,8 @@ const MainController = React.createClass({
           <Route path="/mylife/:postId" component={WalkBlogDetail} />
           <Route path="/book" component={Book} />
           <Route path="/archives" component={Archives} />
-          <Route path="/board" component={Home} />
-          <Route path="/about" component={Home} />
+          <Route path="/board" component={Board} />
+          <Route path="/about" component={About} />
           <Redirect from="/*" to="/" />
         </Route>
 	  </Router>

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import cookie from 'react-cookie';
 import BlogAction from '../actions/BlogAction';
 import BlogStore from '../stores/BlogStore';
+import SiteAction from '../actions/SiteAction';
 
 const CommentBox = React.createClass({
 
@@ -169,6 +170,7 @@ const CommentBox = React.createClass({
       this.handleTip('success', '发表评论成功');
       location.href = '#comment';
       BlogAction.fetchBlogComment(this.props.blogId);
+      SiteAction.fetchSiteNum();
     }
   },
 
@@ -178,7 +180,7 @@ const CommentBox = React.createClass({
     data.nickname = data.nickname.replace(/<\/?script>/g, '');
 
     let commentValue = `<blockquote>\n<pre>引用 ${data.nickname} 的发言：</pre>\n\n${data.content}\n\n</blockquote>\n`;
-    this.refs.content.value = commentValue + this.refs.content.value;
+    this.refs.content.value = commentValue + this.refs.content.value.replace(/<blockquote>[\s\S]*<\/blockquote>/, '');
     this.refs.content.focus();
   },
 

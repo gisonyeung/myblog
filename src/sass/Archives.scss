@@ -186,6 +186,7 @@ $linkColor: #7594b3;
 				padding: 0 20px;
 				
 				.year {
+					position: relative;
 					text-align: center;
 					font-size: 30px;
 					font-family: Microsoft Yahei;
@@ -193,17 +194,20 @@ $linkColor: #7594b3;
 					line-height: 80px;
 					color: #aaa;
 					.icon {
+						position: absolute;
 						margin-top: 31px;
 						cursor: pointer;
 					}
 				}
 
 				.icon-arleft {
-					float: left;
+					top: 0;
+					left: 0;
 				}
 
 				.icon-arright {
-					float: right;
+					top: 0;
+					right: 0;
 				}
 
 				.date-list {
@@ -306,6 +310,18 @@ $linkColor: #7594b3;
 
 .ar-content {
 	margin-bottom: 150px;
+
+	.no-result {
+		// text-align: center;
+		padding-top: 30px;
+		color: #666;
+
+		.emoji {
+			color: #efa6a1;
+			margin-right: 5px;
+			font-size: 19px;
+		}
+	}
 }
 
 .chapter {

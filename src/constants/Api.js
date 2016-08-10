@@ -1,17 +1,30 @@
 const Api = {
+	blogCount: '/blogCount',
 	homeBlog: '/homeBlog',
 	homePage: '/homePage',
 	blogDetail: '/blogDetail',
 	nearBlog: '/nearBlog',
 	blogComment: '/blogComment',
-	addblogComment: '/addblogComment',
+	addBlogComment: '/addBlogComment',
 	addBlogLike: '/addBlogLike',
 	walkingBlog: '/walkingBlog',
 	walkingBlogDetail: '/walkingBlogDetail',
 	walkingBlogComment: '/walkingBlogComment',
 	addWalkingBlogComment: '/addWalkingBlogComment',
 	nearWalkingBlog: '/nearWalkingBlog',
-	
+	bookList: '/bookList',
+	bookLike: '/bookLike',
+	archiveCondition: '/archiveCondition',
+	archiveAll: '/archiveAll',
+	categories: '/categories',
+	tags: '/tags',
+	blogCountForYear: '/blogCountForYear',
+	siteYear: '/siteYear',
+	boardComment: '/boardComment',
+	addBoardComment: '/addBoardComment',
+	subscribe: '/subscribe',
+	siteNum: '/siteNum',
+
 };
 
 export default Api;

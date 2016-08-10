@@ -64,11 +64,11 @@ const ArticleContent = React.createClass({
             this.props.blogId == -1 ? '' :
             <div className="subtitle">
               <span>
-                <i className="icon icon-time" title="发表时间"></i>
+                <i className="icon icon-time" title={`发表时间: ${dateFormat(this.props.createAt, "YYYY-MM-DD hh:mm:ss")}`}></i>
                 <time>{dateFormat(this.props.createAt, "YYYY-MM-DD")}</time>
               </span>
               <span>
-                <i className="icon icon-update" title="最后更新时间"></i>
+                <i className="icon icon-update" title={`最后更新时间: ${dateFormat(this.props.createAt, "YYYY-MM-DD hh:mm:ss")}`}></i>
                 <time>{dateFormat(this.props.updateAt, "YYYY-MM-DD")}</time>
               </span>
               <Link to="/" title="分类">{this.props.category}</Link>

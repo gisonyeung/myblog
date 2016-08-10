@@ -9,7 +9,7 @@ const ArticleComment = React.createClass({
 
   getInitialState() {
       return {
-          comments: []  
+          comments: BlogStore.getComments(), 
       };
   },
 

@@ -2,6 +2,12 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 
 const BlogAction = {
 	
+	fetchCount() {
+		AppDispatcher.dispatch({
+			actionType: 'FETCH_BLOGS_COUNT',
+		});
+	},
+
 	fetchBlogs(pageNum) {
 		AppDispatcher.dispatch({
 			actionType: 'FETCH_BLOGS',
@@ -56,6 +62,23 @@ const BlogAction = {
 			data: data,
 		});
 	},
+
+	fetchBoardComments() {
+		AppDispatcher.dispatch({
+			actionType: 'FETCH_BOARD_COMMENT',
+		});
+	},
+
+	sendBoardComment(formData) {
+		AppDispatcher.dispatch({
+			actionType: 'SEND_BOARD_COMMENT',
+			formData: formData,
+		});
+	},
+
+
+
+	
 
 
 

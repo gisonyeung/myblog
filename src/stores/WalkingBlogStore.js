@@ -94,7 +94,6 @@ const WalkingBlogStore = assign({}, EventEmitter.prototype, {
 		.then(data => {
 			if ( data.result == 'success' ) {
 				this.nearBlog = data.nearBlog;
-				console.log(data.nearBlog);
 				this.emitEvent('BLOG_NEAR');
 			} 
 		})

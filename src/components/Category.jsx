@@ -1,47 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router';
-
+import _ from 'lodash';
+import ArchiveAction from '../actions/ArchiveAction';
+import ArchiveStore from '../stores/ArchiveStore';
 
 const Category = React.createClass({
 
+  getInitialState() {
+      
+    ArchiveAction.fetchCategory();
+
+    return {
+      category: ArchiveStore.getCategory(),
+    };
+  },
+
+  componentDidMount() {
+    ArchiveStore.addChangeListener('CATEGORY_LIST', this.updateCate);
+  },
+
+  componentWillUnmount() {
+    ArchiveStore.removeChangeListener('CATEGORY_LIST', this.updateCate);    
+  },
+
+  updateCate() {
+    this.setState({
+      category: ArchiveStore.getCategory(),
+    });
+  },
 
   render() {
     return (
       <div className="category-panel">
         <h2 className="title">分类</h2>
         <ul className="cate-list">
-          <li className="cate-item">
-            <Link to="/">HTML&CSS</Link>
-            <span className="number">（325）</span>
-          </li>
-          <li className="cate-item">
-            <Link to="/">Javascript</Link>
-            <span className="number">（120）</span>
-          </li>
-          <li className="cate-item">
-            <Link to="/">性能优化</Link>
-            <span className="number">（32）</span>
-          </li>
-          <li className="cate-item">
-            <Link to="/">性能优化</Link>
-            <span className="number">（32）</span>
-          </li>
-          <li className="cate-item">
-            <Link to="/">性能优化</Link>
-            <span className="number">（32）</span>
-          </li>
-          <li className="cate-item">
-            <Link to="/">性能优化</Link>
-            <span className="number">（32）</span>
-          </li>
-          <li className="cate-item">
-            <Link to="/">性能优化</Link>
-            <span className="number">（32）</span>
-          </li>
-          <li className="cate-item">
-            <Link to="/">性能优化</Link>
-            <span className="number">（32）</span>
-          </li>
+        {
+          this.state.category.map(function(cate, index) {
+            return (
+              <li
+                className="cate-item"
+                key={cate.cateId}
+              >
+                <Link to={`/archives?type=category&category=${cate.cateName}`}>{cate.cateName}</Link>
+                <span className="number">（{cate.blogs.length}）</span>
+              </li>
+            )
+          })
+        }
         </ul>
       </div>
     )

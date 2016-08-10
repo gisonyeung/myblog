@@ -258,6 +258,11 @@
 				font-size: 22px;
 				font-weight: 200;
 				color: #333;
+
+				.emoji {
+					color: #FAEA85;
+					margin: 0 5px;
+				}
 			}
 		}
 
@@ -323,6 +328,8 @@
 				}
 				a {
 					text-decoration: underline;
+					color: #2277da;
+					margin: 0 3px;
 				}
 				blockquote {
 					display: block;
@@ -343,6 +350,10 @@
 					}
 					p {
 						line-height: 20px;
+					}
+					a {
+						color: #333;
+						margin: 0;
 					}
 				}
 			}
@@ -397,31 +408,6 @@
 					margin-left: 4px;
 					
 				}
-			}
-
-			.error-tip {
-				font-size: 12px;
-				
-			    line-height: 20px;
-			    vertical-align: top;
-			    word-break: break-all;
-			    font-family: Microsoft Yahei;
-			    margin-bottom: 10px;
-
-			    .icon {
-			    	margin-right: 5px;
-			    }
-
-			    .text {
-			    	position: relative;
-			    	top: -2px;
-			    	color: #fa5b5b;
-			    	&.success {
-			    		color: #4dd25e;
-			    	}
-			    }
-
-
 			}
 
 			.submit {

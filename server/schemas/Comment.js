@@ -46,6 +46,25 @@ CommentSchema.statics = {
 			.exec(callback);
 	},
 
+	fetchBoardComment: function(callback) {
+		return this
+			.find({
+				type: 'board',
+			})
+			.sort({
+				'time': -1,
+			})
+			.exec(callback);
+	},
+
+	getCount: function(callback) {
+		return this
+			.count({})
+			.exec(callback);
+	},
+
+
+
 
 
 

@@ -421,7 +421,7 @@ exports.nearBlog = function(req, res) {
 		
 		var prev = -1;
 
-		if( blogId - 1 > 0 ) {
+		if( blogId + 1 > 0 ) {
 			WalkingBlog.getPrevId(blogId, function(err, blog) {
 				if ( err ) {
 					reject(err);
@@ -444,7 +444,7 @@ exports.nearBlog = function(req, res) {
 		
 		var next = -1;
 
-		if( blogId + 1 > 0 ) {
+		if( blogId - 1 > 0 ) {
 			WalkingBlog.getNextId(blogId, function(err, blog) {
 				if ( err ) {
 					reject(err);

@@ -1,68 +1,122 @@
 import React from 'react';
 import { Link } from 'react-router';
-
+import ArchiveStore from '../stores/ArchiveStore';
+import ArchiveAction from '../actions/ArchiveAction';
 
 const DatePanel = React.createClass({
 
+  getInitialState() {
+
+    let currentYear = ArchiveStore.getSiteYear().currentYear;
+      
+    ArchiveAction.fetchYearBlogs(currentYear);
+    ArchiveAction.fetchSiteYear();
+
+    return {
+      yearBlogs: ArchiveStore.getYearBlogs(),
+      siteYear: ArchiveStore.getSiteYear(),
+      headerYear: currentYear,
+    };
+
+  },
+
+  componentDidMount() {
+    ArchiveStore.addChangeListener('YEARBLOG_LIST', this.updateDate);  
+    ArchiveStore.addChangeListener('SITE_YEAR', this.updateSiteYear);  
+  },
+
+  componentWillUnmount() {
+    ArchiveStore.removeChangeListener('YEARBLOG_LIST', this.updateDate);          
+    ArchiveStore.removeChangeListener('SITE_YEAR', this.updateSiteYear);          
+  },
+
+  updateDate() {
+
+    this.setState({
+      yearBlogs: ArchiveStore.getYearBlogs(),
+    });
+  },
+
+  updateSiteYear() {
+
+    this.setState({
+      siteYear: ArchiveStore.getSiteYear(),
+      headerYear: ArchiveStore.getSiteYear().currentYear,
+    });
+
+  },
+
+  switchPanel(num) {
+
+    const that = this;
+
+    // 请求列表
+    ArchiveAction.fetchYearBlogs(this.state.headerYear + num);
+
+    this.setState({
+      headerYear: that.state.headerYear + num,
+    });
+  },
+
+
 
   render() {
+
+    const that = this;
+
+    const monthKey = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
+
+    function fillZero(number) {
+      number = parseInt(number, 10) < 10 ? '0' + number : number; 
+    };
+
     return (
-      <div className="ar-panel date">
+      <div className={`ar-panel date ${this.props.open ? 'open' : ''}`}>
         <h2 className="year">
-          <i className="icon icon-arleft"></i>
-          <Link to="/archives">2014</Link>
-          <i className="icon icon-arright"></i>
+          {
+            this.state.headerYear == this.state.siteYear.beginYear ?
+            ''
+            :
+            <i 
+              className="icon icon-arleft" 
+              onClick={this.switchPanel.bind(null, -1)}
+            />
+          }
+          <Link to={`/archives?type=date&date=${that.state.siteYear.currentYear}`}>{this.state.headerYear}</Link>
+          {
+            this.state.headerYear == this.state.siteYear.currentYear ?
+            ''
+            :
+            <i 
+              className="icon icon-arright" 
+              onClick={this.switchPanel.bind(null, 1)}
+            />
+          }
         </h2>
         <div className="date-list clearfix">
-          <div className="date-item disabled">
-            <h3>1月</h3>
-            <p className="number">36</p>
-          </div>
-          <div className="date-item disabled">
-            <h3>2月</h3>
-            <p className="number">36</p>
-          </div>
-          <div className="date-item disabled">
-            <h3>3月</h3>
-            <p className="number">36</p>
-          </div>
-          <div className="date-item disabled">
-            <h3>4月</h3>
-            <p className="number">36</p>
-          </div>
-          <div className="date-item disabled">
-            <h3>5月</h3>
-            <p className="number">36</p>
-          </div>
-          <div className="date-item disabled">
-            <h3>6月</h3>
-            <p className="number">36</p>
-          </div>
-          <div className="date-item disabled">
-            <h3>7月</h3>
-            <p className="number">36</p>
-          </div>
-          <Link to="/" className="date-item">
-            <h3>8月</h3>
-            <p className="number">36</p>
-          </Link>
-          <Link to="/" className="date-item active">
-            <h3>9月</h3>
-            <p className="number">36</p>
-          </Link>
-          <Link to="/" className="date-item">
-            <h3>10月</h3>
-            <p className="number">36</p>
-          </Link>
-          <Link to="/" className="date-item">
-            <h3>11月</h3>
-            <p className="number">36</p>
-          </Link>
-          <Link to="/" className="date-item">
-            <h3>12月</h3>
-            <p className="number">36</p>
-          </Link>
-
+        {
+          monthKey.map(function(key, index) {
+            return (
+              that.state.yearBlogs[key] > 0 ?
+              <Link 
+                to={`/archives?type=date&date=${that.state.siteYear.currentYear}${key}`} 
+                className="date-item"
+                key={index}
+              >
+                <h3>{index + 1}月</h3>
+                <p className="number">{that.state.yearBlogs[key]}</p>
+              </Link>
+              :
+              <div
+                className="date-item disabled"
+                key={index}
+              >
+                <h3>{index + 1}月</h3>
+                <p className="number">0</p>
+              </div>
+            )
+          })
+        }
         </div>
       </div>
     )

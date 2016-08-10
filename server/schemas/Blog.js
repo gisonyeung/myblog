@@ -87,7 +87,110 @@ BlogSchema.statics = {
 				}
 			)
 			.exec(callback);
-	}
+	},
+
+	getArchivesByBlogId: function(blogId, callback) {
+		return this
+			.findOne(
+				{ 
+					blogId: blogId,
+					isShow: true,
+				}, 
+				{ 
+				  blogId: 1,  
+				  title: 1,
+				  time: 1,
+				}
+			)
+			.exec(callback);
+	},
+
+	getArchives: function(callback) {
+		return this
+			.find(
+				{
+					isShow: true,
+				}, 
+				{ 
+				  blogId: 1,  
+				  title: 1,
+				  time: 1,
+				}
+			)
+			.exec(callback);
+	},
+
+	getYearBlog: function(year, callback) {
+		var nextYear = parseInt(year, 10) + 1;
+		return this
+			.where('time.createAt')
+				.gte(new Date(year + '-01-01'))
+				.lt(new Date(nextYear + '-01-01'))
+			.select('blogId title time')
+			.exec(callback);
+	},
+
+	getMonthBlog: function(year, month, callback) {
+		var nextMonth = parseInt(month, 10) + 1;
+
+		var nextYear = nextMonth > 12 ? parseInt(year, 10) + 1 : year;
+
+		nextMonth = nextMonth > 12 ? 1 : nextMonth;
+
+		nextMonth = nextMonth < 10 ? '0' + nextMonth : nextMonth;
+
+		return this
+			.where('time.createAt')
+				.gte(new Date(year + '-' + month + '-01'))
+				.lt(new Date(nextYear + '-' + nextMonth + '-01'))
+			.select('blogId title time')
+			.exec(callback);
+	},
+
+	getArchivesByFuzzy: function(keyword, callback) {
+
+		// 替换常用分隔符
+		keyword = keyword.replace(/\+|,|，|-| /g, '|');
+
+		console.log(keyword);
+
+		var reg = new RegExp(keyword, 'i');
+
+		return this
+			.find(
+				{
+					isShow: true,
+				}, 
+				{ 
+				  blogId: 1,  
+				  title: 1,
+				  time: 1,
+				}
+			)
+			.or([
+				{
+					title: { $regex: reg },
+				},
+				{
+					tags: { $regex: reg },
+				},
+				{
+					summary: { $regex: reg },
+				},
+				{
+					content: { $regex: reg },
+				},
+			])
+			.select('blogId title time')
+			.exec(callback);
+
+	},
+
+
+
+
+
+
 }
 
 module.exports = BlogSchema;

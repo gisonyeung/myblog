@@ -187,6 +187,7 @@ ul.book-list {
 
 .b-body {
 	overflow: hidden;
+	padding-bottom: 65px;
 }
 
 $right: 5%;
@@ -280,6 +281,10 @@ $right: 5%;
 			@include transition();
 			&:hover {
 				color: #7594b3;
+			}
+			&.on {
+				color: #7594b3;
+				cursor: default;
 			}
 		}
 	}

@@ -1,6 +1,9 @@
 import { Dispatcher } from 'flux';
 import BlogStore from '../stores/BlogStore';
 import WalkingBlogStore from '../stores/WalkingBlogStore';
+import BookStore from '../stores/BookStore';
+import ArchiveStore from '../stores/ArchiveStore';
+import SiteStore from '../stores/SiteStore';
 
 const AppDispatcher = new Dispatcher();
 
@@ -8,6 +11,9 @@ AppDispatcher.register(function(action) {
 
 	switch( action.actionType ) {
 		/* 博文 */
+		case 'FETCH_BLOGS_COUNT':
+			BlogStore.fetchBlogsCount(); 
+			break;
 		case 'FETCH_BLOGS':
 			BlogStore.fetchBlogs(action.pageNum); 
 			break;
@@ -55,6 +61,55 @@ AppDispatcher.register(function(action) {
 		case 'FETCH_NEAR_WALKINGBLOG':
 			WalkingBlogStore.fetchNearBlog(action.blogId); 
 			break;
+
+
+		/* 书单 */
+		case 'FETCH_BOOKS':
+			BookStore.fetchBookList();
+			break;
+		case 'ADD_BOOK_LIKE':
+			BookStore.addBookLike(action.bookId);
+			break;
+
+		/* 归档 */
+		case 'ARCHIVES_CONDITION':
+			ArchiveStore.fetchByCondition(action.query);
+			break;
+		case 'ARCHIVES_ALL':
+			ArchiveStore.fetchAll();
+			break;
+		case 'CATEGORY_LIST':
+			ArchiveStore.fetchCategory();
+			break;
+		case 'TAG_LIST':
+			ArchiveStore.fetchTags();
+			break;
+		case 'YEARBLOG_LIST':
+			ArchiveStore.fetchYearBlogs(action.year);
+			break;
+		case 'SITE_YEAR':
+			ArchiveStore.fetchSiteYear();
+			break;
+
+		/* 留言板 */
+		case 'FETCH_BOARD_COMMENT':
+			BlogStore.fetchBoardComments(); 
+			break;
+		case 'SEND_BOARD_COMMENT':
+			BlogStore.sendBoardComments(action.formData); 
+			break;
+
+
+		/* 个人面板 */
+		case 'SITE_SUB_BLOG':
+			SiteStore.subBlog(action.formData);
+			break;
+		case 'SITE_NUMBERS':
+			SiteStore.fetchSiteNum();
+			break;
+
+
+
 
 
 

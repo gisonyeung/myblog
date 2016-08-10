@@ -10,7 +10,14 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 	allpagesNum: 1,
 
+	isFirstFetch_pageNum: true,
+
 	blog: {},
+
+	blogCount: {
+		isFirstFetch: true,
+		count: 0,
+	},
 
 	nearBlog: {
 		prev: {
@@ -31,6 +38,34 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 	},
 
 	comments: [],
+
+	boardComments: [],
+
+	getBlogsCount: function() {
+		return this.blogCount.count;
+	},
+
+	fetchBlogsCount: function() {
+
+		if ( this.blogCount.isFirstFetch ) {
+
+			fetch(Api.blogCount)
+			.then(data => {
+				if( data.result == 'success' ) {
+					this.blogCount.isFirstFetch = false;
+					this.blogCount.count = data.count;
+					this.emitEvent('BLOG_COUNT', data.count);
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			});
+
+		} else {
+			this.emitEvent('BLOG_COUNT', this.blogCount.count);
+		}
+
+	},
 
 	getBlogList: function() {
 		return this.blogs;
@@ -56,16 +91,27 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 	},
 
 	fetchPages: function() {
-		fetch(Api.homePage)
-		.then(data => {
-			if( data.result == 'success' ) {
-				this.allpagesNum = data.page;
-				this.emitEvent('BLOG_PAGE');
-			}
-		})
-		.catch(err => {
-			console.log(err);
-		});
+
+		if ( this.isFirstFetch_pageNum ) {
+
+			fetch(Api.homePage)
+			.then(data => {
+				if( data.result == 'success' ) {
+					this.isFirstFetch_pageNum = false;
+					this.allpagesNum = data.page;
+					this.emitEvent('BLOG_PAGE');
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			});
+
+		} else {
+
+			this.emitEvent('BLOG_PAGE');
+
+		}
+
 		
 	},
 
@@ -130,13 +176,13 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 		const that = this;
 
-		fetch(Api.addblogComment, {
+		fetch(Api.addBlogComment, {
 			blogId: formData.blogId,
 			nickname: formData.nickname,
 			email: formData.email,
 			website: formData.website,
 			content: formData.content,
-			quoteData: that.quoteData
+			quoteData: that.quoteData,
 		})
 		.then(data => {
 			if ( data.result == 'success' ) {
@@ -149,6 +195,31 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 			console.log(err);
 		});
 	},
+
+	sendBoardComments: function(formData) {
+
+		const that = this;
+
+		fetch(Api.addBoardComment, {
+			nickname: formData.nickname,
+			email: formData.email,
+			website: formData.website,
+			content: formData.content,
+			quoteData: that.quoteData,
+		})
+		.then(data => {
+			if ( data.result == 'success' ) {
+				this.emitEvent('SEND_COMMENT');
+			} else {
+				this.emitEvent('SEND_COMMENT', data.reason);
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	},
+
+
 
 	addLike: function(blogId) {
 		fetch(Api.addBlogLike, {
@@ -169,6 +240,26 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 	quoteComment: function(data) {
 		this.quoteData = data;
 		this.emitEvent('QUOTE_COMMENT', data);
+	},
+
+
+	getBoardComments: function() {
+		return this.boardComments;
+	},
+
+	fetchBoardComments: function() {
+
+		fetch(Api.boardComment)
+		.then(data => {
+			if ( data.result == 'success' ) {
+				this.boardComments = data.comments;
+				this.emitEvent('BOARD_COMMENT');
+			} 
+		})
+		.catch(err => {
+			console.log(err);
+		});
+
 	},
 
 

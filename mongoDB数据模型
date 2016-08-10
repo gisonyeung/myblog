@@ -78,7 +78,7 @@
 	photo: '',
 	description: '',
 	time: 'YYYY-MM-DD',
-	recommoend: 0,
+	recommend: 0,
 }
 
 标签 tags 

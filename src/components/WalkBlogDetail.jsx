@@ -15,13 +15,18 @@ const  WalkBlogDetail = React.createClass({
     WalkingBlogAction.fetchNearBlog(this.props.params.postId);
 
     return {
-        blog: WalkingBlogStore.getBlogDetail(),
+      blog: WalkingBlogStore.getBlogDetail(),
+      nearBlog: {
+        prev: -1,
+        next: -1,
+      },
     };
   },
 
   componentWillReceiveProps(nextProps) {
       if ( this.props.params.postId != nextProps.params.postId ) {
         WalkingBlogAction.fetchBlogDetail(nextProps.params.postId);
+        WalkingBlogAction.fetchNearBlog(nextProps.params.postId);
       }
   },
 
@@ -48,7 +53,9 @@ const  WalkBlogDetail = React.createClass({
   },
 
   updateNearBlog() {
-    console.log(WalkingBlogStore.getNearBlog());
+    this.setState({
+      nearBlog: WalkingBlogStore.getNearBlog()
+    });
   },
 
 
@@ -77,8 +84,18 @@ const  WalkBlogDetail = React.createClass({
               numbers={this.state.blog.numbers}
             />
             <div className="wbcm-page clearfix">
-              <Link to="/mylife/1" className="prev"><span>«</span>上一篇</Link>
-              <Link to="/mylife/1" className="next">下一篇<span>»</span></Link>
+              {
+                this.state.nearBlog.prev > 0 ?
+                <Link to={`/mylife/${this.state.nearBlog.prev}`} className="prev"><span>«</span>上一篇</Link>
+                :
+                ''
+              }
+              {
+                this.state.nearBlog.next > 0 ?
+                <Link to={`/mylife/${this.state.nearBlog.next}`} className="next">下一篇<span>»</span></Link>
+                :
+                ''
+              }
             </div>
           </div>
         </ReactCSSTransitionGroup>

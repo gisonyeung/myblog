@@ -13,7 +13,7 @@ const Pagination = React.createClass({
     // 改成异步时，放到getInitialState
     BlogAction.fetchPages();
     return {
-      allPages: this.props.query.page,
+      allPages: BlogStore.getPageNum(),
       pageNow: this.props.query.page,
     };
 
