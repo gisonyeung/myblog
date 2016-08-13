@@ -15,6 +15,23 @@ const SiteAction = {
 		});
 	},
 
+	sendCode(email) {
+		AppDispatcher.dispatch({
+			actionType: 'SITE_SEND_CODE',
+			email: email,
+		});
+	},
+
+	cancelSub(email, id) {
+		AppDispatcher.dispatch({
+			actionType: 'SITE_CANCEL_SUB',
+			email: email,
+			id: id,
+		});
+	},
+
+
+
 };
 
 export default SiteAction;

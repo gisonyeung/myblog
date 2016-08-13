@@ -38,3 +38,8 @@ jspm_packages
 
 # Self Credentials
 credentials.js
+
+# Local Data
+server/app/book/*
+server/app/walkingblog/*
+server/app/blog/*

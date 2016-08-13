@@ -1,0 +1,148 @@
+
+@mixin transition($obj: all, $time: 0.2s, $type: ease-out) {
+	transition: $obj $time $type;
+	-moz-transition: $obj $time $type;	
+	-webkit-transition: $obj $time $type;	
+	-o-transition: $obj $time $type;
+}
+@mixin transitionProperty($obj) {
+	transition-property: $obj;
+	-moz-transition-property: $obj;	
+	-webkit-transition-property: $obj;	
+	-o-transition-property: $obj;
+}
+
+@mixin bgsize($width, $height) {
+	display: inline-block;
+	height: 0;
+	width: $width;
+	padding-top: $height;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+%IEBox {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+@mixin bgimg($url) {
+	background: url($url) transparent no-repeat center top;
+}
+
+@mixin transform($code) {
+	transform: $code;
+    -webkit-transform: $code;
+    -moz-transform: $code;
+    -o-transform: $code;
+    -ms-transform: $code;
+}
+
+@mixin transform-origin($code) {
+	transform-origin: $code;
+	-ms-transform-origin: $code;
+	-o-transform-origin: $code;
+	-webkit-transform-origin: $code;
+	-moz-transform-origin: $code;
+}
+
+.cs {
+
+	text-align: center;
+
+	$width: 270px;
+
+	&-part {
+		margin-top: 150px;
+
+		.title {
+		    font-weight: normal;
+		    font-size: 20px;
+		    padding: 34px 0;
+		}
+
+		input {
+			margin: 0 auto 10px;
+		    display: block;
+		    border: 1px solid #d7d7d7;
+		    font-size: 14px;
+		    padding: 9px 15px;
+		    width: $width;
+		    color: #444;
+		}
+
+		.btn {
+			display: inline-block;
+			height: 40px;
+			line-height: 40px;
+			// margin-top: 10px;
+			color: #fff;
+			width: $width + 30px;
+			font-size: 16px;
+			font-family: inherit;
+			text-align: center;
+			cursor: pointer;
+			background-color: #8db800;
+			border-radius: 2px;
+			border: none;
+			@include transition();
+
+			&:hover {
+				background-color: darken(#AED505, 3%);
+			}
+			
+			&.success {
+				cursor: default;
+				background-color: #23b800;
+			}
+
+			&.error {
+				background-color: #f44336;
+				
+				&:hover {
+					background-color: #d72b1f;
+				}
+			}
+
+		}
+
+		.tip {
+			font-size: 20px;
+
+			.emoji {
+				margin-right: 10px;
+			}
+
+			p {
+				line-height: 30px;
+			}
+
+			a {
+				font-size: 14px;
+				margin-left: 10px;
+			}
+
+			&.success {
+
+				.emoji, a {
+
+					color: #23b800;
+				}
+
+			}
+
+			&.error {
+				
+				.emoji, a {
+
+					color: #f44336;
+				}
+
+			}
+		}
+
+	}
+
+}
+

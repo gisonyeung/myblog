@@ -17,12 +17,11 @@ const  WalkBlog = React.createClass({
 
     // 格式化内容
     let content = {
-      __html: that.props.content.replace(/\n/g, '<br/>')
+      __html: that.props.content.replace(/\n/g, '<br/>') || '搜索不到此行博'
     };
 
     let hot = this.props.numbers.view + this.props.numbers.comment;
-    
-
+      
     return (
       <article className="box-wrap walkblog">
         <div className="wb-side">
@@ -35,9 +34,9 @@ const  WalkBlog = React.createClass({
         <div className={`wb-cont line ${this.props.photo ? '' : 'nophoto'}`}>
           {
             this.props.isDetail == 'true'? 
-            <span className="picture">
+            <a href={this.props.photo} className="picture" target="_blank">
               <img src={this.props.photo} />
-            </span>
+            </a>
             :
             <Link to={`/mylife/${this.props.blogId}`} className="picture" title="查看全文">
               <img src={this.props.photo}/>

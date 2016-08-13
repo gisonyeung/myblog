@@ -48,9 +48,13 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "connect": "^2.30.2",
+    "cookie-parser": "^1.4.3",
     "ejs": "^2.4.2",
     "express": "^4.14.0",
+    "express-session": "^1.14.0",
     "flux": "^2.1.1",
+    "formidable": "^1.0.17",
     "lodash": "^4.14.0",
     "mongoose": "^4.5.7",
     "nodemailer": "^2.5.0",
@@ -59,6 +63,7 @@
     "react-cookie": "^0.4.7",
     "react-dom": "^15.2.1",
     "react-router": "^2.6.0",
+    "session-mongoose": "^0.5.2",
     "webpack": "^1.13.1",
     "whatwg-fetch": "^1.0.0"
   }

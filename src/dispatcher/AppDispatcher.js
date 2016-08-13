@@ -107,6 +107,14 @@ AppDispatcher.register(function(action) {
 		case 'SITE_NUMBERS':
 			SiteStore.fetchSiteNum();
 			break;
+		case 'SITE_SEND_CODE':
+			SiteStore.sendCode(action.email);
+			break;
+		case 'SITE_CANCEL_SUB':
+			SiteStore.cancelSub(action.email, action.id);
+			break;
+
+
 
 
 

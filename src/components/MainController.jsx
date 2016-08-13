@@ -9,6 +9,7 @@ import Article from './Article';
 import WalkBlogDetail from './WalkBlogDetail';
 import Board from './Board';
 import About from './About';
+import CancelSub from './CancelSub';
 
 
 
@@ -31,7 +32,6 @@ const addPage_change = (prevStage, nextStage, replace) => {
 
 
 
-
 const MainController = React.createClass({
 
   render() {
@@ -46,6 +46,7 @@ const MainController = React.createClass({
           <Route path="/archives" component={Archives} />
           <Route path="/board" component={Board} />
           <Route path="/about" component={About} />
+          <Route path="/unsubscribe" component={CancelSub} />
           <Redirect from="/*" to="/" />
         </Route>
 	  </Router>

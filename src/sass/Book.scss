@@ -200,14 +200,18 @@ $right: 5%;
 		height: 216px;
 		text-align: center;
 		img {
+			max-width: 80%;
 			max-height: 100%;
+			object-position: center;
 		}
 	}
 }
 
 .book-widget {
 	position: relative;
-	float: left;
+	// float: left;
+	display: inline-block;
+	vertical-align: top;
 	width: (100 - 3*$right) / 3;
 	padding: 50px 0;
 	margin-right: $right;

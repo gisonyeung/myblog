@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var TouristSchema = new mongoose.Schema({
-	name: String,
+	nickname: String,
 	email: String,
 	website: String,
 	createAt: {
@@ -17,12 +17,37 @@ TouristSchema.pre('save', function(next) {
 	next();
 });
 
+var items_per_page = 50;
+
 TouristSchema.statics = {
 
 	fetchTourist: function(email, callback) {
 		return this
 			.findOne({
 				email: email
+			})
+			.exec(callback);
+	},
+
+	getCount: function(callback) {
+		return this
+			.count({})
+			.exec(callback);
+	},
+
+	fetchByPage: function(page, callback) {
+		return this
+			.find({})
+			.sort({'createAt': -1})
+			.skip( items_per_page * (page - 1) )
+			.limit(items_per_page)
+			.exec(callback);
+	},
+
+	delete: function(id, callback) {
+		return this
+			.findOneAndRemove({
+				_id: id,
 			})
 			.exec(callback);
 	},

@@ -6,8 +6,8 @@ var WalkingBlogSchema = new mongoose.Schema({
 	photo: String,
 	tags: String,
 	numbers: {
-		view: Number,
-		comment: Number,
+		view: 0,
+		comment: 0,
 	},
 	time: {
 		createAt: {
@@ -28,13 +28,17 @@ var WalkingBlogSchema = new mongoose.Schema({
 WalkingBlogSchema.pre('save', function(next) {
 	if ( this.isNew ) {
 		this.time.createAt = this.time.updateAt = Date.now();
+		this.numbers.view = 0;
+		this.numbers.comment = 0;
+		this.isShow = true;
 	} else {
-		// this.time.updateAt = Date.now();
+		this.time.updateAt = Date.now();
 	}
 	next();
 });
 
-var items_per_page = 10;
+var items_per_time = 10;
+var items_per_page = 50;
 
 WalkingBlogSchema.statics = {
 
@@ -50,7 +54,7 @@ WalkingBlogSchema.statics = {
 			.find({ isShow: true })
 			.sort({'time.createAt': -1})
 			.skip(index - 1)
-			.limit(items_per_page)
+			.limit(items_per_time)
 			.exec(callback);
 	},
 
@@ -88,6 +92,55 @@ WalkingBlogSchema.statics = {
 			.limit(1)
 			.exec(callback);
 	},
+
+	getCount: function(callback) {
+		return this
+			.count({})
+			.exec(callback);
+	},
+
+	fetchByPage: function(page, callback) {
+		return this
+			.find({})
+			.sort({'time.createAt': -1})
+			.skip( items_per_page * (page - 1) )
+			.limit(items_per_page)
+			.exec(callback);
+	},
+
+	delete: function(id, callback) {
+		return this
+			.findOneAndRemove({
+				_id: id,
+			})
+			.exec(callback);
+	},
+
+	findLastOne: function(callback) {
+		return this
+			.find({})
+			.sort({'time.createAt': -1})
+			.limit(1)
+			.exec(callback);
+	},
+
+	fetchById: function(id, callback) {
+		return this
+			.findOne({
+				_id: id,
+			})
+			.exec(callback);
+	},
+
+	fetchByBlogId: function(id, callback) {
+		return this
+			.findOne({
+				blogId: id,
+			})
+			.exec(callback);
+	},
+
+
 
 
 

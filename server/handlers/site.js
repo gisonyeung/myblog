@@ -69,6 +69,19 @@ exports.subscribe = function(req, res) {
 					return errorHandler(err, res);
 				}
 
+				var opts = {
+					to: formData.email,
+					data: {
+						currentTime: dateFormat(Date.now(), 'YYYY-MM-DD hh:mm:ss'),
+						email: formData.email,
+						nickname: formData.nickname,
+
+					}
+				}
+
+				mail.subNotice(opts);
+				mail.subNotice_myself(opts);
+
 				return res.json({
 					result: 'success',
 					reason: '订阅成功，感谢您的订阅',
@@ -164,6 +177,113 @@ exports.siteNum = function(req, res) {
 		.catch(err => errorHandler(err, res));
 
 };
+
+
+/*
+	发送退订验证邮件
+*/
+exports.unsubconfirm = function(req, res) {
+
+	var email = req.body.email;
+
+	Member.fetchMember(email, function(err, member) {
+
+		if (err) {
+			return errorHandler(err, res);
+		}
+
+		if ( _.isEmpty(member) ) {
+
+			return res.json({
+				result: 'error',
+				reason: '此邮箱没有订阅服务',
+			});
+
+		};
+
+		/*
+			{
+				to: 'xx@qq.com',
+				data: {
+					currentTime: '',
+					member: {
+						
+					}
+				},
+			}
+		*/
+		var opts = {
+			to: email,
+			data: {
+				currentTime: dateFormat(Date.now(), 'YYYY-MM-DD hh:mm:ss'),
+				member: member,
+			}
+		};
+
+		mail.cancelSub(opts);
+
+		return res.json({
+			result: 'success',
+			reason: '',
+		});
+
+	});
+
+};
+
+
+/*
+	退订
+*/
+exports.cancelSub = function(req, res) {
+
+	var email = req.body.email;
+	var id = req.body.id;
+
+	Member.fetchMemberById(id, function(err, member) {
+
+		if (err) {
+			return errorHandler(err, res);
+		}
+
+		if ( _.isEmpty(member) ) {
+
+			return res.json({
+				result: 'error',
+				reason: '退订失败，验证码无效',
+			});
+
+		};
+
+		if ( member.email == email ) {
+			
+			member.remove(function(err) {
+
+				if (err) {
+					return errorHandler(err, res);
+				}
+
+				return res.json({
+					result: 'success',
+					reason: '退订成功，感谢您的支持',
+				});
+
+			});
+
+		} else {
+
+			return res.json({
+				result: 'error',
+				reason: '退订失败，验证码与邮箱不符',
+			});
+
+		}
+
+	});
+
+
+};
+
 
 
 

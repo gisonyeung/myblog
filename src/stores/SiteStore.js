@@ -65,6 +65,40 @@ const SiteStore = assign({}, EventEmitter.prototype, {
 
 	},
 
+	sendCode: function(email) {
+
+		fetch(Api.unsubconfirm, {
+			email: email,
+		})
+		.then(data => {
+			this.emitEvent('SITE_SEND_CODE', data);
+
+		})
+		.catch(err => {
+			console.log(err);
+		});
+
+	},
+
+	cancelSub: function(email, id) {
+
+		fetch(Api.cancelSub, {
+			email: email,
+			id: id,
+		})
+		.then(data => {
+			console.log(data);
+			this.emitEvent('SITE_CANCEL_SUB', data);
+
+		})
+		.catch(err => {
+			console.log(err);
+		});
+
+	},
+
+
+
 	emitEvent: function(event, data) {
 		this.emit(event, data);
 	},

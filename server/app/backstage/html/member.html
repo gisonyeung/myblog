@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="renderer" content="webkit">
+	<meta charset="UTF-8">
+	<title>订阅管理</title>
+	<link rel="stylesheet" href="/backstage/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/backstage/css/base.css">
+</head>
+<body>
+	<div id="wrap">
+		<div class="sidebar">
+			<ul class="nav">
+				<li><a href="#">博文管理</a></li>
+				<li><a href="/admin/walkingblog">行博管理</a></li>
+				<li><a href="/admin/book">书单管理</a></li>
+				<li><a href="/admin/comment">评论管理</a></li>
+				<li><a href="/admin/tourist">游客管理</a></li>
+				<li class="active"><a href="#">订阅管理</a></li>
+			</ul>
+		</div>
+		<div class="main">
+			<h2 class="title">订阅管理</h2>
+			<div class="content">
+				<table class="table table-condensed table-hover table-striped">
+					<thead>
+						<tr>
+							<td width="200">昵称</td>
+							<td>邮箱</td>
+							<td width="160">订阅时间</td>
+							<td width="150">操作</td>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+						<tr class="no-record">
+							<td colSpan="20">暂无记录</td>
+						</tr>
+					</tbody>
+				</table>
+				<nav class="paging" id="paging1"  data-current="1" data-all="2"></nav>
+			</div>
+		</div>
+
+	</div>
+	<script src="/backstage/js/jquery-1.9.1.min.js"></script>
+	<script src="/backstage/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/backstage/js/global.js"></script>
+	<script src="/backstage/js/member.js"></script>
+	<script type="text/template" id="member_tr_rpl">
+		<tr class="member">
+			<td>{{nickname}}</td>
+			<td>{{email}}</td>
+			<td>{{time}}</td>
+			<td>
+				<button class="btn btn-default btn-xs delete" data-target={{memberId}}>强制退订</button>
+			</td>
+		</tr>
+	</script>
+	<script type="text/template" id="norecord_rpl">
+		<tr class="no-record">
+			<td colSpan="20">暂无记录</td>
+		</tr>
+	</script>
+
+</body>
+</html>

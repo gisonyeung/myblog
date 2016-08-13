@@ -8,6 +8,8 @@ const WalkingBlogStore = assign({}, EventEmitter.prototype, {
 
 	blogs: [],
 
+	isFirstFetch: true,
+
 	beginIndex: 1,
 
 	lastIndex: 0,
@@ -15,8 +17,8 @@ const WalkingBlogStore = assign({}, EventEmitter.prototype, {
 	blog: {
 		blogId: -1,
 		time: {
-			createAt: '0000-00-00',
-			updateAt: '0000-00-00',
+			createAt: '2016-08-20',
+			updateAt: '2016-08-20',
 		},
 		photo: '',
 		content: '',
@@ -39,10 +41,15 @@ const WalkingBlogStore = assign({}, EventEmitter.prototype, {
 		email: '',
 		website: '',
 		content: '',
-		time: '0000-00-00',
+		time: '2016-08-20',
 	},
 
 	getBlogList: function() {
+
+		if ( this.isFirstFetch ) {
+			this.fetchBlogList();
+		}
+
 		return this.blogs;
 	},
 
@@ -57,6 +64,7 @@ const WalkingBlogStore = assign({}, EventEmitter.prototype, {
 			if( data.result == 'success' ) {
 				this.blogs = data.blogs;
 				this.emitEvent('BLOG_LIST');
+				this.isFirstFetch = false;
 			}
 		})
 		.catch(err => {

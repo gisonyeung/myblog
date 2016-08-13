@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="renderer" content="webkit">
+	<meta charset="UTF-8">
+	<title>行博管理</title>
+	<link rel="stylesheet" href="/backstage/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/backstage/css/base.css">
+</head>
+<body>
+	<div id="wrap">
+		<div class="sidebar">
+			<ul class="nav">
+				<li><a href="#">博文管理</a></li>
+				<li class="active"><a href="#">行博管理</a></li>
+				<li><a href="/admin/book">书单管理</a></li>
+				<li><a href="/admin/comment">评论管理</a></li>
+				<li><a href="/admin/tourist">游客管理</a></li>
+				<li><a href="/admin/member">订阅管理</a></li>
+			</ul>
+		</div>
+		<div class="main">
+			<h2 class="title">行博管理</h2>
+			<div class="content">
+				<div class="panel-btn container-fluid">
+			        <div class="collapse navbar-collapse">
+			          <ul class="nav navbar-nav">
+			            <li class="toggle-btn active" data-target="#panel1"><a href="javascript:;">行博列表</a></li>
+			            <li class="toggle-btn" data-target="#panel2"><a href="javascript:;">发布行博</a></li>
+			            <li class="toggle-btn" data-target="#panel3"><a href="javascript:;">修改行博</a></li>
+			          </ul>
+			        </div><!-- /.navbar-collapse -->
+			    </div>
+				
+				<div class="panel open" id="panel1">
+					<table class="table table-condensed table-hover table-striped">
+						<thead>
+							<tr>
+								<td width="50">blogId</td>
+								<td width="140">发布时间</td>
+								<td width="140">更新时间</td>
+								<td width="130">标签</td>
+								<td width="40">图片</td>
+								<td>内容</td>
+								<td width="120">阅读/评论数</td>
+								<td width="50">状态</td>
+								<td width="300">操作</td>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+							<tr class="no-record">
+								<td colSpan="20">暂无记录</td>
+							</tr>
+						</tbody>
+					</table>
+					<nav class="paging" id="paging1"  data-current="1" data-all="2"></nav>
+				</div>
+				<div class="panel" id="panel2">
+					<div class="pub-cont">
+						
+						<form action="/admin/addWalkingblog" enctype="multipart/form-data" method="POST">
+							<div class="form-group">
+								<label for="wb-content">内容</label>
+							    <textarea class="form-control" id="wb-content" placeholder="内容" rows="10" required name="content"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="wb-tags">标签</label>
+							    <input type="text" class="form-control" id="wb-tags" placeholder="标签（半角逗号分隔）" name="tags">
+							</div>
+							<div class="form-group">
+							    <label for="photo">图片</label>
+							    <input type="file" id="photo" name="photo" accept="image/*">
+							    <p class="help-block">jpg、png、gif等图片格式，前台显示时宽度为500px</p>
+							</div>
+							<input type="submit" class="btn btn-success" value="提交" id="add-submit">
+						</form>
+					</div>
+				</div>
+				<div class="panel" id="panel3">
+					<div class="pub-cont">
+						
+						<form action="/admin/addWalkingblog" enctype="multipart/form-data" method="POST">
+							<div class="form-group">
+								<label for="edit-content">内容</label>
+							    <textarea class="form-control" id="edit-content" placeholder="内容" rows="10" required name="content"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="edit-tags">标签</label>
+							    <input type="text" class="form-control" id="edit-tags" placeholder="标签（半角逗号分隔）" name="tags">
+							</div>
+							<div class="form-group">
+								<label>当前图片</label>
+								<img src="" alt="" class="img-thumbnail old-img">
+							</div>
+							<div class="form-group">
+							    <label for="photo">新图片</label>
+							    <input type="file" id="newPhoto" name="photo" accept="image/*">
+							    <p class="help-block">jpg、png、gif等图片格式，前台显示时宽度为500px</p>
+							</div>
+							<div class="form-group">
+							    <label for="photo">是否更新图片</label>
+							    <select name="isUpdatePhoto" id="isUpdatePhoto" class="form-control">
+							    	<option value="false" selected>否</option>
+							    	<option value="true">是</option>
+							    </select>
+							    <p class="help-block">也可以利用此选项删除图片</p>
+							</div>
+
+							<hr>
+							<div class="form-group">
+							    <p class="help-block">
+									blogId: <span class="edit-value"></span>
+									阅读/评论数: <span class="edit-value"></span>
+									状态: <span class="edit-value"></span>
+							    </p>	
+								<p class="help-block">
+									<span class="label-time">发布时间: </span>
+									<span class="edit-value"></span>
+							    </p>	
+							    <p class="help-block">
+							    	<span class="label-time">上次更新时间: </span>
+							    	<span class="edit-value"></span>
+							    </p>
+
+							</div>
+
+							<input type="submit" class="btn btn-success" value="修改" id="edit-submit">
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<script src="/backstage/js/jquery-1.9.1.min.js"></script>
+	<script src="/backstage/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/backstage/js/global.js"></script>
+	<script src="/backstage/js/ajaxfileupload.js"></script>
+	<script src="/backstage/js/walkingblog.js"></script>
+	<script type="text/template" id="walkingblog_tr_rpl">
+		<tr class="walkingblog">
+			<td>{{blogId}}</td>
+			<td>{{time_createAt}}</td>
+			<td>{{time_updateAt}}</td>
+			<td>{{tags}}</td>
+			<td title="{{photo_url}}">{{photo}}</td>
+			<td>{{content}}</td>
+			<td>{{numbers_view}} / <span class="numbers-comment">{{numbers_comment}}</span></td>
+			<td class="status-value">{{status}}</td>
+			<td>
+				<a href="{{url}}" class="btn btn-default btn-xs" target="_blank">查看详情</a>
+				<button class="btn btn-default btn-xs update" data-target="{{blogId}}">更新评论数</button>
+				<button class="btn btn-default btn-xs edit" data-target="{{walkingBlogId}}">修改</button>
+				<button class="btn btn-default btn-xs status" data-target="{{walkingBlogId}}">{{status_btn}}</button>
+				<button class="btn btn-default btn-xs delete" data-target="{{walkingBlogId}}">删除</button>
+			</td>
+		</tr>
+	</script>
+	<script type="text/template" id="norecord_rpl">
+		<tr class="no-record">
+			<td colSpan="20">暂无记录</td>
+		</tr>
+	</script>
+
+</body>
+</html>

@@ -24,6 +24,8 @@ const Api = {
 	addBoardComment: '/addBoardComment',
 	subscribe: '/subscribe',
 	siteNum: '/siteNum',
+	unsubconfirm: '/unsubconfirm',
+	cancelSub: '/cancelSub',
 
 };
 

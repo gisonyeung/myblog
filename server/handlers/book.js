@@ -17,60 +17,6 @@ var dateFormat = require('../utils/dateFormat.js');
 */
 exports.bookList = function(req, res) {
 
-	Book.find(function(err, books) {
-		if ( !books.length ) {
-
-			new Book({
-				bookId: 1,
-				name: 'Javascript高级程序设计1',
-				photo: '/book/1.jpg',
-				description: '夏夜皇陵，紅牆之內，四方須彌，螭首吐螢。\n南京明孝陵丨Canon EOS-1D X + Sigma 35mm f/1.4 DG HSM',
-				time: Date.now(),
-				recommend: 0,
-			}).save();
-			new Book({
-				bookId: 2,
-				name: 'Javascript高级程序设计2',
-				photo: '/book/1.jpg',
-				description: '夏夜皇陵，紅牆之內，四方須彌，螭首吐螢。\n南京明孝陵丨Canon EOS-1D X + Sigma 35mm f/1.4 DG HSM',
-				time: Date.now(),
-				recommend: 0,
-			}).save();
-			new Book({
-				bookId: 3,
-				name: 'Javascript高级程序设计3',
-				photo: '/book/1.jpg',
-				description: '夏夜皇陵，紅牆之內，四方須彌，螭首吐螢。\n南京明孝陵丨Canon EOS-1D X + Sigma 35mm f/1.4 DG HSM',
-				time: Date.now(),
-				recommend: 0,
-			}).save();
-			new Book({
-				bookId: 4,
-				name: 'Javascript高级程序设计4',
-				photo: '/book/1.jpg',
-				description: '夏夜皇陵，紅牆之內，四方須彌，螭首吐螢。\n南京明孝陵丨Canon EOS-1D X + Sigma 35mm f/1.4 DG HSM',
-				time: Date.now(),
-				recommend: 0,
-			}).save();
-			new Book({
-				bookId: 5,
-				name: 'Javascript高级程序设计5',
-				photo: '/book/1.jpg',
-				description: '夏夜皇陵，紅牆之內，四方須彌，螭首吐螢。\n南京明孝陵丨Canon EOS-1D X + Sigma 35mm f/1.4 DG HSM',
-				time: Date.now(),
-				recommend: 0,
-			}).save();
-			new Book({
-				bookId: 6,
-				name: 'Javascript高级程序设计6',
-				photo: '/book/1.jpg',
-				description: '夏夜皇陵，紅牆之內，四方須彌，螭首吐螢。\n南京明孝陵丨Canon EOS-1D X + Sigma 35mm f/1.4 DG HSM',
-				time: Date.now(),
-				recommend: 0,
-			}).save();
-		}
-	});
-
 	Book.fetchAllBooks(function(err, books) {
 
 		if (err) {

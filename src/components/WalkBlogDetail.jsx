@@ -72,17 +72,23 @@ const  WalkBlogDetail = React.createClass({
           <div className="life-wrap detail" key={this.state.blog.blogId}>
             <WalkBlog 
               blogId={this.state.blog.blogId || -1}
-              time={this.state.blog.time.createAt || '0000-00-00'}
+              time={this.state.blog.time.createAt || '2016-08-20'}
               photo={this.state.blog.photo || ''}
               content={this.state.blog.content || ''}
               tags={this.state.blog.tags || ''}
               numbers={this.state.blog.numbers}
               isDetail="true"
             />
-            <WalkBlogCommentBox
-              blogId={this.state.blog.blogId || -1}
-              numbers={this.state.blog.numbers}
-            />
+            {
+              this.state.blog.blogId == -1 ?
+              ''
+              :
+              <WalkBlogCommentBox
+                blogId={this.state.blog.blogId || -1}
+                numbers={this.state.blog.numbers}
+              />
+              
+            }
             <div className="wbcm-page clearfix">
               {
                 this.state.nearBlog.prev > 0 ?

@@ -12,9 +12,6 @@ const  Mylife = React.createClass({
 
   getInitialState() {
 
-    // 请求博客列表
-    WalkingBlogAction.fetchBlogs();
-
     return {
       blogs: WalkingBlogStore.getBlogList(),
     };

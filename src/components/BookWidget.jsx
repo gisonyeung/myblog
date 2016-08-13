@@ -5,8 +5,6 @@ import ls from '../utils/localStorage';
 import BookAction from '../actions/BookAction';
 import BookStore from '../stores/BookStore';
 
-const photo = require('../img/photo-demo2.jpg');
-
 const BookWidget = React.createClass({
   
 
@@ -52,12 +50,11 @@ const BookWidget = React.createClass({
     return (
       <div className="book-widget">
         <div className="wrap">
-          <img src={photo}/>
+          <img src={this.props.photo}/>
         </div>
         <div className="text">
           <h3 className="book-name">
             <span>{this.props.name}</span>
-            
           </h3>
           <div className="introduction" dangerouslySetInnerHTML={description} />
         </div>

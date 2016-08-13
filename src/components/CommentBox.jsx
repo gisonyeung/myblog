@@ -176,8 +176,8 @@ const CommentBox = React.createClass({
 
   quoteComment(data) {
 
-    data.content = data.content.replace(/<blockquote>[\s\S]*<\/blockquote>/, '').replace(/<\/?script>/g, '');
-    data.nickname = data.nickname.replace(/<\/?script>/g, '');
+    data.content = data.content.replace(/<blockquote>[\s\S]*<\/blockquote>/, '');
+    data.nickname = data.nickname;
 
     let commentValue = `<blockquote>\n<pre>引用 ${data.nickname} 的发言：</pre>\n\n${data.content}\n\n</blockquote>\n`;
     this.refs.content.value = commentValue + this.refs.content.value.replace(/<blockquote>[\s\S]*<\/blockquote>/, '');

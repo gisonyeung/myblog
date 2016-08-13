@@ -32,7 +32,7 @@ BlogSchema.pre('save', function(next) {
 	if ( this.isNew ) {
 		this.time.createAt = this.time.updateAt = Date.now();
 	} else {
-		// this.time.updateAt = Date.now();
+		this.time.updateAt = Date.now();
 	}
 	next();
 });

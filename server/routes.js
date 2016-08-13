@@ -1,5 +1,7 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/blog');
+var path = require('path');
+
+var credentials = require('./credentials.js');
+var _ = require('lodash');
 
 /* 路由处理 */
 var blog = require('./handlers/blog.js');
@@ -9,8 +11,117 @@ var archives = require('./handlers/archives.js');
 var category = require('./handlers/category.js');
 var tag = require('./handlers/tag.js');
 var site = require('./handlers/site.js');
+var backstage = require('./handlers/backstage.js');
+
+
+
 
 module.exports = function(app) {
+
+	/*
+		后台管理系统
+	*/
+	app.get('/admin/login', function(req, res) {
+
+		res.render('../server/app/backstage/html/login.html');
+
+	});
+
+	app.get('/admin/comment', function(req, res) {
+
+		// 验证通过 则跳转页面
+		if ( checkSession(req) ) {
+			
+			res.render('../server/app/backstage/html/comment.html');
+		
+		} else {
+
+			res.redirect('/admin/login');
+
+		}
+
+	});
+
+	app.get('/admin/tourist', function(req, res) {
+
+		// 验证通过 则跳转页面
+		if ( checkSession(req) ) {
+			
+			res.render('../server/app/backstage/html/tourist.html');
+		
+		} else {
+
+			res.redirect('/admin/login');
+
+		}
+
+	});
+
+	app.get('/admin/member', function(req, res) {
+
+		// 验证通过 则跳转页面
+		if ( checkSession(req) ) {
+			
+			res.render('../server/app/backstage/html/member.html');
+		
+		} else {
+
+			res.redirect('/admin/login');
+
+		}
+
+	});
+
+	app.get('/admin/walkingblog', function(req, res) {
+
+		// 验证通过 则跳转页面
+		if ( checkSession(req) ) {
+			
+			res.render('../server/app/backstage/html/walkingblog.html');
+		
+		} else {
+
+			res.redirect('/admin/login');
+
+		}
+
+	});
+
+	app.get('/admin/book', function(req, res) {
+
+		// 验证通过 则跳转页面
+		if ( checkSession(req) ) {
+			
+			res.render('../server/app/backstage/html/book.html');
+		
+		} else {
+
+			res.redirect('/admin/login');
+
+		}
+
+	});
+
+
+
+
+
+
+
+
+
+
+	function checkSession(req) {
+
+		if ( !req.session.user ) {
+			return false;
+		} 
+
+		return req.session.user.username === credentials.admin.username && req.session.user.password === credentials.admin.password;
+	};
+
+
+
 
 
 	/*
@@ -163,6 +274,7 @@ module.exports = function(app) {
 		请求留言板留言
 	*/
 	app.post('/boardComment', blog.boardComment);
+
 	/*
 		发布留言板留言
 	*/
@@ -178,11 +290,154 @@ module.exports = function(app) {
 		订阅博客
 	*/
 	app.post('/subscribe', site.subscribe);
+
 	/*
 		请求站点数据
 	*/
 	app.post('/siteNum', site.siteNum);
 
+	/*
+		发送退订验证邮件
+	*/
+	app.post('/unsubconfirm', site.unsubconfirm);
+
+	/*
+		退订
+	*/
+	app.post('/cancelSub', site.cancelSub);
+
+
+
+
+
+
+	/*       后台管理          */
+
+
+	/*
+		登录
+	*/
+	app.post('/admin/login', backstage.login);
+		
+
+	/*
+		根据页码获取评论
+	*/
+	app.post('/admin/commentByPage', backstage.commentByPage);
+
+	/*
+		获取评论页码总数
+	*/
+	app.post('/admin/commentPage', backstage.commentPage);
+
+	/*
+		删除评论
+	*/
+	app.post('/admin/deleteComment', backstage.deleteComment);
+
+
+	/*
+		根据页码获取游客
+	*/
+	app.post('/admin/touristByPage', backstage.touristByPage);
+
+	/*
+		获取游客页码总数
+	*/
+	app.post('/admin/touristPage', backstage.touristPage);
+
+	/*
+		删除游客
+	*/
+	app.post('/admin/deleteTourist', backstage.deleteTourist);
+
+	/*
+		获取指定游客的评论
+	*/
+	app.post('/admin/commentByTourist', backstage.commentByTourist);
+
+
+	/*
+		根据页码获取订阅用户
+	*/
+	app.post('/admin/memberByPage', backstage.memberByPage);
+
+	/*
+		获取订阅用户页码总数
+	*/
+	app.post('/admin/memberPage', backstage.memberPage);
+
+	/*
+		强制退订
+	*/
+	app.post('/admin/deleteMember', backstage.deleteMember);
+
+
+	/*
+		行博发布
+	*/
+	app.post('/admin/addWalkingblog', backstage.addWalkingblog);
+
+	/*
+		行博修改
+	*/
+	app.post('/admin/editWalkingblog', backstage.editWalkingblog);
+
+
+	
+
+	/*
+		根据页码获取行博
+	*/
+	app.post('/admin/walkingblogByPage', backstage.walkingblogByPage);
+
+	/*
+		获取行博页码总数
+	*/
+	app.post('/admin/walkingblogPage', backstage.walkingblogPage);
+
+	/*
+		删除行博，及其对应评论
+	*/
+	app.post('/admin/deleteWalkingblog', backstage.deleteWalkingblog);
+
+	/*
+		更新行博评论数
+	*/
+	app.post('/admin/updateWalkingblogComment', backstage.updateWalkingblogComment);
+
+	/*
+		修改行博状态
+	*/
+	app.post('/admin/changeWalkingblogStatus', backstage.changeWalkingblogStatus);
+
+
+
+
+	/*
+		书本发布
+	*/
+	app.post('/admin/addBook', backstage.addBook);
+
+	/*
+		书本修改
+	*/
+	app.post('/admin/editBook', backstage.editBook);
+
+	/*
+		根据页码获取书单
+	*/
+	app.post('/admin/bookByPage', backstage.bookByPage);
+
+	/*
+		获取书单页码总数
+	*/
+	app.post('/admin/bookPage', backstage.bookPage);
+
+	/*
+		删除书本
+	*/
+	app.post('/admin/deleteBook', backstage.deleteBook);
 
 
 
