@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="renderer" content="webkit">
+	<meta charset="UTF-8">
+	<title>标签管理</title>
+	<link rel="stylesheet" href="/backstage/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/backstage/css/base.css">
+</head>
+<body>
+	<div id="wrap">
+		<div class="sidebar">
+			<ul class="nav">
+				<li><a href="/admin/blog">博文管理</a></li>
+				<li><a href="/admin/category">分类管理</a></li>
+				<li class="active"><a href="#">标签管理</a></li>
+				<li><a href="/admin/walkingblog">行博管理</a></li>
+				<li><a href="/admin/category">书单管理</a></li>
+				<li><a href="/admin/comment">评论管理</a></li>
+				<li><a href="/admin/tourist">游客管理</a></li>
+				<li><a href="/admin/member">订阅管理</a></li>
+			</ul>
+		</div>
+		<div class="main">
+			<h2 class="title">标签管理</h2>
+			<div class="content">
+				<div class="panel-btn container-fluid">
+			        <div class="collapse navbar-collapse">
+			          <ul class="nav navbar-nav">
+			            <li class="toggle-btn active" data-target="#panel1"><a href="javascript:;">标签列表</a></li>
+			            <li class="toggle-btn" data-target="#panel2"><a href="javascript:;">新增标签</a></li>
+			            <li class="toggle-btn" data-target="#panel3"><a href="javascript:;">修改标签</a></li>
+			          </ul>
+			        </div><!-- /.navbar-collapse -->
+			    </div>
+				
+				<div class="panel open" id="panel1">
+					<table class="table table-condensed table-hover table-striped">
+						<thead>
+							<tr>
+								<td width="100">博文数</td>
+								<td>标签名称</td>
+								<td width="150">创建时间</td>
+								<td width="150">更新时间</td>
+								<td width="250">操作</td>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+							<tr class="no-record">
+								<td colSpan="20">暂无记录</td>
+							</tr>
+						</tbody>
+					</table>
+					<nav class="paging" id="paging1"  data-current="1" data-all="2"></nav>
+				</div>
+				<div class="panel" id="panel2">
+					<div class="pub-cont">
+						<form action="/admin/addTag" method="POST">
+							<div class="form-group">
+								<label for="blog-tag">标签</label>
+							    <input type="text" class="form-control tag-input" id="blog-tag" placeholder="标签" name="tags">
+							    <ul class="select-list tag-list" data-target="#blog-tag"></ul>
+							</div>
+							<input type="submit" class="btn btn-success" value="新增标签" id="add-submit">
+						</form>
+					</div>
+				</div>
+				<div class="panel" id="panel3">
+					<div class="pub-cont">
+						<form action="/admin/editTag" method="POST">
+							<div class="form-group">
+								<label for="edit-tag-old">旧标签名</label>
+							    <input type="text" class="form-control tag-input" id="edit-tag-old" placeholder="标签" name="tags">
+							    <ul class="select-list tag-list" data-target="#edit-tag-old"></ul>
+							</div>
+							<div class="form-group">
+								<label for="edit-tag-new">新标签名</label>
+							    <input type="text" class="form-control tag-input" id="edit-tag-new" placeholder="标签" name="tags">
+							    <ul class="select-list tag-list" data-target="#edit-tag-new"></ul>
+							</div>
+							<div class="form-group">
+							    <p class="help-block">如新标签名已存在，将会将旧标签下的博文合并至新标签并删除旧标签，请谨慎操作</p>	
+							</div>
+							<input type="submit" class="btn btn-success" value="修改标签" id="edit-submit">
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<div class="modal fade" id="modal-tag" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="modal-tag-title">标签下的博客</h4>
+	      </div>
+	      <div class="modal-body">
+	        <table class="table table-condensed table-hover table-striped">
+				<thead>
+					<tr>
+						<td width="60">blogId</td>
+						<td>标题</td>
+						<td width="150">标签</td>
+						<td width="100">阅读/评论/点赞</td>
+						<td width="140">发布时间</td>
+						<td width="140">更新时间</td>
+						<td width="130">操作</td>
+					</tr>
+				</thead>
+				<tbody id="tbody2">
+					<tr class="no-record">
+						<td colSpan="20">暂无记录</td>
+					</tr>
+				</tbody>
+			</table>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script src="/backstage/js/jquery-1.9.1.min.js"></script>
+	<script src="/backstage/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/backstage/js/global.js"></script>
+	<script src="/backstage/js/ajaxfileupload.js"></script>
+	<script src="/backstage/js/tag.js"></script>
+	<script type="text/template" id="tag_tr_rpl">
+		<tr class="tag">
+			<td class="blog-count">{{blogs_count}}</td>
+			<td>{{tagName}}</td>
+			<td>{{time_createAt}}</td>
+			<td>{{time_updateAt}}</td>
+			<td>
+				<button class="btn btn-default btn-xs view" data-target="{{tagName}}">查看博文</button>
+				<button class="btn btn-default btn-xs update" data-target="{{tagName}}">更新博文数</button>
+				<button class="btn btn-default btn-xs edit" data-target="{{tagName}}">修改</button>
+				<button class="btn btn-default btn-xs delete" data-target="{{tagName}}" >删除</button>
+			</td>
+		</tr>
+	</script>
+	<script type="text/template" id="blog_tr_rpl">
+		<tr class="blog">
+			<td>{{blogId}}</td>
+			<td>{{title}}</td>
+			<td>{{tags}}</td>
+			<td>{{numbers_view}}/{{numbers_comment}}/{{numbers_like}}</td>
+			<td>{{time_createAt}}</td>
+			<td>{{time_updateAt}}</td>
+			<td>
+				<a href="/article/{{blogId}}" class="btn btn-default btn-xs" target="_blank">查看详情</a>
+				<button class="btn btn-default btn-xs delete" data-target="{{_id}}" >删除</button>
+			</td>
+		</tr>
+	</script>
+
+	<script type="text/template" id="norecord_rpl">
+		<tr class="no-record">
+			<td colSpan="20">暂无记录</td>
+		</tr>
+	</script>
+
+</body>
+</html>

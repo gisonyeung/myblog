@@ -95,34 +95,57 @@
 		.atc-content {
 			padding-bottom: 60px;
 			color: #333;
-			h2 {
+			h1 {
+				margin-bottom: 25px;
+			    padding-bottom: 0.3em;
 				font-size: 20px;
+				font-weight: 600;
 				line-height: 30px;
-				margin-bottom: 25px;
+			    border-bottom: 1px solid #eee;
 			}
-			h3 {
+			h2 {
 				font-size: 17px;
+				font-weight: 600;
 				line-height: 30px;
 				margin-bottom: 25px;
 			}
-			p {
+			& > p {
 				line-height: 27px;
 				margin-bottom: 25px;
+				word-wrap: break-word;
 			}
 
 
 			ul {
-				list-style-type: circle;
+				list-style-type: disc;
 				margin: 16px 0;
 				padding-left: 40px;
+				p {
+					margin: 0;
+				}
 			}
 
+			ol {
+				list-style-type: decimal;
+				margin: 16px 0;
+				padding-left: 40px;
+				p {
+					margin: 0;
+				}
+			}
 
 			blockquote {
 				margin: 20px 0;
 				padding: 15px;
 				border-left: 3px solid #ccc;
 				background-color: #f7f7f7;
+				font-family: inherit;
+				
+				p {
+					margin: 0;
+					line-height: 30px;
+				}
+
 			}
 
 
@@ -131,6 +154,7 @@
 			    text-shadow: 0 1px #fff;
 			    padding: 0 0.3em;
 			    margin: 0 0.3em;
+			    font-family: inherit;
 			}
 
 
@@ -160,6 +184,33 @@
 			    border-radius: 3px;
 			    color: #333;
 			    font: 13px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+				font-family: inherit;
+				code {
+					background: transparent;
+				    text-shadow: none;
+				    padding: 0;
+				    margin: 0;
+				}
+
+			}
+
+			img {
+				display: block;
+				max-width: 100%;
+				margin: 10px 0;
+				border: 1px solid #eee;
+				padding: 5px;
+				border-radius: 2px;
+				@extend %IEBox;
+			}
+
+			a {
+			    color: #4078c0;
+		    	text-decoration: none;
+
+		    	&:hover {
+		    		text-decoration: underline;
+		    	}
 			}
 
 
@@ -174,12 +225,17 @@
 				display: inline-block;
 				background-color: #f5f5f5;
 				margin-right: 13px;
-				padding: 1px 7px;
+				
 				font-size: 13px;
 				color: #555;
 				@include transition();
 				&:hover {
 					background-color: darken(#f5f5f5, 10%);
+				}
+
+				a {
+					display: inline-block;
+					padding: 1px 7px;
 				}
 			}
 

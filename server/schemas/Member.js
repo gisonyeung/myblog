@@ -60,6 +60,12 @@ MemberSchema.statics = {
 			.exec(callback);
 	},
 
+	fetchAll: function(callback) {
+		return this
+			.find({})
+			.exec(callback);
+	},
+
 
 };
 

@@ -93,7 +93,7 @@ WalkingBlogSchema.statics = {
 			.exec(callback);
 	},
 
-	getCount: function(callback) {
+	getCountByAdmin: function(callback) {
 		return this
 			.count({})
 			.exec(callback);

@@ -56,24 +56,30 @@ const HomeBlog = React.createClass({
             transitionEnterTimeout={400}
             transitionLeaveTimeout={300}
           >
-            {
-              this.state.blogs.map(function(blog, index) {
-                return (
-                  <HomeBlogItem 
-                    key={blog._id}
-                    id={blog.blogId}
-                    data={blog}
-                    title={blog.title}
-                    createAt={blog.time.createAt}
-                    updateAt={blog.time.updateAt}
-                    category={blog.category}
-                    summary={blog.summary}
-                    tags={blog.tags}
-                    numbers={blog.numbers}
-                  />
-                )
-              })
-            }
+          {
+            this.state.blogs.length ?
+            ''
+            :
+            <p className="no-blog">暂无博文</p>
+          }
+          {
+            this.state.blogs.map(function(blog, index) {
+              return (
+                <HomeBlogItem 
+                  key={blog._id}
+                  id={blog.blogId}
+                  data={blog}
+                  title={blog.title}
+                  createAt={blog.time.createAt}
+                  updateAt={blog.time.updateAt}
+                  category={blog.category}
+                  summary={blog.summary}
+                  tags={blog.tags}
+                  numbers={blog.numbers}
+                />
+              )
+            })
+          }
           </ReactCSSTransitionGroup>
         </section>
         <Pagination query={this.props.query} />

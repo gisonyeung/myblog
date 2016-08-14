@@ -11,6 +11,8 @@ var Tourist = require('../models/Tourist.js');
 var Member = require('../models/Member.js');
 var WalkingBlog = require('../models/WalkingBlog.js');
 var Book = require('../models/Book.js');
+var Category = require('../models/Category.js');
+var Tag = require('../models/Tag.js');
 
 /* 邮件 */
 var mail = require('../sendEmail.js');
@@ -21,7 +23,9 @@ var safeHTML = require('../utils/safeHTML.js');
 
 var credentials = require('../credentials.js');
 
-
+/*
+	登录
+*/
 exports.login = function(req, res) {
 
 	var username = req.body.username;
@@ -37,7 +41,7 @@ exports.login = function(req, res) {
 
 		return res.json({
 			result: 'success',
-			url: '/admin/comment',
+			url: '/admin/blog',
 		});
 
 	} else {
@@ -397,9 +401,6 @@ exports.deleteMember = function(req, res) {
 
 };
 
-/*
-	发布行博
-*/
 
 // 确保存在目录
 var dataDir = './server/app';
@@ -407,10 +408,19 @@ var walkingblogDir = dataDir + '/walkingblog';
 fs.existsSync(dataDir) || fs.mkdirSync(dataDir);
 fs.existsSync(walkingblogDir) || fs.mkdirSync(walkingblogDir);
 
+/*
+	发布行博
+*/
 exports.addWalkingblog = function(req, res) {
 
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
 	var form = new formidable.IncomingForm();
-	form.uploadDir = "./server/tmp";  
+	form.uploadDir = "./server/app/tmp";  
 
 	form.parse(req, function(err, fields, files) {
 
@@ -451,7 +461,14 @@ exports.addWalkingblog = function(req, res) {
 				return errorHandler(err, res);
 			}
 
-			var newBlogId = lastBlog[0].blogId + 1;
+			var newBlogId = 1;
+
+			if ( !_.isEmpty(blastBlog) ) {
+
+				newBlogId = lastBlog[0].blogId + 1;
+
+			}
+
 
 			/*
 				存储行博
@@ -498,8 +515,15 @@ exports.addWalkingblog = function(req, res) {
 */
 exports.editWalkingblog = function(req, res) {
 
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+
 	var form = new formidable.IncomingForm();
-	form.uploadDir = "./server/tmp";  
+	form.uploadDir = "./server/app/tmp";  
 
 	form.parse(req, function(err, fields, files) {
 
@@ -638,7 +662,7 @@ exports.walkingblogByPage = function(req, res) {
 };
 
 /*
-	获取订阅用户页码总数
+	获取行博页码总数
 */
 exports.walkingblogPage = function(req, res) {
 
@@ -650,7 +674,7 @@ exports.walkingblogPage = function(req, res) {
 	}
 
 
-	WalkingBlog.getCount(function(err, number) {
+	WalkingBlog.getCountByAdmin(function(err, number) {
 
 		if ( err ) {
 			return errorHandler(err, res);
@@ -813,10 +837,19 @@ exports.changeWalkingblogStatus = function(req, res) {
 var bookDir = dataDir + '/book';
 fs.existsSync(bookDir) || fs.mkdirSync(bookDir);
 
+/*
+	新增书本
+*/
 exports.addBook = function(req, res) {
 
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
 	var form = new formidable.IncomingForm();
-	form.uploadDir = "./server/tmp";  
+	form.uploadDir = "./server/app/tmp";  
 
 	form.parse(req, function(err, fields, files) {
 
@@ -866,7 +899,11 @@ exports.addBook = function(req, res) {
 				return errorHandler(err, res);
 			}
 
-			var newBookId = lastBook[0].bookId + 1;
+			var newBookId = 1;
+
+			if ( !_.isEmpty(blastBook) ) {
+				newBookId = lastBook[0].bookId + 1;
+			}
 
 			/*
 				存储书本
@@ -907,12 +944,18 @@ exports.addBook = function(req, res) {
 };
 
 /*
-	修改行博
+	修改书本
 */
 exports.editBook = function(req, res) {
 
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
 	var form = new formidable.IncomingForm();
-	form.uploadDir = "./server/tmp";  
+	form.uploadDir = "./server/app/tmp";  
 
 	form.parse(req, function(err, fields, files) {
 
@@ -1024,7 +1067,7 @@ exports.editBook = function(req, res) {
 
 
 /*
-	根据页码获取行博
+	根据页码获取书本
 */
 exports.bookByPage = function(req, res) {
 
@@ -1054,7 +1097,7 @@ exports.bookByPage = function(req, res) {
 };
 
 /*
-	获取订阅用户页码总数
+	获取书本页码总数
 */
 exports.bookPage = function(req, res) {
 
@@ -1116,6 +1159,1543 @@ exports.deleteBook = function(req, res) {
 	});
 
 };
+
+
+
+
+
+var blogDir = dataDir + '/blog';
+fs.existsSync(blogDir) || fs.mkdirSync(blogDir);
+
+/*
+	博文上传图片，返回URL
+*/
+exports.uploadPhoto =  function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+
+	var form = new formidable.IncomingForm();
+	form.uploadDir = "./server/app/tmp";  
+
+	form.parse(req, function(err, fields, files) {
+
+		if ( err ) {
+			return res.send(JSON.stringify({
+				result: 'error',
+				reason: '上传图片失败，出现异常：' + err,
+			}));
+		}
+
+		var photo = files.photo;
+		var hasPhoto = !!photo.name;
+		var photoName = '',
+			front_path = '';
+
+		// 图片为空则返回错误信息
+		if ( !hasPhoto ) {
+
+			return res.send(JSON.stringify({
+				result: 'error',
+				reason: '请选择图片',
+			}));
+
+		}
+		
+		photoName = Date.now() + '.' + photo.type.split('/')[1];
+		front_path = '/blog/' + photoName;
+		
+
+		// 把临时文件夹下的文件，转移到指定文件夹
+		fs.renameSync(photo.path, blogDir + '/' + photoName);
+
+
+		return res.send(JSON.stringify({
+			result: 'success',
+			url: front_path,
+		}));
+
+
+	});
+
+
+};
+
+
+/*
+	发布博文，要连表查询标签和分类，发邮件
+*/
+exports.addBlog = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var formData = {
+		title: req.body.title,
+		category: req.body.category,
+		summary: req.body.summary,
+		tags: req.body.tags,
+		isNotice: req.body.isNotice,
+		content: req.body.content,
+		markdown: req.body.markdown,
+	};
+
+	// 表单验证
+	if ( !/\S/.test(formData.title) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '博文标题不能为空',
+		});
+
+	} else if ( !/\S/.test(formData.category) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '博文分类不能为空',
+		});
+
+	} else if ( !/\S/.test(formData.summation) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '博文摘要不能为空',
+		});
+
+	} else if ( !/\S/.test(formData.content) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '博文内容不能为空',
+		});
+
+	}
+
+
+	// 找到最新一篇博文，id +1
+	Blog.findLastOne(function(err, blog) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		var newBlogId = 1;
+
+		if ( !_.isEmpty(blog) ) {
+			newBlogId = blog[0].blogId + 1;
+		}
+
+		new Blog({
+			blogId: newBlogId,
+			title: formData.title,
+			summary: formData.summary,
+			markdown: formData.markdown,
+			content: formData.content,
+			category: formData.category,
+			tags: formData.tags,
+		}).save(function(err) {
+
+			if ( err ) {
+				return res.json({
+					result: 'error',
+					reason: '存储博文时发生异常：' + err,
+				});
+			}
+
+			// 分类表
+			Category.fetchByCateName(formData.category, function(err, category) {
+
+				// 分类不存在，则新建一个
+				if ( !category ) {
+
+					new Category({
+						cateName: formData.category,
+						blogs: [newBlogId],
+					}).save();
+					
+				} else { // 存在，则push博文id
+
+					_.pull(category.blogs, newBlogId).push(newBlogId);
+
+					category.save();
+
+				}
+
+			});
+
+			// 标签表
+			var tags = formData.tags.split(',');
+
+			// 遍历存储
+			_.map(tags, function(tagName) {
+
+				Tag.fetchByTagName(tagName, function(err, tag) {
+
+					// 分类不存在，则新建一个
+					if ( !tag ) {
+
+						new Tag({
+							tagName: tagName,
+							blogs: [newBlogId],
+						}).save();
+						
+					} else { // 存在，则push博文id
+
+						_.pull(tag.blogs, newBlogId).push(newBlogId);
+
+						tag.save();
+
+					}
+
+				});
+
+			});
+
+			// 发送邮件
+			Member.fetchAll(function(err, members) {
+
+				if ( err ) {
+					console.log('发送邮件前获取成员信息失败：' + err);
+					return false;
+				}
+
+
+				_.map(members, function(member) {
+
+					var opts = {
+						to: member.email,
+						data: {
+							currentTime: dateFormat(Date.now(), 'YYYY-MM-DD hh:mm:ss'),
+							nickname: member.nickname,
+							blog: {
+								blogId: newBlogId,
+								summary: formData.summary,
+								title: formData.title,
+								category: formData.category,
+								tags: formData.tags,
+							},
+						}
+					}
+
+					mail.newBlogNotice(opts);
+
+				});
+
+			});
+
+
+			
+
+
+			// 存储成功
+			return res.json({
+				result: 'success',
+				blogId: newBlogId,
+				url: '/article/' + newBlogId,
+			});
+
+		});
+
+	});
+
+
+};
+
+/*
+	修改博文，更新标签和分类
+*/
+exports.editBlog = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var formData = {
+		id: req.body.id,
+		title: req.body.title,
+		category: req.body.category,
+		summary: req.body.summary,
+		tags: req.body.tags,
+		isNotice: req.body.isNotice,
+		content: req.body.content,
+		markdown: req.body.markdown,
+	};
+
+	// 表单验证
+	if ( !/\S/.test(formData.id) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '请先选择要修改的博文',
+		});
+
+	} else if ( !/\S/.test(formData.title) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '博文标题不能为空',
+		});
+
+	} else if ( !/\S/.test(formData.category) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '博文分类不能为空',
+		});
+
+	} else if ( !/\S/.test(formData.summation) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '博文摘要不能为空',
+		});
+
+	} else if ( !/\S/.test(formData.content) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '博文内容不能为空',
+		});
+
+	}
+
+	// 通过_id找到对应的博文
+	Blog.fetchById(formData.id, function(err, blog) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		if ( _.isEmpty(blog) ) {
+			return res.json({
+				result: 'error',
+				reason: '数据库中找不到对应博文',
+			});
+		}
+
+		// 如果分类发生改变并且博文为公开状态，则修改分类
+		if ( blog.category != formData.category && blog.isShow) {
+
+			// 修改旧分类
+			Category.fetchByCateName(blog.category, function(err, category) {
+
+				// 分类不存在，则不操作
+				if ( !category ) {
+
+					return false;
+					
+				} else { // 存在，则pull博文id
+
+					_.pull(category.blogs, blog.blogId);
+					category.markModified('blogs');
+					category.save();
+
+				}
+
+			});
+
+			// 修改新分类
+			Category.fetchByCateName(formData.category, function(err, category) {
+
+				// 分类不存在，则新建一个
+				if ( !category ) {
+
+					new Category({
+						cateName: formData.category,
+						blogs: [blog.blogId],
+					}).save();
+					
+				} else { // 存在，则push博文id
+
+					_.pull(category.blogs, blog.blogId).push(blog.blogId);
+					category.markModified('blogs');
+					category.save();
+
+				}
+
+			});
+
+		}
+
+		// 如果标签发生改变并且博文为公开状态，则修改标签
+		if ( blog.tags != formData.tags && blog.isShow) {
+
+			// 修改旧标签
+			_.map(blog.tags.split(','), function(tagName) {
+
+				Tag.fetchByTagName(tagName, function(err, tag) {
+
+					// 找不到对应标签，则不操作
+					if ( _.isEmpty(tag) ) {
+						return false;
+					}
+
+					// pull
+					_.pull(tag.blogs, blog.blogId);
+					tag.markModified('blogs');
+					tag.save();
+
+				});
+
+			});
+
+			// 修改新标签
+			_.map(formData.tags.split(','), function(tagName) {
+
+				Tag.fetchByTagName(tagName, function(err, tag) {
+
+					// 不存在，则新建一个标签
+					if ( !tag ) {
+
+						new Tag({
+							tagName: tagName,
+							blogs: [blog.blogId],
+						}).save();
+						
+					} else { // 存在，则push博文id
+
+						_.pull(tag.blogs, blog.blogId).push(blog.blogId);
+						tag.markModified('blogs');
+						tag.save();
+					}
+
+				});
+
+			});
+
+		}
+
+		blog.title = formData.title;
+		blog.summary = formData.summary;
+		blog.markdown = formData.markdown;
+		blog.content = formData.content;
+		blog.category = formData.category;
+		blog.tags = formData.tags;
+
+		blog.save(function(err) {
+
+			if ( err ) {
+				return res.json({
+					result: 'error',
+					reason: '存储博文时发生异常：' + err,
+				});
+			}
+
+			// 存储成功
+			return res.json({
+				result: 'success',
+				url: '/article/' + blog.blogId,
+			});
+
+		});
+
+
+	});
+
+
+};
+
+
+
+/*
+	根据页码获取博客
+*/
+exports.blogByPage = function(req, res) {
+
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+
+	var page = req.body.page || 1;
+
+	Blog.fetchByPageAdmin(page, function(err, blogs) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		return res.json({
+			result: 'success',
+			blogs: blogs,
+		});
+
+	});
+
+};
+
+/*
+	获取博客页码总数
+*/
+exports.blogPage = function(req, res) {
+
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+
+	Blog.getCountByAdmin(function(err, number) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		return res.json({
+			result: 'success',
+			page: Math.ceil(number / 50) || 1, // 向上取整，最小为一页
+		});
+
+	});
+
+};
+
+/*
+	删除博文，及其对应评论，修改分类，标签
+*/
+exports.deleteBlog = function(req, res) {
+
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	Blog.delete(req.body.id, function(err, blog) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		if ( _.isEmpty(blog) ) {
+			return res.json({
+				result: 'error',
+				reason: '删除失败，此博客不存在',
+			});
+		}
+
+		/*
+			删除该博客下的评论
+		*/
+		Comment.fetchByArticle('blog', blog.blogId, function(err, comments) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+			_.map(comments, function(comment) {
+
+				comment.remove();
+
+			});
+			
+		});
+
+		/*
+			修改分类博文数
+		*/
+		Category.fetchByCateName(blog.category, function(err, category) {
+
+			if ( _.isEmpty(category) ) {
+				return false;
+			}
+
+			_.pull(category.blogs, blog.blogId);
+
+			category.markModified('blogs');
+			category.save();
+
+		});
+
+		/*
+			修改标签博文数
+		*/
+		_.map(blog.tags.split(','), function(tagName) {
+
+			Tag.fetchByTagName(tagName, function(err, tag) {
+
+				if ( _.isEmpty(tag) ) {
+					return false;
+				}
+
+				_.pull(tag.blogs, blog.blogId);
+				tag.markModified('blogs');
+				tag.save();
+
+			});
+
+		});
+
+
+			
+
+		return res.json({
+			result: 'success',
+			blogId: blog.blogId,
+		});
+
+	});
+
+};
+
+/*
+	更新博客评论数
+*/
+exports.updateBlogComment = function(req, res) {
+
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var blogId = req.body.id;
+	// 获取评论数
+	Comment.fetchBlogCommentCount(blogId, function(err, count) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		// 找到对应博文
+		Blog.fetchByBlogId(blogId, function(err, blog) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+			blog.numbers.comment = count;
+
+			blog.save(function(err) {
+
+				if ( err ) {
+					return errorHandler(err, res);
+				}
+
+				return res.json({
+					result: 'success',
+					count: count,
+				});
+
+			});
+
+		});
+
+	});
+
+};
+
+/*
+	修改博文状态，并修改分类和标题表对应的博文数量
+*/
+exports.changeBlogStatus = function(req, res) {
+
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var id = req.body.id;
+
+	// 找到对应博文
+	Blog.fetchById(id, function(err, blog) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		blog.isShow = !blog.isShow;
+
+		blog.save(function(err) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+
+			// 私密状态
+			if ( !blog.isShow ) {
+
+				/*
+					修改分类博文数
+				*/
+				Category.fetchByCateName(blog.category, function(err, category) {
+
+					if ( _.isEmpty(category) ) {
+						return false;
+					}
+
+					_.pull(category.blogs, blog.blogId);
+
+					category.markModified('blogs');
+					category.save();
+
+				});
+
+				/*
+					修改标签博文数
+				*/
+				_.map(blog.tags.split(','), function(tagName) {
+
+					Tag.fetchByTagName(tagName, function(err, tag) {
+
+						if ( _.isEmpty(tag) ) {
+							return false;
+						}
+
+						_.pull(tag.blogs, blog.blogId);
+						tag.markModified('blogs');
+						tag.save();
+
+					});
+
+				});
+
+			} else { // 公开状态
+
+				// 分类表
+				Category.fetchByCateName(blog.category, function(err, category) {
+
+
+					_.pull(category.blogs, blog.blogId).push(blog.blogId);
+
+					category.save();
+
+
+				});
+
+				// 标签表
+				var tags = blog.tags.split(',');
+
+				// 遍历存储
+				_.map(tags, function(tagName) {
+
+					Tag.fetchByTagName(tagName, function(err, tag) {
+
+						_.pull(tag.blogs, blog.blogId).push(blog.blogId);
+
+						tag.save();
+
+
+					});
+
+				});
+
+			}
+
+
+			return res.json({
+				result: 'success',
+				show: blog.isShow,
+			});
+
+		});
+
+	});
+
+
+};
+
+
+/*
+	博文详情
+*/
+exports.blogDetail = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var id = req.body.id;
+
+	Blog.fetchById(id, function(err, blog) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		if ( _.isEmpty(blog) ) {
+
+			return res.json({
+				result: 'error',
+				reasion: '找不到此博文',
+			});
+
+		}
+
+		return res.json({
+			result: 'success',
+			blog: blog,
+		});
+
+	});
+
+
+};
+
+
+/*
+	请求分类列表
+*/
+exports.loadCategories = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	Category.fetchAll(function(err, categories) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		return res.json({
+			result: 'success',
+			categories: categories,
+		});
+
+	});
+
+};
+
+/*
+	通过分类查看博文
+*/
+exports.blogByCategory = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var cateName = req.body.cateName;
+
+	if ( !/\S/.test(cateName) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '分类名不能为空'
+		});
+
+	}
+
+
+
+	Blog.fetchByCategory(cateName, function(err, blogs) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		return res.json({
+			result: 'success',
+			blogs: blogs,
+		});
+
+	});
+
+};
+
+
+/*
+	更新分类博文数，包含公开火或私密状态的
+*/
+exports.updateCateBlog = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var cateName = req.body.cateName;
+
+	if ( !/\S/.test(cateName) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '分类名不能为空'
+		});
+
+	}
+
+
+	Blog.fetchCountByCategory(cateName, function(err, count) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		return res.json({
+			result: 'success',
+			count: count,
+		});
+
+	});
+
+};
+
+
+/*
+	新增分类
+*/
+exports.addCategory = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var cateName = req.body.cateName;
+
+	if ( !/\S/.test(cateName) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '分类名不能为空'
+		});
+
+	}
+
+
+	Category.fetchByCateName(cateName, function(err, category) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		// 分类已经存在
+		if ( category ) {
+
+			return res.json({
+				result: 'error',
+				reason: '该分类已经存在',
+			});
+
+		}
+
+		new Category({
+			cateName: cateName,
+			blogs: [],
+		}).save(function(err) {
+
+			if ( err ) {
+				return res.json({
+					result: 'error',
+					reason: '存储分类时发生异常：' + err,
+				});
+			}
+
+			return res.json({
+				result: 'success',
+				cateName: cateName,
+			});
+
+		});
+
+		
+
+	});
+
+};
+
+/*
+	修改分类名，并修改该分类下所有博文的分类
+*/
+exports.editCategory = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var formData = {
+		oldCate: req.body.oldCate,
+		newCate: req.body.newCate,
+	}
+
+	if ( !/\S/.test(formData.oldCate) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '旧分类名不能为空'
+		});
+
+	} else if ( !/\S/.test(formData.newCate) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '新分类名不能为空'
+		});
+
+	}
+
+	Category.fetchByCateName(formData.oldCate, function(err, oldCategory) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		if ( !oldCategory ) {
+			return res.json({
+				result: 'error',
+				reason: '目标分类不存在',
+			});
+		}
+
+		Blog.fetchByCategory(formData.oldCate, function(err, blogs) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+			// 查询新分类名是否已存在，存在则合并
+			Category.fetchByCateName(formData.newCate, function(err, newCategory) {
+
+				if ( err ) {
+					return errorHandler(err, res);
+				}
+
+				// 不存在，则直接修改旧分类名字与对应博文的分类名
+				if ( !newCategory ) {
+
+					// 修改对应博文分类名
+					_.map(blogs, function(blog) {
+
+						blog.category = formData.newCate;
+						blog.save();
+
+					});
+
+					// 保存旧分类
+					oldCategory.cateName = formData.newCate;
+					oldCategory.save();
+
+					return res.json({
+						result: 'success',
+						status: '新分类不存在，修改旧分类名为新分类名',
+						count: blogs.length,
+					});
+
+				} else { // 存在，则删除旧分类，并将博文移到新分类上
+
+					
+
+					// 修改对应博文分类名，并将博文移到新分类上，
+					_.map(blogs, function(blog) {
+
+						blog.category = formData.newCate;
+						_.pull(newCategory.blogs, blog.blogId).push(blog.blogId);
+						blog.save();
+
+					});
+
+					// 删除旧分类
+					oldCategory.remove();
+
+					
+					newCategory.markModified('blogs');
+					newCategory.save();
+
+					return res.json({
+						result: 'success',
+						status: '新分类已存在，删除旧分类，并将旧分类下的博文合并至新分类',
+						count: blogs.length,
+					});
+
+				}
+
+
+
+
+			});
+
+			
+
+		});
+
+
+	});
+
+};
+
+/*
+	删除分类
+*/
+exports.deleteCategory = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var cateName = req.body.cateName;
+
+	if ( !/\S/.test(cateName) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '分类名不能为空'
+		});
+
+	}
+
+
+	Category.fetchByCateName(cateName, function(err, category) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		// 分类已经存在
+		if ( !category ) {
+
+			return res.json({
+				result: 'error',
+				reason: '该分类不存在',
+			});
+
+		} else if ( category.blogs.length ) {
+
+			return res.json({
+				result: 'error',
+				reason: '该分类下博文不为空',
+			});
+
+		}
+
+		category.remove(function(err) {
+
+			if ( err ) {
+				return res.json({
+					result: 'error',
+					reason: '删除分类时发生异常：' + err,
+				});
+			}
+
+			return res.json({
+				result: 'success',
+				cateName: cateName,
+			});
+
+		});
+
+		
+
+		
+
+	});
+
+};
+
+
+
+/*
+	请求标签列表
+*/
+exports.loadTags = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	Tag.fetchAll(function(err, tags) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		return res.json({
+			result: 'success',
+			tags: tags,
+		});
+
+	});
+
+};
+
+/*
+	通过标签查看博文
+*/
+exports.blogByTag = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var tagName = req.body.tagName;
+
+	if ( !/\S/.test(tagName) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '标签名不能为空'
+		});
+
+	}
+
+
+
+	Blog.fetchByTag(tagName, function(err, blogs) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		return res.json({
+			result: 'success',
+			blogs: blogs,
+		});
+
+	});
+
+};
+
+
+/*
+	更新标签博文数，包含公开或私密状态的
+*/
+exports.updateTagBlog = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var tagName = req.body.tagName;
+
+	if ( !/\S/.test(tagName) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '标签名不能为空'
+		});
+
+	}
+
+
+	Blog.fetchCountByTag(tagName, function(err, count) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		return res.json({
+			result: 'success',
+			count: count,
+		});
+
+	});
+
+};
+
+
+/*
+	新增标签
+*/
+exports.addTag = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var tagName = req.body.tagName;
+
+	if ( !/\S/.test(tagName) && tagName != 'undefined') {
+
+		return res.json({
+			result: 'error',
+			reason: '标签名不能为空'
+		});
+
+	}
+
+
+	Tag.fetchByTagName(tagName, function(err, tag) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		// 分类已经存在
+		if ( tag ) {
+
+			return res.json({
+				result: 'error',
+				reason: '该标签已经存在',
+			});
+
+		}
+
+		new Tag({
+			tagName: tagName,
+			blogs: [],
+		}).save(function(err) {
+
+			if ( err ) {
+				return res.json({
+					result: 'error',
+					reason: '存储标签时发生异常：' + err,
+				});
+			}
+
+			return res.json({
+				result: 'success',
+				tagName: tagName,
+			});
+
+		});
+
+		
+
+	});
+
+};
+
+/*
+	修改标签名，并修改该标签下所有博文的标签
+*/
+exports.editTag = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var formData = {
+		oldTag: req.body.oldTag,
+		newTag: req.body.newTag,
+	}
+
+	if ( !/\S/.test(formData.oldTag) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '旧标签名不能为空'
+		});
+
+	} else if ( !/\S/.test(formData.newTag) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '新标签名不能为空'
+		});
+
+	}
+
+	Tag.fetchByTagName(formData.oldTag, function(err, oldTag) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		if ( !oldTag ) {
+			return res.json({
+				result: 'error',
+				reason: '目标标签不存在',
+			});
+		}
+
+		Blog.fetchByTag(formData.oldTag, function(err, blogs) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+			// 查询新标签名是否已存在，存在则合并
+			Tag.fetchByTagName(formData.newTag, function(err, newTag) {
+
+				if ( err ) {
+					return errorHandler(err, res);
+				}
+
+				var reg_tpl = '(^{{content}},)|(,{{content}}$)|(,{{content}},)|(^{{content}}$)';
+				var reg = new RegExp(reg_tpl.replace(/{{content}}/g, formData.oldTag), 'g');
+
+				// 不存在，则直接修改旧标签名字与对应博文的标签名
+				if ( !newTag ) {
+
+					
+					// 修改对应博文标签名
+					_.map(blogs, function(blog) {
+
+						
+						blog.tags = blog.tags.replace(reg, function(match) {
+							return match.replace(formData.oldTag, formData.newTag);
+						});
+						blog.save();
+
+					});
+
+					// 保存旧分类
+					oldTag.tagName = formData.newTag;
+					oldTag.save();
+
+					return res.json({
+						result: 'success',
+						status: '新标签不存在，修改旧标签名为新标签名',
+						count: blogs.length,
+					});
+
+				} else { // 存在，则删除旧标签，并将博文移到新标签上
+
+					var newReg = new RegExp(reg_tpl.replace(/{{content}}/g, formData.newTag), 'g');
+
+					// 修改对应博文标签名，并将博文移到新标签上，
+					_.map(blogs, function(blog) {
+
+						blog.tags = blog.tags
+							.replace(newReg, function(match) { // 防止当前博文已有新标签，先替换为空
+								return match.replace(formData.newTag, '');
+
+							})
+							.replace(/,+/, ',') // 防止有多余的逗号
+							.replace(reg, function(match) {
+								return match.replace(formData.oldTag, formData.newTag);
+							})
+							.replace(/(^,)|(,$)/, '');
+
+						// 新标签push id
+						_.pull(newTag.blogs, blog.blogId);
+						newTag.blogs.push(blog.blogId);
+						blog.save();
+
+					});
+
+					// 删除旧标签
+					oldTag.remove();
+					
+					newTag.blogs = newTag.blogs;
+					newTag.markModified('blogs');
+					newTag.save();
+
+					return res.json({
+						result: 'success',
+						status: '新标签已存在，删除旧标签，并将旧标签下的博文合并至新标签',
+						count: blogs.length,
+					});
+
+				}
+
+
+
+
+			});
+
+			
+
+		});
+
+
+	});
+
+};
+
+/*
+	删除标签
+*/
+exports.deleteTag = function(req, res) {
+
+	if ( !checkSession(req) ) {
+		
+		return unlogin(res);
+
+	}
+
+	var tagName = req.body.tagName;
+
+	if ( !/\S/.test(tagName) ) {
+
+		return res.json({
+			result: 'error',
+			reason: '标签名不能为空'
+		});
+
+	}
+
+
+	Tag.fetchByTagName(tagName, function(err, tag) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		// 分类已经存在
+		if ( !tag ) {
+
+			return res.json({
+				result: 'error',
+				reason: '该标签不存在',
+			});
+
+		} else if ( tag.blogs.length ) {
+
+			return res.json({
+				result: 'error',
+				reason: '该标签下博文不为空',
+			});
+
+		}
+
+		tag.remove(function(err) {
+
+			if ( err ) {
+				return res.json({
+					result: 'error',
+					reason: '删除标签时发生异常：' + err,
+				});
+			}
+
+			return res.json({
+				result: 'success',
+				tagName: tagName,
+			});
+
+		});
+
+		
+
+		
+
+	});
+
+};
+
+
 
 
 

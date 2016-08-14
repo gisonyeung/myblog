@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="renderer" content="webkit">
+	<meta charset="UTF-8">
+	<title>预览</title>
+	<link rel="stylesheet" href="/backstage/css/editor.css">
+</head>
+<body>
+	<div class="preview"></div>
+	<script src="/backstage/js/jquery-1.9.1.min.js"></script>
+	<script>
+		function writeHTML(id ,html) {
+			$('.preview').html(html);
+			parent.adjustHeight(id, $('html').height());
+		}
+	</script>	
+</body>
+</html>

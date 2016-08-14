@@ -102,6 +102,55 @@ module.exports = function(app) {
 
 	});
 
+	app.get('/admin/blog', function(req, res) {
+
+		// 验证通过 则跳转页面
+		if ( checkSession(req) ) {
+			
+			res.render('../server/app/backstage/html/blog.html');
+		
+		} else {
+
+			res.redirect('/admin/login');
+
+		}
+
+	});
+
+	app.get('/admin/category', function(req, res) {
+
+		// 验证通过 则跳转页面
+		if ( checkSession(req) ) {
+			
+			res.render('../server/app/backstage/html/category.html');
+		
+		} else {
+
+			res.redirect('/admin/login');
+
+		}
+
+	});
+
+	app.get('/admin/tag', function(req, res) {
+
+		// 验证通过 则跳转页面
+		if ( checkSession(req) ) {
+			
+			res.render('../server/app/backstage/html/tag.html');
+		
+		} else {
+
+			res.redirect('/admin/login');
+
+		}
+
+	});
+
+
+
+
+
 
 
 
@@ -438,6 +487,120 @@ module.exports = function(app) {
 		删除书本
 	*/
 	app.post('/admin/deleteBook', backstage.deleteBook);
+
+
+
+	/*
+		发布博文	
+	*/
+	app.post('/admin/addBlog', backstage.addBlog);
+
+	/*
+		博文上传图片，返回URL
+	*/
+	app.post('/admin/uploadPhoto', backstage.uploadPhoto);
+	
+	/*
+		根据页码获取博文
+	*/
+	app.post('/admin/blogByPage', backstage.blogByPage);
+
+
+	/*
+		获取博文页码总数
+	*/
+	app.post('/admin/blogPage', backstage.blogPage);
+
+	/*
+		删除博文，及其对应评论，修改分类，标签
+	*/
+	app.post('/admin/deleteBlog', backstage.deleteBlog);
+
+	/*
+		更新博文评论数
+	*/
+	app.post('/admin/updateBlogComment', backstage.updateBlogComment);
+
+	/*
+		修改博文状态
+	*/
+	app.post('/admin/changeBlogStatus', backstage.changeBlogStatus);
+	
+	/*
+		修改博文前，获取博文详情
+	*/
+	app.post('/admin/blogDetail', backstage.blogDetail);
+	/*
+		修改博文
+	*/
+	app.post('/admin/editBlog', backstage.editBlog);
+	
+
+
+
+	/*
+		请求分类列表
+	*/
+	app.post('/admin/loadCategories', backstage.loadCategories);
+
+	/*
+		通过分类查看博文
+	*/
+	app.post('/admin/blogByCategory', backstage.blogByCategory);
+
+	/*
+		更新分类博文数
+	*/
+	app.post('/admin/updateCateBlog', backstage.updateCateBlog);
+
+	/*
+		新增分类
+	*/
+	app.post('/admin/addCategory', backstage.addCategory);
+
+	/*
+		修改分类名
+	*/
+	app.post('/admin/editCategory', backstage.editCategory);
+
+	/*
+		删除分类
+	*/
+	app.post('/admin/deleteCategory', backstage.deleteCategory);
+
+
+
+
+
+	/*
+		请求标签列表
+	*/
+	app.post('/admin/loadTags', backstage.loadTags);
+
+	/*
+		通过标签查看博文
+	*/
+	app.post('/admin/blogByTag', backstage.blogByTag);
+
+	/*
+		更新标签博文数
+	*/
+	app.post('/admin/updateTagBlog', backstage.updateTagBlog);
+
+	/*
+		新增标签
+	*/
+	app.post('/admin/addTag', backstage.addTag);
+
+	/*
+		修改标签名
+	*/
+	app.post('/admin/editTag', backstage.editTag);
+
+	/*
+		删除标签
+	*/
+	app.post('/admin/deleteTag', backstage.deleteTag);
 
 
 

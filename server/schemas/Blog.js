@@ -4,6 +4,7 @@ var BlogSchema = new mongoose.Schema({
 	blogId: Number,
 	title: String,
 	summary: String,
+	markdown: String,
 	content: String,
 	category: String,
 	tags: String,
@@ -31,6 +32,10 @@ var BlogSchema = new mongoose.Schema({
 BlogSchema.pre('save', function(next) {
 	if ( this.isNew ) {
 		this.time.createAt = this.time.updateAt = Date.now();
+		this.numbers.view = 0;
+		this.numbers.like = 0;
+		this.numbers.comment = 0;
+		this.isShow = true;
 	} else {
 		this.time.updateAt = Date.now();
 	}
@@ -54,6 +59,9 @@ BlogSchema.statics = {
 				{ 
 					blogId: blogId,
 					isShow: true,
+				},
+				{
+					markdown: 0,
 				}
 			)
 			.exec(callback);
@@ -61,7 +69,7 @@ BlogSchema.statics = {
 
 	fetchByPage: function(page, callback) {
 		return this
-			.find({ isShow: true }, { content: 0 })
+			.find({ isShow: true }, { content: 0, markdown: 0 })
 			.sort({'time.createAt': -1})
 			.skip( items_per_page * (page - 1) )
 			.limit(items_per_page)
@@ -185,6 +193,119 @@ BlogSchema.statics = {
 			.exec(callback);
 
 	},
+
+	getCountByAdmin: function(callback) {
+		return this
+			.count({})
+			.exec(callback);
+	},
+
+	fetchByPageAdmin: function(page, callback) {
+		return this
+			.find({}, { content:0, markdown: 0 })
+			.sort({'time.createAt': -1})
+			.skip( items_per_page * (page - 1) )
+			.limit(items_per_page)
+			.exec(callback);
+	},
+
+	delete: function(id, callback) {
+		return this
+			.findOneAndRemove({
+				_id: id,
+			})
+			.exec(callback);
+	},
+
+	findLastOne: function(callback) {
+		return this
+			.find({})
+			.sort({'time.createAt': -1})
+			.limit(1)
+			.exec(callback);
+	},
+
+	fetchById: function(id, callback) {
+		return this
+			.findOne({
+				_id: id,
+			})
+			.exec(callback);
+	},
+
+	fetchByBlogId: function(id, callback) {
+		return this
+			.findOne({
+				blogId: id,
+			})
+			.exec(callback);
+	},
+
+	fetchByCategory: function(cateName, callback) {
+		return this
+			.find(
+				{
+					category: cateName,
+				},
+				{
+					content: 0,
+					markdown: 0,
+					summary: 0,
+				}
+			)
+			.sort({'time.createAt': -1})
+			.exec(callback);
+	},
+
+	fetchCountByCategory: function(cateName, callback) {
+		return this
+			.count({ 
+				category: cateName,
+			})
+			.exec(callback);
+	},
+
+	fetchByTag: function(tagName, callback) {
+
+		var reg_tpl = '(^{{content}},)|(,{{content}}$)|(,{{content}},)|(^{{content}}$)';
+
+		var reg = new RegExp(reg_tpl.replace(/{{content}}/g, tagName), 'g');
+
+		return this
+			.find(
+				{
+					tags: { $regex: reg },
+				},
+				{
+					content: 0,
+					markdown: 0,
+					summary: 0,
+				}
+			)
+			.sort({'time.createAt': -1})
+			.exec(callback);
+	},
+
+	fetchCountByTag: function(tagName, callback) {
+
+		var reg_tpl = '(^{{content}},)|(,{{content}}$)|(,{{content}},)|(^{{content}}$)';
+
+		var reg = new RegExp(reg_tpl.replace(/{{content}}/g, tagName), 'g');
+
+		return this
+			.count({ 
+				tags: { $regex: reg },
+			})
+			.exec(callback);
+	},
+
+
+
+
+
+
+
+	
 
 
 

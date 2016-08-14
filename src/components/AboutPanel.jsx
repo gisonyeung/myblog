@@ -30,8 +30,7 @@ const AboutPanel = React.createClass({
               <p><strong>杨子聪</strong>，1996年出生，家乡惠州，现于广州读书。</p>
               <p>性格外向健谈，乐观向上，日常喜欢写写字。</p>
               <p><strong>广东工业大学2014级</strong>软件工程在读学生，大一暑假加入<strong>计算机工程研发中心</strong>前端组成为其中一员。</p>
-              <p>15年开始学习前端，每天保持8~12个小时学习时间。</p>
-              <p>有设计基础，平常有收集设计素材的习惯。</p>
+              <p>15年开始学习前端，有设计基础，平常有收集设计素材的习惯。</p>
               <p>对页面交互和设计有浓厚兴趣，但目前的前端知识学习专注在开发领域。</p>
               <p>我习惯苛求每一个细节，在自己能力范围内把事情做得最好，不曾敷衍，因为热爱。</p>
             </div>
@@ -114,7 +113,7 @@ const AboutPanel = React.createClass({
               <div className="cont">
                 <div className="row">
                   <p className="key">邮箱</p>
-                  <p className="value">gisonyeung2015@163.com</p>
+                  <p className="value"><a href="mailto:gisonyeung2015@163.com" target="_blank">gisonyeung2015@163.com</a></p>
                 </div>
                 <div className="row">
                   <p className="key">QQ（商业联系）</p>

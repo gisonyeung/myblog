@@ -39,6 +39,10 @@ body {
 .main .panel {
   display: none;
   box-shadow: none; }
+.main .panel:after {
+  content: '';
+  display: table;
+  clear: both; }
 .main .panel.open {
   display: block; }
 .main .panel label {
@@ -50,16 +54,79 @@ body {
   margin-right: 25px; }
 
 .pub-cont {
-  width: 800px; }
-.pub-cont input[type="submit"] {
+  position: relative;
+  width: 700px;
+  float: left; }
+.pub-cont input[type="submit"], .pub-cont #save-draft {
   width: 100%;
   margin-top: 20px; }
+.pub-cont .switch {
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+input[type=file] {
+  display: inline-block; }
+
+.upload-photo {
+  margin-top: 5px; }
+
+.pre-cont {
+  height: 100%;
+  margin-left: 710px;
+  padding-left: 10px;
+  border-left: 1px solid #eee; }
+
+iframe {
+  width: 100%;
+  height: 100%; }
+
+.editor {
+  word-break: break-all; }
+
+.form-group {
+  position: relative; }
+.form-group .select-list {
+  display: none;
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  padding: 5px 10px;
+  z-index: 10;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  list-style-type: none; }
+.form-group .select-list li {
+  margin: 0 5px 5px 0;
+  padding: 5px 10px;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: #666;
+  transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out; }
+.form-group .select-list li:hover {
+  color: #5cb85c;
+  border: 1px solid #5cb85c; }
 
 .table {
   font-size: 12px; }
 .table .no-record {
   text-align: center;
   color: #999; }
+
+.cache-tip {
+  visibility: hidden;
+  color: #5cb85c; }
+.cache-tip .emoji {
+  margin-right: 5px; }
+.cache-tip .cache-time {
+  margin-right: 5px; }
+.cache-tip.show {
+  visibility: visible; }
 
 /* 面板导航 */
 .panel-btn {
@@ -107,10 +174,10 @@ body {
   background-color: #24292c;
   border-color: #24292c; }
 
-#modal-comment .modal-dialog {
+#modal-comment .modal-dialog, #modal-cate .modal-dialog, #modal-tag .modal-dialog {
   width: 1000px;
   font-size: 12px; }
-#modal-comment .modal-body {
+#modal-comment .modal-body, #modal-cate .modal-body, #modal-tag .modal-body {
   min-height: 300px;
   max-height: 400px;
   overflow: auto; }

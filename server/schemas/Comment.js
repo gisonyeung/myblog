@@ -57,6 +57,17 @@ CommentSchema.statics = {
 			.exec(callback);
 	},
 
+	fetchBlogCommentCount: function(blogId, callback) {
+		return this
+			.count({
+				host: blogId,
+				type: 'blog',
+			})
+			.exec(callback);
+	},
+
+
+
 
 
 	fetchBoardComment: function(callback) {

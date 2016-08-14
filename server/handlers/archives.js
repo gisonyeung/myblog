@@ -14,52 +14,6 @@ var mail = require('../sendEmail.js');
 var dateFormat = require('../utils/dateFormat.js');
 
 
-Tag.find(function(err, tags) {
-
-	if (err) {
-		return false;
-	}
-
-	if ( !tags.length ) {
-		new Tag({
-			tagId: 1,
-			tagName: 'Javascript',
-			blogs: [1, 2, 3, 4, 5, 6],
-			time: {
-				createAt: Date.now(),
-				updateAt: Date.now(),
-			},
-		}).save();
-
-	}
-
-});
-
-Category.find(function(err, cates) {
-
-	if (err) {
-		return false;
-	}
-
-	if ( !cates.length ) {
-		new Category({
-			cateId: 1,
-			cateName: 'HTML与CSS',
-			blogs: [1, 2, 3, 4, 5],
-			time: {
-				createAt: Date.now(),
-				updateAt: Date.now(),
-			},
-		}).save();
-
-	}
-
-});
-
-
-
-
-
 /*
 	根据条件归档
 */

@@ -39,7 +39,7 @@ const Category = React.createClass({
             return (
               <li
                 className="cate-item"
-                key={cate.cateId}
+                key={index}
               >
                 <Link to={`/archives?type=category&category=${cate.cateName}`}>{cate.cateName}</Link>
                 <span className="number">（{cate.blogs.length}）</span>

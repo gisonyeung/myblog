@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 var TagSchema = new mongoose.Schema({
-	tagId: Number,
 	tagName: String,
 	blogs: {
 		type: Array,
@@ -17,6 +16,15 @@ var TagSchema = new mongoose.Schema({
 			default: Date.now()
 		},
 	},
+});
+
+TagSchema.pre('save', function(next) {
+	if ( this.isNew ) {
+		this.time.createAt = this.time.updateAt = Date.now();
+	} else {
+		this.time.updateAt = Date.now();
+	}
+	next();
 });
 
 TagSchema.statics = {

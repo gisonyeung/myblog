@@ -56,6 +56,11 @@ const ArticleContent = React.createClass({
   },
 
   render() {
+
+    let content = {
+      __html: this.props.content,
+    }
+
     return (
       <article className="content shadow-1">
         <div className="atc-top">
@@ -71,11 +76,11 @@ const ArticleContent = React.createClass({
                 <i className="icon icon-update" title={`最后更新时间: ${dateFormat(this.props.createAt, "YYYY-MM-DD hh:mm:ss")}`}></i>
                 <time>{dateFormat(this.props.updateAt, "YYYY-MM-DD")}</time>
               </span>
-              <Link to="/" title="分类">{this.props.category}</Link>
+              <Link to={`/archives?type=category&category=${this.props.category}`} title="分类">{this.props.category}</Link>
             </div>
           }
         </div>
-        <div className="atc-content">{this.props.content}</div>
+        <div className="atc-content" dangerouslySetInnerHTML={content} />
         <div className="atc-bottom">
         	<ul className="tags">
               {

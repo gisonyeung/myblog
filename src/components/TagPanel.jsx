@@ -38,7 +38,7 @@ const TagPanel = React.createClass({
               <Link 
                 to={`/archives?type=tag&tag=${tag.tagName}`} 
                 className="ar-tag"
-                key={tag.tagId}
+                key={index}
               >
               {tag.tagName}({tag.blogs.length})
               </Link>
