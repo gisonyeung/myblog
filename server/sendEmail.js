@@ -179,7 +179,7 @@ function subNotice_myself(opts) {
 	mailTransport.sendMail({
 		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
 		to: '442361125@qq.com',
-		subject: '行博有新留言',
+		subject: '博客有新订阅',
 		html: getSubTemplate_myself(opts.data),
 	}, function(err) {
 		if(err) console.log( '发送邮件失败: ' + err );
