@@ -1,14 +1,10 @@
 import React from 'react';
-import { Router, Link, Route, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import Summation from './Summation';
 import SubModal from './SubModal';
-import SiteAction from '../actions/SiteAction';
-import SiteStore from '../stores/SiteStore';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 require('../sass/Sidebar.scss');
-
-const myhead = require('../img/myhead.jpg')
 
 const SelfInfoBar = React.createClass({
 
@@ -35,7 +31,7 @@ const SelfInfoBar = React.createClass({
   render() {
     return (
       <div className="self-sidebar shadow-1">
-        <img src={myhead} alt="我的头像" className="myhead"/>
+        <img src="/static/img/myhead.jpg" alt="我的头像" className="myhead"/>
         <h2 className="nickname">
           <Link to="/about" title="关于我">杨子聪</Link>
         </h2>

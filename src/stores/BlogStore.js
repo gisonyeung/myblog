@@ -41,6 +41,8 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 	boardComments: [],
 
+	isFirstFetch_board: true,
+
 	getBlogsCount: function() {
 		return this.blogCount.count;
 	},
@@ -116,6 +118,7 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getBlogDetail: function() {
+
 		return this.blog;
 	},
 
@@ -244,6 +247,11 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 
 	getBoardComments: function() {
+
+		if ( this.isFirstFetch_board ) {
+			this.fetchBoardComments();
+		}
+
 		return this.boardComments;
 	},
 
@@ -252,6 +260,7 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 		fetch(Api.boardComment)
 		.then(data => {
 			if ( data.result == 'success' ) {
+				this.isFirstFetch_board = false;
 				this.boardComments = data.comments;
 				this.emitEvent('BOARD_COMMENT');
 			} 

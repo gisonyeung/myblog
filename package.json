@@ -41,9 +41,9 @@
     "url-loader": "^0.5.7",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.12.1"
+    "webpack-hot-middleware": "^2.12.1",
     "flux": "^2.1.1",
-    "webpack": "^1.13.1",
+    "webpack": "^1.13.1"
   },
   "dependencies": {
     "events": "^1.1.1",

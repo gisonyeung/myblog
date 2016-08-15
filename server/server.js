@@ -50,11 +50,32 @@ app.use(function(req, res, next) {
 require('./routes.js')(app);
 
 
-app.listen(port, function(err){
+var cluster = require("cluster");
+var numCPUs = require("os").cpus().length;
 
-	if( err ){
-		console.log(err);
-	}
+if (cluster.isMaster) {
+  for (var i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+  // 线程关闭时，重新fork一个
+  cluster.on("exit", function(worker, code, signal) {
+    cluster.fork();
+  });
+} else {
 
-	console.log('The server is running on http://localhost:8000/');
-});
+	app.listen(port, function(err){
+
+		if( err ){
+			console.log(err);
+		}
+
+		console.log('The server is running on http://localhost:8000/');
+	});
+
+}
+
+
+
+
+
+

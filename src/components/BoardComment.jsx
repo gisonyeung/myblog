@@ -9,7 +9,7 @@ const BoardComment = React.createClass({
 
   getInitialState() {
 
-    BlogAction.fetchBoardComments();
+    // BlogAction.fetchBoardComments();
 
     return {
         comments: BlogStore.getBoardComments(), 
