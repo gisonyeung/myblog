@@ -93,6 +93,7 @@
 		}
 		/* 文本效果 */
 		.atc-content {
+			font-size: 15px;
 			padding-bottom: 60px;
 			color: #333;
 			h1 {
@@ -122,6 +123,7 @@
 				padding-left: 40px;
 				p {
 					margin: 0;
+					line-height: 27px;
 				}
 			}
 
@@ -131,6 +133,7 @@
 				padding-left: 40px;
 				p {
 					margin: 0;
+					line-height: 27px;
 				}
 			}
 
@@ -179,18 +182,19 @@
 			    padding: 16px;
 			    overflow: auto;
 			    font-size: 85%;
-			    line-height: 1.45;
 			    background-color: #f7f7f7;
 		        word-wrap: normal;
 			    border-radius: 3px;
 			    color: #333;
 			    font: 13px Consolas, "Liberation Mono", Menlo, Courier, monospace;
 				font-family: inherit;
+				line-height: 25px;
 				code {
 					background: transparent;
 				    text-shadow: none;
 				    padding: 0;
 				    margin: 0;
+				    line-height: 25px;
 				}
 
 			}

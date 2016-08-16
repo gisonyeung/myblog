@@ -15,7 +15,7 @@ body {
 
 	font-family: Lato, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 
-	font-size: 16px;
+	font-size: 15px;
 	color: #333;
 	h1 {
 		margin-bottom: 25px;
@@ -31,7 +31,7 @@ body {
 		line-height: 30px;
 		margin-bottom: 25px;
 	}
-	p {
+	& > p {
 		line-height: 27px;
 		margin-bottom: 25px;
 		word-wrap: break-word;
@@ -44,6 +44,7 @@ body {
 		padding-left: 40px;
 		p {
 			margin: 0;
+			line-height: 27px;
 		}
 	}
 
@@ -53,6 +54,7 @@ body {
 		padding-left: 40px;
 		p {
 			margin: 0;
+			line-height: 27px;
 		}
 	}
 
@@ -98,10 +100,10 @@ body {
 
 	pre {
 		margin-bottom: 25px;
+		line-height: 25px;
 	    padding: 16px;
 	    overflow: auto;
 	    font-size: 85%;
-	    line-height: 1.45;
 	    background-color: #f7f7f7;
         word-wrap: normal;
 	    border-radius: 3px;
@@ -113,6 +115,7 @@ body {
 		    text-shadow: none;
 		    padding: 0;
 		    margin: 0;
+		    line-height: 25px;
 		}
 
 	}
