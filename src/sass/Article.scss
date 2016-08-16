@@ -97,7 +97,7 @@
 			color: #333;
 			h1 {
 				margin-bottom: 25px;
-			    padding-bottom: 0.3em;
+			    padding: 0.3em 0;
 				font-size: 20px;
 				font-weight: 600;
 				line-height: 30px;
@@ -175,6 +175,7 @@
 			}
 
 			pre {
+				margin-bottom: 25px;
 			    padding: 16px;
 			    overflow: auto;
 			    font-size: 85%;
@@ -335,7 +336,7 @@
 					display: inline!important;
 				}
 			}
-			&:first-child {
+			&:first-child {padding: 0.3em;
 				margin-top: 47px;
 				border-top: 0;
 			}
