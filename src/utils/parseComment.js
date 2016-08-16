@@ -151,7 +151,7 @@ function replaceContent(str) {
 					.replace(/>/g, '&gt;')
 				+ '</code>'; 
 		})
-		.replace(/<(?!\/?[a |strong|b|code])/g, '&lt;')
+		.replace(/<(?:\/?[a |strong|b|code])/g, '&lt;')
 		.replace(/<\/([^a|strong|b|code])>/g, function(match, $1) {
 			return '&lt;' + $1 + '&gt;';
 		})

@@ -102,12 +102,14 @@ exports.blogComment = function(req, res) {
 */
 exports.addBlogComment = function(req, res) {
 
+	var _quoteData = typeof(req.body.quoteData) == 'object' ? req.body.quoteData : {};
+
 	var quoteData = {
-		nickname: safeHTML(req.body.quoteData.nickname),
-		email: safeHTML(req.body.quoteData.email),
-		website: safeHTML(req.body.quoteData.website),
-		content: safeHTML(req.body.quoteData.content),
-		time: safeHTML(req.body.quoteData.time)
+		nickname: safeHTML(_quoteData.nickname),
+		email: safeHTML(_quoteData.email),
+		website: safeHTML(_quoteData.website),
+		content: safeHTML(_quoteData.content),
+		time: safeHTML(_quoteData.time)
 	};
 
 	var formData = {
@@ -144,7 +146,7 @@ exports.addBlogComment = function(req, res) {
 			result: 'error',
 			reason: '昵称不能为空',
 		});
-	} else if ( !/\S/.test(formData.email) ) {
+	} else if ( !/\S/.test(formData.email) || formData.email == 'undefined' ) {
 		return res.json({
 			result: 'error',
 			reason: '邮箱不能为空',
@@ -174,7 +176,13 @@ exports.addBlogComment = function(req, res) {
 			result: 'error',
 			reason: '个人网站过长',
 		});
-	} 
+	} else if ( typeof(quoteData) !== 'object' ) {
+		quoteData = {
+			nickname: '',
+			email: '',
+			website: '',
+		};
+	}
 
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
@@ -195,7 +203,7 @@ exports.addBlogComment = function(req, res) {
 				reason: '个人网站格式错误',
 			});
 		}
-		
+
     }
 
 	

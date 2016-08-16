@@ -265,7 +265,7 @@ exports.addBlogComment = function(req, res) {
 			result: 'error',
 			reason: '昵称不能为空',
 		});
-	} else if ( !/\S/.test(formData.email) ) {
+	} else if ( !/\S/.test(formData.email) || formData.email == 'undefined' ) {
 		return res.json({
 			result: 'error',
 			reason: '邮箱不能为空',
@@ -295,12 +295,18 @@ exports.addBlogComment = function(req, res) {
 			result: 'error',
 			reason: '电子邮箱过长',
 		});
-	}  else if ( formData.website.length > 100 ) {
+	} else if ( formData.website.length > 100 ) {
 		return res.json({
 			result: 'error',
 			reason: '个人网站过长',
 		});
-	} 
+	} else if ( typeof(quoteData) !== 'object' ) {
+		quoteData = {
+			nickname: '',
+			email: '',
+			website: '',
+		};
+	}
 
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
@@ -490,7 +496,7 @@ exports.addBoardComment = function(req, res) {
 			result: 'error',
 			reason: '昵称不能为空',
 		});
-	} else if ( !/\S/.test(formData.email) ) {
+	} else if ( !/\S/.test(formData.email) || formData.email == 'undefined' ) {
 		return res.json({
 			result: 'error',
 			reason: '邮箱不能为空',
@@ -525,7 +531,13 @@ exports.addBoardComment = function(req, res) {
 			result: 'error',
 			reason: '个人网站过长',
 		});
-	} 
+	} else if ( typeof(quoteData) !== 'object' ) {
+		quoteData = {
+			nickname: '',
+			email: '',
+			website: '',
+		};
+	}
 
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
