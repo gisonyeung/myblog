@@ -10,6 +10,9 @@ const HomeBlogItem = React.createClass({
 
   render() {
 
+    let summary = {
+      __html: this.props.summary.replace(/\n+/g, '<br/>'),
+    };
 
     return (
       <article className="blog-item shadow-1">
@@ -28,7 +31,7 @@ const HomeBlogItem = React.createClass({
           </span>
           <Link to={`/archives?type=category&category=${this.props.category}`} title="分类">{this.props.category}</Link>
         </div>
-        <p className="summary">{this.props.summary}</p>
+        <p className="summary" dangerouslySetInnerHTML={summary} />
         <footer className="details clearfix">
           <div className="tags">
             <span className="icon icon-tag" title="标签"></span>
