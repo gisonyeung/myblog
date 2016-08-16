@@ -35,6 +35,7 @@ $widgetRadius: 2px;
 .self-sidebar {
 
 	@extend %IEBox;
+	margin-bottom: 32px;
 	float: right;
 	width: 315px;
 	padding: 0 32px 70px;

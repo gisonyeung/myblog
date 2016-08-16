@@ -141,6 +141,12 @@ body {
 	width: 100%;
 	max-width: 1200px;
 	margin: 0 auto;
+	
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
 }
 
 // 防止滚动条显隐导致内容跳动
