@@ -43,3 +43,4 @@ credentials.js
 server/app/book/*
 server/app/walkingblog/*
 server/app/blog/*
+server/app/static/bundle.js
