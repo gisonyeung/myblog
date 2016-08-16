@@ -559,6 +559,9 @@ $(function() {
 		// 存草稿
 		saveDraft_repeat();
 
+		// 适应textarea高度
+		resizeContentHeight('#blog-content');
+
 	});
 
 	$('#edit-content').on('keyup', function() {
@@ -567,7 +570,26 @@ $(function() {
 
 		Preview2.window.writeHTML('Preview2', converter.makeHtml(value));
 
+		// 适应textarea高度
+		resizeContentHeight('#edit-content');
+
 	});
+
+
+	function resizeContentHeight(selector) {
+
+		var content = $(selector).val();
+		// 检测换行的个数
+		line = getLen(content, '\n');
+		$(selector).css('min-height', (25 * (line + 7)) + 'px' )
+
+	};
+
+	function getLen(str,ch){
+		var ret=0;
+		for(var i=0;i<str.length;i++){if(str.charAt(i)==ch)	  ret++;}
+		return ret;
+	}
 
 
 
