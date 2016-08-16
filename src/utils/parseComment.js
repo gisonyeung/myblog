@@ -158,11 +158,13 @@ function replaceContent(str) {
 		.replace(/([^a|"_blank"|strong|b|code])>/g, function(match, $1) {
 			return $1 + '&gt;';
 		})
-		.replace(/!(<\/?code>)(.+)\n/g, function(match, $1) {
+		.replace(/!(<\/?code>)(.+)\n/g, function(match, $1) { // 这个是干嘛的呢？
 			return ('<p>' + $1 + '</p>').replace(/\n/g, '');
 		})
 		.replace(/(<\/?code>)\n/g, function(match, $1) {
 			return $1;
 		})
-		.replace(/<(\/?script)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' });
+		.replace(/<(\/?script)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
+		.replace(/<(\/?br\/?)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
+		.replace(/\n+/g, '\n');
 }
