@@ -160,8 +160,6 @@ BlogSchema.statics = {
 		// 替换常用分隔符
 		keyword = keyword.replace(/\+|,|，|-| /g, '|');
 
-		console.log(keyword);
-
 		var reg = new RegExp(keyword, 'i');
 
 		return this
