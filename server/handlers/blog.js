@@ -531,7 +531,6 @@ exports.addBoardComment = function(req, res) {
 		});
     }
 
-
 	/*
 		查询是否有此有游客，有则更新信息，无则执行save
 	*/

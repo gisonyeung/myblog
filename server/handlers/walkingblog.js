@@ -210,6 +210,39 @@ exports.addBlogComment = function(req, res) {
 		};
 
 		/*
+			查询是否有此有游客，有则更新信息，无则执行save
+		*/
+		Tourist.fetchTourist(formData.email, function(err, person) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+			// 数据库无此游客，存入数据库
+			if( _.isEmpty(person) ) {
+				new Tourist({
+					nickname: formData.nickname,
+					email: formData.email,
+					website: formData.website,
+				}).save();
+			} else {
+				// 已有此游客，更新除email外的信息
+				Tourist.update(
+				{
+					email: formData.email
+				}, 
+				{
+					$set: { 'nickname': formData.nickname },
+					$set: { 'website': formData.website },
+				},
+				function(err, person) {
+					console.log('更新游客信息');
+				});
+			}
+
+		});
+
+		/*
 			存储评论
 		*/
 		let comment_time = Date.now();
