@@ -142,6 +142,7 @@ $(function() {
 							.replace(/{{title}}/g, blog.title)
 							.replace(/{{numbers_view}}/g, blog.numbers.view)
 							.replace(/{{numbers_comment}}/g, blog.numbers.comment)
+							.replace(/{{numbers_like}}/g, blog.numbers.like)
 							.replace(/{{status}}/g, blog.isShow ? '公开' : '私密')
 							.replace(/{{url}}/g, '/article/' + blog.blogId)
 							.replace(/{{status_btn}}/g, blog.isShow ? '设为私密' : '设为公开')

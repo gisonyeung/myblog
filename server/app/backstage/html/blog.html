@@ -45,7 +45,7 @@
 								<td width="110">分类</td>
 								<td width="130">标签</td>
 								<td>标题</td>
-								<td width="100">阅读/评论数</td>
+								<td width="100">阅读/评论/点赞数</td>
 								<td width="50">状态</td>
 								<td width="300">操作</td>
 							</tr>
@@ -148,7 +148,7 @@
 							<div class="form-group">
 							    <p class="help-block">
 									blogId: <span class="edit-value"></span>
-									阅读/评论数: <span class="edit-value"></span>
+									阅读/评论/点赞数: <span class="edit-value"></span>
 									状态: <span class="edit-value"></span>
 							    </p>	
 								<p class="help-block">
@@ -192,7 +192,7 @@
 			<td>{{category}}</td>
 			<td>{{tags}}</td>
 			<td>{{title}}</td>
-			<td>{{numbers_view}} / <span class="numbers-comment">{{numbers_comment}}</span></td>
+			<td>{{numbers_view}}/<span class="numbers-comment">{{numbers_comment}}</span>/{{numbers_like}}</td>
 			<td class="status-value">{{status}}</td>
 			<td>
 				<a href="{{url}}" class="btn btn-default btn-xs" target="_blank">查看</a>
