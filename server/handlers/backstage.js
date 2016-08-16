@@ -463,7 +463,7 @@ exports.addWalkingblog = function(req, res) {
 
 			var newBlogId = 1;
 
-			if ( !_.isEmpty(blastBlog) ) {
+			if ( !_.isEmpty(lastBlog) ) {
 
 				newBlogId = lastBlog[0].blogId + 1;
 
