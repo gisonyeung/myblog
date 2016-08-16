@@ -164,9 +164,7 @@ function replaceContent(str) {
 		.replace(/(<\/?code>)\n/g, function(match, $1) {
 			return $1;
 		})
-		.replace(/(<\/?pre>)\n/g, function(match, $1) {
-			return $1;
-		})
+		.replace(/>\n/g, '>')
 
 		// .replace(/<(\/?script)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
 		// .replace(/<(\/?br\/?)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
