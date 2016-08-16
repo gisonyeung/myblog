@@ -151,7 +151,7 @@ function replaceContent(str) {
 					.replace(/>/g, '&gt;')
 				+ '</code>'; 
 		})
-		.replace(/<(?:\/?[a |strong|b|code])/g, '&lt;')
+		.replace(/<\/?(?!(a )|(strong)|(b)|(code))/g, '&lt;')
 		.replace(/<\/([^a|strong|b|code])>/g, function(match, $1) {
 			return '&lt;' + $1 + '&gt;';
 		})
@@ -164,7 +164,7 @@ function replaceContent(str) {
 		.replace(/(<\/?code>)\n/g, function(match, $1) {
 			return $1;
 		})
-		.replace(/<(\/?script)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
-		.replace(/<(\/?br\/?)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
+		// .replace(/<(\/?script)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
+		// .replace(/<(\/?br\/?)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
 		.replace(/\n+/g, '\n');
 }
