@@ -59,7 +59,7 @@ const BookWidget = React.createClass({
           <div className="introduction" dangerouslySetInnerHTML={description} />
         </div>
         <div className="foot">
-          <span className="time" title={dateFormat(this.props.time, 'YYYY-DD-MM hh:mm')}>添入时间：{dateFormat(this.props.time, 'YYYY-DD-MM')}</span>
+          <span className="time" title={dateFormat(this.props.time, 'YYYY-MM-DD hh:mm')}>添入时间：{dateFormat(this.props.time, 'YYYY-MM-DD')}</span>
           <span 
             className={`recommend ${this.state.isLike ? 'on' : ''}`}
             onClick={this.addLike}

@@ -27,7 +27,7 @@ BookSchema.statics = {
 	fetchAllBooks: function(callback) {
 		return this
 			.find({})
-			.sort({ 'time': -1 })
+			// .sort({ 'time': -1 })
 			.exec(callback);
 	},
 
