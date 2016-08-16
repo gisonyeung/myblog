@@ -42,7 +42,7 @@ $ cnpm install
 $ mongod --dbpath D:/mongodb // 最后这个是数据存储路径，找个文件夹存放即可
 ```
 
-开启数据库后，可以先配置下`/server/credentials.js`文件，这个文件是私人的证书文件，用于存储权限验证信息还有邮件发送用的账户
+开启数据库后，需要手动新建一个文件`/server/credentials.js`，这个文件是私人证书文件，用于存储权限验证信息还有邮件发送用的账户，格式如下：
 ```
 module.exports = {
     cookieSecret: 'someString', // cookie密钥，随便设点什么字符串就行
