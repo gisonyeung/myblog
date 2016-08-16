@@ -177,8 +177,6 @@ module.exports = function(app) {
 	*/
 	app.get('*', function(req, res) {
 
-		console.log(req._parsedUrl.path);
-
 		var reqPath = req._parsedUrl.path;
 
 		if ( reqPath == '/' || /(^\/article)|(^\/mylife)|(^\/book)|(^\/board)|(^\/about)|(^\/unsubscribe)/.test(reqPath) ) {
