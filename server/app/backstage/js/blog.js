@@ -221,6 +221,8 @@ $(function() {
 					$('#edit-tags').val(data.blog.tags);
 					$('#edit-content').val(data.blog.markdown);
 
+					resizeContentHeight('#edit-content');
+
 					Preview2.window.writeHTML('Preview2', data.blog.content);
 
 					$('#edit-submit').attr('data-target', data.blog._id);
@@ -904,7 +906,7 @@ $(function() {
 			}
 
 			Preview.window.writeHTML('Preview', converter.makeHtml(formData.content));
-
+			resizeContentHeight('#blog-content');
 		}
 
 
