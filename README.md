@@ -30,19 +30,8 @@ $ npm install cnpm -g
 $ cnpm install
 ```
 
-## 配置博客项目
-
-
-## 启动
-
-博客需要用到`mongoDB`数据库，所以需要先安装`mongoDB`，如何安装请自行搜索。
-
-下面我们先启动`mongoDB`服务
-```
-$ mongod --dbpath D:/mongodb // 最后这个是数据存储路径，找个文件夹存放即可
-```
-
-开启数据库后，需要手动新建一个文件`/server/credentials.js`，这个文件是私人证书文件，用于存储权限验证信息还有邮件发送用的账户，格式如下：
+## 配置博客证书
+安装完依赖项以后，就需要我们手动新建一个文件`/server/credentials.js`，这个文件是私人证书文件，用于存储权限验证信息还有邮件发送用的账户，格式如下：
 ```
 module.exports = {
     cookieSecret: 'someString', // cookie密钥，随便设点什么字符串就行
@@ -63,8 +52,17 @@ module.exports = {
 };
 ```
 
+## 启动
 
-配置完证书文件后即可运行`start`命令，即可进入到开发模式。
+博客需要用到`mongoDB`数据库，所以需要先安装`mongoDB`，如何安装请自行搜索。
+
+下面我们先启动`mongoDB`服务
+
+```
+$ mongod --dbpath D:/mongodb // 最后这个是数据存储路径，找个文件夹存放即可
+```
+
+开启数据库后，运行`start`命令，即可进入到开发模式。
 
 ```
 $ npm start
