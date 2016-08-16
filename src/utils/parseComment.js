@@ -68,7 +68,7 @@ export default function parseComment(str) {
 
 
 	return {
-		__html: blockquote,
+		__html: blockquote.replace(/>\n*/g, '>'),
 	};
 };
 // 贪婪匹配
@@ -164,8 +164,6 @@ function replaceContent(str) {
 		.replace(/(<\/?code>)\n/g, function(match, $1) {
 			return $1;
 		})
-		.replace(/>\n/g, '>')
-
 		// .replace(/<(\/?script)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
 		// .replace(/<(\/?br\/?)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
 		.replace(/\n+/g, '\n');
