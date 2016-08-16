@@ -56,7 +56,7 @@ const BookWidget = React.createClass({
           <h3 className="book-name">
             <span>{this.props.name}</span>
           </h3>
-          <div className="introduction" dangerouslySetInnerHTML={description} />
+          <div className="introduction">{this.props.description}</div>
         </div>
         <div className="foot">
           <span className="time" title={dateFormat(this.props.time, 'YYYY-MM-DD hh:mm')}>添入时间：{dateFormat(this.props.time, 'YYYY-MM-DD')}</span>
