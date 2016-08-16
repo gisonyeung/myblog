@@ -314,7 +314,17 @@ exports.addBlogComment = function(req, res) {
 				return 'http://' + match;
 			}
 		});
+
+		if ( !/^(http|https):\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?$/.test(formData.website) ) {
+			return res.json({
+				result: 'error',
+				reason: '个人网站格式错误',
+			});
+		}
+
+
     }
+
 
 
 	/*
@@ -529,6 +539,14 @@ exports.addBoardComment = function(req, res) {
 				return 'http://' + match;
 			}
 		});
+
+
+		if ( !/^(http|https):\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?$/.test(formData.website) ) {
+			return res.json({
+				result: 'error',
+				reason: '个人网站格式错误',
+			});
+		}
     }
 
 	/*
