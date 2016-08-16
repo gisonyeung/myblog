@@ -102,3 +102,12 @@ http://localhost:8000/admin/login
 
 ## 修改关于页信息
 如须修改关于页的信息，找到`/src/components/AboutPanel.jsx`
+
+# 上线
+
+## 部署多线程
+服务器在开发环境下默认开启单线程，如需上线开启多线程模式，可以在`/server/server.js`底部取消相应代码的注释
+
+## 取消`webpack hmr`
+在`/server/server.js`注释掉`webpack`相关代码，并注释`/webpack.config.js`中与热替换有关的代码，即可取消`webpack hmr`（上线环境下不取消会导致频繁请求）
+
