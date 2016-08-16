@@ -343,7 +343,7 @@ $(function() {
 					gb.modal.tip.show('新增成功', 'success');
 					$('#book-name').val('');
 					$('#book-description').val('');
-					loadBooksByPage(1);
+					loadBooksByPage();
 				} else {
 					gb.modal.tip.show("新增失败，原因: " + data.reason + "。\n请重试", 'error');
 				}
