@@ -579,17 +579,13 @@ $(function() {
 	function resizeContentHeight(selector) {
 
 		var content = $(selector).val();
-		// 检测换行的个数
-		line = getLen(content, '\n');
-		$(selector).css('min-height', (25 * (line + 7)) + 'px' )
+		$('#calHeight').text(content);
+		var height = $('#calHeight').height();
+		console.log(height);
+		$(selector).css('min-height', (height + 200) + 'px' );
 
 	};
 
-	function getLen(str,ch){
-		var ret=0;
-		for(var i=0;i<str.length;i++){if(str.charAt(i)==ch)	  ret++;}
-		return ret;
-	}
 
 
 

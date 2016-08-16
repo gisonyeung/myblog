@@ -181,6 +181,19 @@ iframe {
 	line-height: 25px;
 }
 
+#calHeight {
+	font-size: 14px;
+	line-height: 25px;
+	padding: 6px 12px;
+	width: 676px;
+	position: absolute;
+	left: 300%;
+	top: 300%;
+	z-index: -1000;
+	visibility: hidden;
+	white-space: pre-wrap;
+}
+
 
 
 .form-group {
