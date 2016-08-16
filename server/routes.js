@@ -177,8 +177,16 @@ module.exports = function(app) {
 	*/
 	app.get('*', function(req, res) {
 
-		// 增加站点访问量
-		site.addSiteView();
+		console.log(req._parsedUrl.path);
+
+		var reqPath = req._parsedUrl.path;
+
+		if ( reqPath == '/' || /(^\/article)|(^\/mylife)|(^\/book)|(^\/board)|(^\/about)|(^\/unsubscribe)/.test(reqPath) ) {
+			// 增加站点访问量
+			site.addSiteView();
+			
+		}
+
 
 		res.render('../server/app/entry.html');
 	});
@@ -196,7 +204,7 @@ module.exports = function(app) {
 	app.post('/homeBlog', blog.homeBlog);
 
 	/* 
-		请求首页页码
+		请求首页页码 
 	*/
 	app.post('/homePage', blog.homePage);
 
