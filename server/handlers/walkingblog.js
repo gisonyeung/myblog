@@ -23,8 +23,6 @@ exports.blogList = function(req, res) {
 
 	WalkingBlog.fetchByIndex(beginIndex, function(err, blogs) {
 
-		console.log('请求行博列表');
-
 		if ( err ) {
 			return errorHandler(err, res);
 		}
@@ -42,8 +40,6 @@ exports.blogList = function(req, res) {
 	请求行博详情
 */
 exports.blogDetail = function(req ,res) {
-
-	console.log('请求行博详情…');
 
 	var blogId = req.body.blogId;
 
@@ -84,8 +80,6 @@ exports.blogDetail = function(req ,res) {
 	请求行博评论列表
 */
 exports.blogComment = function(req, res) {
-
-	console.log('请求行博评论');
 
 	var blogId = req.body.blogId;
 
@@ -308,8 +302,6 @@ exports.addBlogComment = function(req, res) {
 	请求相邻行博
 */
 exports.nearBlog = function(req, res) {
-
-	console.log('请求相邻行博…');
 
 	var blogId = req.body.blogId;
 

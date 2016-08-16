@@ -38,7 +38,6 @@ exports.blogCount = function(req, res) {
 */
 exports.homeBlog = function(req, res) {
 
-	console.log('请求首页博文列表…');
 
 	var page = req.body.page;
 
@@ -61,7 +60,6 @@ exports.homeBlog = function(req, res) {
 */
 exports.homePage = function(req, res) {
 
-	console.log('请求首页页码…');
 
 	Blog.getCount(function(err, number) {
 
@@ -82,8 +80,6 @@ exports.homePage = function(req, res) {
 	请求博文详情
 */
 exports.blogDetail = function(req, res) {
-
-	console.log('请求博文详情…');
 
 	var blogId = req.body.blogId;
 
@@ -121,8 +117,6 @@ exports.blogDetail = function(req, res) {
 	请求相邻博文
 */
 exports.nearBlog = function(req, res) {
-
-	console.log('请求相邻博文…');
 
 	var blogId = req.body.blogId;
 
@@ -206,8 +200,6 @@ exports.nearBlog = function(req, res) {
 	请求博文评论列表
 */
 exports.blogComment = function(req, res) {
-
-	console.log('请求博文评论');
 
 	var blogId = req.body.blogId;
 

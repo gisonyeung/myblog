@@ -172,12 +172,15 @@ module.exports = function(app) {
 
 
 
-
 	/*
 		history fallback
 	*/
 	app.get('*', function(req, res) {
-		res.render('../server/app/index.html');
+
+		// 增加站点访问量
+		site.addSiteView();
+
+		res.render('../server/app/entry.html');
 	});
 
 

@@ -5,6 +5,7 @@ var _ = require('lodash');
 var Blog = require('../models/Blog.js');
 var Comment = require('../models/Comment.js');
 var Member = require('../models/Member.js');
+var Site = require('../models/Site.js');
 
 /* 邮件 */
 var mail = require('../sendEmail.js');
@@ -285,6 +286,56 @@ exports.cancelSub = function(req, res) {
 };
 
 
+// 运行服务器时，判断站点表有无数据，无则新建一个
+var branchName = 'master';
+Site.findByBranch(branchName, function(err, siteData) {
+
+	if ( !siteData ) {
+
+		new Site({
+			view: 0,
+			branch: branchName,
+		}).save();
+
+	} else {
+		console.log('站点访问量：' + siteData.view);
+	}
+
+});
+
+
+/*
+	增加站点访问量
+*/
+exports.addSiteView = function() {
+
+	Site.findByBranch(branchName, function(err, siteData) {
+
+		if ( err ) {
+			console.log('site.js: 访问站点数据失败')
+			return false;
+		}
+
+		if ( !siteData ) {
+			console.log('site.js: 找不到对应的站点数据')
+			return false;
+		}
+
+		siteData.view++;
+
+		siteData.save(function(err) {
+
+			if ( err ) {
+				console.log('site.js：站点数据存储失败');
+				return false;
+			}
+
+			console.log('站点访问+1，现访问量：' + siteData.view);
+		});
+
+	});
+
+};
 
 
 

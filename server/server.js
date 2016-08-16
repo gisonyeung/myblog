@@ -50,18 +50,22 @@ app.use(function(req, res, next) {
 require('./routes.js')(app);
 
 
-var cluster = require("cluster");
-var numCPUs = require("os").cpus().length;
 
-if (cluster.isMaster) {
-  for (var i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
-  // 线程关闭时，重新fork一个
-  cluster.on("exit", function(worker, code, signal) {
-    cluster.fork();
-  });
-} else {
+
+/* 需要开启多线程，则取消注释下面的代码 */
+
+// var cluster = require("cluster");
+// var numCPUs = require("os").cpus().length;
+
+// if (cluster.isMaster) {
+//   for (var i = 0; i < numCPUs; i++) {
+//     cluster.fork();
+//   }
+//   // 线程关闭时，重新fork一个
+//   cluster.on("exit", function(worker, code, signal) {
+//     cluster.fork();
+//   });
+// } else {
 
 	app.listen(port, function(err){
 
@@ -72,7 +76,7 @@ if (cluster.isMaster) {
 		console.log('The server is running on http://localhost:8000/');
 	});
 
-}
+// }
 
 
 
