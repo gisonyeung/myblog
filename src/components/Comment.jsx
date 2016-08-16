@@ -11,7 +11,7 @@ const Comment = React.createClass({
       email: this.props.email,
       time: this.props.time,
       nickname: this.props.nickname,
-      content: this.props.content.replace(/\n+/g, '<br/>'),
+      content: this.props.content,
     });
   },
 
