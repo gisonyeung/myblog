@@ -35,12 +35,36 @@ $ cnpm install
 
 ## 启动
 
-博客需要用到`mongoDB`数据库，所以需要先安装`mongoDB`，如果安装自行搜索，过程很简易。下面先启动`mongoDB`服务
+博客需要用到`mongoDB`数据库，所以需要先安装`mongoDB`，如何安装请自行搜索。
+
+下面我们先启动`mongoDB`服务
 ```
 $ mongod --dbpath D:/mongodb // 最后这个是数据存储路径，找个文件夹存放即可
 ```
 
-开启数据库后，运行`start`命令，即可进入到开发模式。
+开启数据库后，可以先配置下`/server/credentials.js`文件，这个文件是私人的证书文件，用于存储权限验证信息还有邮件发送用的账户
+```
+module.exports = {
+    cookieSecret: 'someString', // cookie密钥，随便设点什么字符串就行
+    mail: {
+        user: 'xxx@163.com', // 这里填的是邮箱名，确保开了SMTP服务
+        password: 'xxx', // 邮箱密码
+        string: 'smtps://username%40163.com:password@smtp.163.com', // username%40xx.com => yangzicong2008%40163.com 这相当于username，只是把@转义为%40
+    },
+    mongo: {
+        development: 'mongodb://localhost:27017/blog', // 这里是数据库链接，确保运行了mongodb服务
+        production: 'mongodb://localhost:27017/blog', // 这里是数据库链接
+        session: 'mongodb://localhost:27017/session' // 这里是session数据库链接
+    },
+    admin: { // 这是后台管理系统登陆时的帐号密码
+        username: 'admin', 
+        password: '123456', 
+    }
+};
+```
+
+
+配置完证书文件后即可运行`start`命令，即可进入到开发模式。
 
 ```
 $ npm start
@@ -72,6 +96,7 @@ $ npm install webpack -g
 ```
 http://localhost:8000/admin/login
 ```
+
 
 
 ## 修改个人面板信息
