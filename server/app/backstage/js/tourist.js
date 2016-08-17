@@ -29,7 +29,7 @@ $(function() {
 	});
 
 	/*
-		删除评论
+		删除游客
 	*/
 	var touristId = '';
 	var parentTr = {};
@@ -278,7 +278,7 @@ $(function() {
 
 	var commentId = '';
 	var parentTr = {};
-	var deleteConfirm = gb.modal.confirm.init(function() {
+	var deleteConfirm2 = gb.modal.confirm.init(function() {
 
 		$.ajax({
 			url: '/admin/deleteComment',
@@ -314,7 +314,7 @@ $(function() {
 
 		commentId = $(this).attr('data-target');
 		parentTr = $(this).parent().parent();
-		gb.modal.confirm.show(deleteConfirm, '是否确认删除该评论？');
+		gb.modal.confirm.show(deleteConfirm2, '是否确认删除该评论？');
 
 	});
 
