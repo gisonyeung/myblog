@@ -12,6 +12,10 @@ var mail = require('../sendEmail.js');
 /* 日期格式化 */
 var dateFormat = require('../utils/dateFormat.js');
 
+/* 字段判空 */
+var testEmpty = require('../utils/testEmpty.js');
+
+
 
 /*
 	请求博文数目
@@ -260,17 +264,17 @@ exports.addBlogComment = function(req, res) {
 			result: 'error',
 			reason: '未知所属博文',
 		});
-	} else if ( !/\S/.test(formData.nickname) ) {
+	} else if ( testEmpty(formData.nickname) ) {
 		return res.json({
 			result: 'error',
 			reason: '昵称不能为空',
 		});
-	} else if ( !/\S/.test(formData.email) || formData.email == 'undefined' ) {
+	} else if ( testEmpty(formData.email) ) {
 		return res.json({
 			result: 'error',
 			reason: '邮箱不能为空',
 		});
-	} else if ( !/\S/.test(formData.content.replace(/<blockquote>[\s\S]*<\/blockquote>/g, '')) ) {
+	} else if ( testEmpty(formData.content.replace(/<blockquote>[\s\S]*<\/blockquote>/g, '')) ) {
 		return res.json({
 			result: 'error',
 			reason: '评论内容不能为空',
@@ -312,7 +316,7 @@ exports.addBlogComment = function(req, res) {
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
     */
-    if ( /\S/.test(formData.website) ) {
+    if ( testEmpty(formData.website) ) {
 		formData.website = formData.website.replace(/^(https?:\/\/)?.*/, function(match, capture) {
 			// 有捕获组，已有前缀
 			if ( capture ) {
@@ -492,17 +496,17 @@ exports.addBoardComment = function(req, res) {
 	var quoteData = req.body.quoteData;
 
 	// 表单验证
-	if ( !/\S/.test(formData.nickname) ) {
+	if ( testEmpty(formData.nickname) ) {
 		return res.json({
 			result: 'error',
 			reason: '昵称不能为空',
 		});
-	} else if ( !/\S/.test(formData.email) || formData.email == 'undefined' ) {
+	} else if ( testEmpty(formData.email) ) {
 		return res.json({
 			result: 'error',
 			reason: '邮箱不能为空',
 		});
-	} else if ( !/\S/.test(formData.content.replace(/<blockquote>[\s\S]*<\/blockquote>/g, '')) ) {
+	} else if ( testEmpty(formData.content.replace(/<blockquote>[\s\S]*<\/blockquote>/g, '')) ) {
 		return res.json({
 			result: 'error',
 			reason: '评论内容不能为空',
@@ -544,7 +548,7 @@ exports.addBoardComment = function(req, res) {
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
     */
-    if ( /\S/.test(formData.website) ) {
+    if ( testEmpty(formData.website) ) {
 		formData.website = formData.website.replace(/^(https?:\/\/)?.*/, function(match, capture) {
 			// 有捕获组，已有前缀
 			if ( capture ) {
@@ -584,7 +588,7 @@ exports.addBoardComment = function(req, res) {
 			Tourist.update(
 			{
 				email: formData.email
-			}, 
+			}, 	
 			{
 				$set: { 'nickname': formData.nickname },
 				$set: { 'website': formData.website },
