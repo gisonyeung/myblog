@@ -190,7 +190,7 @@ exports.addBlogComment = function(req, res) {
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
     */
-    if ( !/\S/.test(formData.website) ) {
+    if ( /\S/.test(formData.website) ) {
 		formData.website = formData.website.replace(/^(https?:\/\/)?.*/, function(match, capture) {
 			// 有捕获组，已有前缀
 			if ( capture ) {
