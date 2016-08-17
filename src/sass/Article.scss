@@ -395,6 +395,13 @@
 				white-space: pre-line;
 				p {
 					line-height: 28px;
+
+					&.shield {
+						padding: 3px 8px;
+						color: #999;
+						border: 1px dashed #999;
+					}
+
 				}
 				a {
 					text-decoration: underline;

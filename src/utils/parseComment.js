@@ -68,7 +68,7 @@ export default function parseComment(str) {
 
 
 	return {
-		__html: blockquote.replace(/>\n*/g, '>'),
+		__html: blockquote.replace(/>\n*/g, '>') || '<p class="shield">内容被屏蔽</p>',
 	};
 };
 // 贪婪匹配
