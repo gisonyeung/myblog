@@ -181,6 +181,7 @@ exports.addBlogComment = function(req, res) {
 			nickname: '',
 			email: '',
 			website: '',
+			content: '',
 		};
 	}
 

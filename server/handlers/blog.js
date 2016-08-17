@@ -305,6 +305,7 @@ exports.addBlogComment = function(req, res) {
 			nickname: '',
 			email: '',
 			website: '',
+			content: '',
 		};
 	}
 
@@ -536,6 +537,7 @@ exports.addBoardComment = function(req, res) {
 			nickname: '',
 			email: '',
 			website: '',
+			content: '',
 		};
 	}
 
