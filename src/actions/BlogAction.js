@@ -69,6 +69,14 @@ const BlogAction = {
 		});
 	},
 
+	fetchBoardComments_more() {
+		AppDispatcher.dispatch({
+			actionType: 'FETCH_BOARD_COMMENT_MORE',
+		});
+	},
+
+
+
 	sendBoardComment(formData) {
 		AppDispatcher.dispatch({
 			actionType: 'SEND_BOARD_COMMENT',

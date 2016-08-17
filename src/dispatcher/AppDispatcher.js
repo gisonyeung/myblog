@@ -95,6 +95,10 @@ AppDispatcher.register(function(action) {
 		case 'FETCH_BOARD_COMMENT':
 			BlogStore.fetchBoardComments(); 
 			break;
+		case 'FETCH_BOARD_COMMENT_MORE':
+			BlogStore.fetchBoardComments_more(); 
+			break;
+
 		case 'SEND_BOARD_COMMENT':
 			BlogStore.sendBoardComments(action.formData); 
 			break;

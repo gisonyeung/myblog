@@ -222,23 +222,80 @@ exports.blogComment = function(req, res) {
 };
 
 /*
-	请求留言板留言
+	请求留言板第一页留言
 */
 exports.boardComment = function(req, res) {
 
-	Comment.fetchBoardComment(function(err, comments) {
+	Comment.fetchBoardCommentByIndex(0, function(err, comments) {
 
 		if ( err ) {
 			return errorHandler(err, res);
 		}
+
+		if ( !comments.length ) {
+
+			return res.json({
+				result: 'success',
+				comments: [],
+				allCount: 0,
+			});
+
+		}
+
+		Comment.getCountByType('board', function(err, count) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+			return res.json({
+				result: 'success',
+				comments: comments || [], 
+				allCount: count,
+			})
+
+		});
  
-		return res.json({
-			result: 'success',
-			comments: comments || [], 
-		})
+		
 	});
  
 };
+
+/*
+	根据下标请求留言板从下标开始的留言
+*/
+exports.boardCommentMore = function(req, res) {
+
+	var index = parseInt(req.body.index);
+
+	// 不是合法数字
+	if ( /[^(0-9)]/.test(index) ) {
+		console.log('不合法');
+		return res.json({
+			result: 'error',
+			reason: '请求参数不合法',
+		});
+	}
+
+	Comment.fetchBoardCommentByIndex(index, function(err, comments) {
+
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		return res.json({
+			result: 'success',
+			comments: comments || [],
+		})
+ 
+		
+	});
+ 
+
+
+};
+
+
 
 
 
@@ -727,7 +784,7 @@ exports.addBlogLike = function(req, res) {
 
 
 function errorHandler(err, res) {
-	console.log(err);
+	console.log('blog.js: ' + err);
 	return res.json({
 		result: 'error',
 		reason: '数据库错误', 

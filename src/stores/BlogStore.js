@@ -41,6 +41,12 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 	boardComments: [],
 
+	boardComments_record: {
+		isOpen: true,
+		index: 0,
+		allCount: 0,
+	},
+
 	isFirstFetch_board: true,
 
 	getBlogsCount: function() {
@@ -257,11 +263,15 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 	fetchBoardComments: function() {
 
+		const that = this;
+
 		fetch(Api.boardComment)
 		.then(data => {
 			if ( data.result == 'success' ) {
 				this.isFirstFetch_board = false;
 				this.boardComments = data.comments;
+				this.boardComments_record.index = data.comments.length;
+				this.boardComments_record.allCount = data.allCount;
 				this.emitEvent('BOARD_COMMENT');
 			} 
 		})
@@ -270,6 +280,41 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 		});
 
 	},
+
+	getBoardRecord: function() {
+		return this.boardComments_record;
+	},
+
+	fetchBoardComments_more: function() {
+
+		const that = this;
+
+		if ( this.boardComments_record.isOpen ) {
+
+			// 在新请求结果返回前不允许再请求，防止连续点击
+			this.boardComments_record.isOpen = false;
+
+			fetch(Api.boardCommentMore, {
+				index: that.boardComments_record.index,
+			})
+			.then(data => {
+				if ( data.result == 'success' ) {
+					this.boardComments = this.boardComments.concat(data.comments);
+					this.boardComments_record.index += data.comments.length;
+					this.emitEvent('BOARD_COMMENT');
+				}
+				this.boardComments_record.isOpen = true;
+			})
+			.catch(err => {
+				console.log(err);
+				this.boardComments_record.isOpen = true;
+			});
+			
+		}
+
+	},
+
+
 
 
 

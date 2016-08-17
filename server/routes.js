@@ -334,6 +334,13 @@ module.exports = function(app) {
 	app.post('/boardComment', blog.boardComment);
 
 	/*
+		请求留言板留言
+	*/
+	app.post('/boardCommentMore', blog.boardCommentMore);
+
+
+
+	/*
 		发布留言板留言
 	*/
 	app.post('/addBoardComment', blog.addBoardComment);

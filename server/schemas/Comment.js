@@ -21,6 +21,7 @@ var CommentSchema = new mongoose.Schema({
 });
 
 var items_per_page = 50;
+var items_per_page_front = 30;
 
 CommentSchema.statics = {
 
@@ -81,11 +82,34 @@ CommentSchema.statics = {
 			.exec(callback);
 	},
 
+	fetchBoardCommentByIndex: function(index, callback) {
+		return this
+			.find({
+				type: 'board',
+			})
+			.sort({ 'time': -1 })
+			.skip(index)
+			.limit(items_per_page_front)
+			.exec(callback);
+	},
+
+
+
 	getCount: function(callback) {
 		return this
 			.count({})
 			.exec(callback);
 	},
+
+	getCountByType: function(type, callback) {
+		return this
+			.count({
+				type: type,
+			})
+			.exec(callback);
+	},
+
+
 
 	fetchByPage: function(page, callback) {
 		return this

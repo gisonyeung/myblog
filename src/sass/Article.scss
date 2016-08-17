@@ -339,6 +339,7 @@
 			background-color: #fff;
 			padding: 47px 45px 100px;
 			margin-bottom: 200px;
+
 			.panel-title {
 				
 				font-size: 22px;
@@ -348,6 +349,24 @@
 				.emoji {
 					color: #FAEA85;
 					margin: 0 5px;
+				}
+			}
+
+			.loadmore {
+				text-align: center;
+				margin-top: 10px;
+				padding: 5px 0;
+				font-size: 14px;
+				color: #999;
+
+
+				span {
+					cursor: pointer;
+					@include transition();
+
+					&:hover {
+						color: #888;
+					}
 				}
 			}
 		}
@@ -435,6 +454,9 @@
 					border-left: 3px solid #eee;
 					padding-left: 14px;
 					background-color: #f8f8f8;
+					word-break: break-all;
+					word-wrap: break-word;
+					white-space: pre-line;
 					blockquote {
 						margin-bottom: 0;
 					}
@@ -442,7 +464,9 @@
 						font-weight: bold;
 						padding-bottom: 7px;
 						word-wrap: normal;
-
+						word-break: break-all;
+						word-wrap: break-word;
+						white-space: pre-line;
 					}
 					p {
 						line-height: 20px;
@@ -460,6 +484,8 @@
 					padding-left: 14px;
 					background-color: #f8f8f8;
 					white-space: pre-wrap;
+					width: 100%;
+					overflow-x: auto;
 				}
 			}
 		}

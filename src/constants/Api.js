@@ -21,6 +21,7 @@ const Api = {
 	blogCountForYear: '/blogCountForYear',
 	siteYear: '/siteYear',
 	boardComment: '/boardComment',
+	boardCommentMore: '/boardCommentMore',
 	addBoardComment: '/addBoardComment',
 	subscribe: '/subscribe',
 	siteNum: '/siteNum',
