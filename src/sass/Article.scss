@@ -59,6 +59,18 @@
 	.content {
 		padding: 65px 45px 50px;
 		background-color: #fff;
+
+
+		.toComment {
+			margin-left: 19px;
+			display: none;
+		}
+
+		&:hover {
+			.toComment {
+				display: inline;
+			}
+		}
 	}
 	@at-root {
 		.atc-top {
@@ -97,17 +109,6 @@
 
 			}
 			
-			.toComment {
-				margin-left: 19px;
-				display: none;
-			}
-
-
-			&:hover {
-				.toComment {
-					display: inline;
-				}
-			}
 	}
 		/* 文本效果 */
 		.atc-content {
