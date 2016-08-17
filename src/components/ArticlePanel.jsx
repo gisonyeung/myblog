@@ -63,7 +63,6 @@ const ArticlePanel = React.createClass({
           category={this.state.blog.category || ''}
           content={this.state.blog.content || ''}
           tags={this.state.blog.tags || ''}
-          numbers={this.state.blog.numbers}
         />
         {
           this.state.blog.blogId != -1 ? 
