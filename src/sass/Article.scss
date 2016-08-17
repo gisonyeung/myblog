@@ -83,6 +83,7 @@
 				}
 
 				a {
+
 					color: #7594b3;
 					@include transition();
 					&:hover {
@@ -92,17 +93,22 @@
 
 				}
 
-				.toComment {
-					display: none;
-				}
+				
 
-				&:hover {
-					.toComment {
-						display: inline;
-					}
+			}
+			
+			.toComment {
+				margin-left: 19px;
+				display: none;
+			}
+
+
+			&:hover {
+				.toComment {
+					display: inline;
 				}
 			}
-		}
+	}
 		/* 文本效果 */
 		.atc-content {
 			font-size: 15px;
