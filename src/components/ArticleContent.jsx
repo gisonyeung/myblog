@@ -77,6 +77,7 @@ const ArticleContent = React.createClass({
                 <time>{dateFormat(this.props.updateAt, "YYYY-MM-DD hh:mm")}</time>
               </span>
               <Link to={`/archives?type=category&category=${this.props.category}`} title="分类">{this.props.category}</Link>
+              <a href="#comment" className="toComment">评论{this.props.numbers.comment ? '(' + this.props.number.comment + ')' : ''}</a>
             </div>
           }
         </div>

@@ -88,6 +88,18 @@
 					&:hover {
 						color: darken(#7594b3, 20%);
 					}
+
+
+				}
+
+				.toComment {
+					display: none;
+				}
+
+				&:hover {
+					.toComment {
+						display: inline;
+					}
 				}
 			}
 		}
