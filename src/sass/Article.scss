@@ -483,8 +483,8 @@
 					font-size: 12px;
 					background-color: #f8f8f8;
 					white-space: pre-wrap;
-					@include %IEBox;
 					overflow-x: auto;
+					@extend %IEBox;
 				}
 			}
 		}
