@@ -166,5 +166,5 @@ function replaceContent(str) {
 		})
 		// .replace(/<(\/?script)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
 		// .replace(/<(\/?br\/?)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
-		.replace(/(\n *)+/g, '\n');
+		.replace(/(\n\s*)+/g, '\n'); // 换行与空格去重
 }
