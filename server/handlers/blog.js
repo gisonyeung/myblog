@@ -269,7 +269,7 @@ exports.addBlogComment = function(req, res) {
 			result: 'error',
 			reason: '昵称不能为空',
 		});
-	} else if ( testEmpty(formData.email) ) {
+	} else if ( !/\S/.test(formData.email) ) {
 		return res.json({
 			result: 'error',
 			reason: '邮箱不能为空',
@@ -316,7 +316,7 @@ exports.addBlogComment = function(req, res) {
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
     */
-    if ( testEmpty(formData.website) ) {
+    if ( !/\S/.test(formData.website) ) {
 		formData.website = formData.website.replace(/^(https?:\/\/)?.*/, function(match, capture) {
 			// 有捕获组，已有前缀
 			if ( capture ) {
@@ -501,7 +501,7 @@ exports.addBoardComment = function(req, res) {
 			result: 'error',
 			reason: '昵称不能为空',
 		});
-	} else if ( testEmpty(formData.email) ) {
+	} else if ( !/\S/.test(formData.email) ) {
 		return res.json({
 			result: 'error',
 			reason: '邮箱不能为空',
@@ -548,7 +548,7 @@ exports.addBoardComment = function(req, res) {
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
     */
-    if ( testEmpty(formData.website) ) {
+    if ( !/\S/.test(formData.website) ) {
 		formData.website = formData.website.replace(/^(https?:\/\/)?.*/, function(match, capture) {
 			// 有捕获组，已有前缀
 			if ( capture ) {
