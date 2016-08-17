@@ -89,11 +89,11 @@ function replaceQuote(str) {
 
 			let content = '';
 
-			if( blockReg.test($2) ) {
-				content = replaceQuote($2);
-			} else {
+			// if( blockReg.test($2) ) {
+			// 	content = replaceQuote($2);
+			// } else {
 				content = replaceContent($2.replace(/<(\/?blockquote)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' }));
-			}
+			// }
 			//  else {
 			// 	content = $2.replace(/(.+)(?!>)\n/g, function(match, $1) {
 			// 		return '<p>' + $1 + '</p>';
