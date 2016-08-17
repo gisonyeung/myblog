@@ -3,7 +3,7 @@ var credentials = require('./credentials.js');
 
 var mailTransport = nodemailer.createTransport(credentials.mail.string);
 
-
+var myEmail = credentials.mail.user;
 
 
 
@@ -55,7 +55,7 @@ function commentNotice(opts) {
 	}
 
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '>',
 		to: opts.to,
 		subject: '杨子聪的个人博客',
 		html: getNoticeTemplate(opts.data),
@@ -67,7 +67,7 @@ function commentNotice(opts) {
 
 function commentNotice_myself(opts) {
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '>',
 		to: '442361125@qq.com',
 		subject: '个人博客有新留言',
 		html: getNoticeTemplate_myself(opts.data),
@@ -83,7 +83,7 @@ function boardNotice(opts) {
 	}
 
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '>',
 		to: opts.to,
 		subject: '杨子聪的个人博客',
 		html: getBoardTemplate(opts.data),
@@ -95,7 +95,7 @@ function boardNotice(opts) {
 
 function boardNotice_myself(opts) {
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '',
 		to: '442361125@qq.com',
 		subject: '个人博客有新留言',
 		html: getBoardTemplate_myself(opts.data),
@@ -115,7 +115,7 @@ function replyNotice(opts) {
 	}
 
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '>',
 		to: opts.to,
 		subject: '杨子聪的个人博客',
 		html: getReplyTemplate(opts.data),
@@ -128,7 +128,7 @@ function replyNotice(opts) {
 
 function replyNotice_myself(opts) {
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '>',
 		to: '442361125@qq.com',
 		subject: '行博有新留言',
 		html: getReplyTemplate_myself(opts.data),
@@ -146,7 +146,7 @@ function cancelSub(opts) {
 	}
 
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '>',
 		to: opts.to,
 		subject: '杨子聪的个人博客',
 		html: getCancelSubTemplate(opts.data),
@@ -164,7 +164,7 @@ function subNotice(opts) {
 	}
 
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '>',
 		to: opts.to,
 		subject: '杨子聪的个人博客',
 		html: getSubTemplate(opts.data),
@@ -177,7 +177,7 @@ function subNotice(opts) {
 
 function subNotice_myself(opts) {
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '>',
 		to: '442361125@qq.com',
 		subject: '博客有新订阅',
 		html: getSubTemplate_myself(opts.data),
@@ -194,7 +194,7 @@ function newBlogNotice(opts) {
 	}
 
 	mailTransport.sendMail({
-		from: '"杨子聪的个人博客" <yangzicong2008@163.com>',
+		from: '"杨子聪的个人博客" <' + myEmail + '>',
 		to: opts.to,
 		subject: '杨子聪的个人博客',
 		html: getBlogTemplate(opts.data),
