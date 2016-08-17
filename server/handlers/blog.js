@@ -668,7 +668,6 @@ exports.addBoardComment = function(req, res) {
 		// 如果有引用人，则发送评论通知
 		if( /<blockquote>[\s\S]*<pre>/.test(formData.content) && quoteData.email ) {
 			opts.data.replyFrom.comment = opts.data.replyFrom.comment.replace(/<blockquote>[\s\S]*<\/blockquote>/, '');
-			console.log(quoteData);
 			mail.boardNotice(opts);
 		}
 
