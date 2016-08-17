@@ -166,5 +166,5 @@ function replaceContent(str) {
 		})
 		// .replace(/<(\/?script)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
 		// .replace(/<(\/?br\/?)>/g, function(match, $1) { return '&lt;' + $1 + '&gt;' })
-		.replace(/\n+/g, '\n');
+		.replace(/(\n *)+/g, '\n');
 }
