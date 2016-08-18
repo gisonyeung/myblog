@@ -303,6 +303,22 @@ body {
 }
 
 
+.icp {
+	text-align: center;
+	font-size: 12px;
+	padding: 10px 0;
+	color: #d0d0d0;
+
+	a {
+		color: #d0d0d0;
+		@include transition();
+
+		&:hover {
+			color: #aaa;
+		}
+	}
+}
+
 
 
 
