@@ -179,7 +179,7 @@ module.exports = function(app) {
 
 		var reqPath = req._parsedUrl.path;
 
-		if ( reqPath == '/' || /(^\/article)|(^\/mylife)|(^\/book$)|(^\/board)|(^\/about)|(^\/unsubscribe)/.test(reqPath) ) {
+		if ( reqPath == '/' || '/?page=1' || /(^\/article)|(^\/mylife)|(^\/book$)|(^\/board)|(^\/about)|(^\/unsubscribe)/.test(reqPath) ) {
 			// 增加站点访问量
 			site.addSiteView(req);
 			
