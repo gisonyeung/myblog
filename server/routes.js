@@ -181,7 +181,7 @@ module.exports = function(app) {
 
 		if ( reqPath == '/' || /(^\/article)|(^\/mylife)|(^\/book$)|(^\/board)|(^\/about)|(^\/unsubscribe)/.test(reqPath) ) {
 			// 增加站点访问量
-			site.addSiteView();
+			site.addSiteView(req);
 			
 		}
 

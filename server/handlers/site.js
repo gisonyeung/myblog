@@ -13,6 +13,10 @@ var mail = require('../sendEmail.js');
 /* 日期格式化 */
 var dateFormat = require('../utils/dateFormat.js');
 
+/* 获取客户端IP */
+var getClientIp = require('../utils/getClientIp.js');
+
+
 /*
 	订阅博客
 */
@@ -307,7 +311,7 @@ Site.findByBranch(branchName, function(err, siteData) {
 /*
 	增加站点访问量
 */
-exports.addSiteView = function() {
+exports.addSiteView = function(req) {
 
 	Site.findByBranch(branchName, function(err, siteData) {
 
@@ -330,7 +334,9 @@ exports.addSiteView = function() {
 				return false;
 			}
 
-			console.log('站点访问+1，现访问量：' + siteData.view);
+
+
+			console.log(getClientIp(req) + '：站点访问+1，现访问量：' + siteData.view);
 		});
 
 	});
