@@ -10,6 +10,10 @@ module.exports = function getClientIp(req) {
 		address = '未知IP';
 	}
 
+	if ( !address ) {
+		address = '未知IP';
+	}
+
 
     return address.replace('::ffff:', '');
 };
