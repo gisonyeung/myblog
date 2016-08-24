@@ -1580,6 +1580,10 @@ exports.editBlog = function(req, res) {
 		blog.content = formData.content;
 		blog.category = formData.category;
 		blog.tags = formData.tags;
+		blog.time.updateAt = Date.now();
+
+		blog.markModified('time');
+
 
 		blog.save(function(err) {
 

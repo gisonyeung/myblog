@@ -37,7 +37,7 @@ BlogSchema.pre('save', function(next) {
 		this.numbers.comment = 0;
 		this.isShow = true;
 	} else {
-		this.time.updateAt = Date.now();
+		// this.time.updateAt = Date.now();
 	}
 	next();
 });

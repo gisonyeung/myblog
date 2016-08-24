@@ -5,7 +5,8 @@ module.exports = function getClientIp(req) {
 	try {
 		address = req.headers['x-forwarded-for'] ||
 		    req.connection.remoteAddress ||
-		    req.socket.remoteAddress;
+		    req.socket.remoteAddress ||
+		    req.connection.socket.remoteAddress;
 	} catch(e) {
 		address = '未知IP';
 	}

@@ -313,6 +313,13 @@ Site.findByBranch(branchName, function(err, siteData) {
 */
 exports.addSiteView = function(req) {
 
+	var ip = getClientIp(req);
+
+	if ( /未知/.test(ip) ) {
+		console.log(ip + '访问');
+		return false;
+	}
+
 	Site.findByBranch(branchName, function(err, siteData) {
 
 		if ( err ) {
@@ -336,7 +343,7 @@ exports.addSiteView = function(req) {
 
 
 
-			console.log(getClientIp(req) + '：站点访问+1，现访问量：' + siteData.view);
+			console.log(ip + '：站点访问+1，现访问量：' + siteData.view);
 		});
 
 	});
