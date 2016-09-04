@@ -144,7 +144,7 @@ exports.deleteComment = function(req, res) {
 
 		if ( comment.host != -1 ) {
 
-			Blog.findByBlogId(comment.host, function(err, blog) {
+			WalkingBlog.findByBlogId(comment.host, function(err, blog) {
 
 				if ( err ) {
 					return errorHandler(err, res);
