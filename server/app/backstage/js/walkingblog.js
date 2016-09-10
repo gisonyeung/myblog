@@ -206,7 +206,7 @@ $(function() {
 			},
 			tags: walkingblog[3].innerText,
 			photo: $(walkingblog[4]).attr('title'),
-			content: walkingblog[5].innerText,
+			content: walkingblog[5].innerHTML,
 			numbers: walkingblog[6].innerText,
 			status: walkingblog[7].innerText,
 		}

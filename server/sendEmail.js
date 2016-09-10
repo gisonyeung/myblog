@@ -210,7 +210,7 @@ function newBlogNotice(opts) {
 
 
 
-var url_home = 'http://www.twopointhole.com';
+var url_home = 'http://www.yangzicong.com';
 
 var tpl_header = '<table class="title-box" style="border:0;padding:0;margin:0;width:100%"><tbody><tr><td style="vertical-align:top;background-color:#24292c;color:#fff;padding-top:10px;padding-bottom:10px;" width="100%"><h1 style="margin:0;padding-bottom:6px;padding-left:20px;"><a style="color:#fff;font-size:18px;font-family:Microsoft Yahei, Helvetica, sans-serif;font-weight:normal;text-decoration:none;" href="' + url_home + '" title="(' + url_home + ')" target="_blank">杨子聪的个人博客</a></h1></td></tr></tbody></table>'
 

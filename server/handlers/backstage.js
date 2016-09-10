@@ -407,6 +407,7 @@ var dataDir = './server/app';
 var walkingblogDir = dataDir + '/walkingblog';
 fs.existsSync(dataDir) || fs.mkdirSync(dataDir);
 fs.existsSync(walkingblogDir) || fs.mkdirSync(walkingblogDir);
+fs.existsSync('./server/app/tmp') || fs.mkdirSync('./server/app/tmp');
 
 /*
 	发布行博
@@ -414,7 +415,7 @@ fs.existsSync(walkingblogDir) || fs.mkdirSync(walkingblogDir);
 exports.addWalkingblog = function(req, res) {
 
 	if ( !checkSession(req) ) {
-		
+
 		return unlogin(res);
 
 	}
