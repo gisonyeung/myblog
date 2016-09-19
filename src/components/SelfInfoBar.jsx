@@ -56,11 +56,11 @@ const SelfInfoBar = React.createClass({
           </li>
           <li>
             <span className="icon icon-disc"></span>
-            Github
+            <a href="javascript:;">微博</a>
           </li>
           <li>
             <span className="icon icon-disc"></span>
-            Lofter
+            <a href="javascript:;">Lofter</a>
           </li>
         </ul>
         <ReactCSSTransitionGroup

@@ -77,7 +77,7 @@ const AboutPanel = React.createClass({
                       、
                       <a href="https://gisonyeung.github.io/xlqy/index.html" target="_blank">《仙侣奇缘2》游戏私服官网</a>
                       、
-                      <a href="http://ftindustry.com/index" target="_blank">夫天官网</a>
+                      <a href="http://www.ftindustry.com/index" target="_blank">夫天官网</a>
                       、ESMS延锋 WebApp开发、中国邮政 WebApp开发、Envision远景 WebApp开发 等
                     </p>
                     <p>

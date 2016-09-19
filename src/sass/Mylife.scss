@@ -299,10 +299,6 @@
 		.name {
 			color: $nameColor;
 			@include transition();
-
-			&:hover {
-				text-decoration: underline;
-			}
 		}
 
 		.grey {
@@ -311,7 +307,9 @@
 		}
 
 		a {
-
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 
 	}
