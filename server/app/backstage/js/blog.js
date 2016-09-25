@@ -583,8 +583,7 @@ $(function() {
 		var content = $(selector).val();
 		$('#calHeight').text(content);
 		var height = $('#calHeight').height();
-		console.log(height);
-		$(selector).css('min-height', (height + 200) + 'px' );
+		$(selector).css('min-height', (height + 500) + 'px' );
 
 	};
 
