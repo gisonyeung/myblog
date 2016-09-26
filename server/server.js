@@ -16,8 +16,8 @@ app.use(webpackDevMiddleware(compiler, {
 	stats: { colors: true } ,
 }));
 app.use(webpackHotMiddleware(compiler));
-app.use(bodyParser.json()); 
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.json({limit: '50mb'})); 
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); 
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -45,7 +45,7 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.use(express.limit(100000000));
+// app.use(express.limit(100000000));
 
 
 // 路由
