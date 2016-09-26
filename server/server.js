@@ -45,6 +45,8 @@ app.use(function(req, res, next) {
 	next();
 });
 
+app.use(express.limit(100000000));
+
 
 // 路由
 require('./routes.js')(app);
