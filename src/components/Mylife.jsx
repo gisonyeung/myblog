@@ -13,6 +13,8 @@ const  Mylife = React.createClass({
   getInitialState() {
 
     return {
+      isLoadMoreShow: false,
+      record: WalkingBlogStore.getBlogRecord(),
       blogs: WalkingBlogStore.getBlogList(),
     };
 
@@ -28,11 +30,20 @@ const  Mylife = React.createClass({
 
   updateBlogs() {
     this.setState({
+      isLoadMoreShow: true,
+      record: WalkingBlogStore.getBlogRecord(),
       blogs: WalkingBlogStore.getBlogList(),
     });
   },
 
+  // 点击按钮，则先隐藏按钮，并发出请求
+  loadMoreComments() {
 
+    WalkingBlogAction.fetchBlogs_more();
+    this.setState({
+      isLoadMoreShow: false,
+    });
+  },
 
 
   render() {
@@ -67,6 +78,15 @@ const  Mylife = React.createClass({
               })
             }
           </ReactCSSTransitionGroup>
+          {
+              this.state.record.index == this.state.record.allCount || !this.state.isLoadMoreShow ? 
+              ""
+              :
+              <p 
+                className="loadmore"
+                onClick={this.loadMoreComments}
+              ><span>加载更多</span><span className="icon icon-loadmore"></span></p>
+            }
         </div>
       </div>
     )

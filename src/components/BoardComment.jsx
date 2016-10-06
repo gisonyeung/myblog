@@ -86,7 +86,7 @@ const BoardComment = React.createClass({
               <p 
                 className="loadmore"
                 onClick={this.loadMoreComments}
-              ><span>加载更多🔽</span></p>
+              ><span>加载更多</span>s<span className="icon icon-loadmor"></span></p>
             }
             
           </div>

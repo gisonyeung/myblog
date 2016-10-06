@@ -44,6 +44,12 @@ const WalkingBlogStore = assign({}, EventEmitter.prototype, {
 		time: '2016-08-20',
 	},
 
+	blogs_record: {
+		isOpen: true,
+		index: 0,
+		allCount: 0,
+	},
+
 	getBlogList: function() {
 
 		if ( this.isFirstFetch ) {
@@ -55,22 +61,54 @@ const WalkingBlogStore = assign({}, EventEmitter.prototype, {
 
 	fetchBlogList: function() {
 
-		let beginIndex = this.beginIndex;
-
-		fetch(Api.walkingBlog, {
-			beginIndex: beginIndex
-		})
+		fetch(Api.walkingBlog)
 		.then(data => {
 			if( data.result == 'success' ) {
-				this.blogs = data.blogs;
-				this.emitEvent('BLOG_LIST');
 				this.isFirstFetch = false;
+				this.blogs = data.blogs;
+				this.blogs_record.index = data.blogs.length;
+				this.blogs_record.allCount = data.allCount;
+				this.emitEvent('BLOG_LIST');
 			}
 		})
 		.catch(err => {
 			console.log(err);
 		});
 	},
+
+	getBlogRecord: function() {
+		return this.blogs_record;
+	},
+
+	fetchBlogs_more: function() {
+
+		const that = this;
+
+		if ( this.blogs_record.isOpen ) {
+
+			// 在新请求结果返回前不允许再请求，防止连续点击
+			this.blogs_record.isOpen = false;
+
+			fetch(Api.walkingBlogMore, {
+				index: that.blogs_record.index,
+			})
+			.then(data => {
+				if ( data.result == 'success' ) {
+					this.blogs = this.blogs.concat(data.blogs);
+					this.blogs_record.index += data.blogs.length;
+					this.emitEvent('BLOG_LIST');
+				}
+				this.blogs_record.isOpen = true;
+			})
+			.catch(err => {
+				console.log(err);
+				this.blogs_record.isOpen = true;
+			});
+			
+		}
+
+	},
+
 
 	getBlogDetail: function() {
 		return this.blog;

@@ -8,6 +8,7 @@ const Api = {
 	addBlogComment: '/addBlogComment',
 	addBlogLike: '/addBlogLike',
 	walkingBlog: '/walkingBlog',
+	walkingBlogMore: '/walkingBlogMore',
 	walkingBlogDetail: '/walkingBlogDetail',
 	walkingBlogComment: '/walkingBlogComment',
 	addWalkingBlogComment: '/addWalkingBlogComment',

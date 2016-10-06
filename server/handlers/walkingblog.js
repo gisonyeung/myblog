@@ -21,9 +21,57 @@ var testEmpty = require('../utils/testEmpty.js');
 */
 exports.blogList = function(req, res) {
 
-	var beginIndex = req.body.beginIndex;
+	WalkingBlog.fetchByIndex(0, function(err, blogs) {
 
-	WalkingBlog.fetchByIndex(beginIndex, function(err, blogs) {
+		if ( err ) {
+			return errorHandler(err, res);
+		}
+
+		if ( !blogs.length ) {
+
+			return res.json({
+				result: 'success',
+				blogs: [],
+				allCount: 0,
+			});
+
+		}
+
+		WalkingBlog.getCount(function(err, count) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+			return res.json({
+				result: 'success',
+				blogs: blogs || [], 
+				allCount: count,
+			})
+
+		});
+
+	});
+
+};
+
+/*
+	根据下标请求从下标开始的行博列表
+*/
+exports.blogListMore = function(req, res) {
+
+	var index = parseInt(req.body.index);
+
+	// 不是合法数字
+	if ( /[^(0-9)]/.test(index) ) {
+		console.log('不合法');
+		return res.json({
+			result: 'error',
+			reason: '请求参数不合法',
+		});
+	}
+
+	WalkingBlog.fetchByIndex(index, function(err, blogs) {
 
 		if ( err ) {
 			return errorHandler(err, res);
@@ -31,12 +79,16 @@ exports.blogList = function(req, res) {
 
 		return res.json({
 			result: 'success',
-			blogs: blogs,
-		});
-
+			blogs: blogs || [],
+		})
+ 
+		
 	});
+ 
 
 };
+
+
 
 /*
 	请求行博详情

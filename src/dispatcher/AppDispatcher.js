@@ -43,6 +43,9 @@ AppDispatcher.register(function(action) {
 		case 'FETCH_WALKINGBLOGS':
 			WalkingBlogStore.fetchBlogList(); 
 			break;
+		case 'FETCH_WALKINGBLOGS_MORE':
+			WalkingBlogStore.fetchBlogs_more(); 
+			break;
 		case 'FETCH_WALKINGBLOG_DETAIL':
 			WalkingBlogStore.fetchBlogDetail(action.blogId); 
 			break;
@@ -98,7 +101,6 @@ AppDispatcher.register(function(action) {
 		case 'FETCH_BOARD_COMMENT_MORE':
 			BlogStore.fetchBoardComments_more(); 
 			break;
-
 		case 'SEND_BOARD_COMMENT':
 			BlogStore.sendBoardComments(action.formData); 
 			break;

@@ -678,6 +678,16 @@ $topMove: 40px;
 }
 
 
+.icon-loadmore {
+	@include bgsize(9px, 9px);
+	@include bgimg('../img/icon-loadmore.png');	
+}
+
+
+
+
+
+
 
 
 

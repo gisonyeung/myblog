@@ -53,7 +53,7 @@ WalkingBlogSchema.statics = {
 		return this
 			.find({ isShow: true })
 			.sort({'time.createAt': -1})
-			.skip(index - 1)
+			.skip(index)
 			.limit(items_per_time)
 			.exec(callback);
 	},

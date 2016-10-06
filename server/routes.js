@@ -250,6 +250,13 @@ module.exports = function(app) {
 	app.post('/walkingBlog', walkingblog.blogList);
 
 	/*
+		请求行博列表
+	*/
+	app.post('/walkingBlogMore', walkingblog.blogListMore);
+
+
+
+	/*
 		请求行博详情
 	*/
 	app.post('/walkingBlogDetail', walkingblog.blogDetail);

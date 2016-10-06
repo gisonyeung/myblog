@@ -263,8 +263,6 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 	fetchBoardComments: function() {
 
-		const that = this;
-
 		fetch(Api.boardComment)
 		.then(data => {
 			if ( data.result == 'success' ) {

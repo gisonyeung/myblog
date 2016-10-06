@@ -8,6 +8,12 @@ const WalkingBlogAction = {
 		});
 	},
 
+	fetchBlogs_more() {
+		AppDispatcher.dispatch({
+			actionType: 'FETCH_WALKINGBLOGS_MORE',
+		});
+	},
+
 	fetchBlogDetail(blogId) {
 		AppDispatcher.dispatch({
 			actionType: 'FETCH_WALKINGBLOG_DETAIL',
