@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选择排序</title>
+	<link rel="stylesheet" href="../../css/prism.css">
+	<link rel="stylesheet" href="../../css/algorithms-demos.css">
+</head>
+<body>
+	<div class="header">
+		<ul class="nav">
+			<li><a href="#code" class="tab-item active">Code</a></li>
+			<li><a href="#analysis" class="tab-item">Analysis</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-panel" id="panel-code">
+<pre class="line-numbers">
+<code class="language-js">/*
+	选择排序
+	@description 
+		选择排序需要两轮循环，从第一个元素开始迭代，每次循环依次
+		在当前元素以后的待排元素中找到最大或最小值并与当前元素进
+		行值交换。 
+	@param { Array } SomeArray 一个可排序的数组
+	@param { Boolean } desc 是否降序，默认值为 false
+	@return { Array } 返回排序后的数组
+*/
+function SelectionSort(SomeArray, desc) {
+	var i, j, flag, t;
+	var n = SomeArray.length;
+
+	// desc 默认值
+	desc = desc ? true : false;
+
+	// 遍历至倒数第 2 个元素
+	for(i = 0; i < n - 1; i++) {
+		// 保存当前元素的位置下标
+		flag = i;
+
+		// 从当前元素的下一位置开始扫描，找到最值下标。
+		for(j = i + 1; j < n; j++) {
+			// 根据传入的 desc 决定降序或升序
+			if ( (SomeArray[j] > SomeArray[flag]) === desc ) {
+				flag = j;
+			}
+		}
+
+		// 将当前元素与最值元素进行值交换
+		t = SomeArray[i];
+		SomeArray[i] = SomeArray[flag];
+		SomeArray[flag] = t;
+	}
+	
+	return SomeArray;
+}
+</code>
+</pre>
+			</div>
+			<div class="tab-panel" id="panel-analysis">
+				<div class="section">
+					<h2 class="title">测试输入</h2>
+					<div class="s-cont">
+						<p class="label">输入：</p>
+						<textarea id="test-input" class="form-control" rows="3" placeholder="输入一个以逗号分隔的待排数列，如 '1,2,3' 或 '[1,2,3]' …"></textarea>
+						<button class="btn btn-default" id="submit">提交</button>
+					</div>
+				</div>
+				<div class="section">
+					<h2 class="title">测试结果</h2>
+					<div class="s-cont">
+						<p class="label">输入：</p>
+						<p class="value" id="result-input">-</p>
+						<p class="label">输出：</p>
+						<p class="value" id="result-output">-</p>
+						<p class="label">用时（非严格测试）：</p>
+						<p class="value" id="result-time">-</p>
+					</div>
+				</div>
+				<div class="section">
+					<h2 class="title">效率分析</h2>
+					<div class="s-cont ">
+						<p class="text">对于选择排序的分析是很简单的。输入的规模由元素的个数<b>n</b>决定，基本操作是键值比较<b>SomeArray[j] < SomeArray[min]</b>（上例代码还多了一个<b>desc</b>的判断），这个比较的执行次数仅仅依赖于数组的规模。</p>
+						<p class="text">求和公式：<b>C(n) = ((n-1) * n)/2</b>。</p>
+						<p class="text">对于任何输入来说，选择排序都是一个<b>Θ(n²)</b>的算法。然而，键的交换次数仅为<b>Θ(n)</b>。这个特性使得选择排序优于很多其他的排序算法。</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../../js/jquery-1.9.1.min.js"></script>
+	<script src="../../js/prism.js"></script>
+	<script src="../../js/algorithms-demos.js"></script>
+	<script>
+		$('#submit').on('click', function() {
+
+			var _text = $('#test-input').val()
+				.replace(/[\n\t\s]/g, '')
+				.replace(/，/g, ',')
+				.replace(/,+/g, ',')
+				.replace(/^,|,$/g, '')
+				.replace(/[\[\]]/g, '')
+			
+			if ( !_text ) {
+				$('#test-input').focus();
+				return false;
+			}
+
+			var input_array = _text.split(',');
+
+			run(input_array);
+
+		});
+
+		function run(input_array) {
+
+			var oldArray_str = '[' + input_array.join(', ') + ']';
+			var start_time, run_time;
+
+			start_time = Date.now();
+			SelectionSort(input_array);
+			run_time = Date.now() - start_time;
+
+			var newArray_str = '[' + input_array.join(', ') + ']';
+
+			printResult(oldArray_str, newArray_str, run_time);
+
+
+		}
+
+		function SelectionSort(SomeArray) {
+			var i, j, flag, t;
+			var n = SomeArray.length;
+
+			// 遍历至倒数第 2 个元素
+			for(i = 0; i < n - 1; i++) {
+				// 保存当前元素的位置下标
+				flag = i;
+
+				// 从当前元素的下一位置开始扫描，找到最值下标。
+				for(j = i + 1; j < n; j++) {
+					// 根据传入的 desc 决定降序或升序
+					if ( SomeArray[j] > SomeArray[flag] ) {
+						flag = j;
+					}
+				}
+
+				// 将当前元素与最值元素进行值交换
+				t = SomeArray[i];
+				SomeArray[i] = SomeArray[flag];
+				SomeArray[flag] = t;
+			}
+			
+			return SomeArray;
+		}
+
+		function printResult(inputStr, outputStr, time) {
+			time = time + 'ms';
+
+			$('#result-input').text(inputStr);
+			$('#result-output').text(outputStr);
+			$('#result-time').text(time);
+		} 
+	</script>
+</body>
+</html>

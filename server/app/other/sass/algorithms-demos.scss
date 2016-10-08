@@ -1,0 +1,223 @@
+@charset "utf-8";
+@mixin transition($obj: all, $time: 0.2s, $type: ease-out) {
+	transition: $obj $time $type;
+	-moz-transition: $obj $time $type;	
+	-webkit-transition: $obj $time $type;	
+	-o-transition: $obj $time $type;
+}
+@mixin transitionProperty($obj) {
+	transition-property: $obj;
+	-moz-transition-property: $obj;	
+	-webkit-transition-property: $obj;	
+	-o-transition-property: $obj;
+}
+
+@mixin bgsize($width, $height) {
+	display: inline-block;
+	height: 0;
+	width: $width;
+	padding-top: $height;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+%IEBox {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+@mixin bgimg($url) {
+	background: url($url) transparent no-repeat center top;
+}
+
+@mixin transform($code) {
+	transform: $code;
+    -webkit-transform: $code;
+    -moz-transform: $code;
+    -o-transform: $code;
+    -ms-transform: $code;
+}
+
+@mixin transform-origin($code) {
+	transform-origin: $code;
+	-ms-transform-origin: $code;
+	-o-transform-origin: $code;
+	-webkit-transform-origin: $code;
+	-moz-transform-origin: $code;
+}
+
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Lato, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+body {
+	
+}
+
+input, button, textarea {
+	outline: none;
+}
+
+
+ul, ol {
+	list-style-type: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+$blue: #006cee;
+$purple: #3A3A4F;
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(57,70,78,.2);
+    height: 52px;
+    z-index: 13;
+}
+
+.nav {
+	
+	li {
+		display: inline-block;
+
+		a {
+			display: inline-block;
+		    padding: 0 20px;
+		    height: 50px;
+		    line-height: 50px;
+		    color: #555;
+		    text-transform: capitalize;
+		    border-bottom: 2px solid #fff;
+		    @include transition();
+
+		    &.active {
+		    	border-bottom-color: #006cee;
+		    }
+		}
+	}
+}
+
+.tab-content {
+	height: 460px;
+	overflow: auto;
+}
+
+.tab-panel {
+	display: none;
+
+	.section {
+		.title {
+			margin-top: 20px;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 0 15px;
+			color:  $purple;
+			border-left: 5px solid $purple;
+			border-radius: 4px;
+		}	
+
+		.s-cont {
+			margin-top: 10px;
+			font-size: 14px;
+		}
+
+		.label {
+			color: #666;
+			margin-bottom: 5px;
+		}
+
+		.value {
+			color: #e91e63;
+			margin-bottom: 5px;
+			margin-left: 2em;
+		}
+
+		.text {
+			text-indent: 2em;
+			color: #333;
+			margin-bottom: 5px;
+			line-height: 23px;
+		}
+
+		b {
+			display: inline-block;
+			margin: 0 2px;
+			padding: 0 5px;
+			background-color: #eee;
+			font-weight: 400;
+			text-indent: 0;
+		}
+
+		.form-control {
+			@extend %IEBox;
+			display: block;
+			margin-bottom: 5px;
+			width: 100%;
+			padding: 8px 10px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			font-size: 14px;
+			font-family: inherit;
+			@include transition();
+
+			&:focus {
+				border-color: $purple;
+			}
+		}
+
+		.btn {
+			display: inline-block;
+			margin-top: 5px;
+			padding: 7px 30px;
+			font-size: 13px;
+			font-family: inherit;
+			color: #fff;
+			border: 1px solid darken($blue, 10%);
+			border-radius: 2px;
+			background-color: $blue;
+			cursor: pointer;
+			@include transition();
+
+			&:hover {
+				border: 1px solid $blue;
+				background-color: lighten($blue, 5%);
+			}
+
+			&:active {
+				border: 1px solid darken($blue, 10%);
+				background-color: darken($blue, 5%);
+			}
+		}
+	}
+
+}
+
+pre[class*="language-"] {
+	margin: 0;
+	background-color: #eee;
+	font-size: 14px;
+}
+
+pre.line-numbers {
+	padding-left: 3em;
+}
+
+.line-numbers .line-numbers-rows {
+	border-right: 0;
+	left: -3.5em;
+}
+
+.tab-content::-webkit-scrollbar{width:6px;}
+.tab-content::-webkit-scrollbar-track{background-color:#eee;}
+.tab-content::-webkit-scrollbar-thumb{background-color:#ddd;}

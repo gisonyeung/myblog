@@ -1,0 +1,302 @@
+@charset "utf-8";
+@mixin transition($obj: all, $time: 0.2s, $type: ease-out) {
+	transition: $obj $time $type;
+	-moz-transition: $obj $time $type;	
+	-webkit-transition: $obj $time $type;	
+	-o-transition: $obj $time $type;
+}
+@mixin transitionProperty($obj) {
+	transition-property: $obj;
+	-moz-transition-property: $obj;	
+	-webkit-transition-property: $obj;	
+	-o-transition-property: $obj;
+}
+
+@mixin bgsize($width, $height) {
+	display: inline-block;
+	height: 0;
+	width: $width;
+	padding-top: $height;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+%IEBox {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+@mixin bgimg($url) {
+	background: url($url) transparent no-repeat center top;
+}
+
+@mixin transform($code) {
+	transform: $code;
+    -webkit-transform: $code;
+    -moz-transform: $code;
+    -o-transform: $code;
+    -ms-transform: $code;
+}
+
+@mixin transform-origin($code) {
+	transform-origin: $code;
+	-ms-transform-origin: $code;
+	-o-transform-origin: $code;
+	-webkit-transform-origin: $code;
+	-moz-transform-origin: $code;
+}
+
+$backColor: #3A3A4F;
+
+body {
+	width: 100%;
+	min-width: auto;
+	background-color: $backColor;
+}
+
+#main {
+	background-color: #eee;
+}
+
+.demo-header {
+	color: #eee;
+	background-color: $backColor;
+
+	.title {
+		margin-left: 25%;
+		padding: 30px 25px;
+		font-size: 23px;
+	}
+
+}
+
+.demo-content {
+	position: relative;
+	
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+	
+
+	.filterinput {
+		display: block;
+		margin: 0 0 15px 15px;
+		padding: 7px 20px;
+		width: 90%;
+		max-width: 300px;
+		background-color: transparent;
+		border: 1px solid #a9a5bf;
+		border-radius: 20px;
+		color: #fff;
+	}
+
+	.demo-item {
+		position: relative;
+		
+		&.active {
+		    background-color: #8f85e8!important;
+    		color: #fff!important;
+
+    		&:after {
+			    content: '';
+			    width: 0;
+			    height: 0;
+			    position: absolute;
+			    right: 0;
+			    top: 7px;
+			    border-top: 10px solid transparent;
+			    border-bottom: 10px solid transparent;
+			    border-right: 10px solid #eee;
+    			z-index: 1;
+    		}
+		}
+	}
+	
+	.sidebar-fill {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 25%;
+		height: 100%;
+		background-color: $backColor;
+		z-index: 0;
+	}
+
+}
+
+.sidebar-wrapper {
+	float: left;
+	width: 25%;
+	box-shadow: none;
+	background-color: $backColor;
+}
+
+.demo-contanier {
+	float: left;
+	width: 75%;
+	
+
+	.demo {
+		padding: 40px 90px;
+		background-color: #eee;
+	}
+}
+
+.frame-wrapper {
+	background-color: #fff;
+	padding: 0 10px 10px;
+	box-shadow: 0 3px 4px #ddd; 
+
+	iframe {
+		width: 100%;
+		height: 510px;
+	}
+
+}
+
+.copyright {
+	padding: 15px 0;
+	color: #aaa;
+	font-size: 12px;
+	text-align: center;
+
+	a {
+		color: #aaa;
+
+		&:hover {
+			color: #90ef7f;
+		}
+	}
+}
+
+.menu-header {
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+	$navH_sm: 50px;
+
+	#nav {
+		
+		height: $navH_sm;
+
+		.brand {
+			display: none;
+		}
+
+		.nav-list {
+			a {
+				line-height: $navH_sm;
+				height: $navH_sm;
+				padding: 0 10px;
+
+				&:first-child {
+					margin-left: 20px;
+				}
+			}
+		}
+	}
+
+	#main {
+		position: relative;
+		margin-top: $navH_sm;
+		width: 100%;
+		overflow-x: hidden;
+
+		&.toggle {
+			#menu {
+				visibility: visible;
+			}
+
+			.menu-header,
+			.demo-header,
+			.demo-contanier {
+				@include transform(translate3d(70%, 0px, 0));
+			}
+		}
+	}
+
+	.sidebar-fill {
+		display: none;
+	}
+
+	#menu {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 70%;
+		z-index: 8;
+		visibility: hidden;
+		@include transition($time: 0.5s);
+
+		#form {
+			padding-top: 20px;
+		} 
+
+	}
+
+	.menu-header,
+	.demo-header,
+	.demo-contanier {
+		position: relative;
+		z-index: 11;
+		@include transition($time: 0.5s);
+	}
+
+	.menu-header {
+		display: block;
+		padding: 15px 0;
+		background-color: $backColor;
+		#open-menu {
+			display: inline-block;
+			font-size: 14px;
+			color: #fff;
+			margin-left: 10px;
+		}
+
+		.close {
+			display: none;
+		}
+	}
+
+	.demo-content {
+		position: static;
+
+		.demo-item.active:after {
+			content: '';
+			display: none;
+		}
+	}
+
+	.demo-header {
+		position: relative;
+		background-color: #eee;
+		color: #47475c;
+		text-align: center;
+
+		.title {
+			margin-left: 0;
+			padding: 30px 0 25px;
+			font-weight: 500;
+			font-size: 20px;
+		}
+
+	}
+
+	.demo-contanier {
+		width: 100%;
+		
+		.demo {
+			padding: 10px 0 40px;
+		}
+
+	}
+
+
+}
