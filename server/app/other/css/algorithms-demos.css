@@ -48,6 +48,7 @@ a {
 
 .tab-content {
   height: 460px;
+  padding-right: 10px;
   overflow: auto; }
 
 .tab-panel {
