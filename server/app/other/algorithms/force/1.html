@@ -113,6 +113,10 @@ function SelectionSort(SomeArray, desc) {
 
 		function run(input_array) {
 
+			input_array.forEach(function (value, i) {
+				input_array[i] = Number(input_array[i]);
+			});
+
 			var oldArray_str = '[' + input_array.join(', ') + ']';
 			var start_time, run_time;
 

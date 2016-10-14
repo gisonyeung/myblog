@@ -686,7 +686,7 @@ function GlobalModule() {
 
 	function dateFormat(dateString, fmt) {
 
-		let _Date = new Date(dateString);
+		var _Date = new Date(dateString);
 
 	    var o = {
 	        "M+": _Date.getMonth() + 1, //月份 
