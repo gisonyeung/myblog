@@ -1398,6 +1398,9 @@ exports.addBlog = function(req, res) {
 
 				});
 
+				i = undefined;
+				perMailTime = undefined;
+
 			});
 
 
