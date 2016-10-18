@@ -230,13 +230,6 @@ exports.addBlogComment = function(req, res) {
 			result: 'error',
 			reason: '个人网站过长',
 		});
-	} else if ( typeof(quoteData) !== 'object' ) {
-		quoteData = {
-			nickname: '',
-			email: '',
-			website: '',
-			content: '',
-		};
 	}
 
 	/*

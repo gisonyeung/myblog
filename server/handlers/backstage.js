@@ -1367,25 +1367,34 @@ exports.addBlog = function(req, res) {
 					return false;
 				}
 
+				var i = 0,
+					perMailTime = 400; // 每封email的发送间隔时间
+
 
 				_.map(members, function(member) {
 
-					var opts = {
-						to: member.email,
-						data: {
-							currentTime: dateFormat(Date.now(), 'YYYY-MM-DD hh:mm:ss'),
-							nickname: member.nickname,
-							blog: {
-								blogId: newBlogId,
-								summary: formData.summary,
-								title: formData.title,
-								category: formData.category,
-								tags: formData.tags,
-							},
-						}
-					}
+					// 异步执行，防止短时间内出现连接数太多的情况
+					setTimeout(function() {
 
-					mail.newBlogNotice(opts);
+						var opts = {
+							to: member.email,
+							data: {
+								currentTime: dateFormat(Date.now(), 'YYYY-MM-DD hh:mm:ss'),
+								nickname: member.nickname,
+								blog: {
+									blogId: newBlogId,
+									summary: formData.summary,
+									title: formData.title,
+									category: formData.category,
+									tags: formData.tags,
+								},
+							}
+						}
+
+						mail.newBlogNotice(opts);
+						
+					}, perMailTime * i++);
+
 
 				});
 

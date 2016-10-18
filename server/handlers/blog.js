@@ -368,7 +368,12 @@ exports.addBlogComment = function(req, res) {
 			website: '',
 			content: '',
 		};
-	}
+	} else if ( quoteData.email && !/^\w+@\w+\.\w+(\.\w+)?$/.test(quoteData.email) ) {
+		return res.json({
+			result: 'error',
+			reason: '回复人电子邮箱格式错误',
+		});
+	};
 
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
@@ -460,6 +465,11 @@ exports.addBlogComment = function(req, res) {
 				nickname: formData.nickname,
 				email: formData.email,
 				website: formData.website,
+			},
+			replyTo: {
+				nickname: quoteData.nickname,
+				email: quoteData.email,
+				website: quoteData.website,
 			},
 			time: comment_time,
 			content: formData.content,
@@ -600,7 +610,12 @@ exports.addBoardComment = function(req, res) {
 			website: '',
 			content: '',
 		};
-	}
+	} else if ( quoteData.email && !/^\w+@\w+\.\w+(\.\w+)?$/.test(quoteData.email) ) {
+		return res.json({
+			result: 'error',
+			reason: '回复人电子邮箱格式错误',
+		});
+	};
 
 	/*
   		个人网站不为空时，检测有无https?://前缀，无则添加http://
@@ -651,7 +666,7 @@ exports.addBoardComment = function(req, res) {
 				$set: { 'website': formData.website },
 			},
 			function(err, person) {
-				console.log('更新游客信息');
+				console.log('更新游客信息 ' + formData.nickname + '(' + formData.email + ')');
 			});
 		}
 
@@ -669,6 +684,11 @@ exports.addBoardComment = function(req, res) {
 			nickname: formData.nickname,
 			email: formData.email,
 			website: formData.website,
+		},
+		replyTo: {
+			nickname: quoteData.nickname,
+			email: quoteData.email,
+			website: quoteData.website,
 		},
 		time: comment_time,
 		content: formData.content,
