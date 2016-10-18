@@ -545,6 +545,7 @@ $(function() {
 
 	var converter = new showdown.Converter({
 		tasklists: true,
+		tables: true,
 	});
 
 	// var Preview = $('#Preview');
@@ -583,7 +584,7 @@ $(function() {
 		var content = $(selector).val();
 		$('#calHeight').text(content);
 		var height = $('#calHeight').height();
-		$(selector).css('min-height', (height + 500) + 'px' );
+		$(selector).css('min-height', (height + 250) + 'px' );
 
 	};
 
