@@ -38,7 +38,7 @@ CategorySchema.statics = {
 	fetchAll: function(callback) {
 		return this
 			.find({})
-			.sort({'time.createAt': -1})
+			.sort({'time.createAt': 1})
 			.exec(callback);
 	},
 
