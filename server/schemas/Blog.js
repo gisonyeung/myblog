@@ -42,7 +42,8 @@ BlogSchema.pre('save', function(next) {
 	next();
 });
 
-var items_per_page = 5;
+var items_per_page = 5,
+	items_per_page_admin = 25;
 
 BlogSchema.statics = {
 
@@ -202,8 +203,8 @@ BlogSchema.statics = {
 		return this
 			.find({}, { content:0, markdown: 0 })
 			.sort({'time.createAt': -1})
-			.skip( items_per_page * (page - 1) )
-			.limit(items_per_page)
+			.skip( items_per_page_admin * (page - 1) )
+			.limit(items_per_page_admin)
 			.exec(callback);
 	},
 

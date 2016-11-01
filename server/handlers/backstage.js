@@ -1674,7 +1674,7 @@ exports.blogPage = function(req, res) {
 
 		return res.json({
 			result: 'success',
-			page: Math.ceil(number / 50) || 1, // 向上取整，最小为一页
+			page: Math.ceil(number / 25) || 1, // 向上取整，最小为一页
 		});
 
 	});
