@@ -2038,7 +2038,7 @@ exports.blogByCategory = function(req, res) {
 
 
 /*
-	更新分类博文数，包含公开火或私密状态的
+	更新分类博文数，包含公开或私密状态的
 */
 exports.updateCateBlog = function(req, res) {
 
@@ -2060,18 +2060,42 @@ exports.updateCateBlog = function(req, res) {
 	}
 
 
-	Blog.fetchCountByCategory(cateName, function(err, count) {
+
+	// 获取所有分类的博文
+	Blog.fetchByCategory(cateName, function(err, blogs) {
 
 		if ( err ) {
 			return errorHandler(err, res);
 		}
 
-		return res.json({
-			result: 'success',
-			count: count,
+		var newBlogs = [];
+
+		_.map(blogs, function(blog) {
+
+			newBlogs.push(blog.blogId);
+
+		});
+
+		Category.fetchByCateName(cateName, function(err, cate) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+			cate.blogs = newBlogs;
+			cate.markModified('blogs');
+			cate.save();
+			newBlogs = null;
+
+			return res.json({
+				result: 'success',
+				count: cate.blogs.length,
+			});
+
 		});
 
 	});
+
 
 };
 
@@ -2421,16 +2445,39 @@ exports.updateTagBlog = function(req, res) {
 
 	}
 
-
-	Blog.fetchCountByTag(tagName, function(err, count) {
+	// 找到所有含有该标签和博文
+	Blog.fetchByTag(tagName, function(err, blogs) {
 
 		if ( err ) {
 			return errorHandler(err, res);
 		}
 
-		return res.json({
-			result: 'success',
-			count: count,
+		var newBlogs = [];
+
+		_.map(blogs, function(blog) {
+
+			newBlogs.push(blog.blogId);
+
+		});
+
+		// 找到指定标签，修改 tag.blogs
+		Tag.fetchByTagName(tagName, function(err, tag) {
+
+			if ( err ) {
+				return errorHandler(err, res);
+			}
+
+			tag.blogs = newBlogs;
+			tag.markModified('blogs');
+			tag.save();
+			newBlogs = null;
+
+			// 返回请求
+			return res.json({
+				result: 'success',
+				count: tag.blogs.length,
+			});
+
 		});
 
 	});
