@@ -150,6 +150,14 @@ exports.deleteComment = function(req, res) {
 					return errorHandler(err, res);
 				}
 
+				// 防止 blog 为空
+				if ( _.isEmpty(blog) ) {
+					return res.json({
+						result: 'error',
+						reason: '删除评论成功，但对应博文评论数修改失败，原因：查找不到对应博文。'
+					});
+				}
+
 				blog.numbers.comment--;
 
 				blog.save(function(err) {
@@ -157,7 +165,7 @@ exports.deleteComment = function(req, res) {
 					if ( err ) {
 						return res.json({
 							result: 'error',
-							reason: '删除成功，但对应博文的评论数修改失败'
+							reason: '删除成功，但对应博文的评论数修改失败，原因：数据库存储失败。'
 						});
 					}
 
