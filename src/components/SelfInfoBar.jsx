@@ -60,7 +60,10 @@ const SelfInfoBar = React.createClass({
           </li>
           <li>
             <span className="icon icon-disc"></span>
-            <a href="javascript:;">微博</a>
+            <a href="javascript:;" className="has-panel">公众号</a>
+            <div className="panel">
+              <img src="/static/img/qrcode.jpg"/>
+            </div>
           </li>
         </ul>
         <ReactCSSTransitionGroup

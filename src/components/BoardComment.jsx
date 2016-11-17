@@ -12,9 +12,11 @@ const BoardComment = React.createClass({
 
     // BlogAction.fetchBoardComments();
 
+    var _record = BlogStore.getBoardRecord();
+
     return {
-      isLoadMoreShow: false,
-      record: BlogStore.getBoardRecord(),
+      isLoadMoreShow: _record.index !== _record.allCount,
+      record: _record,
       comments: BlogStore.getBoardComments(), 
     };
   },
@@ -51,7 +53,7 @@ const BoardComment = React.createClass({
   },
 
   render() {
-    const allCount = this.state.record.allCount;
+    // const allCount = this.state.record.allCount;
 
     return (
       <div className="article-main">
@@ -80,7 +82,7 @@ const BoardComment = React.createClass({
             }
             </ReactCSSTransitionGroup>
             {
-              this.state.record.index == this.state.record.allCount || !this.state.isLoadMoreShow ? 
+              (this.state.record.index == this.state.record.allCount) || !this.state.isLoadMoreShow ? 
               ""
               :
               <p 

@@ -12,9 +12,11 @@ const  Mylife = React.createClass({
 
   getInitialState() {
 
+    var _record = WalkingBlogStore.getBlogRecord();
+
     return {
-      isLoadMoreShow: false,
-      record: WalkingBlogStore.getBlogRecord(),
+      isLoadMoreShow: _record.index !== _record.allCount,
+      record: _record,
       blogs: WalkingBlogStore.getBlogList(),
     };
 
@@ -79,7 +81,7 @@ const  Mylife = React.createClass({
             }
           </ReactCSSTransitionGroup>
           {
-              this.state.record.index == this.state.record.allCount || !this.state.isLoadMoreShow ? 
+              (this.state.record.index == this.state.record.allCount) || !this.state.isLoadMoreShow ? 
               ""
               :
               <p 
