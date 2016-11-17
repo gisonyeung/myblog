@@ -312,12 +312,6 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 	},
 
-
-
-
-
-
-
 	emitEvent: function(event, data) {
 		this.emit(event, data);
 	},

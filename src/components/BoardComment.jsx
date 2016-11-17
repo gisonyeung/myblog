@@ -53,7 +53,7 @@ const BoardComment = React.createClass({
   },
 
   render() {
-    // const allCount = this.state.record.allCount;
+    const allCount = this.state.record.allCount;
 
     return (
       <div className="article-main">
