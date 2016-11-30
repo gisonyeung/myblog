@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>插入排序</title>
+	<link rel="stylesheet" href="../../css/prism.css">
+	<link rel="stylesheet" href="../../css/algorithms-demos.css">
+</head>
+<body>
+	<div class="header">
+		<ul class="nav">
+			<li><a href="#code" class="tab-item active">Code</a></li>
+			<li><a href="#analysis" class="tab-item">Analysis</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-panel" id="panel-code">
+<pre class="line-numbers">
+<code class="language-js">/*
+	插入排序
+	@description 
+		插入排序有两轮循环，外循环将数组元素挨个移动，而内循环则
+		对外循环中选中的元素与它前面的所有元素进行比较。如果外循
+		环中选中的元素比内循环中选中的元素小，那么内循环中的这个
+		数就会往右移动一个位置，为外循环选中的这个元素腾出位置。
+	@param { Array } SomeArray 一个可排序的数组
+	@return { Array } 返回排序后的数组
+*/
+function insertSort(someArray) {
+	var temp, inner;
+
+	// 从第二个元素开始进行外循环
+	for ( var outer = 1; outer < someArray.length; outer++ ) {
+		// 外循环当前选中的比较值
+		temp = someArray[outer];
+		// 拷贝下标副本，作为内循环开始的标记位置
+		inner = outer;
+		// 内循环当前遍历的下标大于 0 并且前一项比外循环选中值大，则内循环前一项的值右移一位
+		while ( inner > 0 && (someArray[inner - 1] > temp) ) {
+			someArray[inner] = someArray[inner - 1];
+			inner--;
+		}
+		// 在内循环中右移产生的空位插入外循环选中值
+		someArray[inner] = temp;
+	}
+
+	return someArray;
+}
+</code>
+</pre>
+			</div>
+			<div class="tab-panel" id="panel-analysis">
+				<div class="section">
+					<h2 class="title">测试输入</h2>
+					<div class="s-cont">
+						<p class="label">输入：</p>
+						<textarea id="test-input" class="form-control" rows="3" placeholder="输入一个以逗号分隔的待排数列，如 '1,2,3' 或 '[1,2,3]' …"></textarea>
+						<button class="btn btn-default" id="submit">提交</button>
+					</div>
+				</div>
+				<div class="section">
+					<h2 class="title">测试结果</h2>
+					<div class="s-cont">
+						<p class="label">输入：</p>
+						<p class="value" id="result-input">-</p>
+						<p class="label">输出：</p>
+						<p class="value" id="result-output">-</p>
+						<p class="label">用时（非严格测试）：</p>
+						<p class="value" id="result-time">-</p>
+					</div>
+				</div>
+				<div class="section">
+					<h2 class="title">效率分析</h2>
+					<div class="s-cont ">
+						<p class="text">插入排序的基本操作是键值比较<b>someArray[inner - 1] > temp</b>，比较次数显然依赖于特定的输入。在最坏的情况下，也就是当数组为降序时，比较执行次数达到最大。</p>
+						<p class="text">最坏情况比较次数：<b>Cworst(n) = ((n-1) * n)/2 ∈ Θ(n²)</b>。</p>
+						<p class="text">因此，在最坏情况下，插入排序和选择排序的键值比较次数是完全一致的。</p>
+						<p class="text">最好的情况下，在外部循环的每次迭代中，比较操作<b>someArray[inner - 1] > temp</b>只执行一次。</p>
+						<p class="text">最好情况比较次数：<b>Cbest(n) = n - 1 ∈ Θ(n)</b>。</p>
+						<p class="text">对于随机序列的数组，插入排序的平均比较次数是降序数组的一半，也就是说：<b>Cavg(n) ≈ n²/4 ∈ Θ(n²)</b>。</p>
+						<p class="text">平均性能比最差性能快一倍，以及遇到基本有序数组时表现出的优异性能，使得插入排序领先于它在基本排序算法领域的主要竞争对手——选择排序和冒泡排序。</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../../js/jquery-1.9.1.min.js"></script>
+	<script src="../../js/prism.js"></script>
+	<script src="../../js/algorithms-demos.js"></script>
+	<script>
+		$('#submit').on('click', function() {
+
+			var _text = $('#test-input').val()
+				.replace(/[\n\t\s]/g, '')
+				.replace(/，/g, ',')
+				.replace(/,+/g, ',')
+				.replace(/^,|,$/g, '')
+				.replace(/[\[\]]/g, '');
+			
+			if ( !_text ) {
+				$('#test-input').focus();
+				return false;
+			}
+
+			var input_array = _text.split(',');
+
+			run(input_array, insertSort);
+
+		});
+
+		function run(input_array, fun) {
+
+			input_array.forEach(function (value, i) {
+				input_array[i] = Number(input_array[i]);
+			});
+
+			var oldArray_str = '[' + input_array.join(', ') + ']';
+			var start_time, run_time;
+
+			start_time = Date.now();
+			fun(input_array);
+			run_time = Date.now() - start_time;
+
+			var newArray_str = '[' + input_array.join(', ') + ']';
+
+			printResult(oldArray_str, newArray_str, run_time);
+
+		}
+
+		function insertSort(someArray) {
+			var temp, inner;
+
+			// 从第二个元素开始进行外循环
+			for ( var outer = 1; outer < someArray.length; outer++ ) {
+				// 外循环当前选中的比较值
+				temp = someArray[outer];
+				// 拷贝下标副本，作为内循环开始的标记位置
+				inner = outer;
+				// 内循环当前遍历的下标大于 0 并且前一项比外循环选中值大，则内循环前一项的值右移一位
+				while ( inner > 0 && (someArray[inner - 1] > temp) ) {
+					someArray[inner] = someArray[inner - 1];
+					inner--;
+				}
+				// 在内循环中右移产生的空位插入外循环选中值
+				someArray[inner] = temp;
+			}
+
+			return someArray;
+		}
+
+		function printResult(inputStr, outputStr, time) {
+			time = time + 'ms';
+
+			$('#result-input').text(inputStr);
+			$('#result-output').text(outputStr);
+			$('#result-time').text(time);
+		} 
+	</script>
+</body>
+</html>

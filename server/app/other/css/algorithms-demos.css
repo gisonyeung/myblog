@@ -75,10 +75,10 @@ a {
   text-indent: 2em;
   color: #333;
   margin-bottom: 5px;
-  line-height: 23px; }
+  line-height: 22px; }
 .tab-panel .section b {
   display: inline-block;
-  margin: 0 2px;
+  margin: 0 2px 3px;
   padding: 0 5px;
   background-color: #eee;
   font-weight: 400;

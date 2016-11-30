@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>希尔排序</title>
+	<link rel="stylesheet" href="../../css/prism.css">
+	<link rel="stylesheet" href="../../css/algorithms-demos.css">
+</head>
+<body>
+	<div class="header">
+		<ul class="nav">
+			<li><a href="#code" class="tab-item active">Code</a></li>
+			<li><a href="#analysis" class="tab-item">Analysis</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-panel" id="panel-code">
+<pre class="line-numbers">
+<code class="language-js">/*
+	希尔排序
+	@description 
+		希尔排序是基于插入排序的一种算法，希尔排序有三轮循环，最
+		外层用来动态控制增量间隔的大小，内两层循环则负责根据间隔
+		迭代比较。
+	@param { Array } SomeArray 一个可排序的数组
+	@return { Array } 返回排序后的数组
+*/
+function shellSort(someArray) {
+	var N = someArray.length;
+	var h = 1; // 间隔默认值，希尔排序最后的间隔必须是1
+	
+	// 以 3 为倍数，计算动态间隔序列
+	while ( h < N/3 ) {
+		h = 3 * h + 1;
+	}
+
+	var i, j, t;
+	while ( h >= 1 ) {
+		for (i = h; i < N; i++) { // 以间隔数为起始下标，逐个开始间隔比较
+			for (j = i; i >= h && someArray[j] < someArray[j-h]; j -= h) {
+				t = someArray[j];
+				someArray[j] = someArray[j-h];
+				someArray[j-h] = t;
+			}
+		}
+		// 缩小增量
+		h = (h - 1) / 3;
+	}
+
+	return someArray;
+}
+</code>
+</pre>
+			</div>
+			<div class="tab-panel" id="panel-analysis">
+				<div class="section">
+					<h2 class="title">测试输入</h2>
+					<div class="s-cont">
+						<p class="label">输入：</p>
+						<textarea id="test-input" class="form-control" rows="3" placeholder="输入一个以逗号分隔的待排数列，如 '1,2,3' 或 '[1,2,3]' …"></textarea>
+						<button class="btn btn-default" id="submit">提交</button>
+					</div>
+				</div>
+				<div class="section">
+					<h2 class="title">测试结果</h2>
+					<div class="s-cont">
+						<p class="label">输入：</p>
+						<p class="value" id="result-input">-</p>
+						<p class="label">输出：</p>
+						<p class="value" id="result-output">-</p>
+						<p class="label">用时（非严格测试）：</p>
+						<p class="value" id="result-time">-</p>
+					</div>
+				</div>
+				<div class="section">
+					<h2 class="title">效率分析</h2>
+					<div class="s-cont ">
+						<p class="text">希尔排序是基于插入排序的一种算法，在此算法基础之上增加了一个新的特性，提高了效率。希尔排序的时间复杂度与增量序列的选取有关，例如<b>希尔增量</b>时间复杂度为O(n²)，而<b>Hibbard增量</b>的希尔排序的时间复杂度为<b>O(n^(3/2))</b>，希尔排序时间复杂度的下界是<b>n*log2n</b>。希尔排序没有快速排序算法快<b>O(n(logn))</b>，因此中等大小规模表现良好，对规模非常大的数据排序不是最优选择。但是比<b>O(n²)</b>复杂度的算法快得多。并且希尔排序非常容易实现，算法代码短而简单。 </p>
+						<p class="text">效率：<b>O(n*log2n) <= shellSort() <= O(n²)</b>。</p>
+						<p class="text">此外，希尔算法在最坏的情况下和平均情况下执行效率相差不是很多，与此同时快速排序在最坏的情况下执行的效率会非常差。</p>
+						<p class="text">基于此，几乎任何排序工作在开始时都可以用希尔排序，若在实际使用中证明它不够快，再改成快速排序这样更高级的排序算法。</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../../js/jquery-1.9.1.min.js"></script>
+	<script src="../../js/prism.js"></script>
+	<script src="../../js/algorithms-demos.js"></script>
+	<script>
+		$('#submit').on('click', function() {
+
+			var _text = $('#test-input').val()
+				.replace(/[\n\t\s]/g, '')
+				.replace(/，/g, ',')
+				.replace(/,+/g, ',')
+				.replace(/^,|,$/g, '')
+				.replace(/[\[\]]/g, '');
+			
+			if ( !_text ) {
+				$('#test-input').focus();
+				return false;
+			}
+
+			var input_array = _text.split(',');
+
+			run(input_array, shellSort);
+
+		});
+
+		function run(input_array, fun) {
+
+			input_array.forEach(function (value, i) {
+				input_array[i] = Number(input_array[i]);
+			});
+
+			var oldArray_str = '[' + input_array.join(', ') + ']';
+			var start_time, run_time;
+
+			start_time = Date.now();
+			fun(input_array);
+			run_time = Date.now() - start_time;
+
+			var newArray_str = '[' + input_array.join(', ') + ']';
+
+			printResult(oldArray_str, newArray_str, run_time);
+
+		}
+
+		function shellSort(someArray) {
+			var N = someArray.length;
+			var h = 1; // 间隔默认值，希尔排序最后的间隔必须是1
+			
+			// 以 3 为倍数，计算动态间隔序列
+			while ( h < N/3 ) {
+				h = 3 * h + 1;
+			}
+
+			var i, j, t;
+			while ( h >= 1 ) {
+				for (i = h; i < N; i++) { // 以间隔数为起始下标，逐个开始间隔比较
+					for (j = i; i >= h && someArray[j] < someArray[j-h]; j -= h) {
+						t = someArray[j];
+						someArray[j] = someArray[j-h];
+						someArray[j-h] = t;
+					}
+				}
+				// 缩小增量
+				h = (h - 1) / 3;
+			}
+
+			return someArray;
+		}
+
+		function printResult(inputStr, outputStr, time) {
+			time = time + 'ms';
+
+			$('#result-input').text(inputStr);
+			$('#result-output').text(outputStr);
+			$('#result-time').text(time);
+		} 
+	</script>
+</body>
+</html>
