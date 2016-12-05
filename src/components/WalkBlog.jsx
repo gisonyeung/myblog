@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 import dateFormat from '../utils/dateFormat';
+import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
 
  // require('../sass/WalkBlog.scss');
-const photo1 = require('../img/demo-photo2.jpg');
+require('../sass/react-video.scss');
 
 const  WalkBlog = React.createClass({
 
@@ -21,7 +22,21 @@ const  WalkBlog = React.createClass({
     };
 
     let hot = this.props.numbers.view + this.props.numbers.comment;
-      
+    
+    // photo
+    let PhotoElem = '';
+    if ( this.props.photo ) {
+      if ( this.props.isDetail == 'true' ) {
+        PhotoElem = (<a href={this.props.photo} className="picture" target="_blank">
+                       <img src={this.props.photo} />
+                     </a>);
+      } else {
+         PhotoElem = (<Link to={`/mylife/${this.props.blogId}`} className="picture" title="查看全文">
+                        <img src={this.props.photo}/>
+                      </Link>);
+      }
+    }
+
     return (
       <article className="box-wrap walkblog">
         <div className="wb-side">
@@ -31,16 +46,19 @@ const  WalkBlog = React.createClass({
           </div>
           <p className="year">{dateFormat(this.props.time, 'YYYY')}</p>
         </div>
-        <div className={`wb-cont line ${this.props.photo ? '' : 'nophoto'}`}>
-          {
-            this.props.isDetail == 'true'? 
-            <a href={this.props.photo} className="picture" target="_blank">
-              <img src={this.props.photo} />
-            </a>
+        <div className={`wb-cont line ${this.props.photo || this.props.video ? '' : 'nophoto'}`}>
+          { PhotoElem }
+          { 
+            this.props.video ? 
+            <Video 
+              loop
+              controls
+            >
+              <source src={this.props.video} type="video/mp4" />
+              <Overlay />
+            </Video>
             :
-            <Link to={`/mylife/${this.props.blogId}`} className="picture" title="查看全文">
-              <img src={this.props.photo}/>
-            </Link>
+            ''
           }
           <div className="text" dangerouslySetInnerHTML={content} />
           <div className="tags">

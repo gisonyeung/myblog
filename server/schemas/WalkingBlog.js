@@ -4,6 +4,10 @@ var WalkingBlogSchema = new mongoose.Schema({
 	blogId: Number,
 	content: String,
 	photo: String,
+	video: {
+		type: String,
+		default: '',
+	},
 	tags: String,
 	numbers: {
 		view: 0,

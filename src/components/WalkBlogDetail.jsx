@@ -74,6 +74,7 @@ const  WalkBlogDetail = React.createClass({
               blogId={this.state.blog.blogId || -1}
               time={this.state.blog.time.createAt || '2016-08-20'}
               photo={this.state.blog.photo || ''}
+              video={this.state.blog.video || ''}
               content={this.state.blog.content || ''}
               tags={this.state.blog.tags || ''}
               numbers={this.state.blog.numbers}

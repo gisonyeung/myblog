@@ -443,24 +443,33 @@ exports.addWalkingblog = function(req, res) {
 		var formData = {
 			content: fields.content || '',
 			tags: safeHTML(fields.tags).replace(/,*^/, '') || '',
+			mediaType: fields.mediaType,
 		};
 
-		if ( !/\S/.test(formData.content) ) {
+		if ( !/\S/.test(formData.mediaType) ) {
 			return res.send(JSON.stringify({
 				result: 'error',
 				reason: '发布失败，行博内容不能为空',
 			}));
 		}
 
-		var photo = files.photo;
-		var hasPhoto = !!photo.name;
-		var photoName = '',
-			front_path = '';
+		var media = files.media;
+		var hasMedia = !!media.name;
+		var mediaName = '',
+			media_path = '',
+			photo_path = '',
+			video_path = '';
 
 		// 有图片则处理
-		if ( hasPhoto ) {
-			photoName = Date.now() + '.' + photo.type.split('/')[1];
-			front_path = '/walkingblog/' + photoName;
+		if ( hasMedia ) {
+			mediaName = Date.now() + '.' + media.type.split('/')[1];
+			media_path = '/walkingblog/' + mediaName;
+		}
+
+		if ( formData.mediaType == 'photo' ) {
+			photo_path = media_path;
+		} else if ( formData.mediaType == 'video' ) {
+			video_path = media_path;
 		}
 		
 		// 找到最后一条行博的ID，+1
@@ -487,7 +496,8 @@ exports.addWalkingblog = function(req, res) {
 				blogId: newBlogId,
 				content: formData.content,
 				tags: formData.tags,
-				photo: front_path,
+				photo: photo_path,
+				video: video_path,
 
 			}).save(function(err) {
 
@@ -499,9 +509,9 @@ exports.addWalkingblog = function(req, res) {
 				}
 
 
-				if ( hasPhoto ) {
+				if ( hasMedia ) {
 					// 把临时文件夹下的文件，转移到指定文件夹
-					fs.renameSync(photo.path, walkingblogDir + '/' + photoName);
+					fs.renameSync(media.path, walkingblogDir + '/' + mediaName);
 				}
 
 
@@ -547,7 +557,8 @@ exports.editWalkingblog = function(req, res) {
 			id: fields.id,
 			content: fields.content || '',
 			tags: safeHTML(fields.tags).replace(/,*^/, '') || '',
-			isUpdatePhoto: fields.isUpdatePhoto,
+			isUpdateMedia: fields.isUpdateMedia,
+			mediaType: fields.mediaType,
 		};
 
 		if ( !/\S/.test(formData.content) ) {
@@ -576,34 +587,43 @@ exports.editWalkingblog = function(req, res) {
 			blog.tags = formData.tags;
 			blog.content = formData.content;
 
-			var photo = files.photo;
+			var media = files.media;
 
-			var hasPhoto = !!photo.name;
-			var photoName = '',
-				front_path = '';
+			var hasMedia = !!media.name;
+			var mediaName = '',
+				front_path = '',
+				photo_path = '',
+				video_path = '';
 
-			// 使用更新的图片
-			if ( formData.isUpdatePhoto == 'true' ) {
+			if (  formData.mediaType == 'photo' ) {
+				photo_path = media_path;
+			} else if ( formData.mediaType == 'video' ) {
+				video_path = media_path;
+			}
+	
+			// 使用更新的媒体文件
+			if ( formData.isUpdateMedia == 'true' ) {
 
-				// 有图片则处理
-				if ( hasPhoto ) {
+				// 有媒体文件则处理
+				if ( hasMedia ) {
 
-					photoName = Date.now() + '.' + photo.type.split('/')[1];
-					front_path = '/walkingblog/' + photoName;
+					mediaName = Date.now() + '.' + media.type.split('/')[1];
+					front_path = '/walkingblog/' + mediaName;
 					// 把临时文件夹下的文件，转移到指定文件夹
-					fs.renameSync(photo.path, walkingblogDir + '/' + photoName);
+					fs.renameSync(media.path, walkingblogDir + '/' + mediaName);
 					
-					if ( blog.photo ) {
+					if ( blog.media ) {
 
-						// 删除旧图片
-						fs.unlinkSync(dataDir + blog.photo);
+						// 删除旧媒体文件
+						fs.unlinkSync(dataDir + blog.media);
 
 					}
 
 
 				}
 
-				blog.photo = front_path;
+				blog.photo = photo_path;
+				blog.video = video_path;
 
 			}
 
@@ -622,6 +642,7 @@ exports.editWalkingblog = function(req, res) {
 					blogId: blog.blogId,
 					url: '/mylife/' + blog.blogId,
 					photo: blog.photo,
+					video: blog.video,
 				}));
 
 			});

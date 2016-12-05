@@ -138,8 +138,8 @@ $(function() {
 							.replace(/{{time_createAt}}/g, gb.dateFormat(walkingblog.time.createAt, 'YYYY-MM-DD hh:mm:ss'))
 							.replace(/{{time_updateAt}}/g, gb.dateFormat(walkingblog.time.updateAt, 'YYYY-MM-DD hh:mm:ss'))
 							.replace(/{{tags}}/g, walkingblog.tags)
-							.replace(/{{photo}}/g, walkingblog.photo ? '有' : '无')
-							.replace(/{{photo_url}}/g, walkingblog.photo)
+							.replace(/{{media}}/g, walkingblog.photo || walkingblog.video ? '有' : '无')
+							.replace(/{{media_url}}/g, walkingblog.photo || walkingblog.video)
 							.replace(/{{content}}/g, walkingblog.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
 							.replace(/{{numbers_view}}/g, walkingblog.numbers.view)
 							.replace(/{{numbers_comment}}/g, walkingblog.numbers.comment)
@@ -205,7 +205,8 @@ $(function() {
 				updateAt: walkingblog[2].innerText,
 			},
 			tags: walkingblog[3].innerText,
-			photo: $(walkingblog[4]).attr('title'),
+			media: $(walkingblog[4]).attr('title'),
+			mediaType: $(walkingblog[4]).attr('data-type'),
 			content: walkingblog[5].innerHTML,
 			numbers: walkingblog[6].innerText,
 			status: walkingblog[7].innerText,
@@ -213,7 +214,8 @@ $(function() {
 
 		$('#edit-content').val(formData.content);
 		$('#edit-tags').val(formData.tags);
-		$('.old-img').attr('src', formData.photo);
+		$('.old-img').attr('src', formData.media);
+		$('.old-video').text(formData.media);
 
 		var other = $('.edit-value');
 
@@ -253,13 +255,8 @@ $(function() {
 			url: baseurl + '/admin/editWalkingblog', //用于文件上传的服务器端请求地址
 			type: 'POST',
 			secureuri: false, //是否需要安全协议，一般设置为false
-			fileElementId: 'newPhoto', //文件上传域的ID
-			data: { 
-				id: edit_formData.id,
-				content: edit_formData.content,
-				tags: edit_formData.tags || '',
-				isUpdatePhoto: $('#isUpdatePhoto').val(),
-			},
+			fileElementId: 'newMedia', //文件上传域的ID
+			data: edit_formData,
 			dataType: 'text', //返回值类型 一般设置为json
 			success: function (data, status) { //服务器成功响应处理函数 
 				var json;
@@ -273,6 +270,7 @@ $(function() {
 					gb.modal.tip.show('修改成功', 'success');
 
 					$('.old-img').attr('src', data.photo);
+					$('.old-text').text(data.photo);
 
 					setTimeout(function() {
 						window.open( baseurl + data.url );
@@ -294,7 +292,8 @@ $(function() {
 		edit_formData = {
 			id: $('#edit-submit').attr('data-target') || '',
 			content: $('#edit-content').val(),
-			tags: $('#edit-tags').val(),
+			tags: $('#edit-tags').val() || '',
+			isUpdateMedia: $('#isUpdateMedia').val(),
 		};
 
 		if ( !/\S/.test(edit_formData.content) ) {
@@ -333,11 +332,8 @@ $(function() {
 			url: baseurl + '/admin/addWalkingblog', //用于文件上传的服务器端请求地址
 			type: 'POST',
 			secureuri: false, //是否需要安全协议，一般设置为false
-			fileElementId: 'photo', //文件上传域的ID
-			data: { 
-				content: add_formData.content,
-				tags: add_formData.tags || '',
-			},
+			fileElementId: 'media', //文件上传域的ID
+			data: add_formData,
 			dataType: 'text', //返回值类型 一般设置为json
 			success: function (data, status) { //服务器成功响应处理函数 
 				var json;
@@ -368,7 +364,8 @@ $(function() {
 
 		add_formData = {
 			content: $('#wb-content').val(),
-			tags: $('#wb-tags').val(),
+			tags: $('#wb-tags').val() || '',
+			mediaType: $('#mediaType').val(),
 		};
 
 		if ( !/\S/.test(add_formData.content) ) {

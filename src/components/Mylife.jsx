@@ -5,7 +5,6 @@ import WalkingBlogAction from '../actions/WalkingBlogAction';
 import WalkingBlogStore from '../stores/WalkingBlogStore';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-
 require('../sass/Mylife.scss');
 
 const  Mylife = React.createClass({
@@ -47,7 +46,6 @@ const  Mylife = React.createClass({
     });
   },
 
-
   render() {
     return (
       <div className="inner-wrapper">
@@ -71,6 +69,7 @@ const  Mylife = React.createClass({
                     blogId={blog.blogId || -1}
                     time={blog.time.createAt || '0000:00:00'}
                     photo={blog.photo || ''}
+                    video={blog.video || ''}
                     content={blog.content || ''}
                     tags={blog.tags || ''}
                     numbers={blog.numbers}

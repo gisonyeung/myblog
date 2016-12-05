@@ -42,7 +42,7 @@
 								<td width="140">发布时间</td>
 								<td width="140">更新时间</td>
 								<td width="130">标签</td>
-								<td width="40">图片</td>
+								<td width="40">媒体</td>
 								<td>内容</td>
 								<td width="120">阅读/评论数</td>
 								<td width="50">状态</td>
@@ -70,9 +70,17 @@
 							    <input type="text" class="form-control" id="wb-tags" placeholder="标签（半角逗号分隔）" name="tags">
 							</div>
 							<div class="form-group">
-							    <label for="photo">图片</label>
-							    <input type="file" id="photo" name="photo" accept="image/*">
-							    <p class="help-block">jpg、png、gif等图片格式，前台显示时宽度为500px</p>
+							    <label for="media">媒体</label>
+							    <input type="file" id="media" name="media">
+							    <p class="help-block">jpg、png、gif等图片格式，mp4视频文件，前台显示时宽度为500px</p>
+							</div>
+							<div class="form-group">
+							    <label for="mediaType">上传的媒体文件种类</label>
+							    <select name="mediaType" id="mediaType" class="form-control">
+							    	<option value="no" selected>无</option>
+							    	<option value="photo">图片</option>
+							    	<option value="video">视频</option>
+							    </select>
 							</div>
 							<input type="submit" class="btn btn-success" value="提交" id="add-submit">
 						</form>
@@ -95,17 +103,29 @@
 								<img src="" alt="" class="img-thumbnail old-img">
 							</div>
 							<div class="form-group">
-							    <label for="photo">新图片</label>
-							    <input type="file" id="newPhoto" name="photo" accept="image/*">
-							    <p class="help-block">jpg、png、gif等图片格式，前台显示时宽度为500px</p>
+								<label>当前视频</label>
+								<p class="old-video"></p>
 							</div>
 							<div class="form-group">
-							    <label for="photo">是否更新图片</label>
-							    <select name="isUpdatePhoto" id="isUpdatePhoto" class="form-control">
+							    <label for="newMedia">新媒体文件</label>
+							    <input type="file" id="newMedia" name="media">
+							    <p class="help-block">jpg、png、gif等图片格式，mp4视频文件，前台显示时宽度为500px</p>
+							</div>
+							<div class="form-group">
+							    <label for="isUpdateMedia">是否更新媒体</label>
+							    <select name="isUpdateMedia" id="isUpdateMedia" class="form-control">
 							    	<option value="false" selected>否</option>
 							    	<option value="true">是</option>
 							    </select>
 							    <p class="help-block">也可以利用此选项删除图片</p>
+							</div>
+							<div class="form-group">
+							    <label for="edit-mediaType">上传的媒体文件种类</label>
+							    <select name="edit-mediaType" id="edit-mediaType" class="form-control">
+							    	<option value="no" selected>无</option>
+							    	<option value="photo">图片</option>
+							    	<option value="video">视频</option>
+							    </select>
 							</div>
 
 							<hr>
@@ -146,7 +166,7 @@
 			<td>{{time_createAt}}</td>
 			<td>{{time_updateAt}}</td>
 			<td>{{tags}}</td>
-			<td title="{{photo_url}}">{{photo}}</td>
+			<td title="{{media_url}}" data-type={{mediaType}}>{{media}}</td>
 			<td>{{content}}</td>
 			<td>{{numbers_view}} / <span class="numbers-comment">{{numbers_comment}}</span></td>
 			<td class="status-value">{{status}}</td>
