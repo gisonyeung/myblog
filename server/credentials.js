@@ -1,5 +1,5 @@
 module.exports = {
-	cookieSecret: 'H612vvbfh56CVrty',
+	cookieSecret: 'RT23TdR5Y3cvAasCX24',
 	mail: {
 		user: 'user@163.com',
 		password: 'pwd',
