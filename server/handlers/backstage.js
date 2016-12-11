@@ -595,11 +595,7 @@ exports.editWalkingblog = function(req, res) {
 				photo_path = '',
 				video_path = '';
 
-			if (  formData.mediaType == 'photo' ) {
-				photo_path = media_path;
-			} else if ( formData.mediaType == 'video' ) {
-				video_path = media_path;
-			}
+			
 	
 			// 使用更新的媒体文件
 			if ( formData.isUpdateMedia == 'true' ) {
@@ -612,14 +608,24 @@ exports.editWalkingblog = function(req, res) {
 					// 把临时文件夹下的文件，转移到指定文件夹
 					fs.renameSync(media.path, walkingblogDir + '/' + mediaName);
 					
-					if ( blog.media ) {
+					if ( blog.photo ) {
 
 						// 删除旧媒体文件
-						fs.unlinkSync(dataDir + blog.media);
+						fs.unlinkSync(dataDir + blog.photo);
+
+					} else if ( blog.video ) {
+
+						// 删除旧媒体文件
+						fs.unlinkSync(dataDir + blog.video);
 
 					}
 
+				}
 
+				if (  formData.mediaType == 'photo' ) {
+					photo_path = front_path;
+				} else if ( formData.mediaType == 'video' ) {
+					video_path = front_path;
 				}
 
 				blog.photo = photo_path;

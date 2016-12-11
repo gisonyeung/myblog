@@ -270,7 +270,7 @@ $(function() {
 					gb.modal.tip.show('修改成功', 'success');
 
 					$('.old-img').attr('src', data.photo);
-					$('.old-text').text(data.photo);
+					$('.old-video').text(data.video);
 
 					setTimeout(function() {
 						window.open( baseurl + data.url );
