@@ -937,7 +937,7 @@ exports.addBook = function(req, res) {
 
 			var newBookId = 1;
 
-			if ( !_.isEmpty(blastBook) ) {
+			if ( !_.isEmpty(lastBook) ) {
 				newBookId = lastBook[0].bookId + 1;
 			}
 
