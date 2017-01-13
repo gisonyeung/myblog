@@ -106,7 +106,10 @@ AppDispatcher.register(function(action) {
 			break;
 
 
-		/* 个人面板 */
+		/* 个人面板 站点相关 */
+		case 'SITE_ADD_VIEW':
+			SiteStore.addSiteView();
+			break;
 		case 'SITE_SUB_BLOG':
 			SiteStore.subBlog(action.formData);
 			break;

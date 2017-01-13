@@ -103,9 +103,17 @@ const AboutPanel = React.createClass({
                   <p className="time">2016年7月</p>
                   <div className="item-cont">
                     <h3>搭建个人博客</h3>
-                    <p>经过三个月的筹备，开始着手搭建个人博客，独立完成个人博客的设计、前端和后台开发。</p>
+                    <p>经过三个月的筹备，开始着手搭建个人博客，独立完成个人博客的设计、前端和后台开发</p>
                   </div>
                 </div>
+                <div className="item clearfix">
+                  <p className="time">2016年12月</p>
+                  <div className="item-cont">
+                    <h3>阿里巴巴移动事业群-UC 实习生</h3>
+                    <p>2016年12月27日正式入职 UC，主要负责 Node 爬虫、视频解析及运营管理平台搭建的工作</p>
+                  </div>
+                </div>
+
               </div>
             </div>
             <div className="ab-section info">
@@ -113,7 +121,7 @@ const AboutPanel = React.createClass({
               <div className="cont">
                 <div className="row">
                   <p className="key">邮箱</p>
-                  <p className="value"><a href="mailto:gisonyeung2015@163.com" target="_blank">gisonyeung2015@163.com</a></p>
+                  <p className="value"><a href="mailto:gisonyeung@gmail.com" target="_blank">gisonyeung@gmail.com</a></p>
                 </div>
                 <div className="row">
                   <p className="key">QQ（商业联系）</p>
@@ -127,8 +135,6 @@ const AboutPanel = React.createClass({
                   <p className="key">GitHub</p>
                   <p className="value"><a href="https://github.com/gisonyeung" target="_blank">https://github.com/gisonyeung</a></p>
                 </div>
-
-
               </div>
             </div>
           </div>

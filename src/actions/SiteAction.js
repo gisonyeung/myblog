@@ -2,6 +2,12 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 
 const SiteAction = {
 
+	addSiteView() {
+		AppDispatcher.dispatch({
+			actionType: 'SITE_ADD_VIEW',
+		});
+	},
+
 	subBlog(formData) {
 		AppDispatcher.dispatch({
 			actionType: 'SITE_SUB_BLOG',
@@ -29,6 +35,8 @@ const SiteAction = {
 			id: id,
 		});
 	},
+
+
 
 
 

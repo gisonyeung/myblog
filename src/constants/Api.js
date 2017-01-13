@@ -28,6 +28,7 @@ const Api = {
 	siteNum: '/siteNum',
 	unsubconfirm: '/unsubconfirm',
 	cancelSub: '/cancelSub',
+	addSiteView: '/addSiteView',
 
 };
 

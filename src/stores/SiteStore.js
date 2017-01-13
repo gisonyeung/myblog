@@ -14,6 +14,13 @@ const SiteStore = assign({}, EventEmitter.prototype, {
 		subscribe: 0,
 	},
 
+	addSiteView: function() {
+		fetch(Api.addSiteView)
+		.catch(err => {
+			console.log(err);
+		});
+	},
+
 	subBlog: function(formData) {
 
 		fetch(Api.subscribe, {

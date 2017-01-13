@@ -82,7 +82,7 @@ const DatePanel = React.createClass({
               onClick={this.switchPanel.bind(null, -1)}
             />
           }
-          <Link to={`/archives?type=date&date=${that.state.siteYear.currentYear}`}>{this.state.headerYear}</Link>
+          <Link to={`/archives?type=date&date=${that.state.headerYear}`}>{this.state.headerYear}</Link>
           {
             this.state.headerYear == this.state.siteYear.currentYear ?
             ''

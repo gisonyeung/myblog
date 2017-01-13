@@ -176,16 +176,6 @@ module.exports = function(app) {
 		history fallback
 	*/
 	app.get('*', function(req, res) {
-
-		var reqPath = req._parsedUrl.path;
-
-		if ( reqPath == '/' || '/?page=1' || /(^\/article)|(^\/mylife)|(^\/book$)|(^\/board)|(^\/about)|(^\/unsubscribe)/.test(reqPath) ) {
-			// 增加站点访问量
-			site.addSiteView(req);
-			
-		}
-
-
 		res.render('../server/app/entry.html');
 	});
 
@@ -378,6 +368,10 @@ module.exports = function(app) {
 	*/
 	app.post('/cancelSub', site.cancelSub);
 
+	/*
+		增加访问量
+	*/
+	app.post('/addSiteView', site.addSiteView);
 
 
 
@@ -390,7 +384,6 @@ module.exports = function(app) {
 		登录
 	*/
 	app.post('/admin/login', backstage.login);
-		
 
 	/*
 		根据页码获取评论

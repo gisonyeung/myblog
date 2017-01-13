@@ -5,7 +5,7 @@ import WalkBlogComment from './WalkBlogComment';
 import WalkingBlogAction from '../actions/WalkingBlogAction';
 import WalkingBlogStore from '../stores/WalkingBlogStore';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
+import infoCache from '../utils/infoCache';
 
 
 const  WalkBlogCommentBox = React.createClass({
@@ -18,11 +18,7 @@ const  WalkBlogCommentBox = React.createClass({
     /*
       读取个人信息cookie
     */
-    let cookieForm = {
-      nickname: cookie.load('nickname'),
-      email: cookie.load('email') || '',
-      website: cookie.load('website'),
-    }
+    let cookieForm = infoCache.get();
 
     let isChecked = false;
 
@@ -142,6 +138,8 @@ const  WalkBlogCommentBox = React.createClass({
       this.refs.website.focus();
       return false;
     }
+
+    infoCache.save(formData);
 
     this.clearTip();
 

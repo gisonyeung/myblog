@@ -27,11 +27,6 @@ const addPage_change = (prevStage, nextStage, replace) => {
   }
 }
 
-
-
-
-
-
 const MainController = React.createClass({
 
   render() {

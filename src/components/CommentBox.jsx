@@ -4,6 +4,7 @@ import cookie from 'react-cookie';
 import BlogAction from '../actions/BlogAction';
 import BlogStore from '../stores/BlogStore';
 import SiteAction from '../actions/SiteAction';
+import infoCache from '../utils/infoCache';
 
 const CommentBox = React.createClass({
 
@@ -12,11 +13,7 @@ const CommentBox = React.createClass({
     /*
       读取个人信息cookie
     */
-    let cookieForm = {
-      nickname: cookie.load('nickname'),
-      email: cookie.load('email') || '',
-      website: cookie.load('website'),
-    }
+    let cookieForm = infoCache.get();
 
     let isChecked = false;
 
@@ -123,18 +120,7 @@ const CommentBox = React.createClass({
       });
     }
 
-
-    // 记住个人信息，存储进cookie => nickname, email, website
-    if ( this.refs.remember.checked ) {
-      cookie.save('nickname', formData.nickname, { path: '/', maxAge: 2592000 });
-      cookie.save('email', formData.email, { path: '/', maxAge: 2592000 });
-      cookie.save('website', formData.website, { path: '/', maxAge: 2592000 });
-    } else {
-      // 删除对应cookie
-      cookie.remove('nickname', { path: '/' });
-      cookie.remove('email', { path: '/' });
-      cookie.remove('website', { path: '/' });
-    }
+    infoCache.save(formData, this.refs.remember.checked)
     
     this.clearTip();
 
