@@ -3,23 +3,6 @@ import { Link } from 'react-router';
 
 const AboutPanel = React.createClass({
 
-  getInitialState() {
-
-
-    return {
-    };
-  },
-
-  componentDidMount() {
-
-    
-  },
-
-  componentWillUnmount() {
-
-
-  },
-
   render() {
     return (
       <div className="article-main">
@@ -110,7 +93,7 @@ const AboutPanel = React.createClass({
                   <p className="time">2016年12月</p>
                   <div className="item-cont">
                     <h3>阿里巴巴移动事业群-UC 实习生</h3>
-                    <p>2016年12月27日正式入职 UC，主要负责 Node 爬虫、视频解析及运营管理平台搭建的工作</p>
+                    <p>2016年12月27日正式入职 UC</p>
                   </div>
                 </div>
 
