@@ -16,6 +16,7 @@ var dateFormat = require('../utils/dateFormat.js');
 /* 字段判空 */
 var testEmpty = require('../utils/testEmpty.js');
 
+var getUserInfo = require('../utils/getUserInfo.js');
 
 var log4js = require('../loggerConfig.js');
 var behaviorLogger = log4js.getLogger('BEHAVIOR');
