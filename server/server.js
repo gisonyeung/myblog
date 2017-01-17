@@ -7,6 +7,9 @@ var config = require('../webpack.config');
 var bodyParser = require('body-parser');
 var port = 8000;
 var compiler = webpack(config);
+var log4js = require('./loggerConfig');
+var _ = require('lodash');
+
 
 app.use(express.static(__dirname + '/app'));
 app.use(webpackDevMiddleware(compiler, { 
@@ -31,6 +34,21 @@ var SessionStore = require('session-mongoose')(require('connect'));
 var store = new SessionStore({
 	url: credentials.mongo.session,
 	interval: 9000000,
+});
+
+
+// 路由拦截，设置域名白名单防止SEO盗取流量
+var WHITE_DOMAIN_LIST = require('./constants/white_domain');
+var seoLogger = log4js.getLogger('SEO');
+app.use(function(req, res, next) {
+	if ( !_.includes(WHITE_DOMAIN_LIST, req.host) ) {
+		if ( !/favicon\.ico/.test(req.url) ) {
+			seoLogger.warn('非法域名意图访问: ' + req.hostname);
+		}
+		res.render('../server/app/forbidden.html');
+	} else {
+		next();
+	}
 });
 
 app.use(require('cookie-parser')(credentials.cookieSecret));

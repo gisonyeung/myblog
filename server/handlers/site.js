@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var _ = require('lodash');
 var fs = require('fs');
-var log4js = require('log4js');
+
 
 /* 数据表 */
 var Blog = require('../models/Blog.js');
@@ -18,19 +18,12 @@ var dateFormat = require('../utils/dateFormat.js');
 /* 获取客户端IP */
 var getClientIp = require('../utils/getClientIp.js');
 
-// 配置 view.log 确保存在目录
-var dataDir = './server/logs';
-var viewLogName = 'view.log';
-fs.existsSync(dataDir) || fs.mkdirSync(dataDir);
-fs.existsSync(dataDir + '/' + viewLogName) || fs.writeFileSync(dataDir + '/' + viewLogName, '');
-log4js.configure({
-  appenders: [
-    { type: 'console' },
-    { type: 'file', filename: 'server/logs/' + viewLogName, category: 'VIEW' }
-  ]
-});
+var getUserInfo = require('../utils/getUserInfo');
 
+var log4js = require('../loggerConfig.js');
 var viewLogger = log4js.getLogger('VIEW');
+var seoLogger = log4js.getLogger('SEO');
+var behaviorLogger = log4js.getLogger('BEHAVIOR');
 
 
 /*
@@ -99,6 +92,8 @@ exports.subscribe = function(req, res) {
 
 					}
 				}
+
+				behaviorLogger.info('新订阅：' + getUserInfo(req, formData) );
 
 				mail.subNotice(opts);
 				mail.subNotice_myself(opts);
@@ -331,17 +326,6 @@ exports.addSiteView = function(req, res) {
 
 	var ip = getClientIp(req);
 
-	var cookies = req.cookies;
-	var nickname = cookies.nickname || '';
-	var email = cookies.email || '';
-	var website = cookies.website || '';
-
-	var userInfo = '';
-	if (nickname) {
-		userInfo = nickname + (email ? '(' + email + ')' : '');
-	}
-	userInfo = userInfo ? userInfo : '无记录';
-
 	Site.findByBranch(branchName, function(err, siteData) {
 
 		if ( err ) {
@@ -362,6 +346,9 @@ exports.addSiteView = function(req, res) {
 				viewLogger.error('site.js：站点数据存储失败');
 				return errorHandler(err, res);
 			}
+
+			var userInfo = getUserInfo(req);
+			seoLogger.info('访问域名: ' + req.hostname + ' 访问人：' + userInfo);
 			viewLogger.info('[' + ip + ']：站点访问+1，现访问量：' + siteData.view + ' 访问人：' + userInfo);
 			return res.json({
 				result: 'success',
@@ -372,12 +359,6 @@ exports.addSiteView = function(req, res) {
 	});
 
 };
-
-
-
-
-
-
 
 function errorHandler(err, res) {
 	console.log(err);

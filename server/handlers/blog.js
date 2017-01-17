@@ -15,7 +15,11 @@ var dateFormat = require('../utils/dateFormat.js');
 /* 字段判空 */
 var testEmpty = require('../utils/testEmpty.js');
 
+var getUserInfo = require('../utils/getUserInfo.js');
 
+
+var log4js = require('../loggerConfig.js');
+var behaviorLogger = log4js.getLogger('BEHAVIOR');
 
 /*
 	请求博文数目
@@ -427,7 +431,7 @@ exports.addBlogComment = function(req, res) {
 				$set: { 'website': formData.website },
 			},
 			function(err, person) {
-				console.log('更新游客信息');
+				behaviorLogger.info('发布博客评论，更新游客信息：' + getUserInfo(req, formData));
 			});
 		}
 
@@ -537,6 +541,8 @@ exports.addBlogComment = function(req, res) {
 				}
 
 				mail.commentNotice_myself(opts);
+
+				behaviorLogger.info('博客新评论：【' + formData.content.replace(/\s+|\t|\n/g, ' ') + '】 评论人：' + getUserInfo(req, formData))
 
 				return res.json({
 					status: 'success'
@@ -666,7 +672,7 @@ exports.addBoardComment = function(req, res) {
 				$set: { 'website': formData.website },
 			},
 			function(err, person) {
-				console.log('更新游客信息 ' + formData.nickname + '(' + formData.email + ')');
+				behaviorLogger.info('发布留言，更新游客信息：' + getUserInfo(req, formData));
 			});
 		}
 
@@ -750,6 +756,7 @@ exports.addBoardComment = function(req, res) {
 
 		mail.boardNotice_myself(opts);
 
+		behaviorLogger.info('留言板新留言：【' + formData.content.replace(/\s+|\t|\n/g, ' ') + '】 留言人：' + getUserInfo(req, formData))
 		return res.json({
 			status: 'success'
 		});
@@ -790,7 +797,7 @@ exports.addBlogLike = function(req, res) {
 				return errorHandler(err, res);
 			}
 
-			console.log('博文点赞增加');
+			behaviorLogger.info('博文《' + blog.title + '》点赞数增加（' + blog.numbers.like + '），点赞用户：' + getUserInfo(req) );
 
 			return res.json({
 				status: 'success',

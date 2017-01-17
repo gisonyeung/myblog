@@ -14,8 +14,6 @@ var site = require('./handlers/site.js');
 var backstage = require('./handlers/backstage.js');
 
 
-
-
 module.exports = function(app) {
 
 	/*

@@ -300,7 +300,7 @@ exports.addBlogComment = function(req, res) {
 					$set: { 'website': formData.website },
 				},
 				function(err, person) {
-					console.log('更新游客信息');
+					behaviorLogger.info('发布行博评论，更新游客信息：' + getUserInfo(req, formData));
 				});
 			}
 
@@ -385,6 +385,7 @@ exports.addBlogComment = function(req, res) {
 
 				mail.replyNotice_myself(opts);
 
+				behaviorLogger.info('行博新评论：【' + formData.content.replace(/\s+|\t|\n/g, ' ') + '】 评论人：' + getUserInfo(req, formData))
 				return res.json({
 					status: 'success'
 				});

@@ -60,6 +60,8 @@ exports.bookLike = function(req, res) {
 				return errorHandler(err, res);
 			}
 
+			behaviorLogger.info('书本《' + book.name + '》点赞数增加（' + book.recommend + '），点赞用户：' + getUserInfo(req) );
+
 			return res.json({
 				result: 'success',
 				bookId: book.bookId,
