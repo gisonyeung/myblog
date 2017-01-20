@@ -11,7 +11,11 @@ var mail = require('../sendEmail.js');
 /* 日期格式化 */
 var dateFormat = require('../utils/dateFormat.js');
 
+var getUserInfo = require('../utils/getUserInfo.js');
 
+
+var log4js = require('../loggerConfig.js');
+var behaviorLogger = log4js.getLogger('BEHAVIOR');
 /*
 	请求书单列表
 */
