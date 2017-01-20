@@ -41,7 +41,7 @@ var store = new SessionStore({
 var WHITE_DOMAIN_LIST = require('./constants/white_domain');
 var seoLogger = log4js.getLogger('SEO');
 app.use(function(req, res, next) {
-	if ( !_.includes(WHITE_DOMAIN_LIST, req.host) ) {
+	if ( !_.includes(WHITE_DOMAIN_LIST, req.hostname.toLowerCase()) ) {
 		if ( !/favicon\.ico/.test(req.url) ) {
 			seoLogger.warn('非法域名意图访问: ' + req.hostname);
 		}
