@@ -51,7 +51,6 @@ const  WalkBlog = React.createClass({
           { 
             this.props.video ? 
             <Video 
-              loop
               controls
             >
               <source src={this.props.video} type="video/mp4" />
