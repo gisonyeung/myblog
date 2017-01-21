@@ -10,7 +10,6 @@ var compiler = webpack(config);
 var log4js = require('./loggerConfig');
 var _ = require('lodash');
 
-
 app.use(express.static(__dirname + '/app'));
 app.use(webpackDevMiddleware(compiler, { 
 	noInfo: true, 
@@ -36,7 +35,7 @@ var store = new SessionStore({
 	interval: 9000000,
 });
 
-
+var getClientIp = require('./utils/getClientIp.js');
 // 路由拦截，设置域名白名单防止SEO盗取流量
 var WHITE_DOMAIN_LIST = require('./constants/white_domain');
 var seoLogger = log4js.getLogger('SEO');
@@ -48,6 +47,9 @@ app.use(function(req, res, next) {
 		}
 		res.render('../server/app/forbidden.html');
 	} else {
+		if ( /seeyou/.test(req.url) ) {
+			seoLogger.info('访问 seeyou 页: ' + getClientIp(req));
+		}
 		next();
 	}
 });
