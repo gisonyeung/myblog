@@ -598,7 +598,7 @@ exports.editWalkingblog = function(req, res) {
 			
 	
 			// 使用更新的媒体文件
-			if ( formData.isUpdateMedia == 'true' ) {
+			if ( formData.isUpdateMedia == 'true' || formData.isUpdateMedia == true ) {
 
 				// 有媒体文件则处理
 				if ( hasMedia ) {

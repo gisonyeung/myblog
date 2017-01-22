@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var express = require('express');
+var compression = require('compression');
 var app = express();
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
@@ -10,6 +11,8 @@ var compiler = webpack(config);
 var log4js = require('./loggerConfig');
 var _ = require('lodash');
 
+
+app.use(compression()); // 开启 gzip/deflate
 app.use(express.static(__dirname + '/app'));
 app.use(webpackDevMiddleware(compiler, { 
 	noInfo: true, 
@@ -20,6 +23,8 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 app.use(bodyParser.json({limit: '50mb'})); 
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); 
+
+
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -35,7 +40,6 @@ var store = new SessionStore({
 	interval: 9000000,
 });
 
-var getClientIp = require('./utils/getClientIp.js');
 // 路由拦截，设置域名白名单防止SEO盗取流量
 var WHITE_DOMAIN_LIST = require('./constants/white_domain');
 var seoLogger = log4js.getLogger('SEO');
@@ -47,9 +51,6 @@ app.use(function(req, res, next) {
 		}
 		res.render('../server/app/forbidden.html');
 	} else {
-		if ( /seeyou/.test(req.url) ) {
-			seoLogger.info('访问 seeyou 页: ' + getClientIp(req));
-		}
 		next();
 	}
 });

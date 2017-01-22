@@ -30,6 +30,10 @@ $(function() {
 	var parentTr = {};
 	var deleteConfirm = gb.modal.confirm.init(function () {
 
+		if ( !confirm('确定删除？删除后不可恢复') ) {
+			return false;
+		}
+
 		$.ajax({
 			url: '/admin/deleteBlog',
 			method: 'POST',

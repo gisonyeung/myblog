@@ -13,6 +13,9 @@ var tag = require('./handlers/tag.js');
 var site = require('./handlers/site.js');
 var backstage = require('./handlers/backstage.js');
 
+var getClientIp = require('./utils/getClientIp.js');
+var log4js = require('./loggerConfig');
+var seoLogger = log4js.getLogger('SEO');
 
 module.exports = function(app) {
 
@@ -178,7 +181,14 @@ module.exports = function(app) {
 	});
 
 
+	app.post('/seeyou', function(req, res) {
 
+		seoLogger.info('访问 seeyou 页: ' + getClientIp(req));
+
+		return res.json({
+			result: 'success'
+		});
+	});
 
 	/* 
 		请求博文数目 
