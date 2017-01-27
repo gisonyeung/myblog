@@ -20,7 +20,7 @@ const HomeBlog = React.createClass({
           blogs: [],
       };
   },
-
+ 
   componentWillReceiveProps(nextProps) {
 
       BlogAction.fetchBlogs(nextProps.query.page);

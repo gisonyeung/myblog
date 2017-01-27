@@ -17,7 +17,6 @@ const Nav = React.createClass({
     this.selectStyle();  
   },
 
-
   componentWillReceiveProps(nextProps) {
   	
     this.selectStyle();
