@@ -35,6 +35,7 @@ var store = new SessionStore({
 	interval: 9000000,
 });
 
+
 var getClientIp = require('./utils/getClientIp.js');
 // 路由拦截，设置域名白名单防止SEO盗取流量
 var WHITE_DOMAIN_LIST = require('./constants/white_domain');
@@ -53,6 +54,18 @@ app.use(function(req, res, next) {
 		next();
 	}
 });
+
+app.all('*', function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Authorization, Accept, X-Requested-With");
+	res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+	if( req.method == "OPTIONS" ) {
+		res.sendStatus(200);/*让options请求快速返回*/
+	} else {
+		next();
+	}
+});
+
 
 app.use(require('cookie-parser')(credentials.cookieSecret));
 app.use(require('express-session')({

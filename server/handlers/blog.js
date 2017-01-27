@@ -126,7 +126,7 @@ exports.blogDetail = function(req, res) {
 */
 exports.nearBlog = function(req, res) {
 
-	var blogId = req.body.blogId;
+	var blogId = parseInt(req.body.blogId);
 
 	var prevId = blogId - 1,
 		nextId = blogId + 1;
