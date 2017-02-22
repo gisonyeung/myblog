@@ -5,7 +5,7 @@ import SiteAction from '../actions/SiteAction';
 
 const App = React.createClass({
 
-  componentWillMount() {
+  componentDidMount() {
   	// 增加博客访问量
     SiteAction.addSiteView();
   },

@@ -513,39 +513,42 @@ exports.addBlogComment = function(req, res) {
 						},
 					}
 				*/
-				var opts = {
-					to: quoteData.email,
-					data: {
-						currentTime: dateFormat(Date.now(), 'YYYY-MM-DD hh:mm:ss'),
-						replyTo: { // 邮件通知人，被回复人
-							nickname: quoteData.nickname,
-							comment: quoteData.content.replace(/<blockquote>[\s\S]*<\/blockquote>/, ''),
-							time: dateFormat(quoteData.time, 'YYYY-MM-DD hh:mm:ss'),
-						},
-						replyFrom: { // 回复人
-							nickname: formData.nickname,
-							comment: formData.content,
-							time: dateFormat(comment_time, 'YYYY-MM-DD hh:mm:ss'),
-						},
-						blog: {
-							blogId: blog.blogId,
-							title: blog.title,
+				if (false) {
+					var opts = {
+						to: quoteData.email,
+						data: {
+							currentTime: dateFormat(Date.now(), 'YYYY-MM-DD hh:mm:ss'),
+							replyTo: { // 邮件通知人，被回复人
+								nickname: quoteData.nickname,
+								comment: quoteData.content.replace(/<blockquote>[\s\S]*<\/blockquote>/, ''),
+								time: dateFormat(quoteData.time, 'YYYY-MM-DD hh:mm:ss'),
+							},
+							replyFrom: { // 回复人
+								nickname: formData.nickname,
+								comment: formData.content,
+								time: dateFormat(comment_time, 'YYYY-MM-DD hh:mm:ss'),
+							},
+							blog: {
+								blogId: blog.blogId,
+								title: blog.title,
+							}
+
 						}
-
 					}
-				}
-				// 如果有引用人，则发送评论通知
-				if( /<blockquote>[\s\S]*<pre>/.test(formData.content) && quoteData.email ) {
-					opts.data.replyFrom.comment = opts.data.replyFrom.comment.replace(/<blockquote>[\s\S]*<\/blockquote>/, '');
-					mail.commentNotice(opts);
-				}
+					// 如果有引用人，则发送评论通知
+					if( /<blockquote>[\s\S]*<pre>/.test(formData.content) && quoteData.email ) {
+						opts.data.replyFrom.comment = opts.data.replyFrom.comment.replace(/<blockquote>[\s\S]*<\/blockquote>/, '');
+						mail.commentNotice(opts);
+					}
 
-				mail.commentNotice_myself(opts);
+					mail.commentNotice_myself(opts);
+
+				}
 
 				behaviorLogger.info('博客新评论：【' + formData.content.replace(/\s+|\t|\n/g, ' ') + '】 评论人：' + getUserInfo(req, formData))
 
 				return res.json({
-					status: 'success'
+					result: 'success'
 				});
 
 			});
@@ -758,7 +761,7 @@ exports.addBoardComment = function(req, res) {
 
 		behaviorLogger.info('留言板新留言：【' + formData.content.replace(/\s+|\t|\n/g, ' ') + '】 留言人：' + getUserInfo(req, formData))
 		return res.json({
-			status: 'success'
+			result: 'success'
 		});
 
 	});
