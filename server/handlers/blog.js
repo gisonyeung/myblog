@@ -89,7 +89,14 @@ exports.homePage = function(req, res) {
 */
 exports.blogDetail = function(req, res) {
 
-	var blogId = req.body.blogId;
+	var blogId = parseInt(req.body.blogId, 10);
+	
+	if ( /[^0-9]/.test(blogId) ) {
+		return res.json({
+			result: 'error',
+			reason: '博文ID非法'
+		})
+	}
 
 	Blog.findByBlogId(blogId, function(err, blog) {
 
