@@ -3,22 +3,28 @@ $(function() {
 		$('#splash-wrapper').fadeOut(300, function() {
 			$('#splash').fadeOut(400);
 			$('#part1').fadeIn(1000, function() {
-				$('#part1 img').animate({
+				$('#part1 .logo').animate({
 					marginTop: 80,
 					opacity: 1
-				}, 700, 'swing', function() {
-					$('#part1 h1').fadeIn(300, function() {
-						setTimeout(function() {
-							$('#part1 p').fadeIn(400);
-							$('#part1 .btn').animate({
-								width: 170
-							}, 1000, 'swing', function() {
-								setTimeout(function() {
-									$('#part1 span').fadeIn(100);
-								}, 100);
-							});
-						}, 900);
+				}, 500, 'swing', function() {
+					$('#part1 .snh48').animate({
+						marginBottom: -90,
+						opacity: 1
+					}, 700, 'swing', function() {
+						$('#part1 h1').fadeIn(300, function() {
+							setTimeout(function() {
+								$('#part1 p').fadeIn(400);
+								$('#part1 .btn').animate({
+									width: 240
+								}, 1000, 'swing', function() {
+									setTimeout(function() {
+										$('#part1 span').fadeIn(100);
+									}, 100);
+								});
+							}, 900);
+						});
 					});
+					
 				});
 			});
 		});
@@ -54,7 +60,7 @@ $(function() {
 							left: '100%'
 						}, 500, showPart3)
 						
-					}, 4000);
+					}, 2500);
 				})
 
 
@@ -68,29 +74,31 @@ $(function() {
 	function showPart3() {
 		$('#part2').hide();
 		$('#part3').fadeIn(400, function() {
-			$('.tip2').animate({
-				opacity: 1,
-				bottom: 250,
-			}, 500, function () {
-				$('#part3').one('click', function() {
-					$('.tip2').fadeOut(200, function() {
-						$('.tip3').animate({
-							opacity: 1,
-							bottom: 95,
-						}, function () {
-							$('#part3').one('click', function() {
-								$('.tip3').fadeOut(200, function() {
-									$('#part4').show();
-									$('#part3').hide();
-									showPart4();
+			setTimeout(function() {
+				$('.tip2').animate({
+					opacity: 1,
+					bottom: 250,
+				}, 500, function () {
+					$('#part3').one('click', function() {
+						$('.tip2').fadeOut(200, function() {
+							$('.tip3').animate({
+								opacity: 1,
+								bottom: 95,
+							}, function () {
+								$('#part3').one('click', function() {
+									$('.tip3').fadeOut(200, function() {
+										$('#part4').show();
+										$('#part3').hide();
+										showPart4();
+									});
+									
 								});
-								
-							});
-						})
-						
+							})
+							
+						});
 					});
 				});
-			})
+			}, 700);
 		});
 
 	}
@@ -103,7 +111,7 @@ $(function() {
 		}, 500, function() {
 
 			$('#part4').on('click', function() {
-				$('#part5').show();
+				
 				$('#part4').animate({
 					left: '100%'
 				}, 500, showPart5);
@@ -113,6 +121,7 @@ $(function() {
 	}
 
 	function showPart5() {
+		$('#part5').fadeIn(400);
 		$('#part4').hide();
 	}
 

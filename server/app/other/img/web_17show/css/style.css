@@ -236,7 +236,7 @@ body {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
   background: -webkit-gradient(linear, 35% 0%, 50% 100%, from(#fde84a), to(#ffba1a));
 }
-#part1 img {
+#part1 .logo {
   opacity: 0;
   margin-top: 30px;
   padding: 10px;
@@ -246,7 +246,16 @@ body {
   background-color: #fff;
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.05);
 }
+#part1 .snh48 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: -120px;
+  width: 100%;
+  opacity: 0;
+}
 #part1 h1 {
+  margin-top: 5px;
   font-size: 25px;
   font-weight: 200;
 }
@@ -322,7 +331,7 @@ body {
   margin-top: 105px;
   font-size: 20px;
   color: #fff;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 #part2 .logo-circle {
@@ -504,8 +513,8 @@ body {
   background: -webkit-gradient(linear, 35% 0%, 50% 100%, from(#fde84a), to(#ffba1a));
   z-index: 90;
 }
-#part5 img {
-  margin-top: 80px;
+#part5 .logo {
+  margin-top: 60px;
   padding: 10px;
   width: 100px;
   height: 100px;
@@ -514,20 +523,20 @@ body {
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.05);
 }
 #part5 h1 {
+  margin-top: 5px;
   font-size: 25px;
   font-weight: 200;
 }
 #part5 p {
-  margin-top: 40px;
   font-size: 18px;
 }
 #part5 p.no-top {
   margin-top: 0;
 }
 #part5 .download-btn {
-  margin: 0 auto;
+  margin: 40px auto 0;
   height: 43px;
-  width: 170px;
+  width: 190px;
   text-align: center;
   margin-top: 20px;
   display: inline-block;
@@ -543,6 +552,13 @@ body {
 }
 #part5 .download-btn:hover {
   background-color: #ff9c1a;
+}
+#part5 .snh48 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: -120px;
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */
