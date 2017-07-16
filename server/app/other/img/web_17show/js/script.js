@@ -15,7 +15,6 @@ $(function() {
 							}, 1000, 'swing', function() {
 								setTimeout(function() {
 									$('#part1 span').fadeIn(100);
-									
 								}, 100);
 							});
 						}, 900);
@@ -73,13 +72,13 @@ $(function() {
 				opacity: 1,
 				bottom: 250,
 			}, 500, function () {
-				$('body').one('click', function() {
+				$('#part3').one('click', function() {
 					$('.tip2').fadeOut(200, function() {
 						$('.tip3').animate({
 							opacity: 1,
 							bottom: 95,
 						}, function () {
-							$('body').one('click', function() {
+							$('#part3').one('click', function() {
 								$('.tip3').fadeOut(200, function() {
 									$('#part4').show();
 									$('#part3').hide();
@@ -103,7 +102,7 @@ $(function() {
 			top: 20,
 		}, 500, function() {
 
-			$('body').on('click', function() {
+			$('#part4').on('click', function() {
 				$('#part5').show();
 				$('#part4').animate({
 					left: '100%'
