@@ -1,0 +1,548 @@
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", STXihei, STHeiti, Heiti, SimSun, sans-serif;
+}
+
+body {
+  background-color: #fff;
+}
+
+input, select {
+  outline: medium;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+#splash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #fff;
+  text-align: center;
+  z-index: 100;
+  transition: background 2s ease-out;
+  -moz-transition: background 2s ease-out;
+  -webkit-transition: background 2s ease-out;
+  -o-transition: background 2s ease-out;
+}
+#splash img {
+  position: absolute;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate3D(-50%, -50%, 0);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(30, 30, 30, 0.05);
+}
+#splash .logo-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3D(-50%, -50%, 0);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgba(255, 236, 62, 0.7);
+  animation-iteration-count: infinite;
+}
+#splash .logo-circle.layer-1 {
+  width: 125px;
+  height: 125px;
+  background-color: rgba(255, 236, 62, 0.7);
+  animation: fade1 1s ease 0s infinite alternate;
+  -moz-animation: fade1 1s ease 0s infinite alternate;
+  -webkit-animation: fade1 1s ease 0s infinite alternate;
+}
+#splash .logo-circle.layer-2 {
+  width: 155px;
+  height: 155px;
+  background-color: rgba(255, 236, 62, 0.4);
+  animation: fade2 1s ease 0s infinite alternate;
+  -moz-animation: fade2 1s ease 0s infinite alternate;
+  -webkit-animation: fade2 1s ease 0s infinite alternate;
+}
+#splash .logo-circle.layer-3 {
+  width: 195px;
+  height: 195px;
+  background-color: rgba(255, 236, 62, 0.3);
+  animation: fade3 1s ease 0s infinite alternate;
+  -moz-animation: fade3 1s ease 0s infinite alternate;
+  -webkit-animation: fade3 1s ease 0s infinite alternate;
+}
+
+.gradientBg {
+  background: -webkit-gradient(linear, 35% 0%, 50% 100%, from(#fde84a), to(#ffba1a));
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fade0 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+@-moz-keyframes fade0 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+@-webkit-keyframes fade0 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+@keyframes fade1 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+@-moz-keyframes fade1 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+@-webkit-keyframes fade1 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+@keyframes fade2 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+@-moz-keyframes fade2 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+@-webkit-keyframes fade2 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+@keyframes fade3 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fade3 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fade3 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+#part5,
+#part4,
+#part3,
+#part2,
+#part1 {
+  display: none;
+}
+
+.part {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  z-index: 99;
+  overflow: hidden;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+#part1 {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  background: -webkit-gradient(linear, 35% 0%, 50% 100%, from(#fde84a), to(#ffba1a));
+}
+#part1 img {
+  opacity: 0;
+  margin-top: 30px;
+  padding: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 13px;
+  background-color: #fff;
+  box-shadow: 0 0 30px rgba(30, 30, 30, 0.05);
+}
+#part1 h1 {
+  font-size: 25px;
+  font-weight: 200;
+}
+#part1 p {
+  margin-top: 40px;
+  font-size: 18px;
+}
+#part1 p.no-top {
+  margin-top: 0;
+}
+#part1 .btn {
+  margin: 0 auto;
+  height: 43px;
+  width: 0px;
+  text-align: center;
+  margin-top: 20px;
+  display: inline-block;
+  padding: 10px 0 13px;
+  line-height: 20px;
+  font-size: 18px;
+  background-color: #f5981f;
+  border-radius: 22px;
+  transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+}
+#part1 .btn:hover {
+  background-color: #ff9c1a;
+}
+#part1 .btn span {
+  display: none;
+}
+#part1 h1,
+#part1 p {
+  display: none;
+}
+
+#part2 {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff6af), to(#ffcc56), color-stop(0.2, #f6f6f6), color-stop(0.8, #f6f6f6));
+  z-index: 98;
+}
+#part2 .tab {
+  position: absolute;
+  top: 20px;
+  left: 10%;
+  width: 80%;
+}
+#part2 .tip1 {
+  position: absolute;
+  width: 70%;
+  top: 50%;
+  margin-top: -210px;
+  left: 15%;
+  opacity: 0;
+}
+#part2 .match-btn {
+  position: absolute;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate3D(-50%, -50%, 0);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(30, 30, 30, 0.05);
+}
+#part2 .match-text {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  margin-top: 105px;
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+#part2 .logo-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3D(-50%, -50%, 0);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgba(255, 236, 62, 0.7);
+  animation-iteration-count: infinite;
+}
+#part2 .logo-circle.layer-1 {
+  width: 125px;
+  height: 125px;
+  background-color: rgba(255, 236, 62, 0.7);
+}
+#part2 .logo-circle.layer-2 {
+  width: 155px;
+  height: 155px;
+  background-color: rgba(255, 236, 62, 0.4);
+}
+#part2 .logo-circle.layer-3 {
+  width: 195px;
+  height: 195px;
+  background-color: rgba(255, 236, 62, 0.3);
+}
+#part2 #splash-wrapper2.animate .match-btn {
+  animation: fade0 1s ease 0s infinite alternate;
+  -moz-animation: fade0 1s ease 0s infinite alternate;
+  -webkit-animation: fade0 1s ease 0s infinite alternate;
+}
+#part2 #splash-wrapper2.animate .layer-1 {
+  animation: fade1 1s ease 0s infinite alternate;
+  -moz-animation: fade1 1s ease 0s infinite alternate;
+  -webkit-animation: fade1 1s ease 0s infinite alternate;
+}
+#part2 #splash-wrapper2.animate .layer-2 {
+  animation: fade2 1s ease 0s infinite alternate;
+  -moz-animation: fade2 1s ease 0s infinite alternate;
+  -webkit-animation: fade2 1s ease 0s infinite alternate;
+}
+#part2 #splash-wrapper2.animate .layer-3 {
+  animation: fade2 1s ease 0s infinite alternate;
+  -moz-animation: fade2 1s ease 0s infinite alternate;
+  -webkit-animation: fade2 1s ease 0s infinite alternate;
+}
+#part2 #splash-wrapper2.animate .match-text {
+  animation: fade1 1s ease 0s infinite alternate;
+  -moz-animation: fade1 1s ease 0s infinite alternate;
+  -webkit-animation: fade1 1s ease 0s infinite alternate;
+}
+#part2 .footer_btn_1 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 65px;
+}
+#part2 .footer_btn_2 {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  margin-left: -50px;
+  width: 100px;
+}
+#part2 .footer_btn_3 {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 65px;
+}
+
+#part3 {
+  z-index: 97;
+}
+#part3 .gif {
+  position: absolute;
+  height: 100%;
+  left: -143%;
+  z-index: 96;
+}
+#part3 .bg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 96;
+}
+#part3 audio {
+  display: none;
+}
+#part3 img {
+  position: absolute;
+  z-index: 97;
+}
+#part3 .people {
+  top: 20px;
+  left: 10px;
+  width: 200px;
+}
+#part3 .add5s {
+  bottom: 200px;
+  right: 20px;
+  width: 70px;
+}
+#part3 .magic {
+  bottom: 130px;
+  right: 25px;
+  width: 55px;
+}
+#part3 .like {
+  bottom: 20px;
+  right: 5px;
+  width: 90px;
+}
+#part3 .unlike {
+  bottom: 20px;
+  left: 5px;
+  width: 90px;
+}
+#part3 .countdown {
+  position: absolute;
+  bottom: 23px;
+  left: 50%;
+  margin-left: -45px;
+  width: 90px;
+  height: 90px;
+  line-height: 30px;
+  padding: 17px 0;
+  font-size: 40px;
+  color: #fff;
+  border: 9px solid #ffec3e;
+  font-weight: 400;
+  text-align: center;
+  background-color: rgba(153, 153, 153, 0.9);
+  border-radius: 50%;
+  z-index: 97;
+}
+#part3 .tip2 {
+  width: 80%;
+  right: 10px;
+  bottom: 290px;
+  opacity: 0;
+}
+#part3 .tip3 {
+  width: 80%;
+  right: 0;
+  bottom: 125px;
+  opacity: 0;
+}
+
+#part4 {
+  z-index: 95;
+}
+#part4 .bg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 96;
+}
+#part4 img {
+  position: absolute;
+  z-index: 96;
+}
+#part4 .success {
+  width: 90%;
+  left: 5%;
+  top: 0;
+  opacity: 0;
+}
+
+#part5 {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  background: -webkit-gradient(linear, 35% 0%, 50% 100%, from(#fde84a), to(#ffba1a));
+  z-index: 90;
+}
+#part5 img {
+  margin-top: 80px;
+  padding: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 13px;
+  background-color: #fff;
+  box-shadow: 0 0 30px rgba(30, 30, 30, 0.05);
+}
+#part5 h1 {
+  font-size: 25px;
+  font-weight: 200;
+}
+#part5 p {
+  margin-top: 40px;
+  font-size: 18px;
+}
+#part5 p.no-top {
+  margin-top: 0;
+}
+#part5 .download-btn {
+  margin: 0 auto;
+  height: 43px;
+  width: 170px;
+  text-align: center;
+  margin-top: 20px;
+  display: inline-block;
+  padding: 10px 0 13px;
+  line-height: 20px;
+  font-size: 18px;
+  background-color: #f5981f;
+  border-radius: 22px;
+  transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+}
+#part5 .download-btn:hover {
+  background-color: #ff9c1a;
+}
+
+/*# sourceMappingURL=style.css.map */
