@@ -1,41 +1,35 @@
 $(function() {
-	if (window.location.hash == '#download') {
-		window.location.hash = '';
-		$('#part5').show();
-		$('#splash-wrapper').hide();
-	} else {
-		setTimeout(function() {
-			$('#splash-wrapper').fadeOut(300, function() {
-				$('#splash').fadeOut(400);
-				$('#part1').fadeIn(1000, function() {
-					$('#part1 .logo').animate({
-						marginTop: 80,
+	setTimeout(function() {
+		$('#splash-wrapper').fadeOut(300, function() {
+			$('#splash').fadeOut(400);
+			$('#part1').fadeIn(1000, function() {
+				$('#part1 .logo').animate({
+					marginTop: 80,
+					opacity: 1
+				}, 500, 'swing', function() {
+					$('#part1 .snh48').animate({
+						marginBottom: -90,
 						opacity: 1
-					}, 500, 'swing', function() {
-						$('#part1 .snh48').animate({
-							marginBottom: -90,
-							opacity: 1
-						}, 700, 'swing', function() {
-							$('#part1 h1').fadeIn(300, function() {
-								setTimeout(function() {
-									$('#part1 p').fadeIn(400);
-									$('#part1 .btn').animate({
-										width: 240
-									}, 1000, 'swing', function() {
-										setTimeout(function() {
-											$('#part1 span').fadeIn(100);
-										}, 100);
-									});
-								}, 500);
-							});
+					}, 700, 'swing', function() {
+						$('#part1 h1').fadeIn(300, function() {
+							setTimeout(function() {
+								$('#part1 p').fadeIn(400);
+								$('#part1 .btn').animate({
+									width: 240
+								}, 1000, 'swing', function() {
+									setTimeout(function() {
+										$('#part1 span').fadeIn(100);
+									}, 100);
+								});
+							}, 500);
 						});
-						
 					});
+					
 				});
 			});
-			// $('#part1').fadeIn(1000);
-		}, 2000);
-	}
+		});
+		// $('#part1').fadeIn(1000);
+	}, 2000);
 
 
 	$('.btn').one('click', function() {
@@ -82,7 +76,6 @@ $(function() {
 	$('.download-btn').on('click', function(e) {
 		if (isWeixinBrowser()) {
 			alert('请在右上角将页面转到外部浏览器打开');
-			window.location.hash = 'download';
 			e.preventDefault();
 		}
 	});
