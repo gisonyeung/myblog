@@ -1,5 +1,5 @@
 $(function() {
-	if (window.location.hash == 'download') {
+	if (window.location.hash == '#download') {
 		window.location.hash = '';
 		$('#part5').show();
 		$('#splash-wrapper').hide();
@@ -80,11 +80,11 @@ $(function() {
 
 
 	$('.download-btn').on('click', function(e) {
-		if (isWeixinBrowser()) {
+		// if (isWeixinBrowser()) {
 			alert('请在右上角将页面转到外部浏览器打开');
 			window.location.hash = 'download';
 			e.preventDefault();
-		}
+		// }
 	});
 
 	function showPart3() {
