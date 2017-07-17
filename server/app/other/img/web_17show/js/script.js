@@ -71,6 +71,14 @@ $(function() {
 		}, 700);
 	}
 
+
+	$('.download-btn').on('click', function(e) {
+		if (isWeixinBrowser()) {
+			alert('请在右上角将页面转到外部浏览器打开');
+			e.preventDefault();
+		}
+	});
+
 	function showPart3() {
 		$('#part2').hide();
 		$('#part3').fadeIn(400, function() {
@@ -124,5 +132,11 @@ $(function() {
 		$('#part5').fadeIn(400);
 		$('#part4').hide();
 	}
+
+	function isWeixinBrowser(){
+		return /micromessenger/.test(navigator.userAgent.toLowerCase())
+	}
+
+
 
 });
