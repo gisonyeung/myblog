@@ -108,6 +108,13 @@ exports.blogDetail = function(req, res) {
 			blog = getSafeBlog();
 		}
 
+		if (blog.blogId === -1) {
+			return res.json({
+				result: 'error',
+				reason: '博文为空'
+			})
+		}
+
 		blog.numbers.view++;
 		blog.save(function(err) {
 
