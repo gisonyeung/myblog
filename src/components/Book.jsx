@@ -55,9 +55,8 @@ const Book = React.createClass({
       <div className="inner-wrapper">
         <div className="b-head">
           <h2 className="title">我的书单 <span>{this.state.books.length ? '(' + this.state.books.length + ')' : ''}</span></h2>
-          <p className="about">一些看过的书，有好的，有坏的。</p>
-          <p className="about">如果下面也有你推荐的书，请随手加个热度。</p>
-          <p className="about">目前在看：《HTTP 权威指南》</p>
+          <p className="about">学生时期一些看过的书，内容有好有坏。</p>
+          <p className="about">如果下面也有你推荐的书，欢迎随手加个热度~</p>
         </div>
         <div className="b-body innew-wrapper">
           <div className="b-list clearfix">

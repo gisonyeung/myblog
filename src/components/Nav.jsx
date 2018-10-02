@@ -74,7 +74,7 @@ const Nav = React.createClass({
     return (
       <header className={`nav ${this.state.stateClass}`}>
       	<div className="inner-wrapper clearfix">
-	      <Link to="/" className="brand" title="二点零的个人站点">TWOPOINTHOLE</Link>
+	      <Link to="/" className="brand" title="杨子聪的个人站点">TWOPOINTHOLE</Link>
 	      <nav className="nav-bar">
 	        <div className="nav-list">
 	          <IndexLink to="/" activeClassName="active">首页</IndexLink>

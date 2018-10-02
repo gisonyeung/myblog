@@ -10,12 +10,10 @@ const AboutPanel = React.createClass({
           <h1 className="panel-title">关于我<span className="emoji">🎀</span></h1>
           <div className="ab-content">
             <div className="introduction">
-              <p><strong>杨子聪</strong>，1996年出生，家乡惠州，现于广州读书。</p>
+              <p><strong>杨子聪</strong>，1996年出生，家乡惠州，本科，毕业于广东工业大学，现供职于<strong>腾讯</strong>。</p>
               <p>性格外向健谈，乐观向上，日常喜欢写写字。</p>
-              <p><strong>广东工业大学2014级</strong>软件工程在读学生，大一暑假加入<strong>计算机工程研发中心</strong>前端组成为其中一员。</p>
-              <p>15年开始学习前端，有设计基础，平常有收集设计素材的习惯。</p>
-              <p>对页面交互和设计有浓厚兴趣，但目前的前端知识学习专注在开发领域。</p>
-              <p>我习惯苛求每一个细节，在自己能力范围内把事情做得最好，不曾敷衍，因为热爱。</p>
+              <p>广东工业大学2018届软件工程学生，学院工作室<strong>计算机工程研发中心</strong>前端组成员。</p>
+              <p>在工作上，我习惯苛求每一个细节，在自己能力范围内把事情做得最好，不曾敷衍，因为热爱。</p>
             </div>
             <div className="ab-section exp">
               <h2 className="sub-title">大学经历</h2>
@@ -93,9 +91,17 @@ const AboutPanel = React.createClass({
                   <p className="time">2016年12月</p>
                   <div className="item-cont">
                     <h3>阿里巴巴移动事业群-UC 实习生</h3>
-                    <p>2016年12月27日正式入职 UC</p>
+                    <p>2016年12月27日进入 UC 实习，次年3月离职</p>
                   </div>
                 </div>
+                <div className="item clearfix">
+                  <p className="time">2017年7月</p>
+                  <div className="item-cont">
+                    <h3>腾讯 实习生</h3>
+                    <p>2017年7月2日进入腾讯（深圳）SNG 实习，毕业后转正入职</p>
+                  </div>
+                </div>
+
 
               </div>
             </div>
@@ -112,7 +118,7 @@ const AboutPanel = React.createClass({
                 </div>
                 <div className="row">
                   <p className="key">所在地</p>
-                  <p className="value">广州大学城广东工业大学工学1号馆617</p>
+                  <p className="value">深圳市南山区科技中一路万利达大厦6F</p>
                 </div>
                 <div className="row">
                   <p className="key">GitHub</p>

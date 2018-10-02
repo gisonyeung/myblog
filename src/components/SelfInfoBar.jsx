@@ -35,7 +35,7 @@ const SelfInfoBar = React.createClass({
         <h2 className="nickname">
           <Link to="/about" title="关于我">杨子聪</Link>
         </h2>
-        <p className="introduction">广东工业大学软件工程在读学生。15年开始学习前端，对架构和开发都很感兴趣。<br/>工作时有强迫症。</p>
+        <p className="introduction">2018届广东工业大学软件工程毕业生<br/>现就职于腾讯（深圳）</p>
         <p className="github">
           <span className="icon icon-github"></span>
           <a href="https://github.com/gisonyeung" target="_blank" title="我的Github">https://github.com/gisonyeung</a>
