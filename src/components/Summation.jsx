@@ -29,7 +29,7 @@ const Summation = React.createClass({
       <section className="summation clearfix">
         <div className="data">
           <h3 className="value">{this.state.numbers.blog}</h3>
-          <p className="key">博客</p>
+          <p className="key">博文</p>
         </div>
         <div className="data">
           <h3 className="value">{this.state.numbers.comment}</h3>

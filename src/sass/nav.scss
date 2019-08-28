@@ -57,9 +57,10 @@ $navHeight: 86px;
 	z-index: 10;
 	@include transition();
 	.brand {
-		margin-top: 31px;
-		@include bgsize(228px, 30px);
+		margin-top: 21px;
+		@include bgsize(228px, 45px);
 		@include bgimg('../img/brand.png');
+		background-size: auto 45px;
 	}
 
 	.nav-bar {

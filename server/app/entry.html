@@ -7,29 +7,67 @@
 	<link rel="shortcut icon" href="/static/img/favour.png">
 </head>
 <style>
-	#out-date {
-		font-family: Lato, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-		color: #333;
-		padding: 20px 40px;
-	}
-	#out-date h2{
-		line-height: 100px;
-	}
-	#out-date h2 .emoji {
-		margin-right: 8px;
-	}
-	#out-date p {
-		line-height: 40px;
+  html, body, #container {
+		height: 100%;
+		margin: 0;
+		padding: 0;
 	}
 
+	#loading-svg {
+		height: 100%;
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 </style>
 <body>
 	<div id="container">
-		<div id="out-date">
-			<h2><span class="emoji">😭</span>浏览器版本过时</h2>
-			<p>很抱歉，您所使用的浏览器版本不被支持。</p>
-			<p>支持性：谷歌浏览器、火狐浏览器、IE9+</p>
-			<p>（出现这个信息也可能是由于页面正在加载中）</p>	
+		<div id="loading-svg">
+			<svg width="80px" height="80px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+				class="lds-ellipsis" style="background: none;">
+				<!--circle(cx="16",cy="50",r="10")-->
+				<circle cx="84" cy="50" r="0" fill="#dce4eb">
+					<animate attributeName="r" values="10;0;0;0;0" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="0s"></animate>
+					<animate attributeName="cx" values="84;84;84;84;84" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="0s"></animate>
+				</circle>
+				<circle cx="28.7591" cy="50" r="10" fill="#bbcedd">
+					<animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="-0.7s"></animate>
+					<animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="-0.7s"></animate>
+				</circle>
+				<circle cx="16" cy="50" r="3.75268" fill="#85a2b6">
+					<animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="-0.35s"></animate>
+					<animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="-0.35s"></animate>
+				</circle>
+				<circle cx="84" cy="50" r="6.24732" fill="#fdfdfd">
+					<animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="0s"></animate>
+					<animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="0s"></animate>
+				</circle>
+				<circle cx="62.7591" cy="50" r="10" fill="#dce4eb">
+					<animate attributeName="r" values="0;0;10;10;10" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="0s"></animate>
+					<animate attributeName="cx" values="16;16;16;50;84" keyTimes="0;0.25;0.5;0.75;1"
+						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
+						begin="0s"></animate>
+				</circle>
+			</svg>
 		</div>
 		
 	</div>
@@ -37,7 +75,7 @@
 
 	<!-- <iframe id="music-video" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=33544485&auto=0&height=66"></iframe> --><!-- 北方女王 -->
 
-	<iframe id="music-video" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=29431066&auto=0&height=66"></iframe>
+	<!-- <iframe id="music-video" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=29431066&auto=0&height=66"></iframe> -->
 
 	<!-- <iframe id="music-video" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=32272267&auto=0&height=66"></iframe> --><!-- 人海 -->
 	
