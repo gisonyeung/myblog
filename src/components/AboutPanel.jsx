@@ -10,7 +10,7 @@ const AboutPanel = React.createClass({
           <h1 className="panel-title">关于我<span className="emoji">🎀</span></h1>
           <div className="ab-content">
             <div className="introduction">
-              <p><strong>杨子聪</strong>，1996年出生，家乡惠州，本科，毕业于广东工业大学，现供职于<strong>腾讯</strong>。</p>
+              <p><strong>杨子聪</strong>，1996年，家乡惠州，本科，毕业于广东工业大学，现供职于<strong>腾讯</strong>。</p>
               <p>性格外向健谈，乐观向上，日常喜欢写写字。</p>
               <p>广东工业大学2018届软件工程学生，学院工作室<strong>计算机工程研发中心</strong>前端组成员。</p>
               <p>在工作上，我习惯苛求每一个细节，在自己能力范围内把事情做得最好，不曾敷衍，因为热爱。</p>
@@ -97,7 +97,7 @@ const AboutPanel = React.createClass({
                 <div className="item clearfix">
                   <p className="time">2017年7月</p>
                   <div className="item-cont">
-                    <h3>腾讯 实习生</h3>
+                    <h3>腾讯 正式员工</h3>
                     <p>2017年7月2日进入腾讯（深圳）SNG 实习，毕业后转正入职</p>
                   </div>
                 </div>
@@ -111,10 +111,6 @@ const AboutPanel = React.createClass({
                 <div className="row">
                   <p className="key">邮箱</p>
                   <p className="value"><a href="mailto:gisonyeung@gmail.com" target="_blank">gisonyeung@gmail.com</a></p>
-                </div>
-                <div className="row">
-                  <p className="key">QQ（商业联系）</p>
-                  <p className="value">1678067541</p>
                 </div>
                 <div className="row">
                   <p className="key">所在地</p>
