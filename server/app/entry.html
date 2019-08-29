@@ -13,7 +13,7 @@
 		padding: 0;
 	}
 
-	#loading-svg {
+	#loading-container {
 		height: 100%;
 		flex: 1;
 		display: flex;
@@ -23,51 +23,226 @@
 </style>
 <body>
 	<div id="container">
-		<div id="loading-svg">
-			<svg width="80px" height="80px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
-				class="lds-ellipsis" style="background: none;">
-				<!--circle(cx="16",cy="50",r="10")-->
-				<circle cx="84" cy="50" r="0" fill="#dce4eb">
-					<animate attributeName="r" values="10;0;0;0;0" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="0s"></animate>
-					<animate attributeName="cx" values="84;84;84;84;84" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="0s"></animate>
-				</circle>
-				<circle cx="28.7591" cy="50" r="10" fill="#bbcedd">
-					<animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="-0.7s"></animate>
-					<animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="-0.7s"></animate>
-				</circle>
-				<circle cx="16" cy="50" r="3.75268" fill="#85a2b6">
-					<animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="-0.35s"></animate>
-					<animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="-0.35s"></animate>
-				</circle>
-				<circle cx="84" cy="50" r="6.24732" fill="#fdfdfd">
-					<animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="0s"></animate>
-					<animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="0s"></animate>
-				</circle>
-				<circle cx="62.7591" cy="50" r="10" fill="#dce4eb">
-					<animate attributeName="r" values="0;0;10;10;10" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="0s"></animate>
-					<animate attributeName="cx" values="16;16;16;50;84" keyTimes="0;0.25;0.5;0.75;1"
-						keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1.4s" repeatCount="indefinite"
-						begin="0s"></animate>
-				</circle>
-			</svg>
+		<div id="loading-container">
+			<div class="lds-css ng-scope">
+				<div style="width:100%;height:100%" class="lds-ellipsis">
+					<div>
+						<div></div>
+					</div>
+					<div>
+						<div></div>
+					</div>
+					<div>
+						<div></div>
+					</div>
+					<div>
+						<div></div>
+					</div>
+					<div>
+						<div></div>
+					</div>
+				</div>
+				<style type="text/css">
+					@keyframes lds-ellipsis3 {
+			
+						0%,
+						25% {
+							left: 32px;
+							-webkit-transform: scale(0);
+							transform: scale(0);
+						}
+			
+						50% {
+							left: 32px;
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+			
+						75% {
+							left: 100px;
+						}
+			
+						100% {
+							left: 168px;
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+					}
+			
+					@-webkit-keyframes lds-ellipsis3 {
+			
+						0%,
+						25% {
+							left: 32px;
+							-webkit-transform: scale(0);
+							transform: scale(0);
+						}
+			
+						50% {
+							left: 32px;
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+			
+						75% {
+							left: 100px;
+						}
+			
+						100% {
+							left: 168px;
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+					}
+			
+					@keyframes lds-ellipsis2 {
+						0% {
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+			
+						25%,
+						100% {
+							-webkit-transform: scale(0);
+							transform: scale(0);
+						}
+					}
+			
+					@-webkit-keyframes lds-ellipsis2 {
+						0% {
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+			
+						25%,
+						100% {
+							-webkit-transform: scale(0);
+							transform: scale(0);
+						}
+					}
+			
+					@keyframes lds-ellipsis {
+						0% {
+							left: 32px;
+							-webkit-transform: scale(0);
+							transform: scale(0);
+						}
+			
+						25% {
+							left: 32px;
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+			
+						50% {
+							left: 100px;
+						}
+			
+						75% {
+							left: 168px;
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+			
+						100% {
+							left: 168px;
+							-webkit-transform: scale(0);
+							transform: scale(0);
+						}
+					}
+			
+					@-webkit-keyframes lds-ellipsis {
+						0% {
+							left: 32px;
+							-webkit-transform: scale(0);
+							transform: scale(0);
+						}
+			
+						25% {
+							left: 32px;
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+			
+						50% {
+							left: 100px;
+						}
+			
+						75% {
+							left: 168px;
+							-webkit-transform: scale(1);
+							transform: scale(1);
+						}
+			
+						100% {
+							left: 168px;
+							-webkit-transform: scale(0);
+							transform: scale(0);
+						}
+					}
+			
+					.lds-ellipsis {
+						position: relative;
+					}
+			
+					.lds-ellipsis>div {
+						position: absolute;
+						-webkit-transform: translate(-50%, -50%);
+						transform: translate(-50%, -50%);
+						width: 40px;
+						height: 40px;
+					}
+			
+					.lds-ellipsis div>div {
+						width: 40px;
+						height: 40px;
+						border-radius: 50%;
+						background: #f00;
+						position: absolute;
+						top: 100px;
+						left: 32px;
+						-webkit-animation: lds-ellipsis 1.6s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
+						animation: lds-ellipsis 1.6s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
+					}
+			
+					.lds-ellipsis div:nth-child(1) div {
+						-webkit-animation: lds-ellipsis2 1.6s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
+						animation: lds-ellipsis2 1.6s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
+						background: #dce4eb;
+					}
+			
+					.lds-ellipsis div:nth-child(2) div {
+						-webkit-animation-delay: -0.8s;
+						animation-delay: -0.8s;
+						background: #bbcedd;
+					}
+			
+					.lds-ellipsis div:nth-child(3) div {
+						-webkit-animation-delay: -0.4s;
+						animation-delay: -0.4s;
+						background: #85a2b6;
+					}
+			
+					.lds-ellipsis div:nth-child(4) div {
+						-webkit-animation-delay: 0s;
+						animation-delay: 0s;
+						background: #fdfdfd;
+					}
+			
+					.lds-ellipsis div:nth-child(5) div {
+						-webkit-animation: lds-ellipsis3 1.6s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
+						animation: lds-ellipsis3 1.6s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
+						background: #dce4eb;
+					}
+			
+					.lds-ellipsis {
+						width: 80px !important;
+						height: 80px !important;
+						-webkit-transform: translate(-40px, -40px) scale(0.4) translate(40px, 40px);
+						transform: translate(-40px, -40px) scale(0.4) translate(40px, 40px);
+					}
+				</style>
+			</div>
 		</div>
 		
 	</div>

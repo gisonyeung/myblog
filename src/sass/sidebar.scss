@@ -78,6 +78,9 @@ $widgetRadius: 2px;
 	.github {
 		font-size: 12px;
 		color: $nameColor;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		.icon-github {
 			margin-right: 5px;
