@@ -2,6 +2,7 @@ import React from 'react';
 import smoothScroll from '../utils/smoothScroll';
 
 require('../sass/AnchorBar.scss');
+import BlogStore from '../stores/BlogStore';
 
 
 const AnchorBar = React.createClass({
@@ -16,20 +17,19 @@ const AnchorBar = React.createClass({
   },
 
   componentDidMount() {
-    this.reloadMenuList();
+    BlogStore.addChangeListener('BLOG_DETAIL', this.reloadMenuListWithTimer);
     this.bindScrollListener();
   },
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.blogId !== this.props.blogId) {
-      setTimeout(() => {
-        this.reloadMenuList();
-      }, 200);
-    }
+  componentWillUnmount() {
+    BlogStore.removeChangeListener('BLOG_DETAIL', this.reloadMenuListWithTimer);
+    this.unbindScrollListener();
   },
 
-  componentWillUnmount() {
-    this.unbindScrollListener();
+  reloadMenuListWithTimer() {
+    setTimeout(() => {
+      this.reloadMenuList();
+    }, 500);
   },
 
   reloadMenuList() {
