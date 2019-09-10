@@ -48,24 +48,40 @@ const SelfInfoBar = React.createClass({
           <span className="icon icon-mail"></span>
           <em>订阅我</em>
         </a>
-        <Summation />
-        <ul className="link">
-          <li>
-            <span className="icon icon-disc"></span>
-            <Link to="/about" className="active">我的简介</Link>
-          </li>
-          <li>
-            <span className="icon icon-disc"></span>
-            <a href="/other/html/algorithms.html" target="_blank">算法分析</a>
-          </li>
-          <li>
-            <span className="icon icon-disc"></span>
-            <a href="javascript:;" className="has-panel">公众号</a>
-            <div className="panel">
-              <img src="/static/img/qrcode.jpg"/>
-            </div>
-          </li>
-        </ul>
+
+        <ReactCSSTransitionGroup
+          transitionName="fold"
+          transitionAppear={true}
+          transitionAppearTimeout={800}
+          transitionEnterTimeout={800}
+          transitionLeaveTimeout={800}
+        >
+        {
+          this.props.simpleMode ? '' : <Summation />
+        }
+        {
+          this.props.simpleMode ? '' :
+          <ul className="link">
+            <li>
+              <span className="icon icon-disc"></span>
+              <Link to="/about" className="active">我的简介</Link>
+            </li>
+            <li>
+              <span className="icon icon-disc"></span>
+              <a href="/other/html/algorithms.html" target="_blank">算法分析</a>
+            </li>
+            <li>
+              <span className="icon icon-disc"></span>
+              <a href="javascript:;" className="has-panel">公众号</a>
+              <div className="panel">
+                <img src="/static/img/qrcode.jpg" />
+              </div>
+            </li>
+          </ul>
+        }
+        </ReactCSSTransitionGroup>
+
+        
         <ReactCSSTransitionGroup
           transitionName="dropdown" 
           transitionAppear={true} 
