@@ -29,7 +29,7 @@ const AnchorBar = React.createClass({
   reloadMenuListWithTimer() {
     setTimeout(() => {
       this.reloadMenuList();
-    }, 500);
+    }, 100);
   },
 
   reloadMenuList() {
