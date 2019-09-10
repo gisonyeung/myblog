@@ -29,7 +29,7 @@ const AnchorBar = React.createClass({
   reloadMenuListWithTimer() {
     setTimeout(() => {
       this.reloadMenuList();
-    }, 300);
+    }, 100);
   },
 
   reloadMenuList() {
@@ -44,6 +44,7 @@ const AnchorBar = React.createClass({
     // 第一项为文章标题，不加入列表
     $headers.shift();
 
+    let lastTop = -1;
     let menuList = [];
     let subMenuList = [];
     Array.prototype.forEach.call($headers, (item, index) => {
@@ -52,6 +53,10 @@ const AnchorBar = React.createClass({
         top: item.offsetTop,
       };
 
+      // 去重
+      if (lastTop == item.offsetTop) return;
+
+      lastTop = item.offsetTop;
       item.tagName == 'H1' ? menuList.push(menuItem) : subMenuList.push(menuItem)
 
       if ((!$headers[index + 1] || $headers[index + 1].tagName == 'H1') && subMenuList.length) {

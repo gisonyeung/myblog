@@ -74,6 +74,8 @@ $widgetRadius: 2px;
 		}
 
 		a {
+			display: inline-block;
+			vertical-align: -7px;
 			cursor: pointer;
 			transition: all 0.3s;
 			border-bottom: 1px solid #fff;
@@ -82,6 +84,7 @@ $widgetRadius: 2px;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+
 
 			&:hover {
 				border-bottom-color: #000;
