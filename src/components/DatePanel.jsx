@@ -99,7 +99,7 @@ const DatePanel = React.createClass({
             return (
               that.state.yearBlogs[key] > 0 ?
               <Link 
-                to={`/archives?type=date&date=${that.state.siteYear.currentYear}${key}`} 
+                to={`/archives?type=date&date=${that.state.headerYear}${key}`} 
                 className="date-item"
                 key={index}
               >
