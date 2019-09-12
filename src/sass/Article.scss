@@ -173,7 +173,8 @@
 			blockquote {
 				margin: 20px 0;
 				padding: 15px;
-				border-left: 3px solid #ccc;
+				// border-left: 9px solid #ccc;
+				border-left: 9px solid #ccc;
 				background-color: #f7f7f7;
 				font-family: inherit;
 				
@@ -188,7 +189,7 @@
 			code {
 			    background: #eee;
 			    text-shadow: 0 1px #fff;
-			    padding: 0 0.3em;
+			    padding: 3px 0.3em;
 			    margin: 0 0.3em;
 			    font-family: inherit;
 			}
@@ -211,16 +212,18 @@
 			}
 
 			pre {
+				width: 763px;
+				margin-left: -45px;
 				margin-bottom: 25px;
-				padding: 16px;
+				padding: 16px 45px;
 				overflow: auto;
 				font-size: 85%;
 				background-color: #111;
 				word-wrap: normal;
-				border-radius: 3px;
+				// border-radius: 3px;
 				color: #fff;
-				font: 13px Consolas, "Liberation Mono", Menlo, Courier, monospace;
-				font-family: inherit;
+				font-size: 13px;
+				font-family: Source Code Pro,Monaco,Lucida Console,monospace;
 				line-height: 25px;
 
 				code {
@@ -236,7 +239,7 @@
 			img {
 				display: block;
 				max-width: 100%;
-				margin: 10px 0;
+				margin: 16px auto;
 				border: 1px solid #eee;
 				padding: 5px;
 				border-radius: 2px;
@@ -244,11 +247,18 @@
 			}
 
 			a {
-			    color: #4078c0;
-		    	text-decoration: none;
+					color: #4078c0;
+					border-bottom: 1px solid #4078c0;
+					border-bottom: 1px solid #4078c0;
+					padding: 2px 2px 1px;
+			    // color: #4078c0;
+					text-decoration: none;
+					cursor: pointer;
 
 		    	&:hover {
-		    		text-decoration: underline;
+						background-color: #4078c0;
+    					color: #fff;
+		    		// text-decoration: underline;
 		    	}
 			}
 
@@ -627,6 +637,20 @@ code::-moz-selection {
 }
 
 code::-webkit-selection {
+		background: $selectBg; 
+		color: $selectFt;
+}
+
+code *::selection {
+		background: $selectBg; 
+		color: $selectFt;
+}
+code *::-moz-selection {
+		background: $selectBg; 
+		color: $selectFt;
+}
+
+code *::-webkit-selection {
 		background: $selectBg; 
 		color: $selectFt;
 }
