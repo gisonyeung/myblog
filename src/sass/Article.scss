@@ -641,6 +641,12 @@ code::-webkit-selection {
 		color: $selectFt;
 }
 
+code::-webkit-scrollbar { width: 0 !important }
+code {
+	-ms-overflow-style: none;
+	overflow: -moz-scrollbars-none;
+}
+
 code *::selection {
 		background: $selectBg; 
 		color: $selectFt;

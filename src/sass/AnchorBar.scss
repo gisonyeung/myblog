@@ -32,10 +32,16 @@
 
 $widgetRadius: 2px;
 
+.anchor-bar::-webkit-scrollbar { width: 0 !important }
+.anchor-bar {
+	-ms-overflow-style: none;
+	overflow: -moz-scrollbars-none;
+}
+
 .anchor-bar {
 	position: sticky;
 	top: 32px;
-	overflow: hidden;
+	overflow: auto;
 	// left: 900px;
 
 

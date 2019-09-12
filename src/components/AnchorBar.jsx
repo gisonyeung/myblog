@@ -19,6 +19,11 @@ const AnchorBar = React.createClass({
   componentDidMount() {
     BlogStore.addChangeListener('BLOG_DETAIL', this.reloadMenuListWithTimer);
     this.bindScrollListener();
+
+    setTimeout(() => {
+      this.setMenuMaxHeight();
+      this.scrollPrevent();
+    }, 2000);
   },
 
   componentWillUnmount() {
@@ -70,6 +75,14 @@ const AnchorBar = React.createClass({
     })
   },
 
+  setMenuMaxHeight() {
+    const $menu = document.querySelector('.anchor-bar');
+
+    if (!$menu) return;
+
+    $menu.style.maxHeight = window.innerHeight - 60 + 'px';
+  },
+
   bindScrollListener() {
     const edgeDistance = 100;
     const scrollHandler = () => {
@@ -106,6 +119,29 @@ const AnchorBar = React.createClass({
 
   jumpToAnchor(menuItem) {
     smoothScroll(menuItem.top + 100)
+  },
+
+  scrollPrevent() {
+    const eventType = document.mozHidden !== undefined ? 'DOMMouseScroll' : 'mousewheel';
+    const $menu = document.querySelector('.anchor-bar');
+
+    if (!$menu) return;
+
+    $menu.addEventListener(eventType, (event) => {
+      let { scrollTop, scrollHeight, clientHeight } = $menu;
+      let scrollEndHeight = scrollHeight - clientHeight;
+      let delta = event.wheelDelta ? event.wheelDelta : -(event.originalEvent.delta || 0);
+
+      // 无滚动条时不启动特性
+      if (scrollHeight === clientHeight) return;
+
+      if ((delta > 0 && scrollTop <= delta) || (delta < 0 && scrollEndHeight - scrollTop <= -1 * delta)) {
+        // IE浏览器下滚动会跨越边界直接影响父级滚动，因此，临界时候手动边界滚动定位
+        $menu.scrollTop = delta > 0 ? 0 : scrollHeight;
+        // 向上滚 || 向下滚
+        event.preventDefault();
+      }
+    });
   },
 
   render() {
