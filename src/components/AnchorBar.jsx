@@ -21,7 +21,6 @@ const AnchorBar = React.createClass({
     this.bindScrollListener();
 
     setTimeout(() => {
-      this.setMenuMaxHeight();
       this.scrollPrevent();
     }, 2000);
   },
@@ -73,14 +72,6 @@ const AnchorBar = React.createClass({
     this.setState({
       menuList
     })
-  },
-
-  setMenuMaxHeight() {
-    const $menu = document.querySelector('.anchor-bar');
-
-    if (!$menu) return;
-
-    $menu.style.maxHeight = window.innerHeight - 60 + 'px';
   },
 
   bindScrollListener() {

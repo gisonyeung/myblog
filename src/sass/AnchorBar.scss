@@ -42,6 +42,7 @@ $widgetRadius: 2px;
 	position: sticky;
 	top: 32px;
 	overflow: auto;
+	max-height: calc(100vh - 60px);
 	// left: 900px;
 
 
