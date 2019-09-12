@@ -4,35 +4,45 @@
 
 const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
-const smoothScroll = (y = 0, duration = 150) => {
+const smoothScroll = (y = 0, duration = 150, $container = window) => {
+  let isContinue = true;
   y = Math.max(y, 0);
   duration = Math.max(duration, 0);
 
   if (duration == 0) {
-    return window.scrollTo(0, y);
+    return $container.scrollTo(0, y);
   }
 
-  let currentScrollTop = document.body.scrollTop + document.documentElement.scrollTop;
+  let currentScrollTop = $container == window ? (document.body.scrollTop + document.documentElement.scrollTop) : $container.scrollTop;
   let eachStepDistance = (y - currentScrollTop) * 16 / duration
 
-  if (currentScrollTop == y) return;
+  if (currentScrollTop == y) return () => { isContinue = false };
 
   function step() {
-    let currentScrollTop = document.body.scrollTop + document.documentElement.scrollTop;
-    let currentBottomPlace = document.body.scrollTop + document.documentElement.scrollTop + window.innerHeight;
+    if (!isContinue) return;
 
-    window.scrollTo(0, document.body.scrollTop + document.documentElement.scrollTop + eachStepDistance);
+    let currentScrollTop = $container == window ? (document.body.scrollTop + document.documentElement.scrollTop) : $container.scrollTop;
+    let currentBottomPlace = $container == window ? 
+      (document.body.scrollTop + document.documentElement.scrollTop + window.innerHeight) :
+      ($container.scrollTop + $container.innerHeight);
+    let containerScrollHeight = $container == window ? document.body.scrollHeight : $container.scrollHeight;
+
+    $container.scrollTo(0, currentScrollTop + eachStepDistance);
 
     if (Math.abs(y - currentScrollTop) > Math.abs(eachStepDistance)
-      && currentBottomPlace != document.body.scrollHeight 
+      && currentBottomPlace != containerScrollHeight
       && currentScrollTop != 0) {
       requestAnimationFrame(step);
     } else {
-      window.scrollTo(0, y);
+      $container.scrollTo(0, y);
     }
   }
 
   requestAnimationFrame(step);
+
+  return () => {
+    isContinue = false;
+  }
 }
 
 export default smoothScroll;

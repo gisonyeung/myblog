@@ -4,6 +4,7 @@ import smoothScroll from '../utils/smoothScroll';
 require('../sass/AnchorBar.scss');
 import BlogStore from '../stores/BlogStore';
 
+let cancelRAF = () => {};
 
 const AnchorBar = React.createClass({
 
@@ -23,6 +24,8 @@ const AnchorBar = React.createClass({
     setTimeout(() => {
       this.scrollPrevent();
     }, 2000);
+
+    this.reloadMenuListWithTimer();
   },
 
   componentWillUnmount() {
@@ -37,12 +40,11 @@ const AnchorBar = React.createClass({
   },
 
   reloadMenuList() {
-    let $h1 = document.querySelectorAll('.content h1');
-    let $h2 = document.querySelectorAll('.content h2');
-    let $headers = Array.prototype.concat.call(...$h1, ...$h2);
-
+    let $headers = document.querySelectorAll('.content h1, .content h2');
+    
     if (!$headers.length) return;
-
+    
+    $headers = [].concat(...$headers);
     // 根据 offsetTop 排序，形成数据结构，并基于这个高度，后续绑定scroll时判断阅读到哪里
     Array.prototype.sort.call($headers, (a, b) => a.offsetTop - b.offsetTop);
     // 第一项为文章标题，不加入列表
@@ -79,15 +81,18 @@ const AnchorBar = React.createClass({
     const scrollHandler = () => {
       let currentScrollTop = document.documentElement.scrollTop + document.body.scrollTop;
       let activeIndex = '0';
+      let activeDomIndex = -1;
       this.state.menuList.forEach((item, index) => {
         if (!item.length) {
           if (currentScrollTop > (item.top - edgeDistance)) {
-            activeIndex = index + ''
+            activeIndex = index + '';
+            activeDomIndex++;
           }
         } else {
           item.forEach((subItem, subIndex) => {
             if (currentScrollTop > (subItem.top - edgeDistance)) {
-              activeIndex = index + '-' + subIndex
+              activeIndex = index + '-' + subIndex;
+              activeDomIndex++;
             }
           })
         }
@@ -95,7 +100,9 @@ const AnchorBar = React.createClass({
 
       this.setState({
         activeIndex
-      })
+      });
+
+      this.checkItemInViewport(activeDomIndex);
     }
 
     window.addEventListener('scroll', scrollHandler);
@@ -109,7 +116,6 @@ const AnchorBar = React.createClass({
   },
 
   jumpToAnchor(menuItem) {
-    smoothScroll(menuItem.top + 100)
   },
 
   scrollPrevent() {
@@ -133,6 +139,35 @@ const AnchorBar = React.createClass({
         event.preventDefault();
       }
     });
+  },
+
+  checkItemInViewport(index) {
+    const $menu = document.querySelector('.anchor-bar');
+
+    // 阅读面板高度小于面板最大高度，则跳过检查
+    if (index == -1 || !$menu || $menu.innerHeight <= (window.innerHeight - 60)) return;
+
+    const $lis = document.querySelectorAll('.anchor-bar li');
+    const $li = $lis[index];
+
+    cancelRAF();
+
+    // 当前 index 处于前2或倒数第2时直接置顶或置底
+    if (index <= 1) {
+      return (cancelRAF = smoothScroll(0, 100, $menu));
+    } else if (index >= $lis.length - 2) {
+      return (cancelRAF = smoothScroll($menu.scrollHeight, 100, $menu));
+    }
+    
+    // 说明还在视窗内
+    if ($li.offsetTop >= $menu.scrollTop + 25 && $li.offsetTop <= $menu.scrollTop + $menu.offsetHeight - 50) return;
+      
+    // 在上方，那就往上微移，保持目标在顶部
+    if ($li.offsetTop < $menu.scrollTop + 25) {
+      cancelRAF = smoothScroll($li.offsetTop - 25, 100, $menu);
+    } else { // 在下方，那就往下微移，保持目标在底部 
+      cancelRAF = smoothScroll($li.offsetTop - $menu.offsetHeight + 50, 100, $menu);
+    }
   },
 
   render() {
