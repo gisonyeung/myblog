@@ -116,6 +116,7 @@ const AnchorBar = React.createClass({
   },
 
   jumpToAnchor(menuItem) {
+    smoothScroll(menuItem.top)
   },
 
   scrollPrevent() {
