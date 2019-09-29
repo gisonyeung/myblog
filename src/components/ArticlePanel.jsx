@@ -5,6 +5,9 @@ import ArticleHot from './ArticleHot';
 import ArticleComment from './ArticleComment';
 import BlogAction from '../actions/BlogAction';
 import BlogStore from '../stores/BlogStore';
+import hljs from 'highlight.js';
+import '../sass/highlight.scss';
+window.hljs = hljs;
 
 const ArticlePanel = React.createClass({
 
@@ -36,15 +39,16 @@ const ArticlePanel = React.createClass({
   },
 
   componentDidMount() {
-
+    setTimeout(() => {
+      document.querySelectorAll('.atc-content pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    }, 1000);
     BlogStore.addChangeListener('BLOG_DETAIL', this.updateContent);
-    
   },
 
   componentWillUnmount() {
-
     BlogStore.removeChangeListener('BLOG_DETAIL', this.updateContent)  
-
   },
 
   updateContent() {
@@ -53,9 +57,9 @@ const ArticlePanel = React.createClass({
     });
 
     setTimeout(() => {
-      document.querySelectorAll('.atc-content pre code').forEach(block => {
+      document.querySelectorAll('.atc-content pre code').forEach((block) => {
         hljs.highlightBlock(block);
-      })
+      });
     }, 200);
   },	
 
