@@ -137,7 +137,7 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 		})
 		.then(data => {
 			if ( data.result == 'success' ) {
-				this.blog = this.getBlogDetail();
+				this.blog = data.blog;
 				this.emitEvent('BLOG_DETAIL');
 			} 
 		})
