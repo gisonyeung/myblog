@@ -53,7 +53,7 @@ const ArticlePanel = React.createClass({
     });
 
     setTimeout(() => {
-      docuemnt.querySelectorAll('.atc-content pre code').forEach(block => {
+      document.querySelectorAll('.atc-content pre code').forEach(block => {
         hljs.highlightBlock(block);
       })
     }, 200);
