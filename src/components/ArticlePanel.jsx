@@ -5,7 +5,6 @@ import ArticleHot from './ArticleHot';
 import ArticleComment from './ArticleComment';
 import BlogAction from '../actions/BlogAction';
 import BlogStore from '../stores/BlogStore';
-import smoothScroll from '../utils/smoothScroll';
 import hljs from 'highlight.js';
 import '../sass/highlight.scss';
 window.hljs = hljs;
@@ -32,13 +31,6 @@ const ArticlePanel = React.createClass({
     // 相等的时候，不更新
     if(nextProps.blogId == this.props.blogId) {
       return false;
-    }
-
-    // 只有切换博文的时候才自动置顶
-    if (nextProps.blogId && this.props.blodId && this.props.blodId !== -1) {
-      setTimeout(() => {
-        smoothScroll(0, 200);
-      }, 100);
     }
 
     // 于当前页切换博文详情时，发送请求更新文章，并将页面置顶

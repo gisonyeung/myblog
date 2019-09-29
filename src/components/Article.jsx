@@ -4,10 +4,18 @@ import AnchorBar from './AnchorBar';
 import SelfInfoBar from './SelfInfoBar';
 import ArticlePanel from './ArticlePanel';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+// import smoothScroll from '../utils/smoothScroll';
 
 require('../sass/Article.scss');
 
 const Article = React.createClass({
+
+  componentWillReceiveProps(nextProps) {
+    // 切换文章时自动置顶
+    if (this.props.params.articleId !== nextProps.params.articleId) {
+      window.scrollTo(0,0);
+    }
+  },
 
   render() {
     return (
