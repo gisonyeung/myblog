@@ -13,7 +13,7 @@ var _ = require('lodash');
 
 
 app.use(compression()); // 开启 gzip/deflate
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/app', { maxAge: 24 * 3600 * 30 }));
 app.use(webpackDevMiddleware(compiler, { 
 	noInfo: true, 
 	publicPath: config.output.publicPath,
@@ -30,15 +30,15 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 var credentials = require('./credentials.js');
 
-var mongoose = require('mongoose');
-mongoose.connect(credentials.mongo.development);
+// var mongoose = require('mongoose');
+// mongoose.connect(credentials.mongo.development);
 
-/* session */
-var SessionStore = require('session-mongoose')(require('connect'));
-var store = new SessionStore({
-	url: credentials.mongo.session,
-	interval: 9000000,
-});
+// /* session */
+// var SessionStore = require('session-mongoose')(require('connect'));
+// var store = new SessionStore({
+// 	url: credentials.mongo.session,
+// 	interval: 9000000,
+// });
 
 // 路由拦截，设置域名白名单防止SEO盗取流量
 var WHITE_DOMAIN_LIST = require('./constants/white_domain');
@@ -55,15 +55,15 @@ app.use(function(req, res, next) {
 	}
 });
 
-app.use(require('cookie-parser')(credentials.cookieSecret));
-app.use(require('express-session')({
-	store: store,
-	cookie: { maxAge: 9000000 },
-}));
+// app.use(require('cookie-parser')(credentials.cookieSecret));
+// app.use(require('express-session')({
+// 	store: store,
+// 	cookie: { maxAge: 9000000 },
+// }));
 
 app.use(function(req, res, next) {
 	// 如果session有user，把它传到上下文中
-	res.locals.user = req.session.user;
+	// res.locals.user = req.session.user;
 	next();
 });
 
