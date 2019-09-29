@@ -72,10 +72,11 @@ const SelfInfoBar = React.createClass({
             </li>
             <li>
               <span className="icon icon-disc"></span>
-              <a href="javascript:;" className="has-panel">公众号</a>
-              <div className="panel">
+                  <a href="https://www.zhihu.com/people/xi-you-82-86/activities" target="_blank">知乎</a>
+              {/* <a href="javascript:;" className="has-panel">公众号</a> */}
+              {/* <div className="panel">
                 <img src="/static/img/qrcode.jpg" />
-              </div>
+              </div> */}
             </li>
           </ul>
         }
