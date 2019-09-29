@@ -172,7 +172,7 @@ exports.nearBlog = function(req, res) {
 			title: '',
 		}
 
-		Blog.getNextId(nextId, function(err, blog) {
+		Blog.getNextId(blogId, function(err, blog) {
 			if ( err ) {
 				reject(err);
 			}

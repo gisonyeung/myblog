@@ -26,7 +26,7 @@ const ArticleContent = React.createClass({
 
   componentWillReceiveProps(nextProps) {
     // 更新标题
-    document.title = this.props.title;
+    document.title = nextProps.title;
     
     // 相等的时候，不更新
     if(nextProps.blogId == this.props.blogId || this.props.blogId != -1) {
