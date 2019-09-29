@@ -13,7 +13,7 @@ const HomeBlog = React.createClass({
   
 
   getInitialState() {
-    let pageNum = BlogStore.getPageNum();
+    let pageNum = BlogStore.getCurrentPageNum();
 
     // 页码不同再重新拉起
     if (pageNum != this.props.query.page) {
