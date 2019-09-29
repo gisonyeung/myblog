@@ -51,6 +51,12 @@ const ArticlePanel = React.createClass({
     this.setState({ 
       blog: BlogStore.getBlogDetail() 
     });
+
+    setTimeout(() => {
+      docuemnt.querySelectorAll('.atc-content pre code').forEach(block => {
+        hljs.highlightBlock(block);
+      })
+    }, 200);
   },	
 
   render() {
