@@ -34,6 +34,13 @@ const ArticlePanel = React.createClass({
       return false;
     }
 
+    // 只有切换博文的时候才自动置顶
+    if (nextProps.blogId && this.props.blodId && this.props.blodId !== -1) {
+      setTimeout(() => {
+        smoothScroll(0, 200);
+      }, 100);
+    }
+
     // 于当前页切换博文详情时，发送请求更新文章，并将页面置顶
     this.setState({
       isLoading: true
@@ -51,6 +58,7 @@ const ArticlePanel = React.createClass({
   },
 
   componentWillUnmount() {
+    document.title = '杨子聪的个人博客';
     BlogStore.removeChangeListener('BLOG_DETAIL', this.updateContent)  
   },
 
@@ -59,13 +67,12 @@ const ArticlePanel = React.createClass({
       isLoading: false
     });
 
-    this.setState({ 
-      blog: BlogStore.getBlogDetail() 
-    });
+    let blog = BlogStore.getBlogDetail() ;
 
-    setTimeout(() => {
-      smoothScroll(0);
-    }, 100);
+    this.setState({ blog });
+
+    // 更新标签标题
+    document.title = blog.title || '此文章不存在';
 
     setTimeout(() => {
       document.querySelectorAll('.atc-content pre code').forEach((block) => {
