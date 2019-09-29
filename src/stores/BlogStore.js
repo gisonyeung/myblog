@@ -106,8 +106,7 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 
 	fetchPages: function() {
 
-		if ( this.isFirstFetch_pageNum ) {
-
+		if (this.isFirstFetch_pageNum) {
 			fetch(Api.homePage)
 			.then(data => {
 				if( data.result == 'success' ) {
@@ -121,9 +120,7 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 			});
 
 		} else {
-
 			this.emitEvent('BLOG_PAGE');
-
 		}
 	},
 
@@ -139,7 +136,9 @@ const BlogStore = assign({}, EventEmitter.prototype, {
 			if ( data.result == 'success' ) {
 				this.blog = data.blog;
 				this.emitEvent('BLOG_DETAIL');
-			} 
+			} else {
+				this.blog = {};
+			}
 		})
 		.catch(err => {
 			console.log(err);

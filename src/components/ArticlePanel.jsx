@@ -29,8 +29,10 @@ const ArticlePanel = React.createClass({
       return false;
     }
 
-    // 与当前页切换博文详情时，发送请求，更新页面
-    BlogAction.fetchBlogDetail(nextProps.blogId);  
+    // 于当前页切换博文详情时，发送请求更新文章，并将页面置顶
+    BlogAction.fetchBlogDetail(nextProps.blogId);
+    window.scrollTo(0,0);
+    
   },
 
   componentDidMount() {
@@ -46,10 +48,9 @@ const ArticlePanel = React.createClass({
   },
 
   updateContent() {
-    this.setState({
-      blog: BlogStore.getBlogDetail()
+    this.setState({ 
+      blog: BlogStore.getBlogDetail() 
     });
-
   },	
 
   render() {
@@ -65,7 +66,7 @@ const ArticlePanel = React.createClass({
           tags={this.state.blog.tags || ''}
         />
         {
-          this.state.blog.blogId != -1 ? 
+          this.state.blog.blogId ? 
           <ArticleHot
             blogId={this.state.blog.blogId || -1}
             numbers={this.state.blog.numbers}
@@ -73,7 +74,7 @@ const ArticlePanel = React.createClass({
           : ''
         }
         {
-          this.state.blog.blogId != -1 ? 
+          this.state.blog.blogId ? 
           <ArticleComment
             blogId={this.state.blog.blogId || -1}
           />

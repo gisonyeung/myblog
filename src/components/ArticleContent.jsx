@@ -98,7 +98,7 @@ const ArticleContent = React.createClass({
                 })
               }
         	</ul>
-        	<div className="page">
+        	<div className={`page ${this.props.blogId == -1 ? 'page-none' : ''}`}>
             { 
               this.state.nearBlog.next.blogId > 0 ? 
               <Link to={`/article/${this.state.nearBlog.next.blogId}`} className="left">
