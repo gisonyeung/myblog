@@ -31,20 +31,22 @@ const ArticleContent = React.createClass({
       return false;
     }
 
+    // 更新标题
+    document.title = this.props.title;
 
     // 换成异步的时候，移至WillReceiveProps
     BlogAction.fetchNearBlog(nextProps.blogId);
   },
 
   componentDidMount() {
-
+    document.title = this.props.title;
     BlogStore.addChangeListener('BLOG_NEAR', this.updateNearBlog);
     
   },
 
   componentWillUnmount() {
-
-    BlogStore.removeChangeListener('BLOG_NEAR', this.updateNearBlog)  
+    document.title = '杨子聪的个人博客';
+    BlogStore.removeChangeListener('BLOG_NEAR', this.updateNearBlog)  ;
 
   },
 

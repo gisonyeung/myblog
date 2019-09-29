@@ -11,9 +11,15 @@ const Pagination = React.createClass({
 
   getInitialState() {
     // 改成异步时，放到getInitialState
-    BlogAction.fetchPages();
+    let allPages = BlogStore.getPageNum();
+
+    // state 中存在则无需重新获取
+    if (allPages == 1) {
+      BlogAction.fetchPages();
+    }
+    
     return {
-      allPages: BlogStore.getPageNum(),
+      allPages: allPages,
       pageNow: this.props.query.page,
     };
 

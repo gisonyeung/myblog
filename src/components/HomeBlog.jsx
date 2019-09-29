@@ -13,17 +13,27 @@ const HomeBlog = React.createClass({
   
 
   getInitialState() {
-    // 换成异步的时候，移至getInitial
-    BlogAction.fetchBlogs(this.props.query.page);
-    
-      return {
-          blogs: [],
-      };
+    let pageNum = BlogStore.getPageNum();
+
+    // 页码不同再重新拉起
+    if (pageNum != this.props.query.page) {
+      // 换成异步的时候，移至getInitial
+      BlogAction.fetchBlogs(this.props.query.page);
+    }
+
+    return {
+      pageNum: this.props.query.page,
+      blogs: BlogStore.getBlogList(),
+    };
   },
  
   componentWillReceiveProps(nextProps) {
+    // 和缓存同页码则直接获取 state 的缓存
+    if (nextProps.query.page === this.pageNum) {
+      return this.updateList();
+    }
 
-      BlogAction.fetchBlogs(nextProps.query.page);
+    BlogAction.fetchBlogs(nextProps.query.page);
 
   },
 
@@ -42,7 +52,8 @@ const HomeBlog = React.createClass({
 
   updateList() {
     this.setState({
-      blogs: BlogStore.getBlogList()
+      blogs: BlogStore.getBlogList(),
+      pageNum: BlogStore.getPageNum()
     });
 
   },
