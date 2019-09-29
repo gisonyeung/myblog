@@ -5,6 +5,7 @@ import ArticleHot from './ArticleHot';
 import ArticleComment from './ArticleComment';
 import BlogAction from '../actions/BlogAction';
 import BlogStore from '../stores/BlogStore';
+import smoothScroll from '../smoothScroll';
 import hljs from 'highlight.js';
 import '../sass/highlight.scss';
 window.hljs = hljs;
@@ -38,8 +39,6 @@ const ArticlePanel = React.createClass({
       isLoading: true
     });
     BlogAction.fetchBlogDetail(nextProps.blogId);
-    window.scrollTo(0,0);
-    
   },
 
   componentDidMount() {
@@ -63,6 +62,10 @@ const ArticlePanel = React.createClass({
     this.setState({ 
       blog: BlogStore.getBlogDetail() 
     });
+
+    setTimeout(() => {
+      smoothScroll(0);
+    }, 100);
 
     setTimeout(() => {
       document.querySelectorAll('.atc-content pre code').forEach((block) => {

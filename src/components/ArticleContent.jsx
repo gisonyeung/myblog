@@ -25,13 +25,13 @@ const ArticleContent = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    // 更新标题
-    document.title = nextProps.title;
-    
     // 相等的时候，不更新
     if(nextProps.blogId == this.props.blogId || this.props.blogId != -1) {
       return false;
     }
+
+    // 更新标题
+    document.title = nextProps.title;
 
     // 换成异步的时候，移至WillReceiveProps
     BlogAction.fetchNearBlog(nextProps.blogId);
@@ -63,7 +63,7 @@ const ArticleContent = React.createClass({
     return (
       <article className="content shadow-1">
         <div className="atc-top">
-          <h1 className="title">{this.isLoading ? '正在加载中...' : this.props.title}</h1>
+          <h1 className="title">{this.props.isLoading ? '正在加载中...' : this.props.title}</h1>
           {
             this.props.blogId == -1 ? '' :
             <div className="subtitle">
