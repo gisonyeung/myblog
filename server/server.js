@@ -13,7 +13,7 @@ var _ = require('lodash');
 
 
 app.use(compression()); // 开启 gzip/deflate
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/app', { maxAge: 24 * 3600 * 30 }));
 app.use(webpackDevMiddleware(compiler, { 
 	noInfo: true, 
 	publicPath: config.output.publicPath,
