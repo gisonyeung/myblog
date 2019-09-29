@@ -5,7 +5,7 @@ import ArticleHot from './ArticleHot';
 import ArticleComment from './ArticleComment';
 import BlogAction from '../actions/BlogAction';
 import BlogStore from '../stores/BlogStore';
-import smoothScroll from '../smoothScroll';
+import smoothScroll from '../utils/smoothScroll';
 import hljs from 'highlight.js';
 import '../sass/highlight.scss';
 window.hljs = hljs;
