@@ -142,11 +142,6 @@ exports.nearBlog = function(req, res) {
 
 	var blogId = req.body.blogId;
 
-	var prevId = blogId - 1,
-		nextId = blogId + 1;
-
-	
-	
 	var prevPromise = new Promise(function(resolve, reject) {
 		
 		var prev = {
@@ -154,23 +149,19 @@ exports.nearBlog = function(req, res) {
 			title: '',
 		};
 
-		if( prevId > 0 ) {
-			Blog.getTitle(prevId, function(err, blog) {
-				if ( err ) {
-					reject(err);
-					return false;
-				}
+		Blog.getPrevId(blogId, function(err, blog) {
+			if ( err ) {
+				reject(err);
+				return false;
+			}
 
-				if( blog ) {
-					prev = blog;
-				}
+			if (!_.isEmpty(blog)) {
+				prev.blogId = blog[0].blogId;
+				prev.title = blog[0].title;
+			}
 
-				resolve(prev);
-
-			});
-		} else {
 			resolve(prev);
-		}
+		});
 
 	});
 
@@ -181,22 +172,18 @@ exports.nearBlog = function(req, res) {
 			title: '',
 		}
 
-		if( nextId > 0 ) {
-			Blog.getTitle(nextId, function(err, blog) {
-				if ( err ) {
-					reject(err);
-				}
+		Blog.getNextId(nextId, function(err, blog) {
+			if ( err ) {
+				reject(err);
+			}
 
-				if( blog ) {
-					next = blog;
-				}
+			if (!_.isEmpty(blog)) {
+				next.blogId = blog[0].blogId;
+				next.title = blog[0].title;
+			}
 
-				resolve(next);
-
-			});
-		} else {
 			resolve(next);
-		}
+		});
 
 	});
 

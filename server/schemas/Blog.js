@@ -98,6 +98,24 @@ BlogSchema.statics = {
 			.exec(callback);
 	},
 
+	getPrevId: function (blogId, callback) {
+		return this
+			.find({ isShow: true })
+			.where('blogId').gt(blogId)
+			.sort({ 'time.createAt': 1 })
+			.limit(1)
+			.exec(callback);
+	},
+
+	getNextId: function (blogId, callback) {
+		return this
+			.find({ isShow: true })
+			.where('blogId').lt(blogId)
+			.sort({ 'time.createAt': -1 })
+			.limit(1)
+			.exec(callback);
+	},
+
 	getArchivesByBlogId: function(blogId, callback) {
 		return this
 			.findOne(
