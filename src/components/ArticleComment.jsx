@@ -14,7 +14,7 @@ const ArticleComment = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if( nextProps.blogId == this.props.blogId || this.props.blogId != -1) {
+    if(nextProps.blogId == this.props.blogId && this.props.blogId != -1) {
       return false;
     }
     // 换成异步的时候，移至WillReceiveProps
