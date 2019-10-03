@@ -12,6 +12,7 @@ if(module.hot) {
 }
 
 require('./sass/main.scss');
+require('./sass/mobile.scss');
 
 render(
   <MainController />

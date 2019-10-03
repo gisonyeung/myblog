@@ -43,17 +43,17 @@ var credentials = require('./credentials.js');
 // 路由拦截，设置域名白名单防止SEO盗取流量
 var WHITE_DOMAIN_LIST = require('./constants/white_domain');
 var seoLogger = log4js.getLogger('SEO');
-app.use(function(req, res, next) {
-	var hostname = req.hostname || '无域名';
-	if ( !_.includes(WHITE_DOMAIN_LIST, hostname.toLowerCase()) ) {
-		if ( !/favicon\.ico/.test(req.url) ) {
-			seoLogger.warn('非法域名意图访问: ' + hostname);
-		}
-		res.render('../server/app/forbidden.html');
-	} else {
-		next();
-	}
-});
+// app.use(function(req, res, next) {
+// 	var hostname = req.hostname || '无域名';
+// 	if ( !_.includes(WHITE_DOMAIN_LIST, hostname.toLowerCase()) ) {
+// 		if ( !/favicon\.ico/.test(req.url) ) {
+// 			seoLogger.warn('非法域名意图访问: ' + hostname);
+// 		}
+// 		res.render('../server/app/forbidden.html');
+// 	} else {
+// 		next();
+// 	}
+// });
 
 // app.use(require('cookie-parser')(credentials.cookieSecret));
 // app.use(require('express-session')({

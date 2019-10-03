@@ -70,15 +70,15 @@ const ArticleContent = React.createClass({
           {
             this.props.blogId == -1 ? '' :
             <div className="subtitle">
-              <span>
+              <span className="subtitle-publish-time">
                 <i className="icon icon-time" title={`发表时间: ${dateFormat(this.props.createAt, "YYYY-MM-DD hh:mm:ss")}`}></i>
                 <time>{dateFormat(this.props.createAt, "YYYY-MM-DD hh:mm")}</time>
               </span>
-              <span>
+              <span className="subtitle-update-time">
                 <i className="icon icon-update" title={`最后更新时间: ${dateFormat(this.props.createAt, "YYYY-MM-DD hh:mm:ss")}`}></i>
                 <time>{dateFormat(this.props.updateAt, "YYYY-MM-DD hh:mm")}</time>
               </span>
-              <Link to={`/archives?type=category&category=${this.props.category}`} title="分类">{this.props.category}</Link>
+              <Link className="subtitle-category" to={`/archives?type=category&category=${this.props.category}`} title="分类">{this.props.category}</Link>
               <a href="#comment" className="toComment">#跳到评论#</a>
             </div>
           }
@@ -100,17 +100,17 @@ const ArticleContent = React.createClass({
         	</ul>
         	<div className="page">
             { 
-              this.state.nearBlog.next.blogId > 0 ? 
+              this.state.nearBlog.next.blogId > 0 || true ? 
               <Link to={`/article/${this.state.nearBlog.next.blogId}`} className="left">
                 <span className="icon icon-pageleft"></span>
-                <span className="text">{this.state.nearBlog.next.title}</span>
+                <span className="text">{this.state.nearBlog.next.title}哈哈哈哈</span>
               </Link>
               : ''
             }
             { 
-              this.state.nearBlog.prev.blogId > 0 ? 
+              this.state.nearBlog.prev.blogId > 0 || true ? 
               <Link to={`/article/${this.state.nearBlog.prev.blogId}`} className="right">
-                <span className="text">{this.state.nearBlog.prev.title}</span>
+                <span className="text">{this.state.nearBlog.prev.title}哈哈哈哈</span>
                 <span className="icon icon-pageright"></span>
               </Link>
               : ''
