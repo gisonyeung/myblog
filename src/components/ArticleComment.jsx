@@ -8,6 +8,8 @@ import BlogStore from '../stores/BlogStore';
 const ArticleComment = React.createClass({
 
   getInitialState() {
+      BlogAction.fetchBlogComment(this.props.blogId);
+    
       return {
           comments: BlogStore.getComments(), 
       };
