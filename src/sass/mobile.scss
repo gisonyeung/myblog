@@ -400,7 +400,7 @@
 
   .category-panel {
     margin-top: 0;
-    padding: 0 12px;
+    padding: 0 12px 30px;;
 
     .title {
       font-size: 14px;
@@ -566,6 +566,7 @@
     box-sizing: border-box;
     width: 100%;
     font-size: 13px;
+    margin-left: 0;
   }
 
   /* 关于页 */
@@ -630,9 +631,42 @@
     }
   }
 
-  .ab-content {
+  /* 书单页 */
+  .nav.book {
+    margin-bottom: 30px;
+
+    .inner-wrapper {
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
   }
-  
+
+  .b-head {
+    padding: 0 0 10px 0;
+    width: 100%;
+  }
+
+  .b-list {
+    margin-right: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .book-widget {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0!important;
+
+    .foot .time {
+      padding: 3px 5px;
+    }
+
+    &:hover {
+      &:before, &:after {
+        opacity: 0;
+      }
+    }
+  }
   
 
 }
