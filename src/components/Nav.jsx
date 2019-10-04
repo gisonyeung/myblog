@@ -75,6 +75,12 @@ const Nav = React.createClass({
     })
   },
 
+  closeMenu() {
+    this.setState({
+      menuOpened: false
+    })
+  },
+
 
   render() {
 
@@ -84,7 +90,7 @@ const Nav = React.createClass({
 	      <Link to="/" className="brand" title="杨子聪的个人站点">TWOPOINTHOLE</Link>
         <i className={`nav-menu icon-menu ${this.state.menuOpened ? 'open' : ''}`} onClick={this.toggleMenu}></i>
 	      <nav className="nav-bar">
-	        <div className="nav-list">
+	        <div className="nav-list" onClick={this.closeMenu}>
 	          <IndexLink to="/" activeClassName="active">首页</IndexLink>
 	          <Link to="/mylife" activeClassName="active">行博</Link>
 	          <Link to="/book" activeClassName="active">我的书单</Link>

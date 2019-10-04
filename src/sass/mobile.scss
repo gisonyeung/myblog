@@ -516,30 +516,32 @@
 
   .wb-side {
 
-    width: 56px;
+    width: 50px;
 
     .date {
-      height: 50px;
+      height: 44px;
       display: flex;
       align-items: center;
       flex-direction: column;
       justify-content: center;
-      width: 50px;
+      width: 44px;
+      border-width: 2px;
 
       .day {
-        font-size: 12px;
+        margin-top: 0;
+        font-size: 11px;
         font-weight: bold;
       }
 
       .month {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
       }
     }
 
     .year {
       margin-top: 2px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: bold;
     }
   }
@@ -550,7 +552,7 @@
   }
 
   .wb-cont {
-    margin-left: 70px;
+    margin-left: 64px;
 
     .text {
       padding: 0;
