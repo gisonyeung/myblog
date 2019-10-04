@@ -11,6 +11,8 @@ const  WalkBlogDetail = React.createClass({
 
   getInitialState() {
 
+    window.scrollTo(0,0);
+
     WalkingBlogAction.fetchBlogDetail(this.props.params.postId);
     WalkingBlogAction.fetchNearBlog(this.props.params.postId);
 
@@ -27,6 +29,7 @@ const  WalkBlogDetail = React.createClass({
       if ( this.props.params.postId != nextProps.params.postId ) {
         WalkingBlogAction.fetchBlogDetail(nextProps.params.postId);
         WalkingBlogAction.fetchNearBlog(nextProps.params.postId);
+        window.scrollTo(0, 0);
       }
   },
 

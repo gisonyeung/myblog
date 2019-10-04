@@ -8,7 +8,8 @@ const Nav = React.createClass({
 
   getInitialState() {
       return {
-          stateClass: ''  
+        stateClass: '',
+        menuOpened: false,
       };
   },
 
@@ -68,6 +69,12 @@ const Nav = React.createClass({
     }
   },
 
+  toggleMenu() {
+    this.setState({
+      menuOpened: !this.state.menuOpened
+    })
+  }
+
 
   render() {
 
@@ -75,6 +82,7 @@ const Nav = React.createClass({
       <header className={`nav ${this.state.stateClass}`}>
       	<div className="inner-wrapper clearfix">
 	      <Link to="/" className="brand" title="杨子聪的个人站点">TWOPOINTHOLE</Link>
+        <i className={`nav-menu icon-menu ${this.state.menuOpened ? 'open' : ''}`} onClick={this.toggleMenu}></i>
 	      <nav className="nav-bar">
 	        <div className="nav-list">
 	          <IndexLink to="/" activeClassName="active">首页</IndexLink>

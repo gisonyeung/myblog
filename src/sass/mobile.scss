@@ -1,10 +1,13 @@
-@media screen and (min-width: 980px) {
+@media screen and (min-width: 750px) {
   body {
     min-width: 1240px;
   }
+  .nav-menu {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 750px) {
   * {
     outline: none;
   }
@@ -15,9 +18,44 @@
   
   .self-sidebar,
   .anchor-bar,
-  .nav-bar {
+  .nav-bar,
+  .search-bar,
+  .nav .nav-list a.active ~ .triangle {
     display: none;
   }
+
+  .nav-menu {
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 12px;
+
+    &.open {
+      & + .nav-bar {
+        display:block;
+      }
+    }
+  }
+
+  .nav {
+    .nav-bar {
+      float: none;
+      position: absolute;
+      top: 50px;
+      background-color: #333;
+      width: 100%;
+    }
+
+    .nav-list {
+      font-size: 13px;
+
+      a {
+
+      }
+
+    }
+  }
+
 
   .inner-wrapper {
     display: flex;

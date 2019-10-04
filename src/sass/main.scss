@@ -677,10 +677,15 @@ $topMove: 40px;
 	@include bgimg('../img/icon-ok.png');	
 }
 
+.icon-menu {
+	@include bgsize(px, 9px);
+	@include bgimg('../img/icon-loadmore.png');	
+}
+
 
 .icon-loadmore {
-	@include bgsize(9px, 9px);
-	@include bgimg('../img/icon-loadmore.png');	
+	@include bgsize(30px, 30px);
+	@include bgimg('../img/menu.svg');	
 }
 
 
