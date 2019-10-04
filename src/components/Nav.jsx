@@ -73,7 +73,7 @@ const Nav = React.createClass({
     this.setState({
       menuOpened: !this.state.menuOpened
     })
-  }
+  },
 
 
   render() {
