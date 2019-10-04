@@ -342,7 +342,17 @@
 
   /* 归档页 */
   .ar-nav {
-    display:none;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 12px;
+
+    .switch {
+      display:none;
+    }
+
+    .nav-link {
+      font-size: 14px;
+    }
   }
 
   .archives {
@@ -363,9 +373,45 @@
     }
   }
 
+  .chapter {
+
+    .ch-title {
+      padding: 12px 0 0;
+      font-size: 13px;
+    }
+
+    .ch-item {
+      height: 36px;
+      line-height: 36px;
+      font-size: 13px;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
   .ar-content {
     padding: 0 12px;
     margin-bottom: 50px;
+  }
+
+  .category-panel {
+    margin-top: 0;
+    padding: 0 12px;
+
+    .title {
+      font-size: 14px;
+    }
+
+    .cate-list {
+      margin-top: 10px;
+    }
+
+    .cate-item {
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
   }
 
 
