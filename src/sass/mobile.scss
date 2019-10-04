@@ -52,12 +52,13 @@
   }
 
   .atc-top {
-    margin-top: 20px;
+    margin-top: 12px;
     margin-bottom: 20px;
 
     .title {
       font-size: 20px;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
+      line-height: 24px;
     }
   }
 
@@ -191,7 +192,7 @@
 
       .left, .right {
         float: none!important;
-        display: lfex;
+        display: flex;
         align-items: center;
       }
 
@@ -345,6 +346,7 @@
     height: 50px;
     line-height: 50px;
     padding: 0 12px;
+    border-bottom: none;
 
     .switch {
       display:none;
@@ -362,7 +364,7 @@
       max-width: 100%;
     }
 
-    .catogory-bar {
+    .category-bar {
       float: none;
       width: 100%;
       max-width: 100%;
