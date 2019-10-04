@@ -417,7 +417,7 @@
   }
 
   /* 行博页 */
-  .lift-wrap {
+  .life-wrap {
     width: 100%;
     max-width: 100%;
 
@@ -443,6 +443,21 @@
 
     .box-wrap {
       margin-bottom: 7px;
+    }
+
+    min-height: 100vh;
+    margin-bottom: 0;
+
+    .line {
+      padding-bottom: 23px;
+    }
+
+    .loadmore {
+      font-size: 13px;
+    }
+
+    &.detail {
+      padding-top: 30px;
     }
 
   }
@@ -483,23 +498,6 @@
       margin-top: 2px;
       font-size: 13px;
       font-weight: bold;
-    }
-  }
-
-  .life-wrap {
-    min-height: 100vh;
-    margin-bottom: 0;
-
-    .line {
-      padding-bottom: 23px;
-    }
-
-    .loadmore {
-      font-size: 13px;
-    }
-
-    &.detail {
-      padding-top: 30px;
     }
   }
 
