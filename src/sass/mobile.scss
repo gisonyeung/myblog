@@ -23,6 +23,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     & > span {
       max-width: 100%;
@@ -51,6 +52,7 @@
   }
 
   .atc-top {
+    margin-top: 20px;
     margin-bottom: 20px;
 
     .title {
@@ -110,6 +112,7 @@
       margin-bottom: 15px;
       font-size: 15px;
       font-weight: bold;
+      padding-bottom: 0;
     }
 
     h2 {
@@ -140,8 +143,11 @@
   }
 
   .atc-bottom {
+    .tags {
+      margin-bottom: 20px;
+    }
     .tag {
-      // font-size: 25px;
+      font-size: 12px;
 
       a {
         height: 20px;
@@ -154,15 +160,42 @@
     }
 
     .page {
-      // .icon {
-      //   padding-top: 25px;
-      //   width: 10px;
-      //   background-size: 0 25px;
-      // }
+      display:flex;
+      justify-content: space-between;
+      padding: 20px 0;
 
-      // .text {
-      //   font-size: 25px;
-      // }
+      .icon {
+        background-size: auto 10px!important;
+        padding-top: 10px!important;
+      }
+
+      a {
+        font-size: 12px;
+
+        .text {
+          max-width: 150px;
+          overflow: hidden;
+          display: inline-block;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .icon-pageleft {
+        margin-right: 5px!important;
+      }
+
+      .icon-pageright {
+        margin-left: 5px!important;
+      }
+
+      .left, .right {
+        float: none!important;
+        display: lfex;
+        align-items: center;
+      }
+
+
     }
   }
 
@@ -175,17 +208,35 @@
     padding-top: 10px;
 
     .label {
-      font-size: 14px;
+      font-size: 13px;
+      margin: 9px 0;
     }
 
-    .form-text.msg {
-      box-sizing: border-box;
+    .form-text {
+      font-size: 13px;
+
+      &.msg {
+        font-size: 13px;
+        box-sizing: border-box;
+      }
     }
+
+    .remember {
+      font-size: 13px;
+    }
+
+    .submit {
+      font-size: 13px;
+    }
+
   }
 
   .comment {
-    padding: 14px 0 8px;
-    margin-top: 20px;
+    padding: 10px 0.3em 0.3em!important;
+
+    &:first-child {
+      margin-top: 27px;
+    }
 
     .cm-top {
       font-size: 12px;
@@ -196,14 +247,14 @@
       }
 
       .name {
-        font-size: 14px;
+        font-size: 13px;
         margin-right: 10px;
       }
     }
 
     .cm-content {
       padding: 5px 0;
-      font-size: 14px;
+      font-size: 13px;
     }
   }
 
@@ -216,6 +267,10 @@
     margin-bottom: 15px;
     padding: 10px 12px;
 
+    &:first-child {
+      margin-top: 15px;
+    }
+
     .title {
       font-size: 16px;
       margin-bottom: 5px;
@@ -227,7 +282,7 @@
       .icon {
         margin-right: 3px;
         width: 10px;
-        padding: 10px;
+        padding-top: 10px;
         top: 0;
         background-size: auto 10px;
       }
@@ -245,6 +300,11 @@
 
     .details {
       font-size: 12px;
+
+      .icon-tag {
+        width: 10px;
+        padding-top: 10px;
+      }
     }
     
     .summation {
@@ -261,10 +321,51 @@
       }
     }
 
+
     .tags-list li {
       margin-right: 10px;
       font-size: 12px;
     }
+  }
+
+  .pagination {
+    font-size: 12px;
+    margin-bottom: 55px;
+
+    a {
+      height: 26px;
+      line-height: 26px;
+      padding: 0 10px;
+      margin: 0 8px;
+    }
+  }
+
+  /* 归档页 */
+  .ar-nav {
+    display:none;
+  }
+
+  .archives {
+    .main {
+
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .catogory-bar {
+      float: none;
+      width: 100%;
+      max-width: 100%;
+
+      .segment {
+        display: none;
+      }
+    }
+  }
+
+  .ar-content {
+    padding: 0 12px;
+    margin-bottom: 50px;
   }
 
 
