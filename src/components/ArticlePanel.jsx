@@ -46,7 +46,9 @@ const ArticlePanel = React.createClass({
   checkLoading() {
     setTimeout(() => {
       if (this.state.isLoading) {
-        this.state.isLoading = false;
+        this.setState({
+          isLoading: false
+        })
       }
     }, 2000);
   },
