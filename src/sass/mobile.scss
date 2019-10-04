@@ -416,5 +416,225 @@
     }
   }
 
+  /* 行博页 */
+  .lift-wrap {
+    width: 100%;
+    max-width: 100%;
+
+    .banner {
+      height: 75vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-bottom: 30px;
+
+      h1 {
+        padding-top: 0;
+        font-size: 28px;
+      }
+
+      p {
+        margin-top: 1px;
+        font-size: 14px;
+
+      }
+    }
+
+    .box-wrap {
+      margin-bottom: 7px;
+    }
+
+  }
+
+  .box-wrap {
+    padding: 0 12px;
+  }
+
+  .nav.mylife {
+    background-color: #1b3349;
+    margin-bottom: 0px;
+  }
+
+  .wb-side {
+
+    width: 56px;
+
+    .date {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      width: 50px;
+
+      .day {
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .month {
+        font-size: 13px;
+        font-weight: bold;
+      }
+    }
+
+    .year {
+      margin-top: 2px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+  }
+
+  .life-wrap {
+    min-height: 100vh;
+    margin-bottom: 0;
+
+    .line {
+      padding-bottom: 23px;
+    }
+
+    .loadmore {
+      font-size: 13px;
+    }
+
+    &.detail {
+      padding-top: 30px;
+    }
+  }
+
+  .box-wrap {
+    width: auto;
+    margin-bottom: 27px;
+  }
+
+  .wb-cont {
+    margin-left: 70px;
+
+    .text {
+      padding: 0;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .tags {
+      margin-top: 13px;
+
+      span {
+        margin-bottom: 3px;
+        white-space: normal;
+      }
+    }
+
+    .link {
+      margin-top: 17px;
+    }
+
+    .picture {
+      margin-right: 0;
+
+      img {
+        margin-bottom: 7px;
+      }
+    }
+  }
+
+  .wbcm {
+    margin-left: 70px;
+
+    .form-text {
+      font-size: 13px;
+    }
+  }
+
+  .wbcm-info {
+    .label {
+      font-size: 13px;
+    }
+  }
+
+  .wbcm-detail {
+    margin-right: 30px;
+  }
+
+  .wbcm-item:hover .wbcm-time {
+    background-color: rgba(255,255,255,0.8);
+  }
+
+  .wbcm-page {
+    width: 100%;
+    padding: 0 12px;
+    padding-left: 82px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 13px;
+  }
+
+  /* 关于页 */
+  .about-panel {
+    padding: 30px 12px 30px;
+    margin-bottom: 0;
+
+    .panel-title {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .introduction {
+      font-size: 14px;
+      margin-bottom: 50px;
+
+      p {
+        line-height: 25px;
+      }
+    }
+  }
+
+  .ab-section {
+    margin-bottom: 50px;
+    
+    .sub-title {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    &.info {
+      padding-top: 0;
+
+      .cont {
+        padding-top: 20px;
+        font-size: 14px;
+      }
+
+      .row {
+
+        .key {
+          width: 70px;
+          color: #999;
+        }
+      }
+    }
+
+
+  }
+
+
+  .ab-section.exp .item {
+    padding: 20px 0 20px 0;
+
+    .item-cont {
+      margin-left: 135px;
+
+      h3 {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .ab-content {
+  }
+  
+  
 
 }
