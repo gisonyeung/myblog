@@ -678,9 +678,10 @@ $topMove: 40px;
 }
 
 .icon-menu {
-	@include bgsize(30px, 30px);
-	@include bgimg('../img/menu.svg');
+	@include bgsize(26px, 26px);
+	@include bgimg('../img/menu.png');
 	background-position: center center;
+	background-size: 26px auto;
 }
 
 
