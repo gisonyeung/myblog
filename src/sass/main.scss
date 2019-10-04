@@ -678,14 +678,15 @@ $topMove: 40px;
 }
 
 .icon-menu {
-	@include bgsize(px, 9px);
-	@include bgimg('../img/icon-loadmore.png');	
+	@include bgsize(30px, 30px);
+	@include bgimg('../img/menu.svg');
+	background-position: center center;
 }
 
 
 .icon-loadmore {
-	@include bgsize(30px, 30px);
-	@include bgimg('../img/menu.svg');	
+	@include bgsize(9px, 9px);
+	@include bgimg('../img/icon-loadmore.png');	
 }
 
 
