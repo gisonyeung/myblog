@@ -19,7 +19,6 @@
   .self-sidebar,
   .anchor-bar,
   .nav-bar,
-  .search-bar,
   .nav .nav-list a.active ~ .triangle {
     display: none;
   }
@@ -46,11 +45,17 @@
       width: 100%;
     }
 
+    .search-bar {
+      display: none;
+    }
+
     .nav-list {
       font-size: 13px;
 
       a {
-
+        height: 40px;
+        line-height: 40px;
+        padding: 0 18px;
       }
 
     }
