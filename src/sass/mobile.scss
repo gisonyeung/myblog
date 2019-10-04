@@ -420,6 +420,9 @@
   .life-wrap {
     width: 100%;
     max-width: 100%;
+    min-height: calc(100vh - 50px);
+    margin-bottom: 0;
+    box-sizing: border-box;
 
     .banner {
       height: 75vw;
@@ -444,9 +447,6 @@
     .box-wrap {
       margin-bottom: 7px;
     }
-
-    min-height: 100vh;
-    margin-bottom: 0;
 
     .line {
       padding-bottom: 23px;
@@ -635,7 +635,7 @@
   .nav.book {
     margin-bottom: 30px;
 
-    .inner-wrapper {
+    & + .inner-wrapper {
       padding: 0 12px;
       box-sizing: border-box;
     }
