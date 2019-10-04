@@ -64,6 +64,7 @@ const ArticlePanel = React.createClass({
 
   componentWillUnmount() {
     document.title = '杨子聪的个人博客';
+    this.setMetaDescription('杨子聪的个人博客');
     BlogStore.removeChangeListener('BLOG_DETAIL', this.updateContent)  
   },
 
@@ -78,13 +79,18 @@ const ArticlePanel = React.createClass({
 
     // 更新标签标题
     document.title = blog.title || '此文章不存在';
+    this.setMetaDescription(blog.summary || '杨子聪的个人博客');
 
     setTimeout(() => {
       document.querySelectorAll('.atc-content pre code').forEach((block) => {
         hljs.highlightBlock(block);
       });
     }, 200);
-  },	
+  },
+
+  setMetaDescription(text) {
+    document.getElementById('description-meta').setAttribute('content', text);
+  },
 
   render() {
     return (
