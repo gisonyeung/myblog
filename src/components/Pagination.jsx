@@ -26,6 +26,11 @@ const Pagination = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    // 换页置顶
+    if (nextProps.query.page !== this.props.query.page) {
+      window.scrollTo(0,0);
+    }
+
     this.setState({
       pageNow: nextProps.query.page
     });  
@@ -35,7 +40,6 @@ const Pagination = React.createClass({
 
     BlogStore.addChangeListener('BLOG_PAGE', this.updatePageNum);
     
-
   },
 
   componentWillUnmount() {
