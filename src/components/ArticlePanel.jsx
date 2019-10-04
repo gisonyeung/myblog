@@ -12,6 +12,8 @@ window.hljs = hljs;
 const ArticlePanel = React.createClass({
 
   getInitialState() {
+    this.checkLoading();
+
     // 换成异步的时候，移至getInitial
     BlogAction.fetchBlogDetail(this.props.blogId);
     return {
@@ -38,6 +40,15 @@ const ArticlePanel = React.createClass({
       isLoading: true
     });
     BlogAction.fetchBlogDetail(nextProps.blogId);
+    this.checkLoading();
+  },
+
+  checkLoading() {
+    setTimeout(() => {
+      if (this.state.isLoading) {
+        this.state.isLoading = false;
+      }
+    }, 2000);
   },
 
   componentDidMount() {
