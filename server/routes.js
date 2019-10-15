@@ -33,7 +33,7 @@ module.exports = function(app) {
 		后台管理系统
 		/login
 	*/
-	app.get('/admin/logi ', function(req, res) {
+	app.get('/admin/login', function(req, res) {
 
 		res.render(`../server/app/backstage/html/login.html`);
 
@@ -64,8 +64,12 @@ module.exports = function(app) {
 
 	});
 
+
 	/* 博文页直出 */
 	app.get('/article/:blogId', ssr.blog);
+
+	/* 首页直出 */
+	app.get('/', ssr.home);
 
 
 
