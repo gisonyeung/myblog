@@ -32,7 +32,7 @@ exports.blog = function(req, res) {
       return res.status(200).send(tpl);
     }
 
-    res.status(200).send(tpl.replace(SSR_PLACEHOLDER, `<div class="content">${blog.content}</div>`));
+    res.status(200).send(tpl.replace(SSR_PLACEHOLDER, `<article class="content" style="display:none">${blog.content}</article>`));
   });
 
 };
