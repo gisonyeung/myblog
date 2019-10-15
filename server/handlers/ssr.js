@@ -32,7 +32,17 @@ exports.blog = function(req, res) {
       return res.status(200).send(tpl);
     }
 
-    res.status(200).send(tpl.replace(SSR_PLACEHOLDER, `<article class="content" style="display:none">${blog.content}</article>`));
+    res.status(200).send(
+      tpl
+        .replace('<title>杨子聪的个人博客</title>', `<title>${blog.title}</title>`)
+        .replace('content="杨子聪的个人博客">', `content="${blog.summary}">`)
+        .replace(SSR_PLACEHOLDER, `
+          <article class="content" style="display:none">
+            <h1 class="title">${blog.title}</h1>
+            ${blog.content}
+          </article>
+        `)
+    );
   });
 
 };
