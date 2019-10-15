@@ -12,6 +12,7 @@ var category = require('./handlers/category.js');
 var tag = require('./handlers/tag.js');
 var site = require('./handlers/site.js');
 var backstage = require('./handlers/backstage.js');
+var ssr = require('./handlers/ssr.js');
 
 var getClientIp = require('./utils/getClientIp.js');
 var log4js = require('./loggerConfig');
@@ -19,156 +20,64 @@ var seoLogger = log4js.getLogger('SEO');
 
 module.exports = function(app) {
 
-	/*
-		后台管理系统
-	*/
-	app.get('/admin/login', function(req, res) {
-
-		res.render('../server/app/backstage/html/login.html');
-
-	});
-
-	app.get('/admin/comment', function(req, res) {
-
-		// 验证通过 则跳转页面
-		if ( checkSession(req) ) {
-			
-			res.render('../server/app/backstage/html/comment.html');
-		
-		} else {
-
-			res.redirect('/admin/login');
-
-		}
-
-	});
-
-	app.get('/admin/tourist', function(req, res) {
-
-		// 验证通过 则跳转页面
-		if ( checkSession(req) ) {
-			
-			res.render('../server/app/backstage/html/tourist.html');
-		
-		} else {
-
-			res.redirect('/admin/login');
-
-		}
-
-	});
-
-	app.get('/admin/member', function(req, res) {
-
-		// 验证通过 则跳转页面
-		if ( checkSession(req) ) {
-			
-			res.render('../server/app/backstage/html/member.html');
-		
-		} else {
-
-			res.redirect('/admin/login');
-
-		}
-
-	});
-
-	app.get('/admin/walkingblog', function(req, res) {
-
-		// 验证通过 则跳转页面
-		if ( checkSession(req) ) {
-			
-			res.render('../server/app/backstage/html/walkingblog.html');
-		
-		} else {
-
-			res.redirect('/admin/login');
-
-		}
-
-	});
-
-	app.get('/admin/book', function(req, res) {
-
-		// 验证通过 则跳转页面
-		if ( checkSession(req) ) {
-			
-			res.render('../server/app/backstage/html/book.html');
-		
-		} else {
-
-			res.redirect('/admin/login');
-
-		}
-
-	});
-
-	app.get('/admin/blog', function(req, res) {
-
-		// 验证通过 则跳转页面
-		if ( checkSession(req) ) {
-			
-			res.render('../server/app/backstage/html/blog.html');
-		
-		} else {
-
-			res.redirect('/admin/login');
-
-		}
-
-	});
-
-	app.get('/admin/category', function(req, res) {
-
-		// 验证通过 则跳转页面
-		if ( checkSession(req) ) {
-			
-			res.render('../server/app/backstage/html/category.html');
-		
-		} else {
-
-			res.redirect('/admin/login');
-
-		}
-
-	});
-
-	app.get('/admin/tag', function(req, res) {
-
-		// 验证通过 则跳转页面
-		if ( checkSession(req) ) {
-			
-			res.render('../server/app/backstage/html/tag.html');
-		
-		} else {
-
-			res.redirect('/admin/login');
-
-		}
-
-	});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	function checkSession(req) {
 
-		if ( !req.session.user ) {
+		if (!req.session.user) {
 			return false;
-		} 
+		}
 
 		return req.session.user.username === credentials.admin.username && req.session.user.password === credentials.admin.password;
 	};
+
+	/*
+		后台管理系统
+		/login
+	*/
+	app.get('/admin/logi ', function(req, res) {
+
+		res.render(`../server/app/backstage/html/login.html`);
+
+	});
+
+	/**
+	 * /comment
+	 * /tourist
+	 * /member
+	 * /walkingblog
+	 * /book
+	 * /blog
+	 * /category
+	 * /tag
+	 */
+	app.get('/admin/:module', function(req, res) {
+
+		// 验证通过 则跳转页面
+		if ( checkSession(req) ) {
+			
+			res.render(`../server/app/backstage/html/${req.params.module}.html`);
+		
+		} else {
+
+			res.redirect('/admin/login');
+
+		}
+
+	});
+
+	/* 博文页直出 */
+	app.get('/article/:blogId', ssr.blog);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
