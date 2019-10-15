@@ -84,7 +84,11 @@ exports.home = function(req, res) {
     });
 
     res.status(200).send(
-      tpl.replace(SSR_PLACEHOLDER, ssrContent)
+      tpl.replace(SSR_PLACEHOLDER, 
+        `<div class="content" style="display:none">
+          ${ssrContent}
+        </div>`
+      )
     );
   
   });
