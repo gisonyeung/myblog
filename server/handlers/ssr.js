@@ -37,7 +37,7 @@ exports.blog = function(req, res) {
         .replace('<title>杨子聪的个人博客</title>', `<title>${blog.title}</title>`)
         .replace('content="杨子聪的个人博客">', `content="${blog.summary}">`)
         .replace(SSR_PLACEHOLDER, `
-          <article class="content" style="display:none">
+          <article class="content" style="height:0; overflow:hidden">
             <h1 class="title">${blog.title}</h1>
             ${blog.content}
           </article>
@@ -85,7 +85,7 @@ exports.home = function(req, res) {
 
     res.status(200).send(
       tpl.replace(SSR_PLACEHOLDER, 
-        `<div class="content" style="display:none">
+        `<div class="content" style="height:0; overflow:hidden">
           ${ssrContent}
         </div>`
       )
