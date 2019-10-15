@@ -2,6 +2,7 @@
  * 直出控制器
  */
 
+const path = require('path');
 const fs = require('fs');
 const Blog = require('../models/Blog.js');
 const SSR_PLACEHOLDER = '<!-- {{ssr}} -->';
@@ -21,7 +22,7 @@ exports.blog = function(req, res) {
     return res.status(200).send(tpl);
   }
 
-  Blog.findByBlogId(blogId, function (err, blog) {
+  Blog.findByBlogId(parseInt(blogId, 10), function (err, blog) {
 
     if (err) {
       return res.status(200).send(tpl);
