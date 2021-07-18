@@ -1,73 +1,59 @@
 {
   "name": "myblog",
   "version": "1.0.0",
-  "description": "Single page personal blog, built by React & Node.",
-  "main": "webpack.config.js",
+  "description": "个人博客",
+  "private": true,
+  "egg": {
+    "typescript": true,
+    "declarations": true
+  },
   "scripts": {
-    "start": "node start.js"
+    "start": "egg-scripts start --daemon --title=egg-server-myblog",
+    "stop": "egg-scripts stop --title=egg-server-myblog",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test-local": "egg-bin test",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "cov": "egg-bin cov",
+    "tsc": "ets && tsc -p tsconfig.json",
+    "ci": "npm run lint && npm run cov && npm run tsc",
+    "autod": "autod",
+    "lint": "eslint . --ext .ts",
+    "clean": "ets clean"
+  },
+  "dependencies": {
+    "egg": "^2.6.1",
+    "egg-mongoose": "^3.3.1",
+    "egg-scripts": "^2.6.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.12",
+    "@types/supertest": "^2.0.0",
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg-ci": "^1.8.0",
+    "egg-bin": "^4.11.0",
+    "egg-mock": "^3.16.0",
+    "tslib": "^1.9.0",
+    "eslint": "^6.7.2",
+    "eslint-config-egg": "^8.0.0",
+    "typescript": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "ci": {
+    "version": "8"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gisonyeung/myblog.git"
+    "url": ""
   },
-  "keywords": [
-    "blog",
-    "wepack",
-    "react",
-    "node"
+  "eslintIgnore": [
+    "coverage"
   ],
   "author": "gisonyeung",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gisonyeung/myblog/issues"
-  },
-  "homepage": "https://github.com/gisonyeung/myblog#readme",
-  "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-core": "^6.11.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.11.1",
-    "babel-register": "^6.11.6",
-    "css-loader": "^0.23.1",
-    "file-loader": "^0.9.0",
-    "flux": "^2.1.1",
-    "json-loader": "^0.5.4",
-    "jsx-loader": "^0.13.2",
-    "node-sass": "^3.13.1",
-    "react-addons-css-transition-group": "^15.2.1",
-    "react-hot-loader": "^1.3.0",
-    "request": "^2.73.0",
-    "sass-loader": "^4.0.0",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.12.1"
-  },
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "compression": "^1.6.2",
-    "connect": "^2.30.2",
-    "cookie-parser": "^1.4.3",
-    "ejs": "^2.4.2",
-    "events": "^1.1.1",
-    "express": "^4.14.0",
-    "express-session": "^1.14.0",
-    "formidable": "^1.0.17",
-    "highlight.js": "^9.15.10",
-    "lodash": "^4.14.0",
-    "log4js": "^1.1.0",
-    "mongoose": "^4.5.7",
-    "nodemailer": "^2.5.0",
-    "object-assign": "^4.1.0",
-    "react": "^15.2.1",
-    "react-cookie": "^0.4.7",
-    "react-dom": "^15.2.1",
-    "react-html5video": "^1.4.0",
-    "react-router": "^2.6.0",
-    "session-mongoose": "^0.5.2",
-    "whatwg-fetch": "^1.0.0"
-  }
+  "license": "MIT"
 }
